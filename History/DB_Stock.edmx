@@ -1,0 +1,610 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="stockModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'stock.dbo.daily_close' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="daily_close">
+          <Key>
+            <PropertyRef Name="symbol" />
+            <PropertyRef Name="date_hist" />
+          </Key>
+          <Property Name="symbol" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="date_hist" Type="date" Nullable="false" />
+          <Property Name="SMA_005" Type="float" />
+          <Property Name="SMA_010" Type="float" />
+          <Property Name="SMA_020" Type="float" />
+          <Property Name="SMA_030" Type="float" />
+          <Property Name="SMA_060" Type="float" />
+          <Property Name="SMA_120" Type="float" />
+          <Property Name="SMA_240" Type="float" />
+          <Property Name="price" Type="float" />
+        </EntityType>
+        <EntityType Name="daily_history">
+          <Key>
+            <PropertyRef Name="symbol" />
+            <PropertyRef Name="date" />
+          </Key>
+          <Property Name="symbol" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="date" Type="date" Nullable="false" />
+          <Property Name="open" Type="float" />
+          <Property Name="close" Type="float" />
+          <Property Name="high" Type="float" />
+          <Property Name="low" Type="float" />
+          <Property Name="volume" Type="float" />
+          <Property Name="avg" Type="float" />
+          <Property Name="seq" Type="nvarchar" MaxLength="81" StoreGeneratedPattern="Computed" Nullable="false" />
+        </EntityType>
+        <EntityType Name="daily_source">
+          <Key>
+            <PropertyRef Name="symbol" />
+            <PropertyRef Name="date" />
+          </Key>
+          <Property Name="symbol" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="date" Type="date" Nullable="false" />
+          <Property Name="open" Type="float" />
+          <Property Name="close" Type="float" />
+          <Property Name="adjusted_close" Type="float" />
+          <Property Name="high" Type="float" />
+          <Property Name="low" Type="float" />
+          <Property Name="volume" Type="float" />
+          <Property Name="dividend_amount" Type="float" />
+          <Property Name="split_coefficient" Type="float" />
+        </EntityType>
+        <EntityType Name="daily_strong">
+          <Key>
+            <PropertyRef Name="symbol" />
+            <PropertyRef Name="date_hist" />
+          </Key>
+          <Property Name="symbol" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="date_hist" Type="date" Nullable="false" />
+          <Property Name="price" Type="float" />
+          <Property Name="price_chg_perc" Type="float" />
+          <Property Name="sma5_chg_perc" Type="float" />
+          <Property Name="spy_chg" Type="float" />
+          <Property Name="spy_sma5" Type="float" />
+          <Property Name="qqq_chg" Type="float" />
+          <Property Name="qqq_sma5" Type="float" />
+          <Property Name="dia_chg" Type="float" />
+          <Property Name="dia_sma5" Type="float" />
+          <Property Name="i_spy_sma5" Type="float" />
+          <Property Name="i_qqq_sma5" Type="float" />
+          <Property Name="i_dia_sma5" Type="float" />
+          <Property Name="i_dia_price" Type="float" />
+          <Property Name="i_dia_chg" Type="float" />
+          <Property Name="i_spy_price" Type="float" />
+          <Property Name="i_spy_chg" Type="float" />
+          <Property Name="i_qqq_price" Type="float" />
+          <Property Name="i_qqq_chg" Type="float" />
+        </EntityType>
+        <EntityType Name="earning">
+          <Key>
+            <PropertyRef Name="symbol" />
+            <PropertyRef Name="fiscalDateEnding" />
+          </Key>
+          <Property Name="symbol" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="fiscalDateEnding" Type="date" Nullable="false" />
+          <Property Name="reportedDate" Type="date" />
+          <Property Name="reportedEPS" Type="float" />
+          <Property Name="estimatedEPS" Type="float" />
+          <Property Name="surprise" Type="float" />
+          <Property Name="surprisePercentage" Type="float" />
+        </EntityType>
+        <EntityType Name="income">
+          <Key>
+            <PropertyRef Name="symbol" />
+            <PropertyRef Name="fiscalDateEnding" />
+          </Key>
+          <Property Name="symbol" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="fiscalDateEnding" Type="date" Nullable="false" />
+          <Property Name="reportedCurrency" Type="nvarchar" MaxLength="50" />
+          <Property Name="totalRevenue" Type="float" />
+          <Property Name="totalOperatingExpense" Type="float" />
+          <Property Name="costOfRevenue" Type="float" />
+          <Property Name="grossProfit" Type="float" />
+          <Property Name="ebit" Type="float" />
+          <Property Name="netIncome" Type="float" />
+          <Property Name="researchAndDevelopment" Type="float" />
+          <Property Name="effectOfAccountingCharges" Type="float" />
+          <Property Name="incomeBeforeTax" Type="float" />
+          <Property Name="minorityInterest" Type="float" />
+          <Property Name="sellingGeneralAdministrative" Type="float" />
+          <Property Name="otherNonOperatingIncome" Type="float" />
+          <Property Name="operatingIncome" Type="float" />
+          <Property Name="otherOperatingExpense" Type="float" />
+          <Property Name="interestExpense" Type="float" />
+          <Property Name="taxProvision" Type="nvarchar" MaxLength="50" />
+          <Property Name="interestIncome" Type="nvarchar" MaxLength="50" />
+          <Property Name="netInterestIncome" Type="nvarchar" MaxLength="50" />
+          <Property Name="extraordinaryItems" Type="float" />
+          <Property Name="nonRecurring" Type="float" />
+          <Property Name="otherItems" Type="float" />
+          <Property Name="incomeTaxExpense" Type="float" />
+          <Property Name="totalOtherIncomeExpense" Type="float" />
+          <Property Name="discontinuedOperations" Type="float" />
+          <Property Name="netIncomeFromContinuingOperations" Type="float" />
+          <Property Name="netIncomeApplicableToCommonShares" Type="float" />
+          <Property Name="preferredStockAndOtherAdjustments" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="lookup">
+          <Key>
+            <PropertyRef Name="l_type" />
+            <PropertyRef Name="l_id" />
+          </Key>
+          <Property Name="l_type" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="l_id" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="l_name" Type="nvarchar" MaxLength="250" />
+          <Property Name="l_order" Type="int" />
+          <Property Name="l_att1" Type="nvarchar" MaxLength="250" />
+          <Property Name="l_att2" Type="nvarchar" MaxLength="250" />
+          <Property Name="l_att3" Type="nvarchar" MaxLength="250" />
+          <Property Name="l_att4" Type="nvarchar" MaxLength="250" />
+          <Property Name="l_att5" Type="nvarchar" MaxLength="250" />
+        </EntityType>
+        <EntityType Name="watch_list">
+          <Key>
+            <PropertyRef Name="symbol" />
+          </Key>
+          <Property Name="symbol" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="watch_type" Type="nchar" MaxLength="10" />
+          <Property Name="Sector" Type="nvarchar" MaxLength="250" />
+          <Property Name="Industry" Type="nvarchar" MaxLength="250" />
+          <Property Name="company" Type="nvarchar" MaxLength="250" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'stock.dbo.watch_list_v1' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="watch_list_v1">
+          <Key>
+            <PropertyRef Name="symbol" />
+          </Key>
+          <Property Name="symbol" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="watch_type" Type="nchar" MaxLength="10" />
+          <Property Name="company" Type="nvarchar" MaxLength="250" />
+          <Property Name="industry" Type="nvarchar" MaxLength="250" />
+          <Property Name="sector" Type="nvarchar" MaxLength="250" />
+          <Property Name="last_updated" Type="date" />
+        </EntityType>
+        <Function Name="process_analysis" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="symbol" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="process_history" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="symbol" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="process_sma_detail" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="symbol" Type="nvarchar" Mode="In" />
+          <Parameter Name="last_ran" Type="date" Mode="In" />
+          <Parameter Name="table_name" Type="nvarchar" Mode="In" />
+          <Parameter Name="col_name" Type="nvarchar" Mode="In" />
+          <Parameter Name="days" Type="int" Mode="In" />
+        </Function>
+        <Function Name="process_volume" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="symbol" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="update_daily_v1" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <EntityContainer Name="stockModelStoreContainer">
+          <EntitySet Name="daily_history" EntityType="Self.daily_history" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="daily_source" EntityType="Self.daily_source" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="daily_strong" EntityType="Self.daily_strong" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="earning" EntityType="Self.earning" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="income" EntityType="Self.income" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="lookup" EntityType="Self.lookup" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="watch_list" EntityType="Self.watch_list" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="daily_close" EntityType="Self.daily_close" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [daily_close].[symbol] AS [symbol], 
+    [daily_close].[date_hist] AS [date_hist], 
+    [daily_close].[SMA_005] AS [SMA_005], 
+    [daily_close].[SMA_010] AS [SMA_010], 
+    [daily_close].[SMA_020] AS [SMA_020], 
+    [daily_close].[SMA_030] AS [SMA_030], 
+    [daily_close].[SMA_060] AS [SMA_060], 
+    [daily_close].[SMA_120] AS [SMA_120], 
+    [daily_close].[SMA_240] AS [SMA_240], 
+    [daily_close].[price] AS [price]
+    FROM [dbo].[daily_close] AS [daily_close]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="watch_list_v1" EntityType="Self.watch_list_v1" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [watch_list_v1].[symbol] AS [symbol], 
+    [watch_list_v1].[watch_type] AS [watch_type], 
+    [watch_list_v1].[company] AS [company], 
+    [watch_list_v1].[industry] AS [industry], 
+    [watch_list_v1].[sector] AS [sector], 
+    [watch_list_v1].[last_updated] AS [last_updated]
+    FROM [dbo].[watch_list_v1] AS [watch_list_v1]</DefiningQuery>
+          </EntitySet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="stockModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="StockEntity" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="watch_list" EntityType="stockModel.watch_list" />
+          <FunctionImport Name="process_ema" />
+          <FunctionImport Name="process_rsi" />
+          <FunctionImport Name="process_macd" />
+          <EntitySet Name="lookups" EntityType="stockModel.lookup" />
+          <FunctionImport Name="process_volume" >
+          <Parameter Name="symbol" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="update_daily_v1" />
+          <FunctionImport Name="process_change">
+          <Parameter Name="symbol" Mode="In" Type="String" />
+          </FunctionImport>
+          <EntitySet Name="daily_source" EntityType="stockModel.daily_source" />
+          <FunctionImport Name="process_history">
+          <Parameter Name="symbol" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="process_analysis">
+          <Parameter Name="symbol" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="process_sma_detail">
+            <Parameter Name="symbol" Mode="In" Type="String" />
+            <Parameter Name="last_ran" Mode="In" Type="DateTime" />
+            <Parameter Name="table_name" Mode="In" Type="String" />
+            <Parameter Name="col_name" Mode="In" Type="String" />
+            <Parameter Name="days" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <EntitySet Name="earnings" EntityType="stockModel.earning" />
+          <EntitySet Name="incomes" EntityType="stockModel.income" />
+          <EntitySet Name="watch_list_v1" EntityType="stockModel.watch_list_v1" />
+          <EntitySet Name="daily_history" EntityType="stockModel.daily_history" />
+          <EntitySet Name="daily_strong" EntityType="stockModel.daily_strong" />
+          <EntitySet Name="daily_close" EntityType="stockModel.daily_close" />
+        </EntityContainer>
+        <EntityType Name="watch_list">
+          <Key>
+            <PropertyRef Name="symbol" />
+          </Key>
+          <Property Name="symbol" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="watch_type" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Sector" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Industry" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="company" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="lookup">
+          <Key>
+            <PropertyRef Name="l_type" />
+            <PropertyRef Name="l_id" />
+          </Key>
+          <Property Name="l_type" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="l_id" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="l_name" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="l_order" Type="Int32" />
+          <Property Name="l_att1" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="l_att2" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="l_att3" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="l_att4" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="l_att5" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="daily_source">
+          <Key>
+            <PropertyRef Name="symbol" />
+            <PropertyRef Name="date" />
+          </Key>
+          <Property Name="symbol" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="open" Type="Double" />
+          <Property Name="close" Type="Double" />
+          <Property Name="adjusted_close" Type="Double" />
+          <Property Name="high" Type="Double" />
+          <Property Name="low" Type="Double" />
+          <Property Name="volume" Type="Double" />
+          <Property Name="dividend_amount" Type="Double" />
+          <Property Name="split_coefficient" Type="Double" />
+        </EntityType>
+        <EntityType Name="earning">
+          <Key>
+            <PropertyRef Name="symbol" />
+            <PropertyRef Name="fiscalDateEnding" />
+          </Key>
+          <Property Name="symbol" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="fiscalDateEnding" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="reportedDate" Type="DateTime" Precision="0" />
+          <Property Name="reportedEPS" Type="Double" />
+          <Property Name="estimatedEPS" Type="Double" />
+          <Property Name="surprise" Type="Double" />
+          <Property Name="surprisePercentage" Type="Double" />
+        </EntityType>
+        <EntityType Name="income">
+          <Key>
+            <PropertyRef Name="symbol" />
+            <PropertyRef Name="fiscalDateEnding" />
+          </Key>
+          <Property Name="symbol" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="fiscalDateEnding" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="reportedCurrency" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="totalRevenue" Type="Double" />
+          <Property Name="totalOperatingExpense" Type="Double" />
+          <Property Name="costOfRevenue" Type="Double" />
+          <Property Name="grossProfit" Type="Double" />
+          <Property Name="ebit" Type="Double" />
+          <Property Name="netIncome" Type="Double" />
+          <Property Name="researchAndDevelopment" Type="Double" />
+          <Property Name="effectOfAccountingCharges" Type="Double" />
+          <Property Name="incomeBeforeTax" Type="Double" />
+          <Property Name="minorityInterest" Type="Double" />
+          <Property Name="sellingGeneralAdministrative" Type="Double" />
+          <Property Name="otherNonOperatingIncome" Type="Double" />
+          <Property Name="operatingIncome" Type="Double" />
+          <Property Name="otherOperatingExpense" Type="Double" />
+          <Property Name="interestExpense" Type="Double" />
+          <Property Name="taxProvision" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="interestIncome" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="netInterestIncome" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="extraordinaryItems" Type="Double" />
+          <Property Name="nonRecurring" Type="Double" />
+          <Property Name="otherItems" Type="Double" />
+          <Property Name="incomeTaxExpense" Type="Double" />
+          <Property Name="totalOtherIncomeExpense" Type="Double" />
+          <Property Name="discontinuedOperations" Type="Double" />
+          <Property Name="netIncomeFromContinuingOperations" Type="Double" />
+          <Property Name="netIncomeApplicableToCommonShares" Type="Double" />
+          <Property Name="preferredStockAndOtherAdjustments" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="watch_list_v1">
+          <Key>
+            <PropertyRef Name="symbol" />
+          </Key>
+          <Property Name="symbol" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="watch_type" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="company" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="industry" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="sector" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="last_updated" Type="DateTime" Precision="0" />
+        </EntityType>
+        <EntityType Name="daily_history">
+          <Key>
+            <PropertyRef Name="symbol" />
+            <PropertyRef Name="date" />
+          </Key>
+          <Property Name="symbol" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="open" Type="Double" />
+          <Property Name="close" Type="Double" />
+          <Property Name="high" Type="Double" />
+          <Property Name="low" Type="Double" />
+          <Property Name="volume" Type="Double" />
+          <Property Name="avg" Type="Double" />
+          <Property Name="seq" Type="String" Nullable="false" MaxLength="81" FixedLength="false" Unicode="true" annotation:StoreGeneratedPattern="Computed" />
+        </EntityType>
+        <EntityType Name="daily_strong">
+          <Key>
+            <PropertyRef Name="symbol" />
+            <PropertyRef Name="date_hist" />
+          </Key>
+          <Property Name="symbol" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="date_hist" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="price" Type="Double" />
+          <Property Name="price_chg_perc" Type="Double" />
+          <Property Name="sma5_chg_perc" Type="Double" />
+          <Property Name="spy_chg" Type="Double" />
+          <Property Name="spy_sma5" Type="Double" />
+          <Property Name="qqq_chg" Type="Double" />
+          <Property Name="qqq_sma5" Type="Double" />
+          <Property Name="dia_chg" Type="Double" />
+          <Property Name="dia_sma5" Type="Double" />
+          <Property Name="i_spy_sma5" Type="Double" />
+          <Property Name="i_qqq_sma5" Type="Double" />
+          <Property Name="i_dia_sma5" Type="Double" />
+          <Property Name="i_dia_price" Type="Double" />
+          <Property Name="i_dia_chg" Type="Double" />
+          <Property Name="i_spy_price" Type="Double" />
+          <Property Name="i_spy_chg" Type="Double" />
+          <Property Name="i_qqq_price" Type="Double" />
+          <Property Name="i_qqq_chg" Type="Double" />
+        </EntityType>
+        <EntityType Name="daily_close">
+          <Key>
+            <PropertyRef Name="symbol" />
+            <PropertyRef Name="date_hist" />
+          </Key>
+          <Property Name="symbol" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="date_hist" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="SMA_005" Type="Double" />
+          <Property Name="SMA_010" Type="Double" />
+          <Property Name="SMA_020" Type="Double" />
+          <Property Name="SMA_030" Type="Double" />
+          <Property Name="SMA_060" Type="Double" />
+          <Property Name="SMA_120" Type="Double" />
+          <Property Name="SMA_240" Type="Double" />
+          <Property Name="price" Type="Double" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="stockModelStoreContainer" CdmEntityContainer="StockEntity">
+          <EntitySetMapping Name="watch_list">
+            <EntityTypeMapping TypeName="stockModel.watch_list">
+              <MappingFragment StoreEntitySet="watch_list">
+                <ScalarProperty Name="company" ColumnName="company" />
+                <ScalarProperty Name="Industry" ColumnName="Industry" />
+                <ScalarProperty Name="Sector" ColumnName="Sector" />
+                <ScalarProperty Name="watch_type" ColumnName="watch_type" />
+                <ScalarProperty Name="symbol" ColumnName="symbol" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="lookups">
+            <EntityTypeMapping TypeName="stockModel.lookup">
+              <MappingFragment StoreEntitySet="lookup">
+                <ScalarProperty Name="l_att5" ColumnName="l_att5" />
+                <ScalarProperty Name="l_att4" ColumnName="l_att4" />
+                <ScalarProperty Name="l_att3" ColumnName="l_att3" />
+                <ScalarProperty Name="l_att2" ColumnName="l_att2" />
+                <ScalarProperty Name="l_att1" ColumnName="l_att1" />
+                <ScalarProperty Name="l_order" ColumnName="l_order" />
+                <ScalarProperty Name="l_name" ColumnName="l_name" />
+                <ScalarProperty Name="l_id" ColumnName="l_id" />
+                <ScalarProperty Name="l_type" ColumnName="l_type" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="process_volume" FunctionName="stockModel.Store.process_volume" />
+          <FunctionImportMapping FunctionImportName="update_daily_v1" FunctionName="stockModel.Store.update_daily_v1" />
+          <EntitySetMapping Name="daily_source">
+            <EntityTypeMapping TypeName="stockModel.daily_source">
+              <MappingFragment StoreEntitySet="daily_source">
+                <ScalarProperty Name="split_coefficient" ColumnName="split_coefficient" />
+                <ScalarProperty Name="dividend_amount" ColumnName="dividend_amount" />
+                <ScalarProperty Name="volume" ColumnName="volume" />
+                <ScalarProperty Name="low" ColumnName="low" />
+                <ScalarProperty Name="high" ColumnName="high" />
+                <ScalarProperty Name="adjusted_close" ColumnName="adjusted_close" />
+                <ScalarProperty Name="close" ColumnName="close" />
+                <ScalarProperty Name="open" ColumnName="open" />
+                <ScalarProperty Name="date" ColumnName="date" />
+                <ScalarProperty Name="symbol" ColumnName="symbol" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="process_history" FunctionName="stockModel.Store.process_history" />
+          <FunctionImportMapping FunctionImportName="process_analysis" FunctionName="stockModel.Store.process_analysis" />
+          <FunctionImportMapping FunctionImportName="process_sma_detail" FunctionName="stockModel.Store.process_sma_detail" />
+          <EntitySetMapping Name="earnings">
+            <EntityTypeMapping TypeName="stockModel.earning">
+              <MappingFragment StoreEntitySet="earning">
+                <ScalarProperty Name="surprisePercentage" ColumnName="surprisePercentage" />
+                <ScalarProperty Name="surprise" ColumnName="surprise" />
+                <ScalarProperty Name="estimatedEPS" ColumnName="estimatedEPS" />
+                <ScalarProperty Name="reportedEPS" ColumnName="reportedEPS" />
+                <ScalarProperty Name="reportedDate" ColumnName="reportedDate" />
+                <ScalarProperty Name="fiscalDateEnding" ColumnName="fiscalDateEnding" />
+                <ScalarProperty Name="symbol" ColumnName="symbol" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="incomes">
+            <EntityTypeMapping TypeName="stockModel.income">
+              <MappingFragment StoreEntitySet="income">
+                <ScalarProperty Name="preferredStockAndOtherAdjustments" ColumnName="preferredStockAndOtherAdjustments" />
+                <ScalarProperty Name="netIncomeApplicableToCommonShares" ColumnName="netIncomeApplicableToCommonShares" />
+                <ScalarProperty Name="netIncomeFromContinuingOperations" ColumnName="netIncomeFromContinuingOperations" />
+                <ScalarProperty Name="discontinuedOperations" ColumnName="discontinuedOperations" />
+                <ScalarProperty Name="totalOtherIncomeExpense" ColumnName="totalOtherIncomeExpense" />
+                <ScalarProperty Name="incomeTaxExpense" ColumnName="incomeTaxExpense" />
+                <ScalarProperty Name="otherItems" ColumnName="otherItems" />
+                <ScalarProperty Name="nonRecurring" ColumnName="nonRecurring" />
+                <ScalarProperty Name="extraordinaryItems" ColumnName="extraordinaryItems" />
+                <ScalarProperty Name="netInterestIncome" ColumnName="netInterestIncome" />
+                <ScalarProperty Name="interestIncome" ColumnName="interestIncome" />
+                <ScalarProperty Name="taxProvision" ColumnName="taxProvision" />
+                <ScalarProperty Name="interestExpense" ColumnName="interestExpense" />
+                <ScalarProperty Name="otherOperatingExpense" ColumnName="otherOperatingExpense" />
+                <ScalarProperty Name="operatingIncome" ColumnName="operatingIncome" />
+                <ScalarProperty Name="otherNonOperatingIncome" ColumnName="otherNonOperatingIncome" />
+                <ScalarProperty Name="sellingGeneralAdministrative" ColumnName="sellingGeneralAdministrative" />
+                <ScalarProperty Name="minorityInterest" ColumnName="minorityInterest" />
+                <ScalarProperty Name="incomeBeforeTax" ColumnName="incomeBeforeTax" />
+                <ScalarProperty Name="effectOfAccountingCharges" ColumnName="effectOfAccountingCharges" />
+                <ScalarProperty Name="researchAndDevelopment" ColumnName="researchAndDevelopment" />
+                <ScalarProperty Name="netIncome" ColumnName="netIncome" />
+                <ScalarProperty Name="ebit" ColumnName="ebit" />
+                <ScalarProperty Name="grossProfit" ColumnName="grossProfit" />
+                <ScalarProperty Name="costOfRevenue" ColumnName="costOfRevenue" />
+                <ScalarProperty Name="totalOperatingExpense" ColumnName="totalOperatingExpense" />
+                <ScalarProperty Name="totalRevenue" ColumnName="totalRevenue" />
+                <ScalarProperty Name="reportedCurrency" ColumnName="reportedCurrency" />
+                <ScalarProperty Name="fiscalDateEnding" ColumnName="fiscalDateEnding" />
+                <ScalarProperty Name="symbol" ColumnName="symbol" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="watch_list_v1">
+            <EntityTypeMapping TypeName="stockModel.watch_list_v1">
+              <MappingFragment StoreEntitySet="watch_list_v1">
+                <ScalarProperty Name="last_updated" ColumnName="last_updated" />
+                <ScalarProperty Name="sector" ColumnName="sector" />
+                <ScalarProperty Name="industry" ColumnName="industry" />
+                <ScalarProperty Name="company" ColumnName="company" />
+                <ScalarProperty Name="watch_type" ColumnName="watch_type" />
+                <ScalarProperty Name="symbol" ColumnName="symbol" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="daily_history">
+            <EntityTypeMapping TypeName="stockModel.daily_history">
+              <MappingFragment StoreEntitySet="daily_history">
+                <ScalarProperty Name="seq" ColumnName="seq" />
+                <ScalarProperty Name="avg" ColumnName="avg" />
+                <ScalarProperty Name="volume" ColumnName="volume" />
+                <ScalarProperty Name="low" ColumnName="low" />
+                <ScalarProperty Name="high" ColumnName="high" />
+                <ScalarProperty Name="close" ColumnName="close" />
+                <ScalarProperty Name="open" ColumnName="open" />
+                <ScalarProperty Name="date" ColumnName="date" />
+                <ScalarProperty Name="symbol" ColumnName="symbol" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="daily_strong">
+            <EntityTypeMapping TypeName="stockModel.daily_strong">
+              <MappingFragment StoreEntitySet="daily_strong">
+                <ScalarProperty Name="i_qqq_chg" ColumnName="i_qqq_chg" />
+                <ScalarProperty Name="i_qqq_price" ColumnName="i_qqq_price" />
+                <ScalarProperty Name="i_spy_chg" ColumnName="i_spy_chg" />
+                <ScalarProperty Name="i_spy_price" ColumnName="i_spy_price" />
+                <ScalarProperty Name="i_dia_chg" ColumnName="i_dia_chg" />
+                <ScalarProperty Name="i_dia_price" ColumnName="i_dia_price" />
+                <ScalarProperty Name="i_dia_sma5" ColumnName="i_dia_sma5" />
+                <ScalarProperty Name="i_qqq_sma5" ColumnName="i_qqq_sma5" />
+                <ScalarProperty Name="i_spy_sma5" ColumnName="i_spy_sma5" />
+                <ScalarProperty Name="dia_sma5" ColumnName="dia_sma5" />
+                <ScalarProperty Name="dia_chg" ColumnName="dia_chg" />
+                <ScalarProperty Name="qqq_sma5" ColumnName="qqq_sma5" />
+                <ScalarProperty Name="qqq_chg" ColumnName="qqq_chg" />
+                <ScalarProperty Name="spy_sma5" ColumnName="spy_sma5" />
+                <ScalarProperty Name="spy_chg" ColumnName="spy_chg" />
+                <ScalarProperty Name="sma5_chg_perc" ColumnName="sma5_chg_perc" />
+                <ScalarProperty Name="price_chg_perc" ColumnName="price_chg_perc" />
+                <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="date_hist" ColumnName="date_hist" />
+                <ScalarProperty Name="symbol" ColumnName="symbol" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="daily_close">
+            <EntityTypeMapping TypeName="stockModel.daily_close">
+              <MappingFragment StoreEntitySet="daily_close">
+                <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="SMA_240" ColumnName="SMA_240" />
+                <ScalarProperty Name="SMA_120" ColumnName="SMA_120" />
+                <ScalarProperty Name="SMA_060" ColumnName="SMA_060" />
+                <ScalarProperty Name="SMA_030" ColumnName="SMA_030" />
+                <ScalarProperty Name="SMA_020" ColumnName="SMA_020" />
+                <ScalarProperty Name="SMA_010" ColumnName="SMA_010" />
+                <ScalarProperty Name="SMA_005" ColumnName="SMA_005" />
+                <ScalarProperty Name="date_hist" ColumnName="date_hist" />
+                <ScalarProperty Name="symbol" ColumnName="symbol" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

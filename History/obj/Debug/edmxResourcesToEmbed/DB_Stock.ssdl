@@ -1,0 +1,215 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="stockModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'stock.dbo.daily_close' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="daily_close">
+    <Key>
+      <PropertyRef Name="symbol" />
+      <PropertyRef Name="date_hist" />
+    </Key>
+    <Property Name="symbol" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="date_hist" Type="date" Nullable="false" />
+    <Property Name="SMA_005" Type="float" />
+    <Property Name="SMA_010" Type="float" />
+    <Property Name="SMA_020" Type="float" />
+    <Property Name="SMA_030" Type="float" />
+    <Property Name="SMA_060" Type="float" />
+    <Property Name="SMA_120" Type="float" />
+    <Property Name="SMA_240" Type="float" />
+    <Property Name="price" Type="float" />
+  </EntityType>
+  <EntityType Name="daily_history">
+    <Key>
+      <PropertyRef Name="symbol" />
+      <PropertyRef Name="date" />
+    </Key>
+    <Property Name="symbol" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="date" Type="date" Nullable="false" />
+    <Property Name="open" Type="float" />
+    <Property Name="close" Type="float" />
+    <Property Name="high" Type="float" />
+    <Property Name="low" Type="float" />
+    <Property Name="volume" Type="float" />
+    <Property Name="avg" Type="float" />
+    <Property Name="seq" Type="nvarchar" MaxLength="81" StoreGeneratedPattern="Computed" Nullable="false" />
+  </EntityType>
+  <EntityType Name="daily_source">
+    <Key>
+      <PropertyRef Name="symbol" />
+      <PropertyRef Name="date" />
+    </Key>
+    <Property Name="symbol" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="date" Type="date" Nullable="false" />
+    <Property Name="open" Type="float" />
+    <Property Name="close" Type="float" />
+    <Property Name="adjusted_close" Type="float" />
+    <Property Name="high" Type="float" />
+    <Property Name="low" Type="float" />
+    <Property Name="volume" Type="float" />
+    <Property Name="dividend_amount" Type="float" />
+    <Property Name="split_coefficient" Type="float" />
+  </EntityType>
+  <EntityType Name="daily_strong">
+    <Key>
+      <PropertyRef Name="symbol" />
+      <PropertyRef Name="date_hist" />
+    </Key>
+    <Property Name="symbol" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="date_hist" Type="date" Nullable="false" />
+    <Property Name="price" Type="float" />
+    <Property Name="price_chg_perc" Type="float" />
+    <Property Name="sma5_chg_perc" Type="float" />
+    <Property Name="spy_chg" Type="float" />
+    <Property Name="spy_sma5" Type="float" />
+    <Property Name="qqq_chg" Type="float" />
+    <Property Name="qqq_sma5" Type="float" />
+    <Property Name="dia_chg" Type="float" />
+    <Property Name="dia_sma5" Type="float" />
+    <Property Name="i_spy_sma5" Type="float" />
+    <Property Name="i_qqq_sma5" Type="float" />
+    <Property Name="i_dia_sma5" Type="float" />
+    <Property Name="i_dia_price" Type="float" />
+    <Property Name="i_dia_chg" Type="float" />
+    <Property Name="i_spy_price" Type="float" />
+    <Property Name="i_spy_chg" Type="float" />
+    <Property Name="i_qqq_price" Type="float" />
+    <Property Name="i_qqq_chg" Type="float" />
+  </EntityType>
+  <EntityType Name="earning">
+    <Key>
+      <PropertyRef Name="symbol" />
+      <PropertyRef Name="fiscalDateEnding" />
+    </Key>
+    <Property Name="symbol" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="fiscalDateEnding" Type="date" Nullable="false" />
+    <Property Name="reportedDate" Type="date" />
+    <Property Name="reportedEPS" Type="float" />
+    <Property Name="estimatedEPS" Type="float" />
+    <Property Name="surprise" Type="float" />
+    <Property Name="surprisePercentage" Type="float" />
+  </EntityType>
+  <EntityType Name="income">
+    <Key>
+      <PropertyRef Name="symbol" />
+      <PropertyRef Name="fiscalDateEnding" />
+    </Key>
+    <Property Name="symbol" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="fiscalDateEnding" Type="date" Nullable="false" />
+    <Property Name="reportedCurrency" Type="nvarchar" MaxLength="50" />
+    <Property Name="totalRevenue" Type="float" />
+    <Property Name="totalOperatingExpense" Type="float" />
+    <Property Name="costOfRevenue" Type="float" />
+    <Property Name="grossProfit" Type="float" />
+    <Property Name="ebit" Type="float" />
+    <Property Name="netIncome" Type="float" />
+    <Property Name="researchAndDevelopment" Type="float" />
+    <Property Name="effectOfAccountingCharges" Type="float" />
+    <Property Name="incomeBeforeTax" Type="float" />
+    <Property Name="minorityInterest" Type="float" />
+    <Property Name="sellingGeneralAdministrative" Type="float" />
+    <Property Name="otherNonOperatingIncome" Type="float" />
+    <Property Name="operatingIncome" Type="float" />
+    <Property Name="otherOperatingExpense" Type="float" />
+    <Property Name="interestExpense" Type="float" />
+    <Property Name="taxProvision" Type="nvarchar" MaxLength="50" />
+    <Property Name="interestIncome" Type="nvarchar" MaxLength="50" />
+    <Property Name="netInterestIncome" Type="nvarchar" MaxLength="50" />
+    <Property Name="extraordinaryItems" Type="float" />
+    <Property Name="nonRecurring" Type="float" />
+    <Property Name="otherItems" Type="float" />
+    <Property Name="incomeTaxExpense" Type="float" />
+    <Property Name="totalOtherIncomeExpense" Type="float" />
+    <Property Name="discontinuedOperations" Type="float" />
+    <Property Name="netIncomeFromContinuingOperations" Type="float" />
+    <Property Name="netIncomeApplicableToCommonShares" Type="float" />
+    <Property Name="preferredStockAndOtherAdjustments" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="lookup">
+    <Key>
+      <PropertyRef Name="l_type" />
+      <PropertyRef Name="l_id" />
+    </Key>
+    <Property Name="l_type" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="l_id" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="l_name" Type="nvarchar" MaxLength="250" />
+    <Property Name="l_order" Type="int" />
+    <Property Name="l_att1" Type="nvarchar" MaxLength="250" />
+    <Property Name="l_att2" Type="nvarchar" MaxLength="250" />
+    <Property Name="l_att3" Type="nvarchar" MaxLength="250" />
+    <Property Name="l_att4" Type="nvarchar" MaxLength="250" />
+    <Property Name="l_att5" Type="nvarchar" MaxLength="250" />
+  </EntityType>
+  <EntityType Name="watch_list">
+    <Key>
+      <PropertyRef Name="symbol" />
+    </Key>
+    <Property Name="symbol" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="watch_type" Type="nchar" MaxLength="10" />
+    <Property Name="Sector" Type="nvarchar" MaxLength="250" />
+    <Property Name="Industry" Type="nvarchar" MaxLength="250" />
+    <Property Name="company" Type="nvarchar" MaxLength="250" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'stock.dbo.watch_list_v1' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="watch_list_v1">
+    <Key>
+      <PropertyRef Name="symbol" />
+    </Key>
+    <Property Name="symbol" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="watch_type" Type="nchar" MaxLength="10" />
+    <Property Name="company" Type="nvarchar" MaxLength="250" />
+    <Property Name="industry" Type="nvarchar" MaxLength="250" />
+    <Property Name="sector" Type="nvarchar" MaxLength="250" />
+    <Property Name="last_updated" Type="date" />
+  </EntityType>
+  <Function Name="process_analysis" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="symbol" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="process_history" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="symbol" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="process_sma_detail" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="symbol" Type="nvarchar" Mode="In" />
+    <Parameter Name="last_ran" Type="date" Mode="In" />
+    <Parameter Name="table_name" Type="nvarchar" Mode="In" />
+    <Parameter Name="col_name" Type="nvarchar" Mode="In" />
+    <Parameter Name="days" Type="int" Mode="In" />
+  </Function>
+  <Function Name="process_volume" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="symbol" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="update_daily_v1" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <EntityContainer Name="stockModelStoreContainer">
+    <EntitySet Name="daily_history" EntityType="Self.daily_history" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="daily_source" EntityType="Self.daily_source" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="daily_strong" EntityType="Self.daily_strong" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="earning" EntityType="Self.earning" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="income" EntityType="Self.income" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="lookup" EntityType="Self.lookup" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="watch_list" EntityType="Self.watch_list" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="daily_close" EntityType="Self.daily_close" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [daily_close].[symbol] AS [symbol], 
+    [daily_close].[date_hist] AS [date_hist], 
+    [daily_close].[SMA_005] AS [SMA_005], 
+    [daily_close].[SMA_010] AS [SMA_010], 
+    [daily_close].[SMA_020] AS [SMA_020], 
+    [daily_close].[SMA_030] AS [SMA_030], 
+    [daily_close].[SMA_060] AS [SMA_060], 
+    [daily_close].[SMA_120] AS [SMA_120], 
+    [daily_close].[SMA_240] AS [SMA_240], 
+    [daily_close].[price] AS [price]
+    FROM [dbo].[daily_close] AS [daily_close]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="watch_list_v1" EntityType="Self.watch_list_v1" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [watch_list_v1].[symbol] AS [symbol], 
+    [watch_list_v1].[watch_type] AS [watch_type], 
+    [watch_list_v1].[company] AS [company], 
+    [watch_list_v1].[industry] AS [industry], 
+    [watch_list_v1].[sector] AS [sector], 
+    [watch_list_v1].[last_updated] AS [last_updated]
+    FROM [dbo].[watch_list_v1] AS [watch_list_v1]</DefiningQuery>
+    </EntitySet>
+  </EntityContainer>
+</Schema>
