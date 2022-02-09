@@ -1,0 +1,26 @@
+﻿CREATE TABLE [dbo].[daily_close] (
+    [symbol]      NVARCHAR (50) NOT NULL,
+    [date_hist]   DATE          NOT NULL,
+    [SMA_005]     FLOAT (53)    NULL,
+    [SMA_010]     FLOAT (53)    NULL,
+    [SMA_020]     FLOAT (53)    NULL,
+    [SMA_030]     FLOAT (53)    NULL,
+    [SMA_060]     FLOAT (53)    NULL,
+    [SMA_120]     FLOAT (53)    NULL,
+    [SMA_240]     FLOAT (53)    NULL,
+    [price]       FLOAT (53)    NULL,
+    [direction]   NVARCHAR (50) NULL,
+    [candle]      NVARCHAR (50) NULL,
+    [head]        FLOAT (53)    NULL,
+    [center]      FLOAT (53)    NULL,
+    [tail]        FLOAT (53)    NULL,
+    [size_sma5]   FLOAT (53)    NULL,
+    [size_sma10]  FLOAT (53)    NULL,
+    [size_sma20]  FLOAT (53)    NULL,
+    [size_sma30]  FLOAT (53)    NULL,
+    [size_sma60]  FLOAT (53)    NULL,
+    [size_sma120] FLOAT (53)    NULL,
+    [size_sma240] FLOAT (53)    NULL,
+    CONSTRAINT [PK_daily_close] PRIMARY KEY CLUSTERED ([symbol] ASC, [date_hist] ASC)
+);
+

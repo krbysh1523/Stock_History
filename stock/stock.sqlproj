@@ -1,0 +1,151 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <Name>stock</Name>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectVersion>4.1</ProjectVersion>
+    <ProjectGuid>{4463c684-82e1-4dab-b66a-8b93c551f5da}</ProjectGuid>
+    <DSP>Microsoft.Data.Tools.Schema.Sql.Sql130DatabaseSchemaProvider</DSP>
+    <OutputType>Database</OutputType>
+    <RootPath>
+    </RootPath>
+    <RootNamespace>stock</RootNamespace>
+    <AssemblyName>stock</AssemblyName>
+    <ModelCollation>1033,CI</ModelCollation>
+    <DefaultFileStructure>BySchemaAndSchemaType</DefaultFileStructure>
+    <DeployToDatabase>True</DeployToDatabase>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetLanguage>CS</TargetLanguage>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <SqlServerVerification>False</SqlServerVerification>
+    <IncludeCompositeObjects>True</IncludeCompositeObjects>
+    <TargetDatabaseSet>True</TargetDatabaseSet>
+    <DefaultCollation>SQL_Latin1_General_CP1_CI_AS</DefaultCollation>
+    <DefaultFilegroup>PRIMARY</DefaultFilegroup>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <OutputPath>bin\Release\</OutputPath>
+    <BuildScriptName>$(MSBuildProjectName).sql</BuildScriptName>
+    <TreatWarningsAsErrors>False</TreatWarningsAsErrors>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <OutputPath>bin\Debug\</OutputPath>
+    <BuildScriptName>$(MSBuildProjectName).sql</BuildScriptName>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">11.0</VisualStudioVersion>
+    <!-- Default to the v11.0 targets path if the targets file for the current VS version is not found -->
+    <SSDTExists Condition="Exists('$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets')">True</SSDTExists>
+    <VisualStudioVersion Condition="'$(SSDTExists)' == ''">11.0</VisualStudioVersion>
+  </PropertyGroup>
+  <Import Condition="'$(SQLDBExtensionsRefPath)' != ''" Project="$(SQLDBExtensionsRefPath)\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
+  <Import Condition="'$(SQLDBExtensionsRefPath)' == ''" Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
+  <ItemGroup>
+    <Folder Include="Properties" />
+    <Folder Include="dbo\" />
+    <Folder Include="dbo\Tables\" />
+    <Folder Include="dbo\Views\" />
+    <Folder Include="Storage\" />
+    <Folder Include="dbo\Functions\" />
+    <Folder Include="dbo\Stored Procedures\" />
+    <Folder Include="dbo\Sequences\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Build Include="dbo\Tables\daily_industry.sql" />
+    <Build Include="dbo\Tables\daily_sector.sql" />
+    <Build Include="dbo\Tables\prediction_history.sql" />
+    <Build Include="dbo\Tables\prediction.sql" />
+    <Build Include="dbo\Tables\symbol_att.sql" />
+    <Build Include="dbo\Tables\daily_history.sql" />
+    <Build Include="dbo\Tables\watch_list.sql" />
+    <Build Include="dbo\Tables\daily_strong.sql" />
+    <Build Include="dbo\Tables\lookup.sql" />
+    <Build Include="dbo\Tables\daily_sma5.sql" />
+    <Build Include="dbo\Tables\fundamental.sql" />
+    <Build Include="dbo\Tables\daily_volume.sql" />
+    <Build Include="dbo\Tables\temp_hist.sql" />
+    <Build Include="dbo\Tables\daily_close.sql" />
+    <Build Include="dbo\Tables\api.sql" />
+    <Build Include="dbo\Tables\daily_analysis.sql" />
+    <Build Include="dbo\Tables\daily_open.sql" />
+    <Build Include="dbo\Tables\daily_high.sql" />
+    <Build Include="dbo\Tables\daily_low.sql" />
+    <Build Include="dbo\Tables\daily_avg.sql" />
+    <Build Include="dbo\Tables\daily_source.sql" />
+    <Build Include="dbo\Tables\test_plan.sql" />
+    <Build Include="dbo\Tables\list_history.sql" />
+    <Build Include="dbo\Tables\earning.sql" />
+    <Build Include="dbo\Tables\income.sql" />
+    <Build Include="dbo\Views\list_history_v1.sql" />
+    <Build Include="dbo\Views\fundamental_v1.sql" />
+    <Build Include="dbo\Views\daily_sma5_v1.sql" />
+    <Build Include="dbo\Views\daily_vol_sma10_v1.sql" />
+    <Build Include="dbo\Views\daily_v1.sql" />
+    <Build Include="dbo\Views\daily_vol_sma5_v1.sql" />
+    <Build Include="dbo\Views\daily_candle_v1.sql" />
+    <Build Include="dbo\Views\daily_close_v1.sql" />
+    <Build Include="dbo\Views\daily_strong_v1.sql" />
+    <Build Include="dbo\Views\watch_list_v1.sql" />
+    <Build Include="dbo\Views\daily_volume_v1.sql" />
+    <Build Include="dbo\Views\daily_analysis_v1.sql" />
+    <Build Include="dbo\Views\industry_v1.sql" />
+    <Build Include="dbo\Views\sector_v1.sql" />
+    <Build Include="Storage\MOD.sql" />
+    <Build Include="dbo\Functions\get_eps.sql" />
+    <Build Include="dbo\Functions\fx_is_up_pattern1.sql" />
+    <Build Include="dbo\Functions\fx_rate_perc.sql" />
+    <Build Include="dbo\Functions\fx_ret_high.sql" />
+    <Build Include="dbo\Functions\fx_ret_low.sql" />
+    <Build Include="dbo\Functions\get_next_day.sql" />
+    <Build Include="dbo\Functions\get_cur_day.sql" />
+    <Build Include="dbo\Functions\fx_weight_order_by.sql" />
+    <Build Include="dbo\Functions\get_pre_day.sql" />
+    <Build Include="dbo\Functions\get_nth_day.sql" />
+    <Build Include="dbo\Functions\fx_greater.sql" />
+    <Build Include="dbo\Functions\fx_lower.sql" />
+    <Build Include="dbo\Functions\fx_doji_tail_perc.sql" />
+    <Build Include="dbo\Stored Procedures\sp_prediction_history_cleanup.sql" />
+    <Build Include="dbo\Stored Procedures\sp_add_list_history.sql" />
+    <Build Include="dbo\Stored Procedures\sp_get_prediction_history.sql" />
+    <Build Include="dbo\Stored Procedures\option_02.sql" />
+    <Build Include="dbo\Stored Procedures\filter_simul.sql" />
+    <Build Include="dbo\Stored Procedures\process_sma_detail.sql" />
+    <Build Include="dbo\Stored Procedures\option_03.sql" />
+    <Build Include="dbo\Stored Procedures\option_05.sql" />
+    <Build Include="dbo\Stored Procedures\option_06.sql" />
+    <Build Include="dbo\Stored Procedures\option_07.sql" />
+    <Build Include="dbo\Stored Procedures\option_08.sql" />
+    <Build Include="dbo\Stored Procedures\process_rsi_detail.sql" />
+    <Build Include="dbo\Stored Procedures\sp_generate_idx.sql" />
+    <Build Include="dbo\Stored Procedures\process_volume.sql" />
+    <Build Include="dbo\Stored Procedures\update_daily_v1.sql" />
+    <Build Include="dbo\Stored Procedures\sp_simulation.sql" />
+    <Build Include="dbo\Stored Procedures\option_09.sql" />
+    <Build Include="dbo\Stored Procedures\option_10.sql" />
+    <Build Include="dbo\Stored Procedures\option_11.sql" />
+    <Build Include="dbo\Stored Procedures\sp_weekly_v1.sql" />
+    <Build Include="dbo\Stored Procedures\process_history.sql" />
+    <Build Include="dbo\Stored Procedures\filter_main.sql" />
+    <Build Include="dbo\Stored Procedures\process_analysis.sql" />
+    <Build Include="dbo\Stored Procedures\option_04.sql" />
+    <Build Include="dbo\Stored Procedures\update_daily_analysis_v1.sql" />
+    <Build Include="dbo\Stored Procedures\option_01.sql" />
+    <Build Include="dbo\Sequences\test_step_id.sql" />
+  </ItemGroup>
+</Project>
