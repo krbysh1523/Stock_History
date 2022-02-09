@@ -19,5 +19,6 @@ namespace History
         public string Sector { get; set; }
         public string Industry { get; set; }
         public string company { get; set; }
+        public Nullable<double> market_cap { get; set; }
     }
 }

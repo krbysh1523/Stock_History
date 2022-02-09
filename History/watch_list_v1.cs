@@ -20,5 +20,6 @@ namespace History
         public string industry { get; set; }
         public string sector { get; set; }
         public Nullable<System.DateTime> last_updated { get; set; }
+        public Nullable<System.DateTime> last_earning { get; set; }
     }
 }

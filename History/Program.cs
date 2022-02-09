@@ -16,7 +16,7 @@ namespace History
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Analysis());
+            Application.Run(new Query());
         }
     }
 }

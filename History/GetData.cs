@@ -23,17 +23,30 @@ namespace History
     {
 
         #region + Form
-        int[] days = new int[] { 5, 10, 20, 30, 60, 120, 200 };
+        Query query = null;
+        int[] days = new int[] { 5, 10, 20, 30, 60, 120, 240 };
         string API_KEY = "YFMAAM655H11S0KV";
         //string API_KEY = "BWN5J2GY9613F0D0";
         List<lookup> data_types = new List<lookup>();
         int wait_sleep = 500;
-        int down_sleep = 100;
+        int down_sleep = 1000;
 
         public GetData()
         {
             InitializeComponent();
             CheckForIllegalCrossThreadCalls = false;
+        }
+
+        public GetData(Query _query)
+        {
+            query = _query;
+            InitializeComponent();
+            CheckForIllegalCrossThreadCalls = false;
+        }
+
+        private void GetData_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            query.CloseChild(this);
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -44,20 +57,27 @@ namespace History
 
         private void Load_Symbols()
         {
-            using (StockEntity stock = new StockEntity())
+            using (stockEntities stock = new stockEntities())
             {
-                List<watch_list_v1> watches = new List<watch_list_v1>();
-                watches = stock.watch_list_v1.ToList();
+                SortableBindingList<watch_list_v1> watches = new SortableBindingList<watch_list_v1>();
+                foreach(var w in stock.watch_list_v1)
+                    watches.Add(w);
                 chk_Symbols.DataSource = watches;
+                chk_Symbols.ReadOnly = false;
                 var chk_col = new DataGridViewCheckBoxColumn();
-                chk_col.ReadOnly = false;
                 chk_Symbols.Columns.Insert(0, chk_col);
                 chk_Symbols.Columns[0].Width = 50;
+                chk_col.ReadOnly = false;
+                for (int c = 1; c < chk_Symbols.Columns.Count; c++)
+                {
+                    chk_Symbols.Columns[c].SortMode = DataGridViewColumnSortMode.Automatic;
+                }
+
             }
         }
         private void Load_Lookup()
         {
-            using (StockEntity stock = new StockEntity())
+            using (stockEntities stock = new stockEntities())
             {
                 data_types = stock.lookups.Where(r => r.l_type == "data_type").ToList();
             }
@@ -92,7 +112,7 @@ namespace History
         private void btn_Check_Not_Updated_Click(object sender, EventArgs e)
         {
             var max_dttm = DateTime.Today;
-            using (StockEntity stock = new StockEntity())
+            using (stockEntities stock = new stockEntities())
             {
                 max_dttm = stock.watch_list_v1.Max(r => r.last_updated).Value;
             }
@@ -139,6 +159,34 @@ namespace History
                     _chk_all.SetItemChecked(i, true);
             }
         }
+        private void chk_Selected_Click(object sender, EventArgs e)
+        {
+            foreach (DataGridViewCell c in chk_Symbols.SelectedCells)
+            {
+                int row = c.RowIndex;
+                DataGridViewCheckBoxCell chkchecking = chk_Symbols.Rows[row].Cells[0] as DataGridViewCheckBoxCell;
+
+                if (Convert.ToBoolean(chkchecking.Value) == true)
+                {
+                    chk_Symbols.Rows[row].Cells[0].Value = false;
+                }
+                else
+                {
+                    chk_Symbols.Rows[row].Cells[0].Value = true;
+                }
+            }
+        }
+        private void btn_Test_Click(object sender, EventArgs e)
+        {
+            foreach (DataGridViewRow r in chk_Symbols.Rows)
+            {
+                if (r.Cells["last_earning"].Value == null)
+                    r.Cells[0].Value = true;
+                //else if( Convert.ToDateTime(r.Cells["last_updated"].Value) < max_dttm)
+                //    r.Cells[0].Value = true;
+            }
+        }
+
         #endregion
 
         #region + Download
@@ -166,12 +214,15 @@ namespace History
         {
             foreach (var s in Ret_Checked(chk_Symbols))
             {
-                string json_result = Get_API_Data("https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol=" + s + "&outputsize=full&apikey=" + API_KEY, s);
+                string json_result = "";
+                if (Get_API_Data("https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol=" + s + "&outputsize=full&apikey=" + API_KEY, s, out json_result))
+                {
 
-                DailyHistoryAdjusted(json_result, s);
-                show_Message("Downloaded " + s);
+                    DailyHistoryAdjusted(json_result, s);
+                    show_Message("Downloaded " + s);
 
-                Thread.Sleep(down_sleep);
+                    Thread.Sleep(down_sleep);
+                }
             }
             show_Message("Completed");
         }
@@ -179,12 +230,13 @@ namespace History
         {
             foreach (var s in Ret_Checked(chk_Symbols))
             {
-                string json_result = Get_API_Data("https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol=" + s + "&outputsize=compact&apikey=" + API_KEY, s);
-
-                DailyHistoryAdjusted(json_result, s);
-                show_Message("Downloaded " + s);
-
-                Thread.Sleep(down_sleep);
+                string json_result = "";
+                if (Get_API_Data("https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol=" + s + "&outputsize=compact&apikey=" + API_KEY, s, out json_result))
+                {
+                    DailyHistoryAdjusted(json_result, s);
+                    show_Message("Downloaded " + s);
+                    Thread.Sleep(down_sleep);
+                }
             }
             show_Message("Completed");
         }
@@ -193,8 +245,17 @@ namespace History
             var jsearch = Newtonsoft.Json.Linq.JObject.Parse(_json_result);
             if (jsearch == null)
                 return;
-            IList<JToken> results = jsearch["Time Series (Daily)"].Children().ToList();
-            using (StockEntity api = new StockEntity())
+            IList<JToken> results;
+            try
+            {
+                results = jsearch["Time Series (Daily)"].Children().ToList();
+            }
+            catch (Exception ex)
+            {
+                show_Message(_symbol + ": " + ex.Message);
+                return;
+            }
+            using (stockEntities api = new stockEntities())
             {
                 List<daily_source> history = new List<daily_source>();
                 history = api.daily_source.Where(r => r.symbol == _symbol).ToList();
@@ -231,47 +292,90 @@ namespace History
         {
             foreach (var s in Ret_Checked(chk_Symbols))
             {
-                string json_result = Get_API_Data("https://www.alphavantage.co/query?function=EARNINGS&symbol=" + s + "&apikey=" + API_KEY, s);
-
-                var jsearch = Newtonsoft.Json.Linq.JObject.Parse(json_result);
-                IList<JToken> results = jsearch["quarterlyEarnings"].Children().ToList();
-                using (StockEntity api = new StockEntity())
-                {
-                    List<earning> history = new List<earning>();
-                    history = api.earnings.Where(r => r.symbol == s).ToList();
-
-                    foreach (JToken j in results)
-                    {
-                        DateTime fiscalDateEnding = Convert.ToDateTime(((Newtonsoft.Json.Linq.JValue)j["fiscalDateEnding"]).Value);
-
-                        if (!history.Any(r => r.fiscalDateEnding == fiscalDateEnding))
-                        {
-                            api.earnings.Add(new earning
-                            {
-                                symbol = s,
-                                fiscalDateEnding = fiscalDateEnding,
-                                reportedDate = Convert.ToDateTime(((Newtonsoft.Json.Linq.JValue)j["reportedDate"]).Value),
-                                reportedEPS = ret_Double(((Newtonsoft.Json.Linq.JValue)j["reportedEPS"]).Value),
-                                estimatedEPS = ret_Double(((Newtonsoft.Json.Linq.JValue)j["estimatedEPS"]).Value),
-                                surprise = ret_Double(((Newtonsoft.Json.Linq.JValue)j["surprise"]).Value),
-                                surprisePercentage = ret_Double(((Newtonsoft.Json.Linq.JValue)j["surprisePercentage"]).Value),
-                            });
-                        }
-
-                    }
-                    api.SaveChanges();
-                    show_Message("Updated Database for " + s);
-                }
-                show_Message("Downloaded Earnings for " + s);
-
-                Thread.Sleep(down_sleep);
+                DownloadEarning(s);
             }
             show_Message("Completed");
         }
-        private Double ret_Double(object _value)
+
+        private void DownloadEarning(string s)
         {
-            double _t = 0;
-            Double.TryParse(_value.ToString(), out _t);
+            string json_result = "";
+            if (!Get_API_Data("https://www.alphavantage.co/query?function=EARNINGS&symbol=" + s + "&apikey=" + API_KEY, s, out json_result))
+            {
+                return;
+            }
+
+            var jsearch = Newtonsoft.Json.Linq.JObject.Parse(json_result);
+            if (jsearch == null || jsearch.Count < 1)
+                return;
+            IList<JToken> results;
+            try
+            {
+                results = jsearch["quarterlyEarnings"].Children().ToList();
+            }
+            catch (Exception ex)
+            {
+                show_Message(s + ": " + ex.Message);
+                return;
+            }
+            using (stockEntities api = new stockEntities())
+            {
+                List<earning> history = new List<earning>();
+                history = api.earnings.Where(r => r.symbol == s).ToList();
+
+                foreach (JToken j in results)
+                {
+                    DateTime fiscalDateEnding = Convert.ToDateTime(((Newtonsoft.Json.Linq.JValue)j["fiscalDateEnding"]).Value);
+
+                    if (!history.Any(r => r.fiscalDateEnding == fiscalDateEnding))
+                    {
+                        var new_earning = new earning()
+                        {
+                            symbol = s,
+                            fiscalDateEnding = fiscalDateEnding,
+                            reportedDate = Convert.ToDateTime(((Newtonsoft.Json.Linq.JValue)j["reportedDate"]).Value),
+                            reportedEPS = ret_Double(j, "reportedEPS"),
+                            estimatedEPS = ret_Double(j, "estimatedEPS"),
+                            surprise = ret_Double(j, "surprise"),
+                            surprisePercentage = ret_Double(j, "surprisePercentage"),
+                        };
+                        history.Add(new_earning);
+                        api.earnings.Add(new_earning);
+                    }
+                }
+                api.SaveChanges();
+                show_Message("Updated Database for " + s);
+            }
+            show_Message("Downloaded Earnings for " + s);
+
+            Thread.Sleep(down_sleep);
+        }
+        private Double ret_Double(JToken _j, string _name)
+        {
+            double _t = -999999999999999999;
+            try
+            {
+                if ((Newtonsoft.Json.Linq.JValue)_j[_name] != null)
+                    Double.TryParse(((Newtonsoft.Json.Linq.JValue)_j[_name]).Value.ToString(), out _t);
+            }
+            catch(Exception)
+            {
+                show_Message(_name + " had exception (To Double)");
+            }
+            return _t;
+        }
+        private string ret_String(JToken _j, string _name)
+        {
+            string _t = "";
+            try
+            {
+                if ((Newtonsoft.Json.Linq.JValue)_j[_name] != null)
+                    _t = ((Newtonsoft.Json.Linq.JValue)_j[_name]).Value.ToString();
+            }
+            catch (Exception)
+            {
+                show_Message(_name + " had exception (To String)");
+            }
             return _t;
         }
 
@@ -279,64 +383,86 @@ namespace History
         {
             foreach (var s in Ret_Checked(chk_Symbols))
             {
-                string json_result = Get_API_Data("https://www.alphavantage.co/query?function=INCOME_STATEMENT&symbol=" + s + "&apikey=" + API_KEY, s);
-
-                var jsearch = Newtonsoft.Json.Linq.JObject.Parse(json_result);
-                IList<JToken> results = jsearch["quarterlyReports"].Children().ToList();
-                using (StockEntity api = new StockEntity())
-                {
-                    List<income> history = new List<income>();
-                    history = api.incomes.Where(r => r.symbol == s).ToList();
-
-                    foreach (JToken j in results)
-                    {
-                        DateTime fiscalDateEnding = Convert.ToDateTime(((Newtonsoft.Json.Linq.JValue)j["fiscalDateEnding"]).Value);
-
-                        if (!history.Any(r => r.fiscalDateEnding == fiscalDateEnding))
-                        {
-                            api.incomes.Add(new income
-                            {
-                                symbol = s,
-                                fiscalDateEnding = fiscalDateEnding,
-                                reportedCurrency = ((Newtonsoft.Json.Linq.JValue)j["reportedCurrency"]).Value.ToString(),
-                                totalRevenue = ret_Double(((Newtonsoft.Json.Linq.JValue)j["totalRevenue"]).Value),
-                                totalOperatingExpense = ret_Double(((Newtonsoft.Json.Linq.JValue)j["totalOperatingExpense"]).Value),
-                                costOfRevenue = ret_Double(((Newtonsoft.Json.Linq.JValue)j["costOfRevenue"]).Value),
-                                grossProfit = ret_Double(((Newtonsoft.Json.Linq.JValue)j["grossProfit"]).Value),
-                                ebit = ret_Double(((Newtonsoft.Json.Linq.JValue)j["ebit"]).Value),
-                                netIncome = ret_Double(((Newtonsoft.Json.Linq.JValue)j["netIncome"]).Value),
-                                researchAndDevelopment = ret_Double(((Newtonsoft.Json.Linq.JValue)j["researchAndDevelopment"]).Value),
-                                effectOfAccountingCharges = ret_Double(((Newtonsoft.Json.Linq.JValue)j["effectOfAccountingCharges"]).Value),
-                                incomeBeforeTax = ret_Double(((Newtonsoft.Json.Linq.JValue)j["incomeBeforeTax"]).Value),
-                                minorityInterest = ret_Double(((Newtonsoft.Json.Linq.JValue)j["minorityInterest"]).Value),
-                                sellingGeneralAdministrative = ret_Double(((Newtonsoft.Json.Linq.JValue)j["sellingGeneralAdministrative"]).Value),
-                                otherNonOperatingIncome = ret_Double(((Newtonsoft.Json.Linq.JValue)j["otherNonOperatingIncome"]).Value),
-                                operatingIncome = ret_Double(((Newtonsoft.Json.Linq.JValue)j["operatingIncome"]).Value),
-                                otherOperatingExpense = ret_Double(((Newtonsoft.Json.Linq.JValue)j["otherOperatingExpense"]).Value),
-                                interestExpense = ret_Double(((Newtonsoft.Json.Linq.JValue)j["interestExpense"]).Value),
-                                taxProvision = ((Newtonsoft.Json.Linq.JValue)j["taxProvision"]).Value.ToString(),
-                                interestIncome = ((Newtonsoft.Json.Linq.JValue)j["interestIncome"]).Value.ToString(),
-                                netInterestIncome = ((Newtonsoft.Json.Linq.JValue)j["netInterestIncome"]).Value.ToString(),
-                                extraordinaryItems = ret_Double(((Newtonsoft.Json.Linq.JValue)j["extraordinaryItems"]).Value),
-                                nonRecurring = ret_Double(((Newtonsoft.Json.Linq.JValue)j["nonRecurring"]).Value),
-                                otherItems = ret_Double(((Newtonsoft.Json.Linq.JValue)j["otherItems"]).Value),
-                                incomeTaxExpense = ret_Double(((Newtonsoft.Json.Linq.JValue)j["incomeTaxExpense"]).Value),
-                                totalOtherIncomeExpense = ret_Double(((Newtonsoft.Json.Linq.JValue)j["totalOtherIncomeExpense"]).Value),
-                                discontinuedOperations = ret_Double(((Newtonsoft.Json.Linq.JValue)j["discontinuedOperations"]).Value),
-                                netIncomeFromContinuingOperations = ret_Double(((Newtonsoft.Json.Linq.JValue)j["netIncomeFromContinuingOperations"]).Value),
-                                netIncomeApplicableToCommonShares = ret_Double(((Newtonsoft.Json.Linq.JValue)j["netIncomeApplicableToCommonShares"]).Value),
-                                preferredStockAndOtherAdjustments = ((Newtonsoft.Json.Linq.JValue)j["preferredStockAndOtherAdjustments"]).Value.ToString()
-                            });
-                        }
-                    }
-                    api.SaveChanges();
-                    show_Message("Updated Database");
-                }
-                show_Message("Downloaded Income for " + s);
-
-                Thread.Sleep(down_sleep);
+                DownloadIncome(s);
             }
             show_Message("Completed");
+        }
+
+        private void DownloadIncome(string s)
+        {
+            string json_result = "";
+            if(!Get_API_Data("https://www.alphavantage.co/query?function=INCOME_STATEMENT&symbol=" + s + "&apikey=" + API_KEY, s, out json_result))
+            {
+                return;
+            }
+
+            var jsearch = Newtonsoft.Json.Linq.JObject.Parse(json_result);
+            if (jsearch == null || jsearch.Count < 1)
+                return;
+            IList<JToken> results;
+            try
+            {
+                results = jsearch["quarterlyReports"].Children().ToList();
+            }
+            catch (Exception ex)
+            {
+                show_Message(s + ": " + ex.Message);
+                return;
+            }
+            using (stockEntities api = new stockEntities())
+            {
+                List<income> history = new List<income>();
+                history = api.incomes.Where(r => r.symbol == s).ToList();
+
+                foreach (JToken j in results)
+                {
+                    DateTime fiscalDateEnding = Convert.ToDateTime(((Newtonsoft.Json.Linq.JValue)j["fiscalDateEnding"]).Value);
+
+                    if (!history.Any(r => r.fiscalDateEnding == fiscalDateEnding))
+                    {
+                        var new_income = new income()
+                        {
+                            symbol = s,
+                            fiscalDateEnding = fiscalDateEnding,
+                            reportedCurrency = ret_String(j, "reportedCurrency"),
+                            totalRevenue = ret_Double(j, "totalRevenue"),
+                            totalOperatingExpense = ret_Double(j, "totalOperatingExpense"),
+                            costOfRevenue = ret_Double(j, "costOfRevenue"),
+                            grossProfit = ret_Double(j, "grossProfit"),
+                            ebit = ret_Double(j, "ebit"),
+                            netIncome = ret_Double(j, "netIncome"),
+                            researchAndDevelopment = ret_Double(j, "researchAndDevelopment"),
+                            effectOfAccountingCharges = ret_Double(j, "effectOfAccountingCharges"),
+                            incomeBeforeTax = ret_Double(j, "incomeBeforeTax"),
+                            minorityInterest = ret_Double(j, "minorityInterest"),
+                            sellingGeneralAdministrative = ret_Double(j, "sellingGeneralAdministrative"),
+                            otherNonOperatingIncome = ret_Double(j, "otherNonOperatingIncome"),
+                            operatingIncome = ret_Double(j, "operatingIncome"),
+                            otherOperatingExpense = ret_Double(j, "otherOperatingExpense"),
+                            interestExpense = ret_Double(j, "interestExpense"),
+                            taxProvision = ret_String(j, "taxProvision"),
+                            interestIncome = ret_String(j, "interestIncome"),
+                            netInterestIncome = ret_String(j, "netInterestIncome"),
+                            extraordinaryItems = ret_Double(j, "extraordinaryItems"),
+                            nonRecurring = ret_Double(j, "nonRecurring"),
+                            otherItems = ret_Double(j, "otherItems"),
+                            incomeTaxExpense = ret_Double(j, "incomeTaxExpense"),
+                            totalOtherIncomeExpense = ret_Double(j, "totalOtherIncomeExpense"),
+                            discontinuedOperations = ret_Double(j, "discontinuedOperations"),
+                            netIncomeFromContinuingOperations = ret_Double(j, "netIncomeFromContinuingOperations"),
+                            netIncomeApplicableToCommonShares = ret_Double(j, "netIncomeApplicableToCommonShares"),
+                            preferredStockAndOtherAdjustments = ret_String(j, "preferredStockAndOtherAdjustments")
+                        };
+                        api.incomes.Add(new_income);
+                        history.Add(new_income);
+                    }
+                }
+                api.SaveChanges();
+                show_Message("Updated Database");
+            }
+            show_Message("Downloaded Income for " + s);
+
+            Thread.Sleep(down_sleep);
         }
 
         #endregion
@@ -399,6 +525,11 @@ namespace History
                 ProcVolume();
                 Thread.Sleep(wait_sleep);
             }
+            if (chk_Processing.CheckedItems.Contains("Index"))
+            {
+                ProcIndex();
+                Thread.Sleep(wait_sleep);
+            }
         }
         private void btn_CheckAllProc_Click(object sender, EventArgs e)
         {
@@ -406,7 +537,7 @@ namespace History
         }
         private void ProcHistory()
         {
-            using (StockEntity stock = new StockEntity())
+            using (stockEntities stock = new stockEntities())
             {
                 stock.Database.CommandTimeout = 300000;
                 foreach (var s in Ret_Checked(chk_Symbols))
@@ -421,7 +552,7 @@ namespace History
         }
         private void ProcSMA()
         {
-            using (StockEntity stock = new StockEntity())
+            using (stockEntities stock = new stockEntities())
             {
                 stock.Database.CommandTimeout = 300000;
                 foreach (var s in Ret_Checked(chk_Symbols))
@@ -441,7 +572,7 @@ namespace History
         }
         private void ProcEMA()
         {
-            using (StockEntity stock = new StockEntity())
+            using (stockEntities stock = new stockEntities())
             {
                 stock.Database.CommandTimeout = 300000;
 
@@ -468,7 +599,7 @@ namespace History
         }
         private void ProcRSI()
         {
-            using (StockEntity stock = new StockEntity())
+            using (stockEntities stock = new stockEntities())
             {
                 stock.Database.CommandTimeout = 300000;
 
@@ -489,7 +620,7 @@ namespace History
 
         private void ProcMACD()
         {
-            using (StockEntity stock = new StockEntity())
+            using (stockEntities stock = new stockEntities())
             {
                 stock.Database.CommandTimeout = 300000;
 
@@ -525,7 +656,7 @@ namespace History
         }
         private void ProcChange()
         {
-            using (StockEntity stock = new StockEntity())
+            using (stockEntities stock = new stockEntities())
             {
                 stock.Database.CommandTimeout = 300000;
 
@@ -547,7 +678,7 @@ namespace History
         }
         private void ProcForecast()
         {
-            using (StockEntity stock = new StockEntity())
+            using (stockEntities stock = new stockEntities())
             {
                 stock.Database.CommandTimeout = 300000;
 
@@ -573,7 +704,7 @@ namespace History
         }
         private void ProcAnalysis()
         {
-            using (StockEntity stock = new StockEntity())
+            using (stockEntities stock = new stockEntities())
             {
                 stock.Database.CommandTimeout = 300000;
 
@@ -589,7 +720,7 @@ namespace History
         }
         private void ProcEPR()
         {
-            using (StockEntity stock = new StockEntity())
+            using (stockEntities stock = new stockEntities())
             {
                 stock.Database.CommandTimeout = 300000;
 
@@ -615,7 +746,7 @@ namespace History
         }
         private void ProcVolume()
         {
-            using (StockEntity stock = new StockEntity())
+            using (stockEntities stock = new stockEntities())
             {
                 stock.Database.CommandTimeout = 300000;
 
@@ -629,18 +760,39 @@ namespace History
                 Thread.Sleep(300);
             }
         }
+        private void ProcIndex()
+        {
+            using (stockEntities stock = new stockEntities())
+            {
+                stock.Database.CommandTimeout = 300000;
+
+                show_Message("Process Index Started");
+                // Change of basic
+                stock.sp_generate_idx();
+                show_Message("Process Index Finished");
+                Thread.Sleep(300);
+            }
+        }
         #endregion
 
         #region + API
-        public string Get_API_Data(string _URL, string _symbol)
+        public bool Get_API_Data(string _URL, string _symbol, out string _result)
         {
-            string result;
+            _result = "";
             using (var client = new WebClient())
             {
-                result = client.DownloadString(_URL);
+                try
+                {
+                    _result = client.DownloadString(_URL);
+                }
+                catch(Exception ex)
+                {
+                    show_Message("URL Error:" + ex.Message);
+                    return false;
+                }
             }
             show_Message("Downloaded!");
-            return result;
+            return true;
         }
         #endregion
 
@@ -652,7 +804,7 @@ namespace History
         }
         private void UpdateView()
         {
-            using (StockEntity stock = new StockEntity())
+            using (stockEntities stock = new stockEntities())
             {
                 stock.Database.CommandTimeout = 300000;
                 stock.Database.ExecuteSqlCommand(" exec update_daily_v1 ", new object[] { });
@@ -681,10 +833,5 @@ namespace History
         }
         #endregion
 
-        private void btn_Test_Click(object sender, EventArgs e)
-        {
-            Analysis dlg = new Analysis();
-            dlg.Show();
-        }
     }
 }

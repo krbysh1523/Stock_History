@@ -1,7 +1,48 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="stockModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
   <!--Errors Found During Generation:
-warning 6002: The table/view 'stock.dbo.daily_close' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'stock.dbo.api' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="api">
+    <Key>
+      <PropertyRef Name="api_id" />
+    </Key>
+    <Property Name="api_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="api_key" Type="nvarchar" MaxLength="50" />
+    <Property Name="last_ran" Type="datetime" />
+  </EntityType>
+  <EntityType Name="daily_analysis">
+    <Key>
+      <PropertyRef Name="symbol" />
+      <PropertyRef Name="date" />
+    </Key>
+    <Property Name="symbol" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="date" Type="date" Nullable="false" />
+    <Property Name="open_close_perc" Type="float" />
+    <Property Name="high_low_perc" Type="float" />
+    <Property Name="dir" Type="char" MaxLength="1" />
+    <Property Name="oc_by_hl_perc" Type="float" />
+    <Property Name="dir_on" Type="int" />
+    <Property Name="point1" Type="int" />
+    <Property Name="point2" Type="int" />
+    <Property Name="point3" Type="int" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'stock.dbo.daily_avg' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="daily_avg">
+    <Key>
+      <PropertyRef Name="symbol" />
+      <PropertyRef Name="date" />
+    </Key>
+    <Property Name="symbol" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="date" Type="date" Nullable="false" />
+    <Property Name="SMA_005" Type="float" />
+    <Property Name="SMA_010" Type="float" />
+    <Property Name="SMA_020" Type="float" />
+    <Property Name="SMA_030" Type="float" />
+    <Property Name="SMA_060" Type="float" />
+    <Property Name="SMA_120" Type="float" />
+    <Property Name="SMA_200" Type="float" />
+  </EntityType>
   <EntityType Name="daily_close">
     <Key>
       <PropertyRef Name="symbol" />
@@ -17,6 +58,35 @@ warning 6002: The table/view 'stock.dbo.daily_close' does not have a primary key
     <Property Name="SMA_120" Type="float" />
     <Property Name="SMA_240" Type="float" />
     <Property Name="price" Type="float" />
+    <Property Name="direction" Type="nvarchar" MaxLength="50" />
+    <Property Name="candle" Type="nvarchar" MaxLength="50" />
+    <Property Name="head" Type="float" />
+    <Property Name="center" Type="float" />
+    <Property Name="tail" Type="float" />
+    <Property Name="size_sma5" Type="float" />
+    <Property Name="size_sma10" Type="float" />
+    <Property Name="size_sma20" Type="float" />
+    <Property Name="size_sma30" Type="float" />
+    <Property Name="size_sma60" Type="float" />
+    <Property Name="size_sma120" Type="float" />
+    <Property Name="size_sma240" Type="float" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'stock.dbo.daily_high' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="daily_high">
+    <Key>
+      <PropertyRef Name="symbol" />
+      <PropertyRef Name="date" />
+    </Key>
+    <Property Name="symbol" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="date" Type="date" Nullable="false" />
+    <Property Name="SMA_005" Type="float" />
+    <Property Name="SMA_010" Type="float" />
+    <Property Name="SMA_020" Type="float" />
+    <Property Name="SMA_030" Type="float" />
+    <Property Name="SMA_060" Type="float" />
+    <Property Name="SMA_120" Type="float" />
+    <Property Name="SMA_200" Type="float" />
   </EntityType>
   <EntityType Name="daily_history">
     <Key>
@@ -32,6 +102,80 @@ warning 6002: The table/view 'stock.dbo.daily_close' does not have a primary key
     <Property Name="volume" Type="float" />
     <Property Name="avg" Type="float" />
     <Property Name="seq" Type="nvarchar" MaxLength="81" StoreGeneratedPattern="Computed" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'stock.dbo.daily_industry' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="daily_industry">
+    <Key>
+      <PropertyRef Name="date_hist" />
+    </Key>
+    <Property Name="industry" Type="nvarchar" MaxLength="250" />
+    <Property Name="date_hist" Type="date" Nullable="false" />
+    <Property Name="price_chg" Type="float" />
+    <Property Name="idx_chg" Type="float" />
+    <Property Name="strong" Type="float" />
+    <Property Name="strong_sma5" Type="float" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'stock.dbo.daily_low' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="daily_low">
+    <Key>
+      <PropertyRef Name="symbol" />
+      <PropertyRef Name="date" />
+    </Key>
+    <Property Name="symbol" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="date" Type="date" Nullable="false" />
+    <Property Name="SMA_005" Type="float" />
+    <Property Name="SMA_010" Type="float" />
+    <Property Name="SMA_020" Type="float" />
+    <Property Name="SMA_030" Type="float" />
+    <Property Name="SMA_060" Type="float" />
+    <Property Name="SMA_120" Type="float" />
+    <Property Name="SMA_200" Type="float" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'stock.dbo.daily_open' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="daily_open">
+    <Key>
+      <PropertyRef Name="symbol" />
+      <PropertyRef Name="date" />
+    </Key>
+    <Property Name="symbol" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="date" Type="date" Nullable="false" />
+    <Property Name="SMA_005" Type="float" />
+    <Property Name="SMA_010" Type="float" />
+    <Property Name="SMA_020" Type="float" />
+    <Property Name="SMA_030" Type="float" />
+    <Property Name="SMA_060" Type="float" />
+    <Property Name="SMA_120" Type="float" />
+    <Property Name="SMA_200" Type="float" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'stock.dbo.daily_sector' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="daily_sector">
+    <Key>
+      <PropertyRef Name="date_hist" />
+    </Key>
+    <Property Name="sector" Type="nvarchar" MaxLength="250" />
+    <Property Name="date_hist" Type="date" Nullable="false" />
+    <Property Name="price_chg" Type="float" />
+    <Property Name="idx_chg" Type="float" />
+    <Property Name="strong" Type="float" />
+    <Property Name="strong_sma5" Type="float" />
+  </EntityType>
+  <EntityType Name="daily_sma5">
+    <Key>
+      <PropertyRef Name="symbol" />
+      <PropertyRef Name="date_hist" />
+    </Key>
+    <Property Name="symbol" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="date_hist" Type="date" Nullable="false" />
+    <Property Name="price" Type="float" />
+    <Property Name="price_pre" Type="float" />
+    <Property Name="price_chg_perc" Type="float" />
+    <Property Name="sma5" Type="float" />
+    <Property Name="sma5_pre" Type="float" />
+    <Property Name="sma5_chg_perc" Type="float" />
   </EntityType>
   <EntityType Name="daily_source">
     <Key>
@@ -59,21 +203,43 @@ warning 6002: The table/view 'stock.dbo.daily_close' does not have a primary key
     <Property Name="price" Type="float" />
     <Property Name="price_chg_perc" Type="float" />
     <Property Name="sma5_chg_perc" Type="float" />
+    <Property Name="spy_price" Type="float" />
     <Property Name="spy_chg" Type="float" />
     <Property Name="spy_sma5" Type="float" />
+    <Property Name="spy_diff" Type="float" />
+    <Property Name="spy_diff_sma5" Type="float" />
+    <Property Name="qqq_price" Type="float" />
     <Property Name="qqq_chg" Type="float" />
     <Property Name="qqq_sma5" Type="float" />
+    <Property Name="qqq_diff" Type="float" />
+    <Property Name="qqq_diff_sma5" Type="float" />
+    <Property Name="dia_price" Type="float" />
     <Property Name="dia_chg" Type="float" />
     <Property Name="dia_sma5" Type="float" />
-    <Property Name="i_spy_sma5" Type="float" />
-    <Property Name="i_qqq_sma5" Type="float" />
-    <Property Name="i_dia_sma5" Type="float" />
-    <Property Name="i_dia_price" Type="float" />
-    <Property Name="i_dia_chg" Type="float" />
-    <Property Name="i_spy_price" Type="float" />
-    <Property Name="i_spy_chg" Type="float" />
-    <Property Name="i_qqq_price" Type="float" />
-    <Property Name="i_qqq_chg" Type="float" />
+    <Property Name="dia_diff" Type="float" />
+    <Property Name="dia_diff_sma5" Type="float" />
+    <Property Name="idx_diff" Type="float" />
+    <Property Name="idx_diff_sma5" Type="float" />
+    <Property Name="idx_chg" Type="float" />
+    <Property Name="idx_price" Type="float" />
+    <Property Name="idx_sma5" Type="float" />
+    <Property Name="sma5" Type="float" />
+  </EntityType>
+  <EntityType Name="daily_volume">
+    <Key>
+      <PropertyRef Name="symbol" />
+      <PropertyRef Name="date_hist" />
+    </Key>
+    <Property Name="symbol" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="date_hist" Type="date" Nullable="false" />
+    <Property Name="volume" Type="float" />
+    <Property Name="SMA_005" Type="float" />
+    <Property Name="SMA_010" Type="float" />
+    <Property Name="SMA_020" Type="float" />
+    <Property Name="SMA_030" Type="float" />
+    <Property Name="SMA_060" Type="float" />
+    <Property Name="SMA_120" Type="float" />
+    <Property Name="SMA_240" Type="float" />
   </EntityType>
   <EntityType Name="earning">
     <Key>
@@ -87,6 +253,48 @@ warning 6002: The table/view 'stock.dbo.daily_close' does not have a primary key
     <Property Name="estimatedEPS" Type="float" />
     <Property Name="surprise" Type="float" />
     <Property Name="surprisePercentage" Type="float" />
+  </EntityType>
+  <EntityType Name="fundamental">
+    <Key>
+      <PropertyRef Name="symbol" />
+      <PropertyRef Name="date_hist" />
+    </Key>
+    <Property Name="symbol" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="date_hist" Type="date" Nullable="false" />
+    <Property Name="date_fiscal" Type="date" Nullable="false" />
+    <Property Name="eps" Type="float" />
+    <Property Name="perc_eps" Type="float" />
+    <Property Name="perc_eps_1year" Type="float" />
+    <Property Name="perc_eps_3year" Type="float" />
+    <Property Name="est" Type="float" />
+    <Property Name="perc_est" Type="float" />
+    <Property Name="perc_est_1year" Type="float" />
+    <Property Name="perc_est_3year" Type="float" />
+    <Property Name="surprise" Type="float" />
+    <Property Name="surprise_1year" Type="float" />
+    <Property Name="surprise_3year" Type="float" />
+    <Property Name="perc_after_expense" Type="float" />
+    <Property Name="perc_after_expense_1year" Type="float" />
+    <Property Name="perc_after_expense_3year" Type="float" />
+    <Property Name="perc_profit" Type="float" />
+    <Property Name="perc_profit_1year" Type="float" />
+    <Property Name="perc_profit_3year" Type="float" />
+    <Property Name="perc_total" Type="float" />
+    <Property Name="perc_total_1year" Type="float" />
+    <Property Name="perc_total_3year" Type="float" />
+    <Property Name="eps_close_rate" Type="float" />
+    <Property Name="pre_30" Type="float" />
+    <Property Name="pre_20" Type="float" />
+    <Property Name="pre_10" Type="float" />
+    <Property Name="pre_5" Type="float" />
+    <Property Name="pre_3" Type="float" />
+    <Property Name="pre_1" Type="float" />
+    <Property Name="next_1" Type="float" />
+    <Property Name="next_3" Type="float" />
+    <Property Name="next_5" Type="float" />
+    <Property Name="next_10" Type="float" />
+    <Property Name="next_20" Type="float" />
+    <Property Name="next_30" Type="float" />
   </EntityType>
   <EntityType Name="income">
     <Key>
@@ -124,6 +332,23 @@ warning 6002: The table/view 'stock.dbo.daily_close' does not have a primary key
     <Property Name="netIncomeApplicableToCommonShares" Type="float" />
     <Property Name="preferredStockAndOtherAdjustments" Type="nvarchar" MaxLength="50" />
   </EntityType>
+  <EntityType Name="list_history">
+    <Key>
+      <PropertyRef Name="HIST_ID" />
+    </Key>
+    <Property Name="HIST_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="HIST_DTTM" Type="datetime" Nullable="false" />
+    <Property Name="START_DTTM" Type="date" Nullable="false" />
+    <Property Name="END_DTTM" Type="date" Nullable="false" />
+    <Property Name="PASS_LIST" Type="char" MaxLength="1" Nullable="false" />
+    <Property Name="FILTER_OPTION" Type="int" Nullable="false" />
+    <Property Name="att1" Type="nvarchar" MaxLength="250" />
+    <Property Name="att2" Type="nvarchar" MaxLength="250" />
+    <Property Name="att3" Type="nvarchar" MaxLength="250" />
+    <Property Name="att4" Type="nvarchar" MaxLength="250" />
+    <Property Name="att5" Type="nvarchar" MaxLength="250" />
+    <Property Name="option_desc" Type="nvarchar(max)" />
+  </EntityType>
   <EntityType Name="lookup">
     <Key>
       <PropertyRef Name="l_type" />
@@ -139,6 +364,49 @@ warning 6002: The table/view 'stock.dbo.daily_close' does not have a primary key
     <Property Name="l_att4" Type="nvarchar" MaxLength="250" />
     <Property Name="l_att5" Type="nvarchar" MaxLength="250" />
   </EntityType>
+  <EntityType Name="prediction">
+    <Key>
+      <PropertyRef Name="symbol" />
+    </Key>
+    <Property Name="symbol" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="ranking" Type="int" />
+    <Property Name="ratio1" Type="float" />
+    <Property Name="ratio2" Type="float" />
+    <Property Name="rate_5" Type="float" />
+    <Property Name="rate_10" Type="float" />
+    <Property Name="rate_15" Type="float" />
+    <Property Name="rate_20" Type="float" />
+    <Property Name="rate_40" Type="float" />
+    <Property Name="rate_60" Type="float" />
+  </EntityType>
+  <EntityType Name="symbol_att">
+    <Key>
+      <PropertyRef Name="symbol" />
+    </Key>
+    <Property Name="symbol" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="name" Type="nvarchar" MaxLength="250" />
+    <Property Name="Sector" Type="nvarchar" MaxLength="250" />
+    <Property Name="Industry" Type="nvarchar" MaxLength="250" />
+    <Property Name="market_cap" Type="float" />
+    <Property Name="market_rank" Type="int" />
+    <Property Name="symbol_type" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="test_plan">
+    <Key>
+      <PropertyRef Name="test_id" />
+    </Key>
+    <Property Name="test_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="plan_name" Type="nvarchar" MaxLength="250" Nullable="false" />
+    <Property Name="test_seq" Type="int" Nullable="false" />
+    <Property Name="pass_list" Type="char" MaxLength="1" Nullable="false" />
+    <Property Name="filter_option" Type="int" Nullable="false" />
+    <Property Name="filter_att1" Type="nvarchar" MaxLength="250" />
+    <Property Name="filter_att2" Type="nvarchar" MaxLength="250" />
+    <Property Name="filter_att3" Type="nvarchar" MaxLength="250" />
+    <Property Name="filter_att4" Type="nvarchar" MaxLength="250" />
+    <Property Name="filter_att5" Type="nvarchar" MaxLength="250" />
+    <Property Name="filter_desc" Type="nvarchar" MaxLength="250" />
+  </EntityType>
   <EntityType Name="watch_list">
     <Key>
       <PropertyRef Name="symbol" />
@@ -148,6 +416,617 @@ warning 6002: The table/view 'stock.dbo.daily_close' does not have a primary key
     <Property Name="Sector" Type="nvarchar" MaxLength="250" />
     <Property Name="Industry" Type="nvarchar" MaxLength="250" />
     <Property Name="company" Type="nvarchar" MaxLength="250" />
+    <Property Name="market_cap" Type="float" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'stock.dbo.daily_analysis_v1' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="daily_analysis_v1">
+    <Key>
+      <PropertyRef Name="symbol" />
+      <PropertyRef Name="seq" />
+      <PropertyRef Name="date" />
+      <PropertyRef Name="last_created" />
+    </Key>
+    <Property Name="symbol" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="watch_type" Type="nchar" MaxLength="10" />
+    <Property Name="seq" Type="nvarchar" MaxLength="81" Nullable="false" />
+    <Property Name="date" Type="date" Nullable="false" />
+    <Property Name="open" Type="float" />
+    <Property Name="close" Type="float" />
+    <Property Name="high" Type="float" />
+    <Property Name="low" Type="float" />
+    <Property Name="volume" Type="float" />
+    <Property Name="avg" Type="float" />
+    <Property Name="analysis_dir" Type="char" MaxLength="1" />
+    <Property Name="analysis_dir_on" Type="int" />
+    <Property Name="analysis_high_low_perc" Type="float" />
+    <Property Name="analysis_oc_by_hl_perc" Type="float" />
+    <Property Name="analysis_open_close_perc" Type="float" />
+    <Property Name="analysis_point1" Type="int" />
+    <Property Name="analysis_point2" Type="int" />
+    <Property Name="analysis_point3" Type="int" />
+    <Property Name="avg_after_005_perc" Type="float" />
+    <Property Name="avg_after_010_perc" Type="float" />
+    <Property Name="avg_after_015_perc" Type="float" />
+    <Property Name="avg_after_020_perc" Type="float" />
+    <Property Name="avg_after_040_perc" Type="float" />
+    <Property Name="avg_after_060_perc" Type="float" />
+    <Property Name="avg_after_120_perc" Type="float" />
+    <Property Name="avg_after_240_perc" Type="float" />
+    <Property Name="avg_after_480_perc" Type="float" />
+    <Property Name="avg_after_720_perc" Type="float" />
+    <Property Name="avg_after_960_perc" Type="float" />
+    <Property Name="avg_change" Type="float" />
+    <Property Name="avg_change_perc" Type="float" />
+    <Property Name="avg_ema_005" Type="float" />
+    <Property Name="avg_ema_012" Type="float" />
+    <Property Name="avg_ema_020" Type="float" />
+    <Property Name="avg_ema_026" Type="float" />
+    <Property Name="avg_ema_060" Type="float" />
+    <Property Name="avg_ema_120" Type="float" />
+    <Property Name="avg_macd_12_26" Type="float" />
+    <Property Name="avg_macd_12_26_9" Type="float" />
+    <Property Name="avg_macd_12_26_hist" Type="float" />
+    <Property Name="avg_per_fiscal" Type="float" />
+    <Property Name="avg_per_report" Type="float" />
+    <Property Name="avg_rsi_005" Type="float" />
+    <Property Name="avg_rsi_012" Type="float" />
+    <Property Name="avg_rsi_020" Type="float" />
+    <Property Name="avg_rsi_026" Type="float" />
+    <Property Name="avg_rsi_060" Type="float" />
+    <Property Name="avg_rsi_120" Type="float" />
+    <Property Name="avg_sma_005" Type="float" />
+    <Property Name="avg_sma_012" Type="float" />
+    <Property Name="avg_sma_020" Type="float" />
+    <Property Name="avg_sma_026" Type="float" />
+    <Property Name="avg_sma_060" Type="float" />
+    <Property Name="avg_sma_120" Type="float" />
+    <Property Name="volume_after_005_perc" Type="float" />
+    <Property Name="volume_after_010_perc" Type="float" />
+    <Property Name="volume_after_015_perc" Type="float" />
+    <Property Name="volume_after_020_perc" Type="float" />
+    <Property Name="volume_after_040_perc" Type="float" />
+    <Property Name="volume_after_060_perc" Type="float" />
+    <Property Name="volume_after_120_perc" Type="float" />
+    <Property Name="volume_after_240_perc" Type="float" />
+    <Property Name="volume_after_480_perc" Type="float" />
+    <Property Name="volume_after_720_perc" Type="float" />
+    <Property Name="volume_after_960_perc" Type="float" />
+    <Property Name="volume_change" Type="float" />
+    <Property Name="volume_change_perc" Type="float" />
+    <Property Name="volume_ema_005" Type="float" />
+    <Property Name="volume_ema_012" Type="float" />
+    <Property Name="volume_ema_020" Type="float" />
+    <Property Name="volume_ema_026" Type="float" />
+    <Property Name="volume_ema_060" Type="float" />
+    <Property Name="volume_ema_120" Type="float" />
+    <Property Name="volume_macd_12_26" Type="float" />
+    <Property Name="volume_macd_12_26_9" Type="float" />
+    <Property Name="volume_macd_12_26_hist" Type="float" />
+    <Property Name="volume_obv" Type="float" />
+    <Property Name="volume_per_fiscal" Type="float" />
+    <Property Name="volume_per_report" Type="float" />
+    <Property Name="volume_rsi_005" Type="float" />
+    <Property Name="volume_rsi_012" Type="float" />
+    <Property Name="volume_rsi_020" Type="float" />
+    <Property Name="volume_rsi_026" Type="float" />
+    <Property Name="volume_rsi_060" Type="float" />
+    <Property Name="volume_rsi_120" Type="float" />
+    <Property Name="volume_sma_005" Type="float" />
+    <Property Name="volume_sma_012" Type="float" />
+    <Property Name="volume_sma_020" Type="float" />
+    <Property Name="volume_sma_026" Type="float" />
+    <Property Name="volume_sma_060" Type="float" />
+    <Property Name="volume_sma_120" Type="float" />
+    <Property Name="volume_vr" Type="float" />
+    <Property Name="last_created" Type="datetime" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'stock.dbo.daily_candle_v1' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="daily_candle_v1">
+    <Key>
+      <PropertyRef Name="symbol" />
+      <PropertyRef Name="date_hist" />
+      <PropertyRef Name="direction" />
+      <PropertyRef Name="size" />
+      <PropertyRef Name="candle" />
+    </Key>
+    <Property Name="symbol" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="date_hist" Type="date" Nullable="false" />
+    <Property Name="direction" Type="varchar" MaxLength="4" Nullable="false" />
+    <Property Name="size" Type="varchar" MaxLength="6" Nullable="false" />
+    <Property Name="candle" Type="varchar" MaxLength="6" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'stock.dbo.daily_close_v1' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="daily_close_v1">
+    <Key>
+      <PropertyRef Name="symbol" />
+      <PropertyRef Name="date_hist" />
+      <PropertyRef Name="direction" />
+      <PropertyRef Name="candle" />
+    </Key>
+    <Property Name="symbol" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="date_hist" Type="date" Nullable="false" />
+    <Property Name="price" Type="float" />
+    <Property Name="sma_005" Type="float" />
+    <Property Name="sma_010" Type="float" />
+    <Property Name="sma_020" Type="float" />
+    <Property Name="sma_030" Type="float" />
+    <Property Name="sma_060" Type="float" />
+    <Property Name="sma_120" Type="float" />
+    <Property Name="sma_240" Type="float" />
+    <Property Name="direction" Type="varchar" MaxLength="4" Nullable="false" />
+    <Property Name="head" Type="float" />
+    <Property Name="center" Type="float" />
+    <Property Name="tail" Type="float" />
+    <Property Name="candle" Type="varchar" MaxLength="6" Nullable="false" />
+    <Property Name="size_sma5" Type="float" />
+    <Property Name="size_sma10" Type="float" />
+    <Property Name="size_sma20" Type="float" />
+    <Property Name="size_sma30" Type="float" />
+    <Property Name="size_sma60" Type="float" />
+    <Property Name="size_sma120" Type="float" />
+    <Property Name="size_sma240" Type="float" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'stock.dbo.daily_sma5_v1' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="daily_sma5_v1">
+    <Key>
+      <PropertyRef Name="symbol" />
+      <PropertyRef Name="date_hist" />
+    </Key>
+    <Property Name="symbol" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="date_hist" Type="date" Nullable="false" />
+    <Property Name="price" Type="float" />
+    <Property Name="price_pre" Type="float" />
+    <Property Name="price_chg_perc" Type="float" />
+    <Property Name="sma5" Type="float" />
+    <Property Name="sma5_pre" Type="float" />
+    <Property Name="sma5_chg_perc" Type="float" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'stock.dbo.daily_strong_v1' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="daily_strong_v1">
+    <Key>
+      <PropertyRef Name="symbol" />
+      <PropertyRef Name="date_hist" />
+    </Key>
+    <Property Name="symbol" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="date_hist" Type="date" Nullable="false" />
+    <Property Name="price" Type="float" />
+    <Property Name="price_chg_perc" Type="float" />
+    <Property Name="sma5" Type="float" />
+    <Property Name="sma5_chg_perc" Type="float" />
+    <Property Name="spy_price" Type="float" />
+    <Property Name="spy_chg" Type="float" />
+    <Property Name="spy_sma5" Type="float" />
+    <Property Name="spy_diff" Type="float" />
+    <Property Name="spy_diff_sma5" Type="float" />
+    <Property Name="qqq_price" Type="float" />
+    <Property Name="qqq_chg" Type="float" />
+    <Property Name="qqq_sma5" Type="float" />
+    <Property Name="qqq_diff" Type="float" />
+    <Property Name="qqq_diff_sma5" Type="float" />
+    <Property Name="dia_price" Type="float" />
+    <Property Name="dia_chg" Type="float" />
+    <Property Name="dia_sma5" Type="float" />
+    <Property Name="dia_diff" Type="float" />
+    <Property Name="dia_diff_sma5" Type="float" />
+    <Property Name="idx_price" Type="float" />
+    <Property Name="idx_sma5" Type="float" />
+    <Property Name="idx_chg" Type="float" />
+    <Property Name="idx_diff" Type="float" />
+    <Property Name="idx_diff_sma5" Type="float" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'stock.dbo.daily_v1' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="daily_v1">
+    <Key>
+      <PropertyRef Name="symbol" />
+      <PropertyRef Name="seq" />
+      <PropertyRef Name="date" />
+      <PropertyRef Name="last_created" />
+    </Key>
+    <Property Name="symbol" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="watch_type" Type="nchar" MaxLength="10" />
+    <Property Name="seq" Type="nvarchar" MaxLength="81" Nullable="false" />
+    <Property Name="date" Type="date" Nullable="false" />
+    <Property Name="open" Type="float" />
+    <Property Name="close" Type="float" />
+    <Property Name="high" Type="float" />
+    <Property Name="low" Type="float" />
+    <Property Name="volume" Type="float" />
+    <Property Name="avg" Type="float" />
+    <Property Name="analysis_dir" Type="char" MaxLength="1" />
+    <Property Name="analysis_dir_on" Type="int" />
+    <Property Name="analysis_high_low_perc" Type="float" />
+    <Property Name="analysis_oc_by_hl_perc" Type="float" />
+    <Property Name="analysis_open_close_perc" Type="float" />
+    <Property Name="analysis_point1" Type="int" />
+    <Property Name="analysis_point2" Type="int" />
+    <Property Name="analysis_point3" Type="int" />
+    <Property Name="avg_after_005_perc" Type="float" />
+    <Property Name="avg_after_010_perc" Type="float" />
+    <Property Name="avg_after_015_perc" Type="float" />
+    <Property Name="avg_after_020_perc" Type="float" />
+    <Property Name="avg_after_040_perc" Type="float" />
+    <Property Name="avg_after_060_perc" Type="float" />
+    <Property Name="avg_after_120_perc" Type="float" />
+    <Property Name="avg_after_240_perc" Type="float" />
+    <Property Name="avg_after_480_perc" Type="float" />
+    <Property Name="avg_after_720_perc" Type="float" />
+    <Property Name="avg_after_960_perc" Type="float" />
+    <Property Name="avg_change" Type="float" />
+    <Property Name="avg_change_perc" Type="float" />
+    <Property Name="avg_ema_005" Type="float" />
+    <Property Name="avg_ema_012" Type="float" />
+    <Property Name="avg_ema_020" Type="float" />
+    <Property Name="avg_ema_026" Type="float" />
+    <Property Name="avg_ema_060" Type="float" />
+    <Property Name="avg_ema_120" Type="float" />
+    <Property Name="avg_macd_12_26" Type="float" />
+    <Property Name="avg_macd_12_26_9" Type="float" />
+    <Property Name="avg_macd_12_26_hist" Type="float" />
+    <Property Name="avg_per_fiscal" Type="float" />
+    <Property Name="avg_per_report" Type="float" />
+    <Property Name="avg_rsi_005" Type="float" />
+    <Property Name="avg_rsi_012" Type="float" />
+    <Property Name="avg_rsi_020" Type="float" />
+    <Property Name="avg_rsi_026" Type="float" />
+    <Property Name="avg_rsi_060" Type="float" />
+    <Property Name="avg_rsi_120" Type="float" />
+    <Property Name="avg_sma_005" Type="float" />
+    <Property Name="avg_sma_012" Type="float" />
+    <Property Name="avg_sma_020" Type="float" />
+    <Property Name="avg_sma_026" Type="float" />
+    <Property Name="avg_sma_060" Type="float" />
+    <Property Name="avg_sma_120" Type="float" />
+    <Property Name="close_after_005_perc" Type="float" />
+    <Property Name="close_after_010_perc" Type="float" />
+    <Property Name="close_after_015_perc" Type="float" />
+    <Property Name="close_after_020_perc" Type="float" />
+    <Property Name="close_after_040_perc" Type="float" />
+    <Property Name="close_after_060_perc" Type="float" />
+    <Property Name="close_after_120_perc" Type="float" />
+    <Property Name="close_after_240_perc" Type="float" />
+    <Property Name="close_after_480_perc" Type="float" />
+    <Property Name="close_after_720_perc" Type="float" />
+    <Property Name="close_after_960_perc" Type="float" />
+    <Property Name="close_change" Type="float" />
+    <Property Name="close_change_perc" Type="float" />
+    <Property Name="close_ema_005" Type="float" />
+    <Property Name="close_ema_012" Type="float" />
+    <Property Name="close_ema_020" Type="float" />
+    <Property Name="close_ema_026" Type="float" />
+    <Property Name="close_ema_060" Type="float" />
+    <Property Name="close_ema_120" Type="float" />
+    <Property Name="close_macd_12_26" Type="float" />
+    <Property Name="close_macd_12_26_9" Type="float" />
+    <Property Name="close_macd_12_26_hist" Type="float" />
+    <Property Name="close_per_fiscal" Type="float" />
+    <Property Name="close_per_report" Type="float" />
+    <Property Name="close_rsi_005" Type="float" />
+    <Property Name="close_rsi_012" Type="float" />
+    <Property Name="close_rsi_020" Type="float" />
+    <Property Name="close_rsi_026" Type="float" />
+    <Property Name="close_rsi_060" Type="float" />
+    <Property Name="close_rsi_120" Type="float" />
+    <Property Name="close_sma_005" Type="float" />
+    <Property Name="close_sma_012" Type="float" />
+    <Property Name="high_after_005_perc" Type="float" />
+    <Property Name="high_after_010_perc" Type="float" />
+    <Property Name="high_after_015_perc" Type="float" />
+    <Property Name="high_after_020_perc" Type="float" />
+    <Property Name="high_after_040_perc" Type="float" />
+    <Property Name="high_after_060_perc" Type="float" />
+    <Property Name="high_after_120_perc" Type="float" />
+    <Property Name="high_after_240_perc" Type="float" />
+    <Property Name="high_after_480_perc" Type="float" />
+    <Property Name="high_after_720_perc" Type="float" />
+    <Property Name="high_after_960_perc" Type="float" />
+    <Property Name="high_change_perc" Type="float" />
+    <Property Name="low_after_005_perc" Type="float" />
+    <Property Name="low_after_010_perc" Type="float" />
+    <Property Name="low_after_015_perc" Type="float" />
+    <Property Name="low_after_020_perc" Type="float" />
+    <Property Name="low_after_040_perc" Type="float" />
+    <Property Name="low_after_060_perc" Type="float" />
+    <Property Name="low_after_120_perc" Type="float" />
+    <Property Name="low_after_240_perc" Type="float" />
+    <Property Name="low_after_480_perc" Type="float" />
+    <Property Name="low_after_720_perc" Type="float" />
+    <Property Name="low_after_960_perc" Type="float" />
+    <Property Name="low_change_perc" Type="float" />
+    <Property Name="open_after_005_perc" Type="float" />
+    <Property Name="open_after_010_perc" Type="float" />
+    <Property Name="open_after_015_perc" Type="float" />
+    <Property Name="open_after_020_perc" Type="float" />
+    <Property Name="open_after_040_perc" Type="float" />
+    <Property Name="open_after_060_perc" Type="float" />
+    <Property Name="open_after_120_perc" Type="float" />
+    <Property Name="open_after_240_perc" Type="float" />
+    <Property Name="open_after_480_perc" Type="float" />
+    <Property Name="open_after_720_perc" Type="float" />
+    <Property Name="open_after_960_perc" Type="float" />
+    <Property Name="open_change_perc" Type="float" />
+    <Property Name="volume_after_005_perc" Type="float" />
+    <Property Name="volume_after_010_perc" Type="float" />
+    <Property Name="volume_after_015_perc" Type="float" />
+    <Property Name="volume_after_020_perc" Type="float" />
+    <Property Name="volume_after_040_perc" Type="float" />
+    <Property Name="volume_after_060_perc" Type="float" />
+    <Property Name="volume_after_120_perc" Type="float" />
+    <Property Name="volume_after_240_perc" Type="float" />
+    <Property Name="volume_after_480_perc" Type="float" />
+    <Property Name="volume_after_720_perc" Type="float" />
+    <Property Name="volume_after_960_perc" Type="float" />
+    <Property Name="volume_change_perc" Type="float" />
+    <Property Name="close_sma_020" Type="float" />
+    <Property Name="close_sma_026" Type="float" />
+    <Property Name="close_sma_060" Type="float" />
+    <Property Name="close_sma_120" Type="float" />
+    <Property Name="high_change" Type="float" />
+    <Property Name="high_ema_005" Type="float" />
+    <Property Name="high_ema_012" Type="float" />
+    <Property Name="high_ema_020" Type="float" />
+    <Property Name="high_ema_026" Type="float" />
+    <Property Name="high_ema_060" Type="float" />
+    <Property Name="high_ema_120" Type="float" />
+    <Property Name="high_macd_12_26" Type="float" />
+    <Property Name="high_macd_12_26_9" Type="float" />
+    <Property Name="high_macd_12_26_hist" Type="float" />
+    <Property Name="high_per_fiscal" Type="float" />
+    <Property Name="high_per_report" Type="float" />
+    <Property Name="high_rsi_005" Type="float" />
+    <Property Name="high_rsi_012" Type="float" />
+    <Property Name="high_rsi_020" Type="float" />
+    <Property Name="high_rsi_026" Type="float" />
+    <Property Name="high_rsi_060" Type="float" />
+    <Property Name="high_rsi_120" Type="float" />
+    <Property Name="high_sma_005" Type="float" />
+    <Property Name="high_sma_012" Type="float" />
+    <Property Name="high_sma_020" Type="float" />
+    <Property Name="high_sma_026" Type="float" />
+    <Property Name="high_sma_060" Type="float" />
+    <Property Name="high_sma_120" Type="float" />
+    <Property Name="low_change" Type="float" />
+    <Property Name="low_ema_005" Type="float" />
+    <Property Name="low_ema_012" Type="float" />
+    <Property Name="low_ema_020" Type="float" />
+    <Property Name="low_ema_026" Type="float" />
+    <Property Name="low_ema_060" Type="float" />
+    <Property Name="low_ema_120" Type="float" />
+    <Property Name="low_macd_12_26" Type="float" />
+    <Property Name="low_macd_12_26_9" Type="float" />
+    <Property Name="low_macd_12_26_hist" Type="float" />
+    <Property Name="low_per_fiscal" Type="float" />
+    <Property Name="low_per_report" Type="float" />
+    <Property Name="low_rsi_005" Type="float" />
+    <Property Name="low_rsi_012" Type="float" />
+    <Property Name="low_rsi_020" Type="float" />
+    <Property Name="low_rsi_026" Type="float" />
+    <Property Name="low_rsi_060" Type="float" />
+    <Property Name="low_rsi_120" Type="float" />
+    <Property Name="low_sma_005" Type="float" />
+    <Property Name="low_sma_012" Type="float" />
+    <Property Name="low_sma_020" Type="float" />
+    <Property Name="low_sma_026" Type="float" />
+    <Property Name="low_sma_060" Type="float" />
+    <Property Name="low_sma_120" Type="float" />
+    <Property Name="open_change" Type="float" />
+    <Property Name="open_ema_005" Type="float" />
+    <Property Name="open_ema_012" Type="float" />
+    <Property Name="open_ema_020" Type="float" />
+    <Property Name="open_ema_026" Type="float" />
+    <Property Name="open_ema_060" Type="float" />
+    <Property Name="open_ema_120" Type="float" />
+    <Property Name="open_macd_12_26" Type="float" />
+    <Property Name="open_macd_12_26_9" Type="float" />
+    <Property Name="open_macd_12_26_hist" Type="float" />
+    <Property Name="open_per_fiscal" Type="float" />
+    <Property Name="open_per_report" Type="float" />
+    <Property Name="open_rsi_005" Type="float" />
+    <Property Name="open_rsi_012" Type="float" />
+    <Property Name="open_rsi_020" Type="float" />
+    <Property Name="open_rsi_026" Type="float" />
+    <Property Name="open_rsi_060" Type="float" />
+    <Property Name="open_rsi_120" Type="float" />
+    <Property Name="open_sma_005" Type="float" />
+    <Property Name="open_sma_012" Type="float" />
+    <Property Name="open_sma_020" Type="float" />
+    <Property Name="open_sma_026" Type="float" />
+    <Property Name="open_sma_060" Type="float" />
+    <Property Name="open_sma_120" Type="float" />
+    <Property Name="source_adjusted_close" Type="float" />
+    <Property Name="source_close" Type="float" />
+    <Property Name="source_dividend_amount" Type="float" />
+    <Property Name="source_high" Type="float" />
+    <Property Name="source_low" Type="float" />
+    <Property Name="source_open" Type="float" />
+    <Property Name="source_split_coefficient" Type="float" />
+    <Property Name="source_volume" Type="float" />
+    <Property Name="volume_change" Type="float" />
+    <Property Name="volume_ema_005" Type="float" />
+    <Property Name="volume_ema_012" Type="float" />
+    <Property Name="volume_ema_020" Type="float" />
+    <Property Name="volume_ema_026" Type="float" />
+    <Property Name="volume_ema_060" Type="float" />
+    <Property Name="volume_ema_120" Type="float" />
+    <Property Name="volume_macd_12_26" Type="float" />
+    <Property Name="volume_macd_12_26_9" Type="float" />
+    <Property Name="volume_macd_12_26_hist" Type="float" />
+    <Property Name="volume_obv" Type="float" />
+    <Property Name="volume_per_fiscal" Type="float" />
+    <Property Name="volume_per_report" Type="float" />
+    <Property Name="volume_rsi_005" Type="float" />
+    <Property Name="volume_rsi_012" Type="float" />
+    <Property Name="volume_rsi_020" Type="float" />
+    <Property Name="volume_rsi_026" Type="float" />
+    <Property Name="volume_rsi_060" Type="float" />
+    <Property Name="volume_rsi_120" Type="float" />
+    <Property Name="volume_sma_005" Type="float" />
+    <Property Name="volume_sma_012" Type="float" />
+    <Property Name="volume_sma_020" Type="float" />
+    <Property Name="volume_sma_026" Type="float" />
+    <Property Name="volume_sma_060" Type="float" />
+    <Property Name="volume_sma_120" Type="float" />
+    <Property Name="volume_vr" Type="float" />
+    <Property Name="last_created" Type="datetime" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'stock.dbo.daily_vol_sma10_v1' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="daily_vol_sma10_v1">
+    <Key>
+      <PropertyRef Name="symbol" />
+      <PropertyRef Name="date_hist" />
+    </Key>
+    <Property Name="symbol" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="date_hist" Type="date" Nullable="false" />
+    <Property Name="volume" Type="float" />
+    <Property Name="volume_pre" Type="float" />
+    <Property Name="volume_chg_perc" Type="float" />
+    <Property Name="sma10" Type="float" />
+    <Property Name="sma10_pre" Type="float" />
+    <Property Name="sma10_chg_perc" Type="float" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'stock.dbo.daily_vol_sma5_v1' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="daily_vol_sma5_v1">
+    <Key>
+      <PropertyRef Name="symbol" />
+      <PropertyRef Name="date_hist" />
+    </Key>
+    <Property Name="symbol" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="date_hist" Type="date" Nullable="false" />
+    <Property Name="volume" Type="float" />
+    <Property Name="volume_pre" Type="float" />
+    <Property Name="volume_chg_perc" Type="float" />
+    <Property Name="sma5" Type="float" />
+    <Property Name="sma5_pre" Type="float" />
+    <Property Name="sma5_chg_perc" Type="float" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'stock.dbo.daily_volume_v1' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="daily_volume_v1">
+    <Key>
+      <PropertyRef Name="symbol" />
+      <PropertyRef Name="date_hist" />
+    </Key>
+    <Property Name="symbol" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="date_hist" Type="date" Nullable="false" />
+    <Property Name="volume" Type="float" />
+    <Property Name="sma_005" Type="float" />
+    <Property Name="sma_010" Type="float" />
+    <Property Name="sma_020" Type="float" />
+    <Property Name="sma_030" Type="float" />
+    <Property Name="sma_060" Type="float" />
+    <Property Name="sma_120" Type="float" />
+    <Property Name="sma_240" Type="float" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'stock.dbo.fundamental_v1' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="fundamental_v1">
+    <Key>
+      <PropertyRef Name="symbol" />
+      <PropertyRef Name="date_hist" />
+      <PropertyRef Name="date_fiscal" />
+    </Key>
+    <Property Name="symbol" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="date_hist" Type="date" Nullable="false" />
+    <Property Name="date_fiscal" Type="date" Nullable="false" />
+    <Property Name="eps" Type="float" />
+    <Property Name="perc_eps" Type="float" />
+    <Property Name="perc_eps_1year" Type="float" />
+    <Property Name="perc_eps_3year" Type="float" />
+    <Property Name="est" Type="float" />
+    <Property Name="perc_est" Type="float" />
+    <Property Name="perc_est_1year" Type="float" />
+    <Property Name="perc_est_3year" Type="float" />
+    <Property Name="surprise" Type="float" />
+    <Property Name="surprise_1year" Type="float" />
+    <Property Name="surprise_3year" Type="float" />
+    <Property Name="perc_after_expense" Type="float" />
+    <Property Name="perc_after_expense_1year" Type="float" />
+    <Property Name="perc_after_expense_3year" Type="float" />
+    <Property Name="perc_profit" Type="float" />
+    <Property Name="perc_profit_1year" Type="float" />
+    <Property Name="perc_profit_3year" Type="float" />
+    <Property Name="perc_total" Type="float" />
+    <Property Name="perc_total_1year" Type="float" />
+    <Property Name="perc_total_3year" Type="float" />
+    <Property Name="eps_close_rate" Type="float" />
+    <Property Name="pre_30" Type="float" />
+    <Property Name="pre_20" Type="float" />
+    <Property Name="pre_10" Type="float" />
+    <Property Name="pre_5" Type="float" />
+    <Property Name="pre_3" Type="float" />
+    <Property Name="pre_1" Type="float" />
+    <Property Name="next_1" Type="float" />
+    <Property Name="next_3" Type="float" />
+    <Property Name="next_5" Type="float" />
+    <Property Name="next_10" Type="float" />
+    <Property Name="next_20" Type="float" />
+    <Property Name="next_30" Type="float" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'stock.dbo.industry_v1' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="industry_v1">
+    <Key>
+      <PropertyRef Name="date_hist" />
+    </Key>
+    <Property Name="industry" Type="nvarchar" MaxLength="250" />
+    <Property Name="date_hist" Type="date" Nullable="false" />
+    <Property Name="price_chg" Type="float" />
+    <Property Name="idx_chg" Type="float" />
+    <Property Name="strong" Type="float" />
+    <Property Name="strong_sma5" Type="float" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'stock.dbo.list_history_v1' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="list_history_v1">
+    <Key>
+      <PropertyRef Name="HIST_ID" />
+      <PropertyRef Name="HIST_DTTM" />
+      <PropertyRef Name="START_DTTM" />
+      <PropertyRef Name="END_DTTM" />
+      <PropertyRef Name="PASS_LIST" />
+      <PropertyRef Name="FILTER_OPTION" />
+    </Key>
+    <Property Name="HIST_ID" Type="int" Nullable="false" />
+    <Property Name="HIST_DTTM" Type="datetime" Nullable="false" />
+    <Property Name="START_DTTM" Type="date" Nullable="false" />
+    <Property Name="END_DTTM" Type="date" Nullable="false" />
+    <Property Name="PASS_LIST" Type="char" MaxLength="1" Nullable="false" />
+    <Property Name="FILTER_OPTION" Type="int" Nullable="false" />
+    <Property Name="att1" Type="nvarchar" MaxLength="250" />
+    <Property Name="att2" Type="nvarchar" MaxLength="250" />
+    <Property Name="att3" Type="nvarchar" MaxLength="250" />
+    <Property Name="att4" Type="nvarchar" MaxLength="250" />
+    <Property Name="att5" Type="nvarchar" MaxLength="250" />
+    <Property Name="option_desc" Type="nvarchar(max)" />
+    <Property Name="ranking" Type="int" />
+    <Property Name="ratio1" Type="float" />
+    <Property Name="ratio2" Type="float" />
+    <Property Name="rate_5" Type="float" />
+    <Property Name="rate_10" Type="float" />
+    <Property Name="rate_15" Type="float" />
+    <Property Name="rate_20" Type="float" />
+    <Property Name="rate_40" Type="float" />
+    <Property Name="rate_60" Type="float" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'stock.dbo.sector_v1' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="sector_v1">
+    <Key>
+      <PropertyRef Name="date_hist" />
+    </Key>
+    <Property Name="sector" Type="nvarchar" MaxLength="250" />
+    <Property Name="date_hist" Type="date" Nullable="false" />
+    <Property Name="price_chg" Type="float" />
+    <Property Name="idx_chg" Type="float" />
+    <Property Name="strong" Type="float" />
+    <Property Name="strong_sma5" Type="float" />
   </EntityType>
   <!--Errors Found During Generation:
 warning 6002: The table/view 'stock.dbo.watch_list_v1' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -161,12 +1040,33 @@ warning 6002: The table/view 'stock.dbo.watch_list_v1' does not have a primary k
     <Property Name="industry" Type="nvarchar" MaxLength="250" />
     <Property Name="sector" Type="nvarchar" MaxLength="250" />
     <Property Name="last_updated" Type="date" />
+    <Property Name="last_earning" Type="date" />
   </EntityType>
+  <Function Name="filter_main" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="start_dttm" Type="datetime" Mode="In" />
+    <Parameter Name="end_dttm" Type="datetime" Mode="In" />
+    <Parameter Name="option" Type="int" Mode="In" />
+    <Parameter Name="passing_list" Type="nvarchar" Mode="In" />
+    <Parameter Name="passing_symbols" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="att1" Type="nvarchar" Mode="In" />
+    <Parameter Name="att2" Type="nvarchar" Mode="In" />
+    <Parameter Name="att3" Type="nvarchar" Mode="In" />
+    <Parameter Name="att4" Type="nvarchar" Mode="In" />
+    <Parameter Name="att5" Type="nvarchar" Mode="In" />
+    <Parameter Name="is_simul" Type="nvarchar" Mode="In" />
+  </Function>
   <Function Name="process_analysis" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="symbol" Type="nvarchar" Mode="In" />
   </Function>
   <Function Name="process_history" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="symbol" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="process_rsi_detail" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="symbol" Type="nvarchar" Mode="In" />
+    <Parameter Name="last_ran" Type="date" Mode="In" />
+    <Parameter Name="table_name" Type="nvarchar" Mode="In" />
+    <Parameter Name="col_name" Type="nvarchar" Mode="In" />
+    <Parameter Name="days" Type="int" Mode="In" />
   </Function>
   <Function Name="process_sma_detail" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="symbol" Type="nvarchar" Mode="In" />
@@ -178,28 +1078,666 @@ warning 6002: The table/view 'stock.dbo.watch_list_v1' does not have a primary k
   <Function Name="process_volume" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="symbol" Type="nvarchar" Mode="In" />
   </Function>
+  <Function Name="sp_generate_idx" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="sp_get_prediction_history" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="hist_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_simulation" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="symbols" Type="nvarchar" Mode="In" />
+    <Parameter Name="start_dttm" Type="date" Mode="In" />
+    <Parameter Name="drop_limit_perc" Type="float" Mode="In" />
+    <Parameter Name="sell_limit_perc" Type="float" Mode="In" />
+    <Parameter Name="max_days_hold" Type="int" Mode="In" />
+    <Parameter Name="show_detail" Type="char" Mode="In" />
+  </Function>
+  <Function Name="sp_weekly_v1" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="symbols" Type="nvarchar" Mode="In" />
+    <Parameter Name="start_dttm" Type="date" Mode="In" />
+    <Parameter Name="week_count" Type="int" Mode="In" />
+  </Function>
+  <Function Name="update_daily_analysis_v1" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
   <Function Name="update_daily_v1" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
   <EntityContainer Name="stockModelStoreContainer">
+    <EntitySet Name="daily_analysis" EntityType="Self.daily_analysis" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="daily_close" EntityType="Self.daily_close" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="daily_history" EntityType="Self.daily_history" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="daily_sma5" EntityType="Self.daily_sma5" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="daily_source" EntityType="Self.daily_source" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="daily_strong" EntityType="Self.daily_strong" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="daily_volume" EntityType="Self.daily_volume" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="earning" EntityType="Self.earning" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="fundamental" EntityType="Self.fundamental" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="income" EntityType="Self.income" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="list_history" EntityType="Self.list_history" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="lookup" EntityType="Self.lookup" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="prediction" EntityType="Self.prediction" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="symbol_att" EntityType="Self.symbol_att" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="test_plan" EntityType="Self.test_plan" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="watch_list" EntityType="Self.watch_list" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="daily_close" EntityType="Self.daily_close" store:Type="Tables" store:Schema="dbo">
+    <EntitySet Name="api" EntityType="Self.api" store:Type="Tables" store:Schema="dbo">
       <DefiningQuery>SELECT 
-    [daily_close].[symbol] AS [symbol], 
-    [daily_close].[date_hist] AS [date_hist], 
-    [daily_close].[SMA_005] AS [SMA_005], 
-    [daily_close].[SMA_010] AS [SMA_010], 
-    [daily_close].[SMA_020] AS [SMA_020], 
-    [daily_close].[SMA_030] AS [SMA_030], 
-    [daily_close].[SMA_060] AS [SMA_060], 
-    [daily_close].[SMA_120] AS [SMA_120], 
-    [daily_close].[SMA_240] AS [SMA_240], 
-    [daily_close].[price] AS [price]
-    FROM [dbo].[daily_close] AS [daily_close]</DefiningQuery>
+    [api].[api_id] AS [api_id], 
+    [api].[api_key] AS [api_key], 
+    [api].[last_ran] AS [last_ran]
+    FROM [dbo].[api] AS [api]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="daily_avg" EntityType="Self.daily_avg" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [daily_avg].[symbol] AS [symbol], 
+    [daily_avg].[date] AS [date], 
+    [daily_avg].[SMA_005] AS [SMA_005], 
+    [daily_avg].[SMA_010] AS [SMA_010], 
+    [daily_avg].[SMA_020] AS [SMA_020], 
+    [daily_avg].[SMA_030] AS [SMA_030], 
+    [daily_avg].[SMA_060] AS [SMA_060], 
+    [daily_avg].[SMA_120] AS [SMA_120], 
+    [daily_avg].[SMA_200] AS [SMA_200]
+    FROM [dbo].[daily_avg] AS [daily_avg]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="daily_high" EntityType="Self.daily_high" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [daily_high].[symbol] AS [symbol], 
+    [daily_high].[date] AS [date], 
+    [daily_high].[SMA_005] AS [SMA_005], 
+    [daily_high].[SMA_010] AS [SMA_010], 
+    [daily_high].[SMA_020] AS [SMA_020], 
+    [daily_high].[SMA_030] AS [SMA_030], 
+    [daily_high].[SMA_060] AS [SMA_060], 
+    [daily_high].[SMA_120] AS [SMA_120], 
+    [daily_high].[SMA_200] AS [SMA_200]
+    FROM [dbo].[daily_high] AS [daily_high]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="daily_industry" EntityType="Self.daily_industry" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [daily_industry].[industry] AS [industry], 
+    [daily_industry].[date_hist] AS [date_hist], 
+    [daily_industry].[price_chg] AS [price_chg], 
+    [daily_industry].[idx_chg] AS [idx_chg], 
+    [daily_industry].[strong] AS [strong], 
+    [daily_industry].[strong_sma5] AS [strong_sma5]
+    FROM [dbo].[daily_industry] AS [daily_industry]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="daily_low" EntityType="Self.daily_low" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [daily_low].[symbol] AS [symbol], 
+    [daily_low].[date] AS [date], 
+    [daily_low].[SMA_005] AS [SMA_005], 
+    [daily_low].[SMA_010] AS [SMA_010], 
+    [daily_low].[SMA_020] AS [SMA_020], 
+    [daily_low].[SMA_030] AS [SMA_030], 
+    [daily_low].[SMA_060] AS [SMA_060], 
+    [daily_low].[SMA_120] AS [SMA_120], 
+    [daily_low].[SMA_200] AS [SMA_200]
+    FROM [dbo].[daily_low] AS [daily_low]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="daily_open" EntityType="Self.daily_open" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [daily_open].[symbol] AS [symbol], 
+    [daily_open].[date] AS [date], 
+    [daily_open].[SMA_005] AS [SMA_005], 
+    [daily_open].[SMA_010] AS [SMA_010], 
+    [daily_open].[SMA_020] AS [SMA_020], 
+    [daily_open].[SMA_030] AS [SMA_030], 
+    [daily_open].[SMA_060] AS [SMA_060], 
+    [daily_open].[SMA_120] AS [SMA_120], 
+    [daily_open].[SMA_200] AS [SMA_200]
+    FROM [dbo].[daily_open] AS [daily_open]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="daily_sector" EntityType="Self.daily_sector" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [daily_sector].[sector] AS [sector], 
+    [daily_sector].[date_hist] AS [date_hist], 
+    [daily_sector].[price_chg] AS [price_chg], 
+    [daily_sector].[idx_chg] AS [idx_chg], 
+    [daily_sector].[strong] AS [strong], 
+    [daily_sector].[strong_sma5] AS [strong_sma5]
+    FROM [dbo].[daily_sector] AS [daily_sector]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="daily_analysis_v1" EntityType="Self.daily_analysis_v1" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [daily_analysis_v1].[symbol] AS [symbol], 
+    [daily_analysis_v1].[watch_type] AS [watch_type], 
+    [daily_analysis_v1].[seq] AS [seq], 
+    [daily_analysis_v1].[date] AS [date], 
+    [daily_analysis_v1].[open] AS [open], 
+    [daily_analysis_v1].[close] AS [close], 
+    [daily_analysis_v1].[high] AS [high], 
+    [daily_analysis_v1].[low] AS [low], 
+    [daily_analysis_v1].[volume] AS [volume], 
+    [daily_analysis_v1].[avg] AS [avg], 
+    [daily_analysis_v1].[analysis_dir] AS [analysis_dir], 
+    [daily_analysis_v1].[analysis_dir_on] AS [analysis_dir_on], 
+    [daily_analysis_v1].[analysis_high_low_perc] AS [analysis_high_low_perc], 
+    [daily_analysis_v1].[analysis_oc_by_hl_perc] AS [analysis_oc_by_hl_perc], 
+    [daily_analysis_v1].[analysis_open_close_perc] AS [analysis_open_close_perc], 
+    [daily_analysis_v1].[analysis_point1] AS [analysis_point1], 
+    [daily_analysis_v1].[analysis_point2] AS [analysis_point2], 
+    [daily_analysis_v1].[analysis_point3] AS [analysis_point3], 
+    [daily_analysis_v1].[avg_after_005_perc] AS [avg_after_005_perc], 
+    [daily_analysis_v1].[avg_after_010_perc] AS [avg_after_010_perc], 
+    [daily_analysis_v1].[avg_after_015_perc] AS [avg_after_015_perc], 
+    [daily_analysis_v1].[avg_after_020_perc] AS [avg_after_020_perc], 
+    [daily_analysis_v1].[avg_after_040_perc] AS [avg_after_040_perc], 
+    [daily_analysis_v1].[avg_after_060_perc] AS [avg_after_060_perc], 
+    [daily_analysis_v1].[avg_after_120_perc] AS [avg_after_120_perc], 
+    [daily_analysis_v1].[avg_after_240_perc] AS [avg_after_240_perc], 
+    [daily_analysis_v1].[avg_after_480_perc] AS [avg_after_480_perc], 
+    [daily_analysis_v1].[avg_after_720_perc] AS [avg_after_720_perc], 
+    [daily_analysis_v1].[avg_after_960_perc] AS [avg_after_960_perc], 
+    [daily_analysis_v1].[avg_change] AS [avg_change], 
+    [daily_analysis_v1].[avg_change_perc] AS [avg_change_perc], 
+    [daily_analysis_v1].[avg_ema_005] AS [avg_ema_005], 
+    [daily_analysis_v1].[avg_ema_012] AS [avg_ema_012], 
+    [daily_analysis_v1].[avg_ema_020] AS [avg_ema_020], 
+    [daily_analysis_v1].[avg_ema_026] AS [avg_ema_026], 
+    [daily_analysis_v1].[avg_ema_060] AS [avg_ema_060], 
+    [daily_analysis_v1].[avg_ema_120] AS [avg_ema_120], 
+    [daily_analysis_v1].[avg_macd_12_26] AS [avg_macd_12_26], 
+    [daily_analysis_v1].[avg_macd_12_26_9] AS [avg_macd_12_26_9], 
+    [daily_analysis_v1].[avg_macd_12_26_hist] AS [avg_macd_12_26_hist], 
+    [daily_analysis_v1].[avg_per_fiscal] AS [avg_per_fiscal], 
+    [daily_analysis_v1].[avg_per_report] AS [avg_per_report], 
+    [daily_analysis_v1].[avg_rsi_005] AS [avg_rsi_005], 
+    [daily_analysis_v1].[avg_rsi_012] AS [avg_rsi_012], 
+    [daily_analysis_v1].[avg_rsi_020] AS [avg_rsi_020], 
+    [daily_analysis_v1].[avg_rsi_026] AS [avg_rsi_026], 
+    [daily_analysis_v1].[avg_rsi_060] AS [avg_rsi_060], 
+    [daily_analysis_v1].[avg_rsi_120] AS [avg_rsi_120], 
+    [daily_analysis_v1].[avg_sma_005] AS [avg_sma_005], 
+    [daily_analysis_v1].[avg_sma_012] AS [avg_sma_012], 
+    [daily_analysis_v1].[avg_sma_020] AS [avg_sma_020], 
+    [daily_analysis_v1].[avg_sma_026] AS [avg_sma_026], 
+    [daily_analysis_v1].[avg_sma_060] AS [avg_sma_060], 
+    [daily_analysis_v1].[avg_sma_120] AS [avg_sma_120], 
+    [daily_analysis_v1].[volume_after_005_perc] AS [volume_after_005_perc], 
+    [daily_analysis_v1].[volume_after_010_perc] AS [volume_after_010_perc], 
+    [daily_analysis_v1].[volume_after_015_perc] AS [volume_after_015_perc], 
+    [daily_analysis_v1].[volume_after_020_perc] AS [volume_after_020_perc], 
+    [daily_analysis_v1].[volume_after_040_perc] AS [volume_after_040_perc], 
+    [daily_analysis_v1].[volume_after_060_perc] AS [volume_after_060_perc], 
+    [daily_analysis_v1].[volume_after_120_perc] AS [volume_after_120_perc], 
+    [daily_analysis_v1].[volume_after_240_perc] AS [volume_after_240_perc], 
+    [daily_analysis_v1].[volume_after_480_perc] AS [volume_after_480_perc], 
+    [daily_analysis_v1].[volume_after_720_perc] AS [volume_after_720_perc], 
+    [daily_analysis_v1].[volume_after_960_perc] AS [volume_after_960_perc], 
+    [daily_analysis_v1].[volume_change] AS [volume_change], 
+    [daily_analysis_v1].[volume_change_perc] AS [volume_change_perc], 
+    [daily_analysis_v1].[volume_ema_005] AS [volume_ema_005], 
+    [daily_analysis_v1].[volume_ema_012] AS [volume_ema_012], 
+    [daily_analysis_v1].[volume_ema_020] AS [volume_ema_020], 
+    [daily_analysis_v1].[volume_ema_026] AS [volume_ema_026], 
+    [daily_analysis_v1].[volume_ema_060] AS [volume_ema_060], 
+    [daily_analysis_v1].[volume_ema_120] AS [volume_ema_120], 
+    [daily_analysis_v1].[volume_macd_12_26] AS [volume_macd_12_26], 
+    [daily_analysis_v1].[volume_macd_12_26_9] AS [volume_macd_12_26_9], 
+    [daily_analysis_v1].[volume_macd_12_26_hist] AS [volume_macd_12_26_hist], 
+    [daily_analysis_v1].[volume_obv] AS [volume_obv], 
+    [daily_analysis_v1].[volume_per_fiscal] AS [volume_per_fiscal], 
+    [daily_analysis_v1].[volume_per_report] AS [volume_per_report], 
+    [daily_analysis_v1].[volume_rsi_005] AS [volume_rsi_005], 
+    [daily_analysis_v1].[volume_rsi_012] AS [volume_rsi_012], 
+    [daily_analysis_v1].[volume_rsi_020] AS [volume_rsi_020], 
+    [daily_analysis_v1].[volume_rsi_026] AS [volume_rsi_026], 
+    [daily_analysis_v1].[volume_rsi_060] AS [volume_rsi_060], 
+    [daily_analysis_v1].[volume_rsi_120] AS [volume_rsi_120], 
+    [daily_analysis_v1].[volume_sma_005] AS [volume_sma_005], 
+    [daily_analysis_v1].[volume_sma_012] AS [volume_sma_012], 
+    [daily_analysis_v1].[volume_sma_020] AS [volume_sma_020], 
+    [daily_analysis_v1].[volume_sma_026] AS [volume_sma_026], 
+    [daily_analysis_v1].[volume_sma_060] AS [volume_sma_060], 
+    [daily_analysis_v1].[volume_sma_120] AS [volume_sma_120], 
+    [daily_analysis_v1].[volume_vr] AS [volume_vr], 
+    [daily_analysis_v1].[last_created] AS [last_created]
+    FROM [dbo].[daily_analysis_v1] AS [daily_analysis_v1]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="daily_candle_v1" EntityType="Self.daily_candle_v1" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [daily_candle_v1].[symbol] AS [symbol], 
+    [daily_candle_v1].[date_hist] AS [date_hist], 
+    [daily_candle_v1].[direction] AS [direction], 
+    [daily_candle_v1].[size] AS [size], 
+    [daily_candle_v1].[candle] AS [candle]
+    FROM [dbo].[daily_candle_v1] AS [daily_candle_v1]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="daily_close_v1" EntityType="Self.daily_close_v1" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [daily_close_v1].[symbol] AS [symbol], 
+    [daily_close_v1].[date_hist] AS [date_hist], 
+    [daily_close_v1].[price] AS [price], 
+    [daily_close_v1].[sma_005] AS [sma_005], 
+    [daily_close_v1].[sma_010] AS [sma_010], 
+    [daily_close_v1].[sma_020] AS [sma_020], 
+    [daily_close_v1].[sma_030] AS [sma_030], 
+    [daily_close_v1].[sma_060] AS [sma_060], 
+    [daily_close_v1].[sma_120] AS [sma_120], 
+    [daily_close_v1].[sma_240] AS [sma_240], 
+    [daily_close_v1].[direction] AS [direction], 
+    [daily_close_v1].[head] AS [head], 
+    [daily_close_v1].[center] AS [center], 
+    [daily_close_v1].[tail] AS [tail], 
+    [daily_close_v1].[candle] AS [candle], 
+    [daily_close_v1].[size_sma5] AS [size_sma5], 
+    [daily_close_v1].[size_sma10] AS [size_sma10], 
+    [daily_close_v1].[size_sma20] AS [size_sma20], 
+    [daily_close_v1].[size_sma30] AS [size_sma30], 
+    [daily_close_v1].[size_sma60] AS [size_sma60], 
+    [daily_close_v1].[size_sma120] AS [size_sma120], 
+    [daily_close_v1].[size_sma240] AS [size_sma240]
+    FROM [dbo].[daily_close_v1] AS [daily_close_v1]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="daily_sma5_v1" EntityType="Self.daily_sma5_v1" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [daily_sma5_v1].[symbol] AS [symbol], 
+    [daily_sma5_v1].[date_hist] AS [date_hist], 
+    [daily_sma5_v1].[price] AS [price], 
+    [daily_sma5_v1].[price_pre] AS [price_pre], 
+    [daily_sma5_v1].[price_chg_perc] AS [price_chg_perc], 
+    [daily_sma5_v1].[sma5] AS [sma5], 
+    [daily_sma5_v1].[sma5_pre] AS [sma5_pre], 
+    [daily_sma5_v1].[sma5_chg_perc] AS [sma5_chg_perc]
+    FROM [dbo].[daily_sma5_v1] AS [daily_sma5_v1]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="daily_strong_v1" EntityType="Self.daily_strong_v1" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [daily_strong_v1].[symbol] AS [symbol], 
+    [daily_strong_v1].[date_hist] AS [date_hist], 
+    [daily_strong_v1].[price] AS [price], 
+    [daily_strong_v1].[price_chg_perc] AS [price_chg_perc], 
+    [daily_strong_v1].[sma5] AS [sma5], 
+    [daily_strong_v1].[sma5_chg_perc] AS [sma5_chg_perc], 
+    [daily_strong_v1].[spy_price] AS [spy_price], 
+    [daily_strong_v1].[spy_chg] AS [spy_chg], 
+    [daily_strong_v1].[spy_sma5] AS [spy_sma5], 
+    [daily_strong_v1].[spy_diff] AS [spy_diff], 
+    [daily_strong_v1].[spy_diff_sma5] AS [spy_diff_sma5], 
+    [daily_strong_v1].[qqq_price] AS [qqq_price], 
+    [daily_strong_v1].[qqq_chg] AS [qqq_chg], 
+    [daily_strong_v1].[qqq_sma5] AS [qqq_sma5], 
+    [daily_strong_v1].[qqq_diff] AS [qqq_diff], 
+    [daily_strong_v1].[qqq_diff_sma5] AS [qqq_diff_sma5], 
+    [daily_strong_v1].[dia_price] AS [dia_price], 
+    [daily_strong_v1].[dia_chg] AS [dia_chg], 
+    [daily_strong_v1].[dia_sma5] AS [dia_sma5], 
+    [daily_strong_v1].[dia_diff] AS [dia_diff], 
+    [daily_strong_v1].[dia_diff_sma5] AS [dia_diff_sma5], 
+    [daily_strong_v1].[idx_price] AS [idx_price], 
+    [daily_strong_v1].[idx_sma5] AS [idx_sma5], 
+    [daily_strong_v1].[idx_chg] AS [idx_chg], 
+    [daily_strong_v1].[idx_diff] AS [idx_diff], 
+    [daily_strong_v1].[idx_diff_sma5] AS [idx_diff_sma5]
+    FROM [dbo].[daily_strong_v1] AS [daily_strong_v1]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="daily_v1" EntityType="Self.daily_v1" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [daily_v1].[symbol] AS [symbol], 
+    [daily_v1].[watch_type] AS [watch_type], 
+    [daily_v1].[seq] AS [seq], 
+    [daily_v1].[date] AS [date], 
+    [daily_v1].[open] AS [open], 
+    [daily_v1].[close] AS [close], 
+    [daily_v1].[high] AS [high], 
+    [daily_v1].[low] AS [low], 
+    [daily_v1].[volume] AS [volume], 
+    [daily_v1].[avg] AS [avg], 
+    [daily_v1].[analysis_dir] AS [analysis_dir], 
+    [daily_v1].[analysis_dir_on] AS [analysis_dir_on], 
+    [daily_v1].[analysis_high_low_perc] AS [analysis_high_low_perc], 
+    [daily_v1].[analysis_oc_by_hl_perc] AS [analysis_oc_by_hl_perc], 
+    [daily_v1].[analysis_open_close_perc] AS [analysis_open_close_perc], 
+    [daily_v1].[analysis_point1] AS [analysis_point1], 
+    [daily_v1].[analysis_point2] AS [analysis_point2], 
+    [daily_v1].[analysis_point3] AS [analysis_point3], 
+    [daily_v1].[avg_after_005_perc] AS [avg_after_005_perc], 
+    [daily_v1].[avg_after_010_perc] AS [avg_after_010_perc], 
+    [daily_v1].[avg_after_015_perc] AS [avg_after_015_perc], 
+    [daily_v1].[avg_after_020_perc] AS [avg_after_020_perc], 
+    [daily_v1].[avg_after_040_perc] AS [avg_after_040_perc], 
+    [daily_v1].[avg_after_060_perc] AS [avg_after_060_perc], 
+    [daily_v1].[avg_after_120_perc] AS [avg_after_120_perc], 
+    [daily_v1].[avg_after_240_perc] AS [avg_after_240_perc], 
+    [daily_v1].[avg_after_480_perc] AS [avg_after_480_perc], 
+    [daily_v1].[avg_after_720_perc] AS [avg_after_720_perc], 
+    [daily_v1].[avg_after_960_perc] AS [avg_after_960_perc], 
+    [daily_v1].[avg_change] AS [avg_change], 
+    [daily_v1].[avg_change_perc] AS [avg_change_perc], 
+    [daily_v1].[avg_ema_005] AS [avg_ema_005], 
+    [daily_v1].[avg_ema_012] AS [avg_ema_012], 
+    [daily_v1].[avg_ema_020] AS [avg_ema_020], 
+    [daily_v1].[avg_ema_026] AS [avg_ema_026], 
+    [daily_v1].[avg_ema_060] AS [avg_ema_060], 
+    [daily_v1].[avg_ema_120] AS [avg_ema_120], 
+    [daily_v1].[avg_macd_12_26] AS [avg_macd_12_26], 
+    [daily_v1].[avg_macd_12_26_9] AS [avg_macd_12_26_9], 
+    [daily_v1].[avg_macd_12_26_hist] AS [avg_macd_12_26_hist], 
+    [daily_v1].[avg_per_fiscal] AS [avg_per_fiscal], 
+    [daily_v1].[avg_per_report] AS [avg_per_report], 
+    [daily_v1].[avg_rsi_005] AS [avg_rsi_005], 
+    [daily_v1].[avg_rsi_012] AS [avg_rsi_012], 
+    [daily_v1].[avg_rsi_020] AS [avg_rsi_020], 
+    [daily_v1].[avg_rsi_026] AS [avg_rsi_026], 
+    [daily_v1].[avg_rsi_060] AS [avg_rsi_060], 
+    [daily_v1].[avg_rsi_120] AS [avg_rsi_120], 
+    [daily_v1].[avg_sma_005] AS [avg_sma_005], 
+    [daily_v1].[avg_sma_012] AS [avg_sma_012], 
+    [daily_v1].[avg_sma_020] AS [avg_sma_020], 
+    [daily_v1].[avg_sma_026] AS [avg_sma_026], 
+    [daily_v1].[avg_sma_060] AS [avg_sma_060], 
+    [daily_v1].[avg_sma_120] AS [avg_sma_120], 
+    [daily_v1].[close_after_005_perc] AS [close_after_005_perc], 
+    [daily_v1].[close_after_010_perc] AS [close_after_010_perc], 
+    [daily_v1].[close_after_015_perc] AS [close_after_015_perc], 
+    [daily_v1].[close_after_020_perc] AS [close_after_020_perc], 
+    [daily_v1].[close_after_040_perc] AS [close_after_040_perc], 
+    [daily_v1].[close_after_060_perc] AS [close_after_060_perc], 
+    [daily_v1].[close_after_120_perc] AS [close_after_120_perc], 
+    [daily_v1].[close_after_240_perc] AS [close_after_240_perc], 
+    [daily_v1].[close_after_480_perc] AS [close_after_480_perc], 
+    [daily_v1].[close_after_720_perc] AS [close_after_720_perc], 
+    [daily_v1].[close_after_960_perc] AS [close_after_960_perc], 
+    [daily_v1].[close_change] AS [close_change], 
+    [daily_v1].[close_change_perc] AS [close_change_perc], 
+    [daily_v1].[close_ema_005] AS [close_ema_005], 
+    [daily_v1].[close_ema_012] AS [close_ema_012], 
+    [daily_v1].[close_ema_020] AS [close_ema_020], 
+    [daily_v1].[close_ema_026] AS [close_ema_026], 
+    [daily_v1].[close_ema_060] AS [close_ema_060], 
+    [daily_v1].[close_ema_120] AS [close_ema_120], 
+    [daily_v1].[close_macd_12_26] AS [close_macd_12_26], 
+    [daily_v1].[close_macd_12_26_9] AS [close_macd_12_26_9], 
+    [daily_v1].[close_macd_12_26_hist] AS [close_macd_12_26_hist], 
+    [daily_v1].[close_per_fiscal] AS [close_per_fiscal], 
+    [daily_v1].[close_per_report] AS [close_per_report], 
+    [daily_v1].[close_rsi_005] AS [close_rsi_005], 
+    [daily_v1].[close_rsi_012] AS [close_rsi_012], 
+    [daily_v1].[close_rsi_020] AS [close_rsi_020], 
+    [daily_v1].[close_rsi_026] AS [close_rsi_026], 
+    [daily_v1].[close_rsi_060] AS [close_rsi_060], 
+    [daily_v1].[close_rsi_120] AS [close_rsi_120], 
+    [daily_v1].[close_sma_005] AS [close_sma_005], 
+    [daily_v1].[close_sma_012] AS [close_sma_012], 
+    [daily_v1].[high_after_005_perc] AS [high_after_005_perc], 
+    [daily_v1].[high_after_010_perc] AS [high_after_010_perc], 
+    [daily_v1].[high_after_015_perc] AS [high_after_015_perc], 
+    [daily_v1].[high_after_020_perc] AS [high_after_020_perc], 
+    [daily_v1].[high_after_040_perc] AS [high_after_040_perc], 
+    [daily_v1].[high_after_060_perc] AS [high_after_060_perc], 
+    [daily_v1].[high_after_120_perc] AS [high_after_120_perc], 
+    [daily_v1].[high_after_240_perc] AS [high_after_240_perc], 
+    [daily_v1].[high_after_480_perc] AS [high_after_480_perc], 
+    [daily_v1].[high_after_720_perc] AS [high_after_720_perc], 
+    [daily_v1].[high_after_960_perc] AS [high_after_960_perc], 
+    [daily_v1].[high_change_perc] AS [high_change_perc], 
+    [daily_v1].[low_after_005_perc] AS [low_after_005_perc], 
+    [daily_v1].[low_after_010_perc] AS [low_after_010_perc], 
+    [daily_v1].[low_after_015_perc] AS [low_after_015_perc], 
+    [daily_v1].[low_after_020_perc] AS [low_after_020_perc], 
+    [daily_v1].[low_after_040_perc] AS [low_after_040_perc], 
+    [daily_v1].[low_after_060_perc] AS [low_after_060_perc], 
+    [daily_v1].[low_after_120_perc] AS [low_after_120_perc], 
+    [daily_v1].[low_after_240_perc] AS [low_after_240_perc], 
+    [daily_v1].[low_after_480_perc] AS [low_after_480_perc], 
+    [daily_v1].[low_after_720_perc] AS [low_after_720_perc], 
+    [daily_v1].[low_after_960_perc] AS [low_after_960_perc], 
+    [daily_v1].[low_change_perc] AS [low_change_perc], 
+    [daily_v1].[open_after_005_perc] AS [open_after_005_perc], 
+    [daily_v1].[open_after_010_perc] AS [open_after_010_perc], 
+    [daily_v1].[open_after_015_perc] AS [open_after_015_perc], 
+    [daily_v1].[open_after_020_perc] AS [open_after_020_perc], 
+    [daily_v1].[open_after_040_perc] AS [open_after_040_perc], 
+    [daily_v1].[open_after_060_perc] AS [open_after_060_perc], 
+    [daily_v1].[open_after_120_perc] AS [open_after_120_perc], 
+    [daily_v1].[open_after_240_perc] AS [open_after_240_perc], 
+    [daily_v1].[open_after_480_perc] AS [open_after_480_perc], 
+    [daily_v1].[open_after_720_perc] AS [open_after_720_perc], 
+    [daily_v1].[open_after_960_perc] AS [open_after_960_perc], 
+    [daily_v1].[open_change_perc] AS [open_change_perc], 
+    [daily_v1].[volume_after_005_perc] AS [volume_after_005_perc], 
+    [daily_v1].[volume_after_010_perc] AS [volume_after_010_perc], 
+    [daily_v1].[volume_after_015_perc] AS [volume_after_015_perc], 
+    [daily_v1].[volume_after_020_perc] AS [volume_after_020_perc], 
+    [daily_v1].[volume_after_040_perc] AS [volume_after_040_perc], 
+    [daily_v1].[volume_after_060_perc] AS [volume_after_060_perc], 
+    [daily_v1].[volume_after_120_perc] AS [volume_after_120_perc], 
+    [daily_v1].[volume_after_240_perc] AS [volume_after_240_perc], 
+    [daily_v1].[volume_after_480_perc] AS [volume_after_480_perc], 
+    [daily_v1].[volume_after_720_perc] AS [volume_after_720_perc], 
+    [daily_v1].[volume_after_960_perc] AS [volume_after_960_perc], 
+    [daily_v1].[volume_change_perc] AS [volume_change_perc], 
+    [daily_v1].[close_sma_020] AS [close_sma_020], 
+    [daily_v1].[close_sma_026] AS [close_sma_026], 
+    [daily_v1].[close_sma_060] AS [close_sma_060], 
+    [daily_v1].[close_sma_120] AS [close_sma_120], 
+    [daily_v1].[high_change] AS [high_change], 
+    [daily_v1].[high_ema_005] AS [high_ema_005], 
+    [daily_v1].[high_ema_012] AS [high_ema_012], 
+    [daily_v1].[high_ema_020] AS [high_ema_020], 
+    [daily_v1].[high_ema_026] AS [high_ema_026], 
+    [daily_v1].[high_ema_060] AS [high_ema_060], 
+    [daily_v1].[high_ema_120] AS [high_ema_120], 
+    [daily_v1].[high_macd_12_26] AS [high_macd_12_26], 
+    [daily_v1].[high_macd_12_26_9] AS [high_macd_12_26_9], 
+    [daily_v1].[high_macd_12_26_hist] AS [high_macd_12_26_hist], 
+    [daily_v1].[high_per_fiscal] AS [high_per_fiscal], 
+    [daily_v1].[high_per_report] AS [high_per_report], 
+    [daily_v1].[high_rsi_005] AS [high_rsi_005], 
+    [daily_v1].[high_rsi_012] AS [high_rsi_012], 
+    [daily_v1].[high_rsi_020] AS [high_rsi_020], 
+    [daily_v1].[high_rsi_026] AS [high_rsi_026], 
+    [daily_v1].[high_rsi_060] AS [high_rsi_060], 
+    [daily_v1].[high_rsi_120] AS [high_rsi_120], 
+    [daily_v1].[high_sma_005] AS [high_sma_005], 
+    [daily_v1].[high_sma_012] AS [high_sma_012], 
+    [daily_v1].[high_sma_020] AS [high_sma_020], 
+    [daily_v1].[high_sma_026] AS [high_sma_026], 
+    [daily_v1].[high_sma_060] AS [high_sma_060], 
+    [daily_v1].[high_sma_120] AS [high_sma_120], 
+    [daily_v1].[low_change] AS [low_change], 
+    [daily_v1].[low_ema_005] AS [low_ema_005], 
+    [daily_v1].[low_ema_012] AS [low_ema_012], 
+    [daily_v1].[low_ema_020] AS [low_ema_020], 
+    [daily_v1].[low_ema_026] AS [low_ema_026], 
+    [daily_v1].[low_ema_060] AS [low_ema_060], 
+    [daily_v1].[low_ema_120] AS [low_ema_120], 
+    [daily_v1].[low_macd_12_26] AS [low_macd_12_26], 
+    [daily_v1].[low_macd_12_26_9] AS [low_macd_12_26_9], 
+    [daily_v1].[low_macd_12_26_hist] AS [low_macd_12_26_hist], 
+    [daily_v1].[low_per_fiscal] AS [low_per_fiscal], 
+    [daily_v1].[low_per_report] AS [low_per_report], 
+    [daily_v1].[low_rsi_005] AS [low_rsi_005], 
+    [daily_v1].[low_rsi_012] AS [low_rsi_012], 
+    [daily_v1].[low_rsi_020] AS [low_rsi_020], 
+    [daily_v1].[low_rsi_026] AS [low_rsi_026], 
+    [daily_v1].[low_rsi_060] AS [low_rsi_060], 
+    [daily_v1].[low_rsi_120] AS [low_rsi_120], 
+    [daily_v1].[low_sma_005] AS [low_sma_005], 
+    [daily_v1].[low_sma_012] AS [low_sma_012], 
+    [daily_v1].[low_sma_020] AS [low_sma_020], 
+    [daily_v1].[low_sma_026] AS [low_sma_026], 
+    [daily_v1].[low_sma_060] AS [low_sma_060], 
+    [daily_v1].[low_sma_120] AS [low_sma_120], 
+    [daily_v1].[open_change] AS [open_change], 
+    [daily_v1].[open_ema_005] AS [open_ema_005], 
+    [daily_v1].[open_ema_012] AS [open_ema_012], 
+    [daily_v1].[open_ema_020] AS [open_ema_020], 
+    [daily_v1].[open_ema_026] AS [open_ema_026], 
+    [daily_v1].[open_ema_060] AS [open_ema_060], 
+    [daily_v1].[open_ema_120] AS [open_ema_120], 
+    [daily_v1].[open_macd_12_26] AS [open_macd_12_26], 
+    [daily_v1].[open_macd_12_26_9] AS [open_macd_12_26_9], 
+    [daily_v1].[open_macd_12_26_hist] AS [open_macd_12_26_hist], 
+    [daily_v1].[open_per_fiscal] AS [open_per_fiscal], 
+    [daily_v1].[open_per_report] AS [open_per_report], 
+    [daily_v1].[open_rsi_005] AS [open_rsi_005], 
+    [daily_v1].[open_rsi_012] AS [open_rsi_012], 
+    [daily_v1].[open_rsi_020] AS [open_rsi_020], 
+    [daily_v1].[open_rsi_026] AS [open_rsi_026], 
+    [daily_v1].[open_rsi_060] AS [open_rsi_060], 
+    [daily_v1].[open_rsi_120] AS [open_rsi_120], 
+    [daily_v1].[open_sma_005] AS [open_sma_005], 
+    [daily_v1].[open_sma_012] AS [open_sma_012], 
+    [daily_v1].[open_sma_020] AS [open_sma_020], 
+    [daily_v1].[open_sma_026] AS [open_sma_026], 
+    [daily_v1].[open_sma_060] AS [open_sma_060], 
+    [daily_v1].[open_sma_120] AS [open_sma_120], 
+    [daily_v1].[source_adjusted_close] AS [source_adjusted_close], 
+    [daily_v1].[source_close] AS [source_close], 
+    [daily_v1].[source_dividend_amount] AS [source_dividend_amount], 
+    [daily_v1].[source_high] AS [source_high], 
+    [daily_v1].[source_low] AS [source_low], 
+    [daily_v1].[source_open] AS [source_open], 
+    [daily_v1].[source_split_coefficient] AS [source_split_coefficient], 
+    [daily_v1].[source_volume] AS [source_volume], 
+    [daily_v1].[volume_change] AS [volume_change], 
+    [daily_v1].[volume_ema_005] AS [volume_ema_005], 
+    [daily_v1].[volume_ema_012] AS [volume_ema_012], 
+    [daily_v1].[volume_ema_020] AS [volume_ema_020], 
+    [daily_v1].[volume_ema_026] AS [volume_ema_026], 
+    [daily_v1].[volume_ema_060] AS [volume_ema_060], 
+    [daily_v1].[volume_ema_120] AS [volume_ema_120], 
+    [daily_v1].[volume_macd_12_26] AS [volume_macd_12_26], 
+    [daily_v1].[volume_macd_12_26_9] AS [volume_macd_12_26_9], 
+    [daily_v1].[volume_macd_12_26_hist] AS [volume_macd_12_26_hist], 
+    [daily_v1].[volume_obv] AS [volume_obv], 
+    [daily_v1].[volume_per_fiscal] AS [volume_per_fiscal], 
+    [daily_v1].[volume_per_report] AS [volume_per_report], 
+    [daily_v1].[volume_rsi_005] AS [volume_rsi_005], 
+    [daily_v1].[volume_rsi_012] AS [volume_rsi_012], 
+    [daily_v1].[volume_rsi_020] AS [volume_rsi_020], 
+    [daily_v1].[volume_rsi_026] AS [volume_rsi_026], 
+    [daily_v1].[volume_rsi_060] AS [volume_rsi_060], 
+    [daily_v1].[volume_rsi_120] AS [volume_rsi_120], 
+    [daily_v1].[volume_sma_005] AS [volume_sma_005], 
+    [daily_v1].[volume_sma_012] AS [volume_sma_012], 
+    [daily_v1].[volume_sma_020] AS [volume_sma_020], 
+    [daily_v1].[volume_sma_026] AS [volume_sma_026], 
+    [daily_v1].[volume_sma_060] AS [volume_sma_060], 
+    [daily_v1].[volume_sma_120] AS [volume_sma_120], 
+    [daily_v1].[volume_vr] AS [volume_vr], 
+    [daily_v1].[last_created] AS [last_created]
+    FROM [dbo].[daily_v1] AS [daily_v1]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="daily_vol_sma10_v1" EntityType="Self.daily_vol_sma10_v1" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [daily_vol_sma10_v1].[symbol] AS [symbol], 
+    [daily_vol_sma10_v1].[date_hist] AS [date_hist], 
+    [daily_vol_sma10_v1].[volume] AS [volume], 
+    [daily_vol_sma10_v1].[volume_pre] AS [volume_pre], 
+    [daily_vol_sma10_v1].[volume_chg_perc] AS [volume_chg_perc], 
+    [daily_vol_sma10_v1].[sma10] AS [sma10], 
+    [daily_vol_sma10_v1].[sma10_pre] AS [sma10_pre], 
+    [daily_vol_sma10_v1].[sma10_chg_perc] AS [sma10_chg_perc]
+    FROM [dbo].[daily_vol_sma10_v1] AS [daily_vol_sma10_v1]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="daily_vol_sma5_v1" EntityType="Self.daily_vol_sma5_v1" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [daily_vol_sma5_v1].[symbol] AS [symbol], 
+    [daily_vol_sma5_v1].[date_hist] AS [date_hist], 
+    [daily_vol_sma5_v1].[volume] AS [volume], 
+    [daily_vol_sma5_v1].[volume_pre] AS [volume_pre], 
+    [daily_vol_sma5_v1].[volume_chg_perc] AS [volume_chg_perc], 
+    [daily_vol_sma5_v1].[sma5] AS [sma5], 
+    [daily_vol_sma5_v1].[sma5_pre] AS [sma5_pre], 
+    [daily_vol_sma5_v1].[sma5_chg_perc] AS [sma5_chg_perc]
+    FROM [dbo].[daily_vol_sma5_v1] AS [daily_vol_sma5_v1]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="daily_volume_v1" EntityType="Self.daily_volume_v1" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [daily_volume_v1].[symbol] AS [symbol], 
+    [daily_volume_v1].[date_hist] AS [date_hist], 
+    [daily_volume_v1].[volume] AS [volume], 
+    [daily_volume_v1].[sma_005] AS [sma_005], 
+    [daily_volume_v1].[sma_010] AS [sma_010], 
+    [daily_volume_v1].[sma_020] AS [sma_020], 
+    [daily_volume_v1].[sma_030] AS [sma_030], 
+    [daily_volume_v1].[sma_060] AS [sma_060], 
+    [daily_volume_v1].[sma_120] AS [sma_120], 
+    [daily_volume_v1].[sma_240] AS [sma_240]
+    FROM [dbo].[daily_volume_v1] AS [daily_volume_v1]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="fundamental_v1" EntityType="Self.fundamental_v1" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [fundamental_v1].[symbol] AS [symbol], 
+    [fundamental_v1].[date_hist] AS [date_hist], 
+    [fundamental_v1].[date_fiscal] AS [date_fiscal], 
+    [fundamental_v1].[eps] AS [eps], 
+    [fundamental_v1].[perc_eps] AS [perc_eps], 
+    [fundamental_v1].[perc_eps_1year] AS [perc_eps_1year], 
+    [fundamental_v1].[perc_eps_3year] AS [perc_eps_3year], 
+    [fundamental_v1].[est] AS [est], 
+    [fundamental_v1].[perc_est] AS [perc_est], 
+    [fundamental_v1].[perc_est_1year] AS [perc_est_1year], 
+    [fundamental_v1].[perc_est_3year] AS [perc_est_3year], 
+    [fundamental_v1].[surprise] AS [surprise], 
+    [fundamental_v1].[surprise_1year] AS [surprise_1year], 
+    [fundamental_v1].[surprise_3year] AS [surprise_3year], 
+    [fundamental_v1].[perc_after_expense] AS [perc_after_expense], 
+    [fundamental_v1].[perc_after_expense_1year] AS [perc_after_expense_1year], 
+    [fundamental_v1].[perc_after_expense_3year] AS [perc_after_expense_3year], 
+    [fundamental_v1].[perc_profit] AS [perc_profit], 
+    [fundamental_v1].[perc_profit_1year] AS [perc_profit_1year], 
+    [fundamental_v1].[perc_profit_3year] AS [perc_profit_3year], 
+    [fundamental_v1].[perc_total] AS [perc_total], 
+    [fundamental_v1].[perc_total_1year] AS [perc_total_1year], 
+    [fundamental_v1].[perc_total_3year] AS [perc_total_3year], 
+    [fundamental_v1].[eps_close_rate] AS [eps_close_rate], 
+    [fundamental_v1].[pre_30] AS [pre_30], 
+    [fundamental_v1].[pre_20] AS [pre_20], 
+    [fundamental_v1].[pre_10] AS [pre_10], 
+    [fundamental_v1].[pre_5] AS [pre_5], 
+    [fundamental_v1].[pre_3] AS [pre_3], 
+    [fundamental_v1].[pre_1] AS [pre_1], 
+    [fundamental_v1].[next_1] AS [next_1], 
+    [fundamental_v1].[next_3] AS [next_3], 
+    [fundamental_v1].[next_5] AS [next_5], 
+    [fundamental_v1].[next_10] AS [next_10], 
+    [fundamental_v1].[next_20] AS [next_20], 
+    [fundamental_v1].[next_30] AS [next_30]
+    FROM [dbo].[fundamental_v1] AS [fundamental_v1]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="industry_v1" EntityType="Self.industry_v1" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [industry_v1].[industry] AS [industry], 
+    [industry_v1].[date_hist] AS [date_hist], 
+    [industry_v1].[price_chg] AS [price_chg], 
+    [industry_v1].[idx_chg] AS [idx_chg], 
+    [industry_v1].[strong] AS [strong], 
+    [industry_v1].[strong_sma5] AS [strong_sma5]
+    FROM [dbo].[industry_v1] AS [industry_v1]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="list_history_v1" EntityType="Self.list_history_v1" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [list_history_v1].[HIST_ID] AS [HIST_ID], 
+    [list_history_v1].[HIST_DTTM] AS [HIST_DTTM], 
+    [list_history_v1].[START_DTTM] AS [START_DTTM], 
+    [list_history_v1].[END_DTTM] AS [END_DTTM], 
+    [list_history_v1].[PASS_LIST] AS [PASS_LIST], 
+    [list_history_v1].[FILTER_OPTION] AS [FILTER_OPTION], 
+    [list_history_v1].[att1] AS [att1], 
+    [list_history_v1].[att2] AS [att2], 
+    [list_history_v1].[att3] AS [att3], 
+    [list_history_v1].[att4] AS [att4], 
+    [list_history_v1].[att5] AS [att5], 
+    [list_history_v1].[option_desc] AS [option_desc], 
+    [list_history_v1].[ranking] AS [ranking], 
+    [list_history_v1].[ratio1] AS [ratio1], 
+    [list_history_v1].[ratio2] AS [ratio2], 
+    [list_history_v1].[rate_5] AS [rate_5], 
+    [list_history_v1].[rate_10] AS [rate_10], 
+    [list_history_v1].[rate_15] AS [rate_15], 
+    [list_history_v1].[rate_20] AS [rate_20], 
+    [list_history_v1].[rate_40] AS [rate_40], 
+    [list_history_v1].[rate_60] AS [rate_60]
+    FROM [dbo].[list_history_v1] AS [list_history_v1]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="sector_v1" EntityType="Self.sector_v1" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [sector_v1].[sector] AS [sector], 
+    [sector_v1].[date_hist] AS [date_hist], 
+    [sector_v1].[price_chg] AS [price_chg], 
+    [sector_v1].[idx_chg] AS [idx_chg], 
+    [sector_v1].[strong] AS [strong], 
+    [sector_v1].[strong_sma5] AS [strong_sma5]
+    FROM [dbo].[sector_v1] AS [sector_v1]</DefiningQuery>
     </EntitySet>
     <EntitySet Name="watch_list_v1" EntityType="Self.watch_list_v1" store:Type="Views" store:Schema="dbo">
       <DefiningQuery>SELECT 
@@ -208,7 +1746,8 @@ warning 6002: The table/view 'stock.dbo.watch_list_v1' does not have a primary k
     [watch_list_v1].[company] AS [company], 
     [watch_list_v1].[industry] AS [industry], 
     [watch_list_v1].[sector] AS [sector], 
-    [watch_list_v1].[last_updated] AS [last_updated]
+    [watch_list_v1].[last_updated] AS [last_updated], 
+    [watch_list_v1].[last_earning] AS [last_earning]
     FROM [dbo].[watch_list_v1] AS [watch_list_v1]</DefiningQuery>
     </EntitySet>
   </EntityContainer>

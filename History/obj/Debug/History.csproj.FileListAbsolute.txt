@@ -18,7 +18,6 @@ C:\Users\VL068273\Documents\Sukho\Personal\Finance\History\History\bin\Debug\Mic
 C:\Users\VL068273\Documents\Sukho\Personal\Finance\History\History\bin\Debug\EntityFramework.xml
 C:\Users\VL068273\Documents\Sukho\Personal\Finance\History\History\bin\Debug\EntityFramework.SqlServer.xml
 C:\Users\VL068273\Documents\Sukho\Personal\Finance\History\History\bin\Debug\Microsoft.Bcl.AsyncInterfaces.xml
-C:\Users\VL068273\Documents\Sukho\Personal\Finance\History\History\obj\Debug\History.csprojAssemblyReference.cache
 C:\Users\VL068273\Documents\Sukho\Personal\Finance\History\History\bin\Debug\Newtonsoft.Json.dll
 C:\Users\VL068273\Documents\Sukho\Personal\Finance\History\History\bin\Debug\Newtonsoft.Json.xml
 C:\Users\VL068273\Documents\Sukho\Personal\Finance\History\History\bin\Debug\LiveCharts.dll
@@ -31,3 +30,152 @@ C:\Users\VL068273\Documents\Sukho\Personal\Finance\History\History\bin\Debug\Liv
 C:\Users\VL068273\Documents\Sukho\Personal\Finance\History\History\bin\Debug\LiveCharts.Wpf.pdb
 C:\Users\VL068273\Documents\Sukho\Personal\Finance\History\History\bin\Debug\LiveCharts.Wpf.xml
 C:\Users\VL068273\Documents\Sukho\Personal\Finance\History\History\obj\Debug\History.Analysis.resources
+C:\Users\VL068273\Documents\Sukho\Personal\Finance\History\History\bin\Debug\CraftSynth.ImageEditor.dll
+C:\Users\VL068273\Documents\Sukho\Personal\Finance\History\History\obj\Debug\History.Query.resources
+C:\Users\VL068273\Documents\Sukho\Personal\Finance\History\History\obj\Debug\History.csprojAssemblyReference.cache
+C:\Sukho\Personal\Finance\History\History\bin\Debug\History.exe.config
+C:\Sukho\Personal\Finance\History\History\bin\Debug\History.exe
+C:\Sukho\Personal\Finance\History\History\bin\Debug\History.pdb
+C:\Sukho\Personal\Finance\History\History\bin\Debug\CraftSynth.ImageEditor.dll
+C:\Sukho\Personal\Finance\History\History\bin\Debug\EntityFramework.dll
+C:\Sukho\Personal\Finance\History\History\bin\Debug\EntityFramework.SqlServer.dll
+C:\Sukho\Personal\Finance\History\History\bin\Debug\LiveCharts.dll
+C:\Sukho\Personal\Finance\History\History\bin\Debug\LiveCharts.WinForms.dll
+C:\Sukho\Personal\Finance\History\History\bin\Debug\LiveCharts.Wpf.dll
+C:\Sukho\Personal\Finance\History\History\bin\Debug\Microsoft.Bcl.AsyncInterfaces.dll
+C:\Sukho\Personal\Finance\History\History\bin\Debug\Newtonsoft.Json.dll
+C:\Sukho\Personal\Finance\History\History\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
+C:\Sukho\Personal\Finance\History\History\bin\Debug\System.Threading.Tasks.Extensions.dll
+C:\Sukho\Personal\Finance\History\History\bin\Debug\EntityFramework.xml
+C:\Sukho\Personal\Finance\History\History\bin\Debug\EntityFramework.SqlServer.xml
+C:\Sukho\Personal\Finance\History\History\bin\Debug\LiveCharts.pdb
+C:\Sukho\Personal\Finance\History\History\bin\Debug\LiveCharts.xml
+C:\Sukho\Personal\Finance\History\History\bin\Debug\LiveCharts.WinForms.pdb
+C:\Sukho\Personal\Finance\History\History\bin\Debug\LiveCharts.WinForms.xml
+C:\Sukho\Personal\Finance\History\History\bin\Debug\LiveCharts.Wpf.pdb
+C:\Sukho\Personal\Finance\History\History\bin\Debug\LiveCharts.Wpf.xml
+C:\Sukho\Personal\Finance\History\History\bin\Debug\Microsoft.Bcl.AsyncInterfaces.xml
+C:\Sukho\Personal\Finance\History\History\bin\Debug\Newtonsoft.Json.xml
+C:\Sukho\Personal\Finance\History\History\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
+C:\Sukho\Personal\Finance\History\History\bin\Debug\System.Threading.Tasks.Extensions.xml
+C:\Sukho\Personal\Finance\History\History\obj\Debug\History.Analysis.resources
+C:\Sukho\Personal\Finance\History\History\obj\Debug\History.GetData.resources
+C:\Sukho\Personal\Finance\History\History\obj\Debug\History.Properties.Resources.resources
+C:\Sukho\Personal\Finance\History\History\obj\Debug\History.Query.resources
+C:\Sukho\Personal\Finance\History\History\obj\Debug\History.csproj.GenerateResource.cache
+C:\Sukho\Personal\Finance\History\History\obj\Debug\History.csproj.CoreCompileInputs.cache
+C:\Sukho\Personal\Finance\History\History\obj\Debug\History.csproj.CopyComplete
+C:\Sukho\Personal\Finance\History\History\obj\Debug\History.exe
+C:\Sukho\Personal\Finance\History\History\obj\Debug\History.pdb
+C:\Sukho\Personal\Finance\History\History\obj\Debug\History.Index_Analyzer.resources
+C:\Sukho\Personal\Finance\History\History\obj\Debug\History.csprojAssemblyReference.cache
+C:\Users\VL068273\OneDrive - Honda\Documents\Sukho\Personal\Finance\History\History\bin\Debug\History.exe.config
+C:\Users\VL068273\OneDrive - Honda\Documents\Sukho\Personal\Finance\History\History\bin\Debug\History.exe
+C:\Users\VL068273\OneDrive - Honda\Documents\Sukho\Personal\Finance\History\History\bin\Debug\History.pdb
+C:\Users\VL068273\OneDrive - Honda\Documents\Sukho\Personal\Finance\History\History\bin\Debug\CraftSynth.ImageEditor.dll
+C:\Users\VL068273\OneDrive - Honda\Documents\Sukho\Personal\Finance\History\History\bin\Debug\EntityFramework.dll
+C:\Users\VL068273\OneDrive - Honda\Documents\Sukho\Personal\Finance\History\History\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\VL068273\OneDrive - Honda\Documents\Sukho\Personal\Finance\History\History\bin\Debug\LiveCharts.dll
+C:\Users\VL068273\OneDrive - Honda\Documents\Sukho\Personal\Finance\History\History\bin\Debug\LiveCharts.WinForms.dll
+C:\Users\VL068273\OneDrive - Honda\Documents\Sukho\Personal\Finance\History\History\bin\Debug\LiveCharts.Wpf.dll
+C:\Users\VL068273\OneDrive - Honda\Documents\Sukho\Personal\Finance\History\History\bin\Debug\Microsoft.Bcl.AsyncInterfaces.dll
+C:\Users\VL068273\OneDrive - Honda\Documents\Sukho\Personal\Finance\History\History\bin\Debug\Newtonsoft.Json.dll
+C:\Users\VL068273\OneDrive - Honda\Documents\Sukho\Personal\Finance\History\History\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
+C:\Users\VL068273\OneDrive - Honda\Documents\Sukho\Personal\Finance\History\History\bin\Debug\System.Threading.Tasks.Extensions.dll
+C:\Users\VL068273\OneDrive - Honda\Documents\Sukho\Personal\Finance\History\History\bin\Debug\EntityFramework.xml
+C:\Users\VL068273\OneDrive - Honda\Documents\Sukho\Personal\Finance\History\History\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\VL068273\OneDrive - Honda\Documents\Sukho\Personal\Finance\History\History\bin\Debug\LiveCharts.pdb
+C:\Users\VL068273\OneDrive - Honda\Documents\Sukho\Personal\Finance\History\History\bin\Debug\LiveCharts.xml
+C:\Users\VL068273\OneDrive - Honda\Documents\Sukho\Personal\Finance\History\History\bin\Debug\LiveCharts.WinForms.pdb
+C:\Users\VL068273\OneDrive - Honda\Documents\Sukho\Personal\Finance\History\History\bin\Debug\LiveCharts.WinForms.xml
+C:\Users\VL068273\OneDrive - Honda\Documents\Sukho\Personal\Finance\History\History\bin\Debug\LiveCharts.Wpf.pdb
+C:\Users\VL068273\OneDrive - Honda\Documents\Sukho\Personal\Finance\History\History\bin\Debug\LiveCharts.Wpf.xml
+C:\Users\VL068273\OneDrive - Honda\Documents\Sukho\Personal\Finance\History\History\bin\Debug\Microsoft.Bcl.AsyncInterfaces.xml
+C:\Users\VL068273\OneDrive - Honda\Documents\Sukho\Personal\Finance\History\History\bin\Debug\Newtonsoft.Json.xml
+C:\Users\VL068273\OneDrive - Honda\Documents\Sukho\Personal\Finance\History\History\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
+C:\Users\VL068273\OneDrive - Honda\Documents\Sukho\Personal\Finance\History\History\bin\Debug\System.Threading.Tasks.Extensions.xml
+C:\Users\VL068273\OneDrive - Honda\Documents\Sukho\Personal\Finance\History\History\obj\Debug\History.csprojAssemblyReference.cache
+C:\Users\VL068273\OneDrive - Honda\Documents\Sukho\Personal\Finance\History\History\obj\Debug\History.Index_Analyzer.resources
+C:\Users\VL068273\OneDrive - Honda\Documents\Sukho\Personal\Finance\History\History\obj\Debug\History.Analysis.resources
+C:\Users\VL068273\OneDrive - Honda\Documents\Sukho\Personal\Finance\History\History\obj\Debug\History.GetData.resources
+C:\Users\VL068273\OneDrive - Honda\Documents\Sukho\Personal\Finance\History\History\obj\Debug\History.Properties.Resources.resources
+C:\Users\VL068273\OneDrive - Honda\Documents\Sukho\Personal\Finance\History\History\obj\Debug\History.Query.resources
+C:\Users\VL068273\OneDrive - Honda\Documents\Sukho\Personal\Finance\History\History\obj\Debug\History.csproj.GenerateResource.cache
+C:\Users\VL068273\OneDrive - Honda\Documents\Sukho\Personal\Finance\History\History\obj\Debug\History.csproj.CoreCompileInputs.cache
+C:\Users\VL068273\OneDrive - Honda\Documents\Sukho\Personal\Finance\History\History\obj\Debug\History.csproj.CopyComplete
+C:\Users\VL068273\OneDrive - Honda\Documents\Sukho\Personal\Finance\History\History\obj\Debug\History.exe
+C:\Users\VL068273\OneDrive - Honda\Documents\Sukho\Personal\Finance\History\History\obj\Debug\History.pdb
+C:\Sukho\Source\History\History\bin\Debug\History.exe.config
+C:\Sukho\Source\History\History\bin\Debug\History.exe
+C:\Sukho\Source\History\History\bin\Debug\History.pdb
+C:\Sukho\Source\History\History\bin\Debug\CraftSynth.ImageEditor.dll
+C:\Sukho\Source\History\History\bin\Debug\EntityFramework.dll
+C:\Sukho\Source\History\History\bin\Debug\EntityFramework.SqlServer.dll
+C:\Sukho\Source\History\History\bin\Debug\LiveCharts.dll
+C:\Sukho\Source\History\History\bin\Debug\LiveCharts.WinForms.dll
+C:\Sukho\Source\History\History\bin\Debug\LiveCharts.Wpf.dll
+C:\Sukho\Source\History\History\bin\Debug\Microsoft.Bcl.AsyncInterfaces.dll
+C:\Sukho\Source\History\History\bin\Debug\Newtonsoft.Json.dll
+C:\Sukho\Source\History\History\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
+C:\Sukho\Source\History\History\bin\Debug\System.Threading.Tasks.Extensions.dll
+C:\Sukho\Source\History\History\bin\Debug\EntityFramework.xml
+C:\Sukho\Source\History\History\bin\Debug\EntityFramework.SqlServer.xml
+C:\Sukho\Source\History\History\bin\Debug\LiveCharts.pdb
+C:\Sukho\Source\History\History\bin\Debug\LiveCharts.xml
+C:\Sukho\Source\History\History\bin\Debug\LiveCharts.WinForms.pdb
+C:\Sukho\Source\History\History\bin\Debug\LiveCharts.WinForms.xml
+C:\Sukho\Source\History\History\bin\Debug\LiveCharts.Wpf.pdb
+C:\Sukho\Source\History\History\bin\Debug\LiveCharts.Wpf.xml
+C:\Sukho\Source\History\History\bin\Debug\Microsoft.Bcl.AsyncInterfaces.xml
+C:\Sukho\Source\History\History\bin\Debug\Newtonsoft.Json.xml
+C:\Sukho\Source\History\History\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
+C:\Sukho\Source\History\History\bin\Debug\System.Threading.Tasks.Extensions.xml
+C:\Sukho\Source\History\History\obj\Debug\History.Index_Analyzer.resources
+C:\Sukho\Source\History\History\obj\Debug\History.Analysis.resources
+C:\Sukho\Source\History\History\obj\Debug\History.GetData.resources
+C:\Sukho\Source\History\History\obj\Debug\History.Properties.Resources.resources
+C:\Sukho\Source\History\History\obj\Debug\History.Query.resources
+C:\Sukho\Source\History\History\obj\Debug\History.csproj.GenerateResource.cache
+C:\Sukho\Source\History\History\obj\Debug\History.csproj.CoreCompileInputs.cache
+C:\Sukho\Source\History\History\obj\Debug\History.csproj.CopyComplete
+C:\Sukho\Source\History\History\obj\Debug\History.exe
+C:\Sukho\Source\History\History\obj\Debug\History.pdb
+C:\Sukho\Source\History\History\obj\Debug\History.csproj.AssemblyReference.cache
+C:\Sukho\Source\History\History\obj\Debug\History.MessageUI.resources
+C:\Users\Sukho\Documents\Stock\Application\History\History\bin\Debug\History.exe.config
+C:\Users\Sukho\Documents\Stock\Application\History\History\bin\Debug\History.exe
+C:\Users\Sukho\Documents\Stock\Application\History\History\bin\Debug\History.pdb
+C:\Users\Sukho\Documents\Stock\Application\History\History\bin\Debug\CraftSynth.ImageEditor.dll
+C:\Users\Sukho\Documents\Stock\Application\History\History\bin\Debug\EntityFramework.dll
+C:\Users\Sukho\Documents\Stock\Application\History\History\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\Sukho\Documents\Stock\Application\History\History\bin\Debug\LiveCharts.dll
+C:\Users\Sukho\Documents\Stock\Application\History\History\bin\Debug\LiveCharts.WinForms.dll
+C:\Users\Sukho\Documents\Stock\Application\History\History\bin\Debug\LiveCharts.Wpf.dll
+C:\Users\Sukho\Documents\Stock\Application\History\History\bin\Debug\Microsoft.Bcl.AsyncInterfaces.dll
+C:\Users\Sukho\Documents\Stock\Application\History\History\bin\Debug\Newtonsoft.Json.dll
+C:\Users\Sukho\Documents\Stock\Application\History\History\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
+C:\Users\Sukho\Documents\Stock\Application\History\History\bin\Debug\System.Threading.Tasks.Extensions.dll
+C:\Users\Sukho\Documents\Stock\Application\History\History\bin\Debug\EntityFramework.xml
+C:\Users\Sukho\Documents\Stock\Application\History\History\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\Sukho\Documents\Stock\Application\History\History\bin\Debug\LiveCharts.pdb
+C:\Users\Sukho\Documents\Stock\Application\History\History\bin\Debug\LiveCharts.xml
+C:\Users\Sukho\Documents\Stock\Application\History\History\bin\Debug\LiveCharts.WinForms.pdb
+C:\Users\Sukho\Documents\Stock\Application\History\History\bin\Debug\LiveCharts.WinForms.xml
+C:\Users\Sukho\Documents\Stock\Application\History\History\bin\Debug\LiveCharts.Wpf.pdb
+C:\Users\Sukho\Documents\Stock\Application\History\History\bin\Debug\LiveCharts.Wpf.xml
+C:\Users\Sukho\Documents\Stock\Application\History\History\bin\Debug\Microsoft.Bcl.AsyncInterfaces.xml
+C:\Users\Sukho\Documents\Stock\Application\History\History\bin\Debug\Newtonsoft.Json.xml
+C:\Users\Sukho\Documents\Stock\Application\History\History\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
+C:\Users\Sukho\Documents\Stock\Application\History\History\bin\Debug\System.Threading.Tasks.Extensions.xml
+C:\Users\Sukho\Documents\Stock\Application\History\History\obj\Debug\History.Index_Analyzer.resources
+C:\Users\Sukho\Documents\Stock\Application\History\History\obj\Debug\History.Analysis.resources
+C:\Users\Sukho\Documents\Stock\Application\History\History\obj\Debug\History.GetData.resources
+C:\Users\Sukho\Documents\Stock\Application\History\History\obj\Debug\History.MessageUI.resources
+C:\Users\Sukho\Documents\Stock\Application\History\History\obj\Debug\History.Properties.Resources.resources
+C:\Users\Sukho\Documents\Stock\Application\History\History\obj\Debug\History.Query.resources
+C:\Users\Sukho\Documents\Stock\Application\History\History\obj\Debug\History.csproj.GenerateResource.cache
+C:\Users\Sukho\Documents\Stock\Application\History\History\obj\Debug\History.csproj.CoreCompileInputs.cache
+C:\Users\Sukho\Documents\Stock\Application\History\History\obj\Debug\History.csproj.CopyComplete
+C:\Users\Sukho\Documents\Stock\Application\History\History\obj\Debug\History.exe
+C:\Users\Sukho\Documents\Stock\Application\History\History\obj\Debug\History.pdb
+C:\Users\Sukho\Documents\Stock\Application\History\History\obj\Debug\History.csproj.AssemblyReference.cache

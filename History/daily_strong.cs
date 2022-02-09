@@ -19,20 +19,26 @@ namespace History
         public Nullable<double> price { get; set; }
         public Nullable<double> price_chg_perc { get; set; }
         public Nullable<double> sma5_chg_perc { get; set; }
+        public Nullable<double> spy_price { get; set; }
         public Nullable<double> spy_chg { get; set; }
         public Nullable<double> spy_sma5 { get; set; }
+        public Nullable<double> spy_diff { get; set; }
+        public Nullable<double> spy_diff_sma5 { get; set; }
+        public Nullable<double> qqq_price { get; set; }
         public Nullable<double> qqq_chg { get; set; }
         public Nullable<double> qqq_sma5 { get; set; }
+        public Nullable<double> qqq_diff { get; set; }
+        public Nullable<double> qqq_diff_sma5 { get; set; }
+        public Nullable<double> dia_price { get; set; }
         public Nullable<double> dia_chg { get; set; }
         public Nullable<double> dia_sma5 { get; set; }
-        public Nullable<double> i_spy_sma5 { get; set; }
-        public Nullable<double> i_qqq_sma5 { get; set; }
-        public Nullable<double> i_dia_sma5 { get; set; }
-        public Nullable<double> i_dia_price { get; set; }
-        public Nullable<double> i_dia_chg { get; set; }
-        public Nullable<double> i_spy_price { get; set; }
-        public Nullable<double> i_spy_chg { get; set; }
-        public Nullable<double> i_qqq_price { get; set; }
-        public Nullable<double> i_qqq_chg { get; set; }
+        public Nullable<double> dia_diff { get; set; }
+        public Nullable<double> dia_diff_sma5 { get; set; }
+        public Nullable<double> idx_diff { get; set; }
+        public Nullable<double> idx_diff_sma5 { get; set; }
+        public Nullable<double> idx_chg { get; set; }
+        public Nullable<double> idx_price { get; set; }
+        public Nullable<double> idx_sma5 { get; set; }
+        public Nullable<double> sma5 { get; set; }
     }
 }

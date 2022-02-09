@@ -1,0 +1,4 @@
+FROM_DTTM,03/01/2015
+TO_DTTM,06/30/2015
+SYMBOL,XXII
+SAVE_FOLDER,C:\Users\VL068273\Documents\Sukho\Personal\Finance\History\Saved

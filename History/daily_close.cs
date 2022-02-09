@@ -24,5 +24,17 @@ namespace History
         public Nullable<double> SMA_120 { get; set; }
         public Nullable<double> SMA_240 { get; set; }
         public Nullable<double> price { get; set; }
+        public string direction { get; set; }
+        public string candle { get; set; }
+        public Nullable<double> head { get; set; }
+        public Nullable<double> center { get; set; }
+        public Nullable<double> tail { get; set; }
+        public Nullable<double> size_sma5 { get; set; }
+        public Nullable<double> size_sma10 { get; set; }
+        public Nullable<double> size_sma20 { get; set; }
+        public Nullable<double> size_sma30 { get; set; }
+        public Nullable<double> size_sma60 { get; set; }
+        public Nullable<double> size_sma120 { get; set; }
+        public Nullable<double> size_sma240 { get; set; }
     }
 }

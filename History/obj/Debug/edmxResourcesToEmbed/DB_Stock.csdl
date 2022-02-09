@@ -1,24 +1,109 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="stockModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-  <EntityContainer Name="StockEntity" annotation:LazyLoadingEnabled="true">
-    <EntitySet Name="watch_list" EntityType="stockModel.watch_list" />
-    <FunctionImport Name="process_ema" />
-    <FunctionImport Name="process_rsi" />
-    <FunctionImport Name="process_macd" />
+  <EntityType Name="daily_history">
+    <Key>
+      <PropertyRef Name="symbol" />
+      <PropertyRef Name="date" />
+    </Key>
+    <Property Name="symbol" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="date" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="open" Type="Double" />
+    <Property Name="close" Type="Double" />
+    <Property Name="high" Type="Double" />
+    <Property Name="low" Type="Double" />
+    <Property Name="volume" Type="Double" />
+    <Property Name="avg" Type="Double" />
+    <Property Name="seq" Type="String" MaxLength="81" FixedLength="false" Unicode="true" Nullable="false" annotation:StoreGeneratedPattern="Computed" />
+  </EntityType>
+  <EntityType Name="daily_strong">
+    <Key>
+      <PropertyRef Name="symbol" />
+      <PropertyRef Name="date_hist" />
+    </Key>
+    <Property Name="symbol" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="date_hist" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="price" Type="Double" />
+    <Property Name="price_chg_perc" Type="Double" />
+    <Property Name="sma5_chg_perc" Type="Double" />
+    <Property Name="spy_price" Type="Double" />
+    <Property Name="spy_chg" Type="Double" />
+    <Property Name="spy_sma5" Type="Double" />
+    <Property Name="spy_diff" Type="Double" />
+    <Property Name="spy_diff_sma5" Type="Double" />
+    <Property Name="qqq_price" Type="Double" />
+    <Property Name="qqq_chg" Type="Double" />
+    <Property Name="qqq_sma5" Type="Double" />
+    <Property Name="qqq_diff" Type="Double" />
+    <Property Name="qqq_diff_sma5" Type="Double" />
+    <Property Name="dia_price" Type="Double" />
+    <Property Name="dia_chg" Type="Double" />
+    <Property Name="dia_sma5" Type="Double" />
+    <Property Name="dia_diff" Type="Double" />
+    <Property Name="dia_diff_sma5" Type="Double" />
+    <Property Name="idx_diff" Type="Double" />
+    <Property Name="idx_diff_sma5" Type="Double" />
+    <Property Name="idx_chg" Type="Double" />
+    <Property Name="idx_price" Type="Double" />
+    <Property Name="idx_sma5" Type="Double" />
+    <Property Name="sma5" Type="Double" />
+  </EntityType>
+  <EntityContainer Name="stockEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="daily_history" EntityType="Self.daily_history" />
+    <EntitySet Name="daily_strong" EntityType="Self.daily_strong" />
+    <FunctionImport Name="filter_intro" ReturnType="Collection(stockModel.filter_intro_Result)">
+      <Parameter Name="start_dttm" Mode="In" Type="DateTime" />
+      <Parameter Name="end_dttm" Mode="In" Type="DateTime" />
+      <Parameter Name="filter_used" Mode="In" Type="String" />
+      <Parameter Name="filter_option" Mode="In" Type="Int32" />
+      <Parameter Name="filter_limit" Mode="In" Type="Int32" />
+      <Parameter Name="filter_symbols" Mode="In" Type="String" />
+      <Parameter Name="rank_option" Mode="In" Type="Int32" />
+      <Parameter Name="rank_limit" Mode="In" Type="Int32" />
+      <Parameter Name="is_simul" Mode="In" Type="String" />
+    </FunctionImport>
+    <EntitySet Name="daily_close" EntityType="stockModel.daily_close" />
     <EntitySet Name="lookups" EntityType="stockModel.lookup" />
-    <FunctionImport Name="process_volume">
-      <Parameter Name="symbol" Mode="In" Type="String" />
-    </FunctionImport>
-    <FunctionImport Name="update_daily_v1" />
-    <FunctionImport Name="process_change">
-      <Parameter Name="symbol" Mode="In" Type="String" />
-    </FunctionImport>
+    <EntitySet Name="daily_analysis" EntityType="stockModel.daily_analysis" />
+    <EntitySet Name="daily_sma5" EntityType="stockModel.daily_sma5" />
     <EntitySet Name="daily_source" EntityType="stockModel.daily_source" />
+    <EntitySet Name="daily_volume" EntityType="stockModel.daily_volume" />
+    <EntitySet Name="earnings" EntityType="stockModel.earning" />
+    <EntitySet Name="fundamentals" EntityType="stockModel.fundamental" />
+    <EntitySet Name="incomes" EntityType="stockModel.income" />
+    <EntitySet Name="symbol_att" EntityType="stockModel.symbol_att" />
+    <EntitySet Name="watch_list" EntityType="stockModel.watch_list" />
+    <EntitySet Name="apis" EntityType="stockModel.api" />
+    <EntitySet Name="daily_avg" EntityType="stockModel.daily_avg" />
+    <EntitySet Name="daily_high" EntityType="stockModel.daily_high" />
+    <EntitySet Name="daily_industry" EntityType="stockModel.daily_industry" />
+    <EntitySet Name="daily_low" EntityType="stockModel.daily_low" />
+    <EntitySet Name="daily_open" EntityType="stockModel.daily_open" />
+    <EntitySet Name="daily_sector" EntityType="stockModel.daily_sector" />
+    <EntitySet Name="daily_analysis_v1" EntityType="stockModel.daily_analysis_v1" />
+    <EntitySet Name="daily_candle_v1" EntityType="stockModel.daily_candle_v1" />
+    <EntitySet Name="daily_close_v1" EntityType="stockModel.daily_close_v1" />
+    <EntitySet Name="daily_sma5_v1" EntityType="stockModel.daily_sma5_v1" />
+    <EntitySet Name="daily_strong_v1" EntityType="stockModel.daily_strong_v1" />
+    <EntitySet Name="daily_v1" EntityType="stockModel.daily_v1" />
+    <EntitySet Name="daily_vol_sma10_v1" EntityType="stockModel.daily_vol_sma10_v1" />
+    <EntitySet Name="daily_vol_sma5_v1" EntityType="stockModel.daily_vol_sma5_v1" />
+    <EntitySet Name="daily_volume_v1" EntityType="stockModel.daily_volume_v1" />
+    <EntitySet Name="fundamental_v1" EntityType="stockModel.fundamental_v1" />
+    <EntitySet Name="industry_v1" EntityType="stockModel.industry_v1" />
+    <EntitySet Name="sector_v1" EntityType="stockModel.sector_v1" />
+    <EntitySet Name="watch_list_v1" EntityType="stockModel.watch_list_v1" />
+    <FunctionImport Name="process_analysis">
+      <Parameter Name="symbol" Mode="In" Type="String" />
+    </FunctionImport>
     <FunctionImport Name="process_history">
       <Parameter Name="symbol" Mode="In" Type="String" />
     </FunctionImport>
-    <FunctionImport Name="process_analysis">
+    <FunctionImport Name="process_rsi_detail">
       <Parameter Name="symbol" Mode="In" Type="String" />
+      <Parameter Name="last_ran" Mode="In" Type="DateTime" />
+      <Parameter Name="table_name" Mode="In" Type="String" />
+      <Parameter Name="col_name" Mode="In" Type="String" />
+      <Parameter Name="days" Mode="In" Type="Int32" />
     </FunctionImport>
     <FunctionImport Name="process_sma_detail">
       <Parameter Name="symbol" Mode="In" Type="String" />
@@ -27,22 +112,86 @@
       <Parameter Name="col_name" Mode="In" Type="String" />
       <Parameter Name="days" Mode="In" Type="Int32" />
     </FunctionImport>
-    <EntitySet Name="earnings" EntityType="stockModel.earning" />
-    <EntitySet Name="incomes" EntityType="stockModel.income" />
-    <EntitySet Name="watch_list_v1" EntityType="stockModel.watch_list_v1" />
-    <EntitySet Name="daily_history" EntityType="stockModel.daily_history" />
-    <EntitySet Name="daily_strong" EntityType="stockModel.daily_strong" />
-    <EntitySet Name="daily_close" EntityType="stockModel.daily_close" />
+    <FunctionImport Name="process_volume">
+      <Parameter Name="symbol" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_simulation">
+      <Parameter Name="symbols" Mode="In" Type="String" />
+      <Parameter Name="start_dttm" Mode="In" Type="DateTime" />
+      <Parameter Name="drop_limit_perc" Mode="In" Type="Double" />
+      <Parameter Name="sell_limit_perc" Mode="In" Type="Double" />
+      <Parameter Name="max_days_hold" Mode="In" Type="Int32" />
+      <Parameter Name="show_detail" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_weekly_v1">
+      <Parameter Name="symbols" Mode="In" Type="String" />
+      <Parameter Name="start_dttm" Mode="In" Type="DateTime" />
+      <Parameter Name="week_count" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="update_daily_analysis_v1" />
+    <FunctionImport Name="update_daily_v1" />
+    <EntitySet Name="test_plan" EntityType="stockModel.test_plan" />
+    <FunctionImport Name="filter_main" ReturnType="Collection(stockModel.filter_main_Result)">
+      <Parameter Name="start_dttm" Mode="In" Type="DateTime" />
+      <Parameter Name="end_dttm" Mode="In" Type="DateTime" />
+      <Parameter Name="option" Mode="In" Type="Int32" />
+      <Parameter Name="passing_list" Mode="In" Type="String" />
+      <Parameter Name="passing_symbols" Mode="In" Type="String" />
+      <Parameter Name="att1" Mode="In" Type="String" />
+      <Parameter Name="att2" Mode="In" Type="String" />
+      <Parameter Name="att3" Mode="In" Type="String" />
+      <Parameter Name="att4" Mode="In" Type="String" />
+      <Parameter Name="att5" Mode="In" Type="String" />
+      <Parameter Name="is_simul" Mode="In" Type="String" />
+    </FunctionImport>
+    <EntitySet Name="list_history" EntityType="stockModel.list_history" />
+    <EntitySet Name="predictions" EntityType="stockModel.prediction" />
+    <FunctionImport Name="sp_generate_idx" />
+    <FunctionImport Name="sp_get_prediction_history" ReturnType="Collection(stockModel.sp_get_prediction_history_Result)">
+      <Parameter Name="hist_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <EntitySet Name="list_history_v1" EntityType="stockModel.list_history_v1" />
   </EntityContainer>
-  <EntityType Name="watch_list">
+  <ComplexType Name="filter_intro_Result">
+    <Property Type="String" Name="symbol" Nullable="false" MaxLength="50" />
+    <Property Type="Int32" Name="ranking" Nullable="true" />
+    <Property Type="Double" Name="ratio1" Nullable="true" />
+    <Property Type="Double" Name="ratio2" Nullable="true" />
+    <Property Type="Double" Name="rate" Nullable="true" />
+    <Property Type="Double" Name="rate_5" Nullable="true" />
+    <Property Type="Double" Name="rate_10" Nullable="true" />
+    <Property Type="Double" Name="rate_15" Nullable="true" />
+    <Property Type="Double" Name="rate_20" Nullable="true" />
+    <Property Type="Double" Name="rate_40" Nullable="true" />
+    <Property Type="Double" Name="rate_60" Nullable="true" />
+  </ComplexType>
+  <EntityType Name="daily_close">
     <Key>
       <PropertyRef Name="symbol" />
+      <PropertyRef Name="date_hist" />
     </Key>
     <Property Name="symbol" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="watch_type" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-    <Property Name="Sector" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
-    <Property Name="Industry" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
-    <Property Name="company" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="date_hist" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="SMA_005" Type="Double" />
+    <Property Name="SMA_010" Type="Double" />
+    <Property Name="SMA_020" Type="Double" />
+    <Property Name="SMA_030" Type="Double" />
+    <Property Name="SMA_060" Type="Double" />
+    <Property Name="SMA_120" Type="Double" />
+    <Property Name="SMA_240" Type="Double" />
+    <Property Name="price" Type="Double" />
+    <Property Name="direction" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="candle" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="head" Type="Double" />
+    <Property Name="center" Type="Double" />
+    <Property Name="tail" Type="Double" />
+    <Property Name="size_sma5" Type="Double" />
+    <Property Name="size_sma10" Type="Double" />
+    <Property Name="size_sma20" Type="Double" />
+    <Property Name="size_sma30" Type="Double" />
+    <Property Name="size_sma60" Type="Double" />
+    <Property Name="size_sma120" Type="Double" />
+    <Property Name="size_sma240" Type="Double" />
   </EntityType>
   <EntityType Name="lookup">
     <Key>
@@ -58,6 +207,36 @@
     <Property Name="l_att3" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
     <Property Name="l_att4" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
     <Property Name="l_att5" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="daily_analysis">
+    <Key>
+      <PropertyRef Name="symbol" />
+      <PropertyRef Name="date" />
+    </Key>
+    <Property Name="symbol" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="date" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="open_close_perc" Type="Double" />
+    <Property Name="high_low_perc" Type="Double" />
+    <Property Name="dir" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+    <Property Name="oc_by_hl_perc" Type="Double" />
+    <Property Name="dir_on" Type="Int32" />
+    <Property Name="point1" Type="Int32" />
+    <Property Name="point2" Type="Int32" />
+    <Property Name="point3" Type="Int32" />
+  </EntityType>
+  <EntityType Name="daily_sma5">
+    <Key>
+      <PropertyRef Name="symbol" />
+      <PropertyRef Name="date_hist" />
+    </Key>
+    <Property Name="symbol" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="date_hist" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="price" Type="Double" />
+    <Property Name="price_pre" Type="Double" />
+    <Property Name="price_chg_perc" Type="Double" />
+    <Property Name="sma5" Type="Double" />
+    <Property Name="sma5_pre" Type="Double" />
+    <Property Name="sma5_chg_perc" Type="Double" />
   </EntityType>
   <EntityType Name="daily_source">
     <Key>
@@ -75,6 +254,22 @@
     <Property Name="dividend_amount" Type="Double" />
     <Property Name="split_coefficient" Type="Double" />
   </EntityType>
+  <EntityType Name="daily_volume">
+    <Key>
+      <PropertyRef Name="symbol" />
+      <PropertyRef Name="date_hist" />
+    </Key>
+    <Property Name="symbol" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="date_hist" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="volume" Type="Double" />
+    <Property Name="SMA_005" Type="Double" />
+    <Property Name="SMA_010" Type="Double" />
+    <Property Name="SMA_020" Type="Double" />
+    <Property Name="SMA_030" Type="Double" />
+    <Property Name="SMA_060" Type="Double" />
+    <Property Name="SMA_120" Type="Double" />
+    <Property Name="SMA_240" Type="Double" />
+  </EntityType>
   <EntityType Name="earning">
     <Key>
       <PropertyRef Name="symbol" />
@@ -87,6 +282,48 @@
     <Property Name="estimatedEPS" Type="Double" />
     <Property Name="surprise" Type="Double" />
     <Property Name="surprisePercentage" Type="Double" />
+  </EntityType>
+  <EntityType Name="fundamental">
+    <Key>
+      <PropertyRef Name="symbol" />
+      <PropertyRef Name="date_hist" />
+    </Key>
+    <Property Name="symbol" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="date_hist" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="date_fiscal" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="eps" Type="Double" />
+    <Property Name="perc_eps" Type="Double" />
+    <Property Name="perc_eps_1year" Type="Double" />
+    <Property Name="perc_eps_3year" Type="Double" />
+    <Property Name="est" Type="Double" />
+    <Property Name="perc_est" Type="Double" />
+    <Property Name="perc_est_1year" Type="Double" />
+    <Property Name="perc_est_3year" Type="Double" />
+    <Property Name="surprise" Type="Double" />
+    <Property Name="surprise_1year" Type="Double" />
+    <Property Name="surprise_3year" Type="Double" />
+    <Property Name="perc_after_expense" Type="Double" />
+    <Property Name="perc_after_expense_1year" Type="Double" />
+    <Property Name="perc_after_expense_3year" Type="Double" />
+    <Property Name="perc_profit" Type="Double" />
+    <Property Name="perc_profit_1year" Type="Double" />
+    <Property Name="perc_profit_3year" Type="Double" />
+    <Property Name="perc_total" Type="Double" />
+    <Property Name="perc_total_1year" Type="Double" />
+    <Property Name="perc_total_3year" Type="Double" />
+    <Property Name="eps_close_rate" Type="Double" />
+    <Property Name="pre_30" Type="Double" />
+    <Property Name="pre_20" Type="Double" />
+    <Property Name="pre_10" Type="Double" />
+    <Property Name="pre_5" Type="Double" />
+    <Property Name="pre_3" Type="Double" />
+    <Property Name="pre_1" Type="Double" />
+    <Property Name="next_1" Type="Double" />
+    <Property Name="next_3" Type="Double" />
+    <Property Name="next_5" Type="Double" />
+    <Property Name="next_10" Type="Double" />
+    <Property Name="next_20" Type="Double" />
+    <Property Name="next_30" Type="Double" />
   </EntityType>
   <EntityType Name="income">
     <Key>
@@ -124,6 +361,672 @@
     <Property Name="netIncomeApplicableToCommonShares" Type="Double" />
     <Property Name="preferredStockAndOtherAdjustments" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
   </EntityType>
+  <EntityType Name="symbol_att">
+    <Key>
+      <PropertyRef Name="symbol" />
+    </Key>
+    <Property Name="symbol" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="name" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="Sector" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="Industry" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="market_cap" Type="Double" />
+    <Property Name="market_rank" Type="Int32" />
+    <Property Name="symbol_type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="watch_list">
+    <Key>
+      <PropertyRef Name="symbol" />
+    </Key>
+    <Property Name="symbol" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="watch_type" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="Sector" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="Industry" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="company" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="market_cap" Type="Double" />
+  </EntityType>
+  <EntityType Name="api">
+    <Key>
+      <PropertyRef Name="api_id" />
+    </Key>
+    <Property Name="api_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="api_key" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="last_ran" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="daily_avg">
+    <Key>
+      <PropertyRef Name="symbol" />
+      <PropertyRef Name="date" />
+    </Key>
+    <Property Name="symbol" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="date" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="SMA_005" Type="Double" />
+    <Property Name="SMA_010" Type="Double" />
+    <Property Name="SMA_020" Type="Double" />
+    <Property Name="SMA_030" Type="Double" />
+    <Property Name="SMA_060" Type="Double" />
+    <Property Name="SMA_120" Type="Double" />
+    <Property Name="SMA_200" Type="Double" />
+  </EntityType>
+  <EntityType Name="daily_high">
+    <Key>
+      <PropertyRef Name="symbol" />
+      <PropertyRef Name="date" />
+    </Key>
+    <Property Name="symbol" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="date" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="SMA_005" Type="Double" />
+    <Property Name="SMA_010" Type="Double" />
+    <Property Name="SMA_020" Type="Double" />
+    <Property Name="SMA_030" Type="Double" />
+    <Property Name="SMA_060" Type="Double" />
+    <Property Name="SMA_120" Type="Double" />
+    <Property Name="SMA_200" Type="Double" />
+  </EntityType>
+  <EntityType Name="daily_industry">
+    <Key>
+      <PropertyRef Name="date_hist" />
+    </Key>
+    <Property Name="industry" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="date_hist" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="price_chg" Type="Double" />
+    <Property Name="idx_chg" Type="Double" />
+    <Property Name="strong" Type="Double" />
+    <Property Name="strong_sma5" Type="Double" />
+  </EntityType>
+  <EntityType Name="daily_low">
+    <Key>
+      <PropertyRef Name="symbol" />
+      <PropertyRef Name="date" />
+    </Key>
+    <Property Name="symbol" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="date" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="SMA_005" Type="Double" />
+    <Property Name="SMA_010" Type="Double" />
+    <Property Name="SMA_020" Type="Double" />
+    <Property Name="SMA_030" Type="Double" />
+    <Property Name="SMA_060" Type="Double" />
+    <Property Name="SMA_120" Type="Double" />
+    <Property Name="SMA_200" Type="Double" />
+  </EntityType>
+  <EntityType Name="daily_open">
+    <Key>
+      <PropertyRef Name="symbol" />
+      <PropertyRef Name="date" />
+    </Key>
+    <Property Name="symbol" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="date" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="SMA_005" Type="Double" />
+    <Property Name="SMA_010" Type="Double" />
+    <Property Name="SMA_020" Type="Double" />
+    <Property Name="SMA_030" Type="Double" />
+    <Property Name="SMA_060" Type="Double" />
+    <Property Name="SMA_120" Type="Double" />
+    <Property Name="SMA_200" Type="Double" />
+  </EntityType>
+  <EntityType Name="daily_sector">
+    <Key>
+      <PropertyRef Name="date_hist" />
+    </Key>
+    <Property Name="sector" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="date_hist" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="price_chg" Type="Double" />
+    <Property Name="idx_chg" Type="Double" />
+    <Property Name="strong" Type="Double" />
+    <Property Name="strong_sma5" Type="Double" />
+  </EntityType>
+  <EntityType Name="daily_analysis_v1">
+    <Key>
+      <PropertyRef Name="symbol" />
+      <PropertyRef Name="seq" />
+      <PropertyRef Name="date" />
+      <PropertyRef Name="last_created" />
+    </Key>
+    <Property Name="symbol" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="watch_type" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="seq" Type="String" Nullable="false" MaxLength="81" FixedLength="false" Unicode="true" />
+    <Property Name="date" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="open" Type="Double" />
+    <Property Name="close" Type="Double" />
+    <Property Name="high" Type="Double" />
+    <Property Name="low" Type="Double" />
+    <Property Name="volume" Type="Double" />
+    <Property Name="avg" Type="Double" />
+    <Property Name="analysis_dir" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+    <Property Name="analysis_dir_on" Type="Int32" />
+    <Property Name="analysis_high_low_perc" Type="Double" />
+    <Property Name="analysis_oc_by_hl_perc" Type="Double" />
+    <Property Name="analysis_open_close_perc" Type="Double" />
+    <Property Name="analysis_point1" Type="Int32" />
+    <Property Name="analysis_point2" Type="Int32" />
+    <Property Name="analysis_point3" Type="Int32" />
+    <Property Name="avg_after_005_perc" Type="Double" />
+    <Property Name="avg_after_010_perc" Type="Double" />
+    <Property Name="avg_after_015_perc" Type="Double" />
+    <Property Name="avg_after_020_perc" Type="Double" />
+    <Property Name="avg_after_040_perc" Type="Double" />
+    <Property Name="avg_after_060_perc" Type="Double" />
+    <Property Name="avg_after_120_perc" Type="Double" />
+    <Property Name="avg_after_240_perc" Type="Double" />
+    <Property Name="avg_after_480_perc" Type="Double" />
+    <Property Name="avg_after_720_perc" Type="Double" />
+    <Property Name="avg_after_960_perc" Type="Double" />
+    <Property Name="avg_change" Type="Double" />
+    <Property Name="avg_change_perc" Type="Double" />
+    <Property Name="avg_ema_005" Type="Double" />
+    <Property Name="avg_ema_012" Type="Double" />
+    <Property Name="avg_ema_020" Type="Double" />
+    <Property Name="avg_ema_026" Type="Double" />
+    <Property Name="avg_ema_060" Type="Double" />
+    <Property Name="avg_ema_120" Type="Double" />
+    <Property Name="avg_macd_12_26" Type="Double" />
+    <Property Name="avg_macd_12_26_9" Type="Double" />
+    <Property Name="avg_macd_12_26_hist" Type="Double" />
+    <Property Name="avg_per_fiscal" Type="Double" />
+    <Property Name="avg_per_report" Type="Double" />
+    <Property Name="avg_rsi_005" Type="Double" />
+    <Property Name="avg_rsi_012" Type="Double" />
+    <Property Name="avg_rsi_020" Type="Double" />
+    <Property Name="avg_rsi_026" Type="Double" />
+    <Property Name="avg_rsi_060" Type="Double" />
+    <Property Name="avg_rsi_120" Type="Double" />
+    <Property Name="avg_sma_005" Type="Double" />
+    <Property Name="avg_sma_012" Type="Double" />
+    <Property Name="avg_sma_020" Type="Double" />
+    <Property Name="avg_sma_026" Type="Double" />
+    <Property Name="avg_sma_060" Type="Double" />
+    <Property Name="avg_sma_120" Type="Double" />
+    <Property Name="volume_after_005_perc" Type="Double" />
+    <Property Name="volume_after_010_perc" Type="Double" />
+    <Property Name="volume_after_015_perc" Type="Double" />
+    <Property Name="volume_after_020_perc" Type="Double" />
+    <Property Name="volume_after_040_perc" Type="Double" />
+    <Property Name="volume_after_060_perc" Type="Double" />
+    <Property Name="volume_after_120_perc" Type="Double" />
+    <Property Name="volume_after_240_perc" Type="Double" />
+    <Property Name="volume_after_480_perc" Type="Double" />
+    <Property Name="volume_after_720_perc" Type="Double" />
+    <Property Name="volume_after_960_perc" Type="Double" />
+    <Property Name="volume_change" Type="Double" />
+    <Property Name="volume_change_perc" Type="Double" />
+    <Property Name="volume_ema_005" Type="Double" />
+    <Property Name="volume_ema_012" Type="Double" />
+    <Property Name="volume_ema_020" Type="Double" />
+    <Property Name="volume_ema_026" Type="Double" />
+    <Property Name="volume_ema_060" Type="Double" />
+    <Property Name="volume_ema_120" Type="Double" />
+    <Property Name="volume_macd_12_26" Type="Double" />
+    <Property Name="volume_macd_12_26_9" Type="Double" />
+    <Property Name="volume_macd_12_26_hist" Type="Double" />
+    <Property Name="volume_obv" Type="Double" />
+    <Property Name="volume_per_fiscal" Type="Double" />
+    <Property Name="volume_per_report" Type="Double" />
+    <Property Name="volume_rsi_005" Type="Double" />
+    <Property Name="volume_rsi_012" Type="Double" />
+    <Property Name="volume_rsi_020" Type="Double" />
+    <Property Name="volume_rsi_026" Type="Double" />
+    <Property Name="volume_rsi_060" Type="Double" />
+    <Property Name="volume_rsi_120" Type="Double" />
+    <Property Name="volume_sma_005" Type="Double" />
+    <Property Name="volume_sma_012" Type="Double" />
+    <Property Name="volume_sma_020" Type="Double" />
+    <Property Name="volume_sma_026" Type="Double" />
+    <Property Name="volume_sma_060" Type="Double" />
+    <Property Name="volume_sma_120" Type="Double" />
+    <Property Name="volume_vr" Type="Double" />
+    <Property Name="last_created" Type="DateTime" Nullable="false" Precision="3" />
+  </EntityType>
+  <EntityType Name="daily_candle_v1">
+    <Key>
+      <PropertyRef Name="symbol" />
+      <PropertyRef Name="date_hist" />
+      <PropertyRef Name="direction" />
+      <PropertyRef Name="size" />
+      <PropertyRef Name="candle" />
+    </Key>
+    <Property Name="symbol" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="date_hist" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="direction" Type="String" Nullable="false" MaxLength="4" FixedLength="false" Unicode="false" />
+    <Property Name="size" Type="String" Nullable="false" MaxLength="6" FixedLength="false" Unicode="false" />
+    <Property Name="candle" Type="String" Nullable="false" MaxLength="6" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="daily_close_v1">
+    <Key>
+      <PropertyRef Name="symbol" />
+      <PropertyRef Name="date_hist" />
+      <PropertyRef Name="direction" />
+      <PropertyRef Name="candle" />
+    </Key>
+    <Property Name="symbol" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="date_hist" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="price" Type="Double" />
+    <Property Name="sma_005" Type="Double" />
+    <Property Name="sma_010" Type="Double" />
+    <Property Name="sma_020" Type="Double" />
+    <Property Name="sma_030" Type="Double" />
+    <Property Name="sma_060" Type="Double" />
+    <Property Name="sma_120" Type="Double" />
+    <Property Name="sma_240" Type="Double" />
+    <Property Name="direction" Type="String" Nullable="false" MaxLength="4" FixedLength="false" Unicode="false" />
+    <Property Name="head" Type="Double" />
+    <Property Name="center" Type="Double" />
+    <Property Name="tail" Type="Double" />
+    <Property Name="candle" Type="String" Nullable="false" MaxLength="6" FixedLength="false" Unicode="false" />
+    <Property Name="size_sma5" Type="Double" />
+    <Property Name="size_sma10" Type="Double" />
+    <Property Name="size_sma20" Type="Double" />
+    <Property Name="size_sma30" Type="Double" />
+    <Property Name="size_sma60" Type="Double" />
+    <Property Name="size_sma120" Type="Double" />
+    <Property Name="size_sma240" Type="Double" />
+  </EntityType>
+  <EntityType Name="daily_sma5_v1">
+    <Key>
+      <PropertyRef Name="symbol" />
+      <PropertyRef Name="date_hist" />
+    </Key>
+    <Property Name="symbol" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="date_hist" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="price" Type="Double" />
+    <Property Name="price_pre" Type="Double" />
+    <Property Name="price_chg_perc" Type="Double" />
+    <Property Name="sma5" Type="Double" />
+    <Property Name="sma5_pre" Type="Double" />
+    <Property Name="sma5_chg_perc" Type="Double" />
+  </EntityType>
+  <EntityType Name="daily_strong_v1">
+    <Key>
+      <PropertyRef Name="symbol" />
+      <PropertyRef Name="date_hist" />
+    </Key>
+    <Property Name="symbol" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="date_hist" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="price" Type="Double" />
+    <Property Name="price_chg_perc" Type="Double" />
+    <Property Name="sma5" Type="Double" />
+    <Property Name="sma5_chg_perc" Type="Double" />
+    <Property Name="spy_price" Type="Double" />
+    <Property Name="spy_chg" Type="Double" />
+    <Property Name="spy_sma5" Type="Double" />
+    <Property Name="spy_diff" Type="Double" />
+    <Property Name="spy_diff_sma5" Type="Double" />
+    <Property Name="qqq_price" Type="Double" />
+    <Property Name="qqq_chg" Type="Double" />
+    <Property Name="qqq_sma5" Type="Double" />
+    <Property Name="qqq_diff" Type="Double" />
+    <Property Name="qqq_diff_sma5" Type="Double" />
+    <Property Name="dia_price" Type="Double" />
+    <Property Name="dia_chg" Type="Double" />
+    <Property Name="dia_sma5" Type="Double" />
+    <Property Name="dia_diff" Type="Double" />
+    <Property Name="dia_diff_sma5" Type="Double" />
+    <Property Name="idx_price" Type="Double" />
+    <Property Name="idx_sma5" Type="Double" />
+    <Property Name="idx_chg" Type="Double" />
+    <Property Name="idx_diff" Type="Double" />
+    <Property Name="idx_diff_sma5" Type="Double" />
+  </EntityType>
+  <EntityType Name="daily_v1">
+    <Key>
+      <PropertyRef Name="symbol" />
+      <PropertyRef Name="seq" />
+      <PropertyRef Name="date" />
+      <PropertyRef Name="last_created" />
+    </Key>
+    <Property Name="symbol" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="watch_type" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="seq" Type="String" Nullable="false" MaxLength="81" FixedLength="false" Unicode="true" />
+    <Property Name="date" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="open" Type="Double" />
+    <Property Name="close" Type="Double" />
+    <Property Name="high" Type="Double" />
+    <Property Name="low" Type="Double" />
+    <Property Name="volume" Type="Double" />
+    <Property Name="avg" Type="Double" />
+    <Property Name="analysis_dir" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+    <Property Name="analysis_dir_on" Type="Int32" />
+    <Property Name="analysis_high_low_perc" Type="Double" />
+    <Property Name="analysis_oc_by_hl_perc" Type="Double" />
+    <Property Name="analysis_open_close_perc" Type="Double" />
+    <Property Name="analysis_point1" Type="Int32" />
+    <Property Name="analysis_point2" Type="Int32" />
+    <Property Name="analysis_point3" Type="Int32" />
+    <Property Name="avg_after_005_perc" Type="Double" />
+    <Property Name="avg_after_010_perc" Type="Double" />
+    <Property Name="avg_after_015_perc" Type="Double" />
+    <Property Name="avg_after_020_perc" Type="Double" />
+    <Property Name="avg_after_040_perc" Type="Double" />
+    <Property Name="avg_after_060_perc" Type="Double" />
+    <Property Name="avg_after_120_perc" Type="Double" />
+    <Property Name="avg_after_240_perc" Type="Double" />
+    <Property Name="avg_after_480_perc" Type="Double" />
+    <Property Name="avg_after_720_perc" Type="Double" />
+    <Property Name="avg_after_960_perc" Type="Double" />
+    <Property Name="avg_change" Type="Double" />
+    <Property Name="avg_change_perc" Type="Double" />
+    <Property Name="avg_ema_005" Type="Double" />
+    <Property Name="avg_ema_012" Type="Double" />
+    <Property Name="avg_ema_020" Type="Double" />
+    <Property Name="avg_ema_026" Type="Double" />
+    <Property Name="avg_ema_060" Type="Double" />
+    <Property Name="avg_ema_120" Type="Double" />
+    <Property Name="avg_macd_12_26" Type="Double" />
+    <Property Name="avg_macd_12_26_9" Type="Double" />
+    <Property Name="avg_macd_12_26_hist" Type="Double" />
+    <Property Name="avg_per_fiscal" Type="Double" />
+    <Property Name="avg_per_report" Type="Double" />
+    <Property Name="avg_rsi_005" Type="Double" />
+    <Property Name="avg_rsi_012" Type="Double" />
+    <Property Name="avg_rsi_020" Type="Double" />
+    <Property Name="avg_rsi_026" Type="Double" />
+    <Property Name="avg_rsi_060" Type="Double" />
+    <Property Name="avg_rsi_120" Type="Double" />
+    <Property Name="avg_sma_005" Type="Double" />
+    <Property Name="avg_sma_012" Type="Double" />
+    <Property Name="avg_sma_020" Type="Double" />
+    <Property Name="avg_sma_026" Type="Double" />
+    <Property Name="avg_sma_060" Type="Double" />
+    <Property Name="avg_sma_120" Type="Double" />
+    <Property Name="close_after_005_perc" Type="Double" />
+    <Property Name="close_after_010_perc" Type="Double" />
+    <Property Name="close_after_015_perc" Type="Double" />
+    <Property Name="close_after_020_perc" Type="Double" />
+    <Property Name="close_after_040_perc" Type="Double" />
+    <Property Name="close_after_060_perc" Type="Double" />
+    <Property Name="close_after_120_perc" Type="Double" />
+    <Property Name="close_after_240_perc" Type="Double" />
+    <Property Name="close_after_480_perc" Type="Double" />
+    <Property Name="close_after_720_perc" Type="Double" />
+    <Property Name="close_after_960_perc" Type="Double" />
+    <Property Name="close_change" Type="Double" />
+    <Property Name="close_change_perc" Type="Double" />
+    <Property Name="close_ema_005" Type="Double" />
+    <Property Name="close_ema_012" Type="Double" />
+    <Property Name="close_ema_020" Type="Double" />
+    <Property Name="close_ema_026" Type="Double" />
+    <Property Name="close_ema_060" Type="Double" />
+    <Property Name="close_ema_120" Type="Double" />
+    <Property Name="close_macd_12_26" Type="Double" />
+    <Property Name="close_macd_12_26_9" Type="Double" />
+    <Property Name="close_macd_12_26_hist" Type="Double" />
+    <Property Name="close_per_fiscal" Type="Double" />
+    <Property Name="close_per_report" Type="Double" />
+    <Property Name="close_rsi_005" Type="Double" />
+    <Property Name="close_rsi_012" Type="Double" />
+    <Property Name="close_rsi_020" Type="Double" />
+    <Property Name="close_rsi_026" Type="Double" />
+    <Property Name="close_rsi_060" Type="Double" />
+    <Property Name="close_rsi_120" Type="Double" />
+    <Property Name="close_sma_005" Type="Double" />
+    <Property Name="close_sma_012" Type="Double" />
+    <Property Name="high_after_005_perc" Type="Double" />
+    <Property Name="high_after_010_perc" Type="Double" />
+    <Property Name="high_after_015_perc" Type="Double" />
+    <Property Name="high_after_020_perc" Type="Double" />
+    <Property Name="high_after_040_perc" Type="Double" />
+    <Property Name="high_after_060_perc" Type="Double" />
+    <Property Name="high_after_120_perc" Type="Double" />
+    <Property Name="high_after_240_perc" Type="Double" />
+    <Property Name="high_after_480_perc" Type="Double" />
+    <Property Name="high_after_720_perc" Type="Double" />
+    <Property Name="high_after_960_perc" Type="Double" />
+    <Property Name="high_change_perc" Type="Double" />
+    <Property Name="low_after_005_perc" Type="Double" />
+    <Property Name="low_after_010_perc" Type="Double" />
+    <Property Name="low_after_015_perc" Type="Double" />
+    <Property Name="low_after_020_perc" Type="Double" />
+    <Property Name="low_after_040_perc" Type="Double" />
+    <Property Name="low_after_060_perc" Type="Double" />
+    <Property Name="low_after_120_perc" Type="Double" />
+    <Property Name="low_after_240_perc" Type="Double" />
+    <Property Name="low_after_480_perc" Type="Double" />
+    <Property Name="low_after_720_perc" Type="Double" />
+    <Property Name="low_after_960_perc" Type="Double" />
+    <Property Name="low_change_perc" Type="Double" />
+    <Property Name="open_after_005_perc" Type="Double" />
+    <Property Name="open_after_010_perc" Type="Double" />
+    <Property Name="open_after_015_perc" Type="Double" />
+    <Property Name="open_after_020_perc" Type="Double" />
+    <Property Name="open_after_040_perc" Type="Double" />
+    <Property Name="open_after_060_perc" Type="Double" />
+    <Property Name="open_after_120_perc" Type="Double" />
+    <Property Name="open_after_240_perc" Type="Double" />
+    <Property Name="open_after_480_perc" Type="Double" />
+    <Property Name="open_after_720_perc" Type="Double" />
+    <Property Name="open_after_960_perc" Type="Double" />
+    <Property Name="open_change_perc" Type="Double" />
+    <Property Name="volume_after_005_perc" Type="Double" />
+    <Property Name="volume_after_010_perc" Type="Double" />
+    <Property Name="volume_after_015_perc" Type="Double" />
+    <Property Name="volume_after_020_perc" Type="Double" />
+    <Property Name="volume_after_040_perc" Type="Double" />
+    <Property Name="volume_after_060_perc" Type="Double" />
+    <Property Name="volume_after_120_perc" Type="Double" />
+    <Property Name="volume_after_240_perc" Type="Double" />
+    <Property Name="volume_after_480_perc" Type="Double" />
+    <Property Name="volume_after_720_perc" Type="Double" />
+    <Property Name="volume_after_960_perc" Type="Double" />
+    <Property Name="volume_change_perc" Type="Double" />
+    <Property Name="close_sma_020" Type="Double" />
+    <Property Name="close_sma_026" Type="Double" />
+    <Property Name="close_sma_060" Type="Double" />
+    <Property Name="close_sma_120" Type="Double" />
+    <Property Name="high_change" Type="Double" />
+    <Property Name="high_ema_005" Type="Double" />
+    <Property Name="high_ema_012" Type="Double" />
+    <Property Name="high_ema_020" Type="Double" />
+    <Property Name="high_ema_026" Type="Double" />
+    <Property Name="high_ema_060" Type="Double" />
+    <Property Name="high_ema_120" Type="Double" />
+    <Property Name="high_macd_12_26" Type="Double" />
+    <Property Name="high_macd_12_26_9" Type="Double" />
+    <Property Name="high_macd_12_26_hist" Type="Double" />
+    <Property Name="high_per_fiscal" Type="Double" />
+    <Property Name="high_per_report" Type="Double" />
+    <Property Name="high_rsi_005" Type="Double" />
+    <Property Name="high_rsi_012" Type="Double" />
+    <Property Name="high_rsi_020" Type="Double" />
+    <Property Name="high_rsi_026" Type="Double" />
+    <Property Name="high_rsi_060" Type="Double" />
+    <Property Name="high_rsi_120" Type="Double" />
+    <Property Name="high_sma_005" Type="Double" />
+    <Property Name="high_sma_012" Type="Double" />
+    <Property Name="high_sma_020" Type="Double" />
+    <Property Name="high_sma_026" Type="Double" />
+    <Property Name="high_sma_060" Type="Double" />
+    <Property Name="high_sma_120" Type="Double" />
+    <Property Name="low_change" Type="Double" />
+    <Property Name="low_ema_005" Type="Double" />
+    <Property Name="low_ema_012" Type="Double" />
+    <Property Name="low_ema_020" Type="Double" />
+    <Property Name="low_ema_026" Type="Double" />
+    <Property Name="low_ema_060" Type="Double" />
+    <Property Name="low_ema_120" Type="Double" />
+    <Property Name="low_macd_12_26" Type="Double" />
+    <Property Name="low_macd_12_26_9" Type="Double" />
+    <Property Name="low_macd_12_26_hist" Type="Double" />
+    <Property Name="low_per_fiscal" Type="Double" />
+    <Property Name="low_per_report" Type="Double" />
+    <Property Name="low_rsi_005" Type="Double" />
+    <Property Name="low_rsi_012" Type="Double" />
+    <Property Name="low_rsi_020" Type="Double" />
+    <Property Name="low_rsi_026" Type="Double" />
+    <Property Name="low_rsi_060" Type="Double" />
+    <Property Name="low_rsi_120" Type="Double" />
+    <Property Name="low_sma_005" Type="Double" />
+    <Property Name="low_sma_012" Type="Double" />
+    <Property Name="low_sma_020" Type="Double" />
+    <Property Name="low_sma_026" Type="Double" />
+    <Property Name="low_sma_060" Type="Double" />
+    <Property Name="low_sma_120" Type="Double" />
+    <Property Name="open_change" Type="Double" />
+    <Property Name="open_ema_005" Type="Double" />
+    <Property Name="open_ema_012" Type="Double" />
+    <Property Name="open_ema_020" Type="Double" />
+    <Property Name="open_ema_026" Type="Double" />
+    <Property Name="open_ema_060" Type="Double" />
+    <Property Name="open_ema_120" Type="Double" />
+    <Property Name="open_macd_12_26" Type="Double" />
+    <Property Name="open_macd_12_26_9" Type="Double" />
+    <Property Name="open_macd_12_26_hist" Type="Double" />
+    <Property Name="open_per_fiscal" Type="Double" />
+    <Property Name="open_per_report" Type="Double" />
+    <Property Name="open_rsi_005" Type="Double" />
+    <Property Name="open_rsi_012" Type="Double" />
+    <Property Name="open_rsi_020" Type="Double" />
+    <Property Name="open_rsi_026" Type="Double" />
+    <Property Name="open_rsi_060" Type="Double" />
+    <Property Name="open_rsi_120" Type="Double" />
+    <Property Name="open_sma_005" Type="Double" />
+    <Property Name="open_sma_012" Type="Double" />
+    <Property Name="open_sma_020" Type="Double" />
+    <Property Name="open_sma_026" Type="Double" />
+    <Property Name="open_sma_060" Type="Double" />
+    <Property Name="open_sma_120" Type="Double" />
+    <Property Name="source_adjusted_close" Type="Double" />
+    <Property Name="source_close" Type="Double" />
+    <Property Name="source_dividend_amount" Type="Double" />
+    <Property Name="source_high" Type="Double" />
+    <Property Name="source_low" Type="Double" />
+    <Property Name="source_open" Type="Double" />
+    <Property Name="source_split_coefficient" Type="Double" />
+    <Property Name="source_volume" Type="Double" />
+    <Property Name="volume_change" Type="Double" />
+    <Property Name="volume_ema_005" Type="Double" />
+    <Property Name="volume_ema_012" Type="Double" />
+    <Property Name="volume_ema_020" Type="Double" />
+    <Property Name="volume_ema_026" Type="Double" />
+    <Property Name="volume_ema_060" Type="Double" />
+    <Property Name="volume_ema_120" Type="Double" />
+    <Property Name="volume_macd_12_26" Type="Double" />
+    <Property Name="volume_macd_12_26_9" Type="Double" />
+    <Property Name="volume_macd_12_26_hist" Type="Double" />
+    <Property Name="volume_obv" Type="Double" />
+    <Property Name="volume_per_fiscal" Type="Double" />
+    <Property Name="volume_per_report" Type="Double" />
+    <Property Name="volume_rsi_005" Type="Double" />
+    <Property Name="volume_rsi_012" Type="Double" />
+    <Property Name="volume_rsi_020" Type="Double" />
+    <Property Name="volume_rsi_026" Type="Double" />
+    <Property Name="volume_rsi_060" Type="Double" />
+    <Property Name="volume_rsi_120" Type="Double" />
+    <Property Name="volume_sma_005" Type="Double" />
+    <Property Name="volume_sma_012" Type="Double" />
+    <Property Name="volume_sma_020" Type="Double" />
+    <Property Name="volume_sma_026" Type="Double" />
+    <Property Name="volume_sma_060" Type="Double" />
+    <Property Name="volume_sma_120" Type="Double" />
+    <Property Name="volume_vr" Type="Double" />
+    <Property Name="last_created" Type="DateTime" Nullable="false" Precision="3" />
+  </EntityType>
+  <EntityType Name="daily_vol_sma10_v1">
+    <Key>
+      <PropertyRef Name="symbol" />
+      <PropertyRef Name="date_hist" />
+    </Key>
+    <Property Name="symbol" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="date_hist" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="volume" Type="Double" />
+    <Property Name="volume_pre" Type="Double" />
+    <Property Name="volume_chg_perc" Type="Double" />
+    <Property Name="sma10" Type="Double" />
+    <Property Name="sma10_pre" Type="Double" />
+    <Property Name="sma10_chg_perc" Type="Double" />
+  </EntityType>
+  <EntityType Name="daily_vol_sma5_v1">
+    <Key>
+      <PropertyRef Name="symbol" />
+      <PropertyRef Name="date_hist" />
+    </Key>
+    <Property Name="symbol" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="date_hist" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="volume" Type="Double" />
+    <Property Name="volume_pre" Type="Double" />
+    <Property Name="volume_chg_perc" Type="Double" />
+    <Property Name="sma5" Type="Double" />
+    <Property Name="sma5_pre" Type="Double" />
+    <Property Name="sma5_chg_perc" Type="Double" />
+  </EntityType>
+  <EntityType Name="daily_volume_v1">
+    <Key>
+      <PropertyRef Name="symbol" />
+      <PropertyRef Name="date_hist" />
+    </Key>
+    <Property Name="symbol" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="date_hist" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="volume" Type="Double" />
+    <Property Name="sma_005" Type="Double" />
+    <Property Name="sma_010" Type="Double" />
+    <Property Name="sma_020" Type="Double" />
+    <Property Name="sma_030" Type="Double" />
+    <Property Name="sma_060" Type="Double" />
+    <Property Name="sma_120" Type="Double" />
+    <Property Name="sma_240" Type="Double" />
+  </EntityType>
+  <EntityType Name="fundamental_v1">
+    <Key>
+      <PropertyRef Name="symbol" />
+      <PropertyRef Name="date_hist" />
+      <PropertyRef Name="date_fiscal" />
+    </Key>
+    <Property Name="symbol" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="date_hist" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="date_fiscal" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="eps" Type="Double" />
+    <Property Name="perc_eps" Type="Double" />
+    <Property Name="perc_eps_1year" Type="Double" />
+    <Property Name="perc_eps_3year" Type="Double" />
+    <Property Name="est" Type="Double" />
+    <Property Name="perc_est" Type="Double" />
+    <Property Name="perc_est_1year" Type="Double" />
+    <Property Name="perc_est_3year" Type="Double" />
+    <Property Name="surprise" Type="Double" />
+    <Property Name="surprise_1year" Type="Double" />
+    <Property Name="surprise_3year" Type="Double" />
+    <Property Name="perc_after_expense" Type="Double" />
+    <Property Name="perc_after_expense_1year" Type="Double" />
+    <Property Name="perc_after_expense_3year" Type="Double" />
+    <Property Name="perc_profit" Type="Double" />
+    <Property Name="perc_profit_1year" Type="Double" />
+    <Property Name="perc_profit_3year" Type="Double" />
+    <Property Name="perc_total" Type="Double" />
+    <Property Name="perc_total_1year" Type="Double" />
+    <Property Name="perc_total_3year" Type="Double" />
+    <Property Name="eps_close_rate" Type="Double" />
+    <Property Name="pre_30" Type="Double" />
+    <Property Name="pre_20" Type="Double" />
+    <Property Name="pre_10" Type="Double" />
+    <Property Name="pre_5" Type="Double" />
+    <Property Name="pre_3" Type="Double" />
+    <Property Name="pre_1" Type="Double" />
+    <Property Name="next_1" Type="Double" />
+    <Property Name="next_3" Type="Double" />
+    <Property Name="next_5" Type="Double" />
+    <Property Name="next_10" Type="Double" />
+    <Property Name="next_20" Type="Double" />
+    <Property Name="next_30" Type="Double" />
+  </EntityType>
+  <EntityType Name="industry_v1">
+    <Key>
+      <PropertyRef Name="date_hist" />
+    </Key>
+    <Property Name="industry" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="date_hist" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="price_chg" Type="Double" />
+    <Property Name="idx_chg" Type="Double" />
+    <Property Name="strong" Type="Double" />
+    <Property Name="strong_sma5" Type="Double" />
+  </EntityType>
+  <EntityType Name="sector_v1">
+    <Key>
+      <PropertyRef Name="date_hist" />
+    </Key>
+    <Property Name="sector" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="date_hist" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="price_chg" Type="Double" />
+    <Property Name="idx_chg" Type="Double" />
+    <Property Name="strong" Type="Double" />
+    <Property Name="strong_sma5" Type="Double" />
+  </EntityType>
   <EntityType Name="watch_list_v1">
     <Key>
       <PropertyRef Name="symbol" />
@@ -134,62 +1037,109 @@
     <Property Name="industry" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
     <Property Name="sector" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
     <Property Name="last_updated" Type="DateTime" Precision="0" />
+    <Property Name="last_earning" Type="DateTime" Precision="0" />
   </EntityType>
-  <EntityType Name="daily_history">
+  <EntityType Name="test_plan">
+    <Key>
+      <PropertyRef Name="test_id" />
+    </Key>
+    <Property Name="test_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="plan_name" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="test_seq" Type="Int32" Nullable="false" />
+    <Property Name="pass_list" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+    <Property Name="filter_option" Type="Int32" Nullable="false" />
+    <Property Name="filter_att1" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="filter_att2" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="filter_att3" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="filter_att4" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="filter_att5" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="filter_desc" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <ComplexType Name="filter_main_Result">
+    <Property Type="String" Name="symbol" Nullable="false" MaxLength="50" />
+    <Property Type="Int32" Name="ranking" Nullable="true" />
+    <Property Type="Double" Name="ratio1" Nullable="true" />
+    <Property Type="Double" Name="ratio2" Nullable="true" />
+    <Property Type="Double" Name="rate_5" Nullable="true" />
+    <Property Type="Double" Name="rate_10" Nullable="true" />
+    <Property Type="Double" Name="rate_15" Nullable="true" />
+    <Property Type="Double" Name="rate_20" Nullable="true" />
+    <Property Type="Double" Name="rate_40" Nullable="true" />
+    <Property Type="Double" Name="rate_60" Nullable="true" />
+  </ComplexType>
+  <EntityType Name="list_history">
+    <Key>
+      <PropertyRef Name="HIST_ID" />
+    </Key>
+    <Property Name="HIST_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="HIST_DTTM" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="START_DTTM" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="END_DTTM" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="PASS_LIST" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+    <Property Name="FILTER_OPTION" Type="Int32" Nullable="false" />
+    <Property Name="att1" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="att2" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="att3" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="att4" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="att5" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="option_desc" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="prediction">
     <Key>
       <PropertyRef Name="symbol" />
-      <PropertyRef Name="date" />
     </Key>
     <Property Name="symbol" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="date" Type="DateTime" Nullable="false" Precision="0" />
-    <Property Name="open" Type="Double" />
-    <Property Name="close" Type="Double" />
-    <Property Name="high" Type="Double" />
-    <Property Name="low" Type="Double" />
-    <Property Name="volume" Type="Double" />
-    <Property Name="avg" Type="Double" />
-    <Property Name="seq" Type="String" Nullable="false" MaxLength="81" FixedLength="false" Unicode="true" annotation:StoreGeneratedPattern="Computed" />
+    <Property Name="ranking" Type="Int32" />
+    <Property Name="ratio1" Type="Double" />
+    <Property Name="ratio2" Type="Double" />
+    <Property Name="rate_5" Type="Double" />
+    <Property Name="rate_10" Type="Double" />
+    <Property Name="rate_15" Type="Double" />
+    <Property Name="rate_20" Type="Double" />
+    <Property Name="rate_40" Type="Double" />
+    <Property Name="rate_60" Type="Double" />
   </EntityType>
-  <EntityType Name="daily_strong">
+  <ComplexType Name="sp_get_prediction_history_Result">
+    <Property Type="String" Name="symbol" Nullable="false" MaxLength="50" />
+    <Property Type="Int32" Name="ranking" Nullable="true" />
+    <Property Type="Double" Name="ratio1" Nullable="true" />
+    <Property Type="Double" Name="ratio2" Nullable="true" />
+    <Property Type="Double" Name="rate_5" Nullable="true" />
+    <Property Type="Double" Name="rate_10" Nullable="true" />
+    <Property Type="Double" Name="rate_15" Nullable="true" />
+    <Property Type="Double" Name="rate_20" Nullable="true" />
+    <Property Type="Double" Name="rate_40" Nullable="true" />
+    <Property Type="Double" Name="rate_60" Nullable="true" />
+  </ComplexType>
+  <EntityType Name="list_history_v1">
     <Key>
-      <PropertyRef Name="symbol" />
-      <PropertyRef Name="date_hist" />
+      <PropertyRef Name="HIST_ID" />
+      <PropertyRef Name="HIST_DTTM" />
+      <PropertyRef Name="START_DTTM" />
+      <PropertyRef Name="END_DTTM" />
+      <PropertyRef Name="PASS_LIST" />
+      <PropertyRef Name="FILTER_OPTION" />
     </Key>
-    <Property Name="symbol" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="date_hist" Type="DateTime" Nullable="false" Precision="0" />
-    <Property Name="price" Type="Double" />
-    <Property Name="price_chg_perc" Type="Double" />
-    <Property Name="sma5_chg_perc" Type="Double" />
-    <Property Name="spy_chg" Type="Double" />
-    <Property Name="spy_sma5" Type="Double" />
-    <Property Name="qqq_chg" Type="Double" />
-    <Property Name="qqq_sma5" Type="Double" />
-    <Property Name="dia_chg" Type="Double" />
-    <Property Name="dia_sma5" Type="Double" />
-    <Property Name="i_spy_sma5" Type="Double" />
-    <Property Name="i_qqq_sma5" Type="Double" />
-    <Property Name="i_dia_sma5" Type="Double" />
-    <Property Name="i_dia_price" Type="Double" />
-    <Property Name="i_dia_chg" Type="Double" />
-    <Property Name="i_spy_price" Type="Double" />
-    <Property Name="i_spy_chg" Type="Double" />
-    <Property Name="i_qqq_price" Type="Double" />
-    <Property Name="i_qqq_chg" Type="Double" />
-  </EntityType>
-  <EntityType Name="daily_close">
-    <Key>
-      <PropertyRef Name="symbol" />
-      <PropertyRef Name="date_hist" />
-    </Key>
-    <Property Name="symbol" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="date_hist" Type="DateTime" Nullable="false" Precision="0" />
-    <Property Name="SMA_005" Type="Double" />
-    <Property Name="SMA_010" Type="Double" />
-    <Property Name="SMA_020" Type="Double" />
-    <Property Name="SMA_030" Type="Double" />
-    <Property Name="SMA_060" Type="Double" />
-    <Property Name="SMA_120" Type="Double" />
-    <Property Name="SMA_240" Type="Double" />
-    <Property Name="price" Type="Double" />
+    <Property Name="HIST_ID" Type="Int32" Nullable="false" />
+    <Property Name="HIST_DTTM" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="START_DTTM" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="END_DTTM" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="PASS_LIST" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+    <Property Name="FILTER_OPTION" Type="Int32" Nullable="false" />
+    <Property Name="att1" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="att2" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="att3" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="att4" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="att5" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="option_desc" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ranking" Type="Int32" />
+    <Property Name="ratio1" Type="Double" />
+    <Property Name="ratio2" Type="Double" />
+    <Property Name="rate_5" Type="Double" />
+    <Property Name="rate_10" Type="Double" />
+    <Property Name="rate_15" Type="Double" />
+    <Property Name="rate_20" Type="Double" />
+    <Property Name="rate_40" Type="Double" />
+    <Property Name="rate_60" Type="Double" />
   </EntityType>
 </Schema>

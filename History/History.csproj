@@ -35,6 +35,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="CraftSynth.ImageEditor, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>DLL\CraftSynth.ImageEditor.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
@@ -86,22 +90,73 @@
     <Reference Include="WindowsFormsIntegration" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Analysis.cs">
-      <SubType>Form</SubType>
+    <Compile Include="api.cs">
+      <DependentUpon>DB_Stock.tt</DependentUpon>
     </Compile>
-    <Compile Include="Analysis.Designer.cs">
-      <DependentUpon>Analysis.cs</DependentUpon>
+    <Compile Include="daily_analysis.cs">
+      <DependentUpon>DB_Stock.tt</DependentUpon>
+    </Compile>
+    <Compile Include="daily_analysis_v1.cs">
+      <DependentUpon>DB_Stock.tt</DependentUpon>
+    </Compile>
+    <Compile Include="daily_avg.cs">
+      <DependentUpon>DB_Stock.tt</DependentUpon>
+    </Compile>
+    <Compile Include="daily_candle_v1.cs">
+      <DependentUpon>DB_Stock.tt</DependentUpon>
     </Compile>
     <Compile Include="daily_close.cs">
       <DependentUpon>DB_Stock.tt</DependentUpon>
     </Compile>
+    <Compile Include="daily_close_v1.cs">
+      <DependentUpon>DB_Stock.tt</DependentUpon>
+    </Compile>
+    <Compile Include="daily_high.cs">
+      <DependentUpon>DB_Stock.tt</DependentUpon>
+    </Compile>
     <Compile Include="daily_history.cs">
+      <DependentUpon>DB_Stock.tt</DependentUpon>
+    </Compile>
+    <Compile Include="daily_industry.cs">
+      <DependentUpon>DB_Stock.tt</DependentUpon>
+    </Compile>
+    <Compile Include="daily_low.cs">
+      <DependentUpon>DB_Stock.tt</DependentUpon>
+    </Compile>
+    <Compile Include="daily_open.cs">
+      <DependentUpon>DB_Stock.tt</DependentUpon>
+    </Compile>
+    <Compile Include="daily_sector.cs">
+      <DependentUpon>DB_Stock.tt</DependentUpon>
+    </Compile>
+    <Compile Include="daily_sma5.cs">
+      <DependentUpon>DB_Stock.tt</DependentUpon>
+    </Compile>
+    <Compile Include="daily_sma5_v1.cs">
       <DependentUpon>DB_Stock.tt</DependentUpon>
     </Compile>
     <Compile Include="daily_source.cs">
       <DependentUpon>DB_Stock.tt</DependentUpon>
     </Compile>
     <Compile Include="daily_strong.cs">
+      <DependentUpon>DB_Stock.tt</DependentUpon>
+    </Compile>
+    <Compile Include="daily_strong_v1.cs">
+      <DependentUpon>DB_Stock.tt</DependentUpon>
+    </Compile>
+    <Compile Include="daily_v1.cs">
+      <DependentUpon>DB_Stock.tt</DependentUpon>
+    </Compile>
+    <Compile Include="daily_volume.cs">
+      <DependentUpon>DB_Stock.tt</DependentUpon>
+    </Compile>
+    <Compile Include="daily_volume_v1.cs">
+      <DependentUpon>DB_Stock.tt</DependentUpon>
+    </Compile>
+    <Compile Include="daily_vol_sma10_v1.cs">
+      <DependentUpon>DB_Stock.tt</DependentUpon>
+    </Compile>
+    <Compile Include="daily_vol_sma5_v1.cs">
       <DependentUpon>DB_Stock.tt</DependentUpon>
     </Compile>
     <Compile Include="DB_Stock.Context.cs">
@@ -122,32 +177,107 @@
     <Compile Include="earning.cs">
       <DependentUpon>DB_Stock.tt</DependentUpon>
     </Compile>
+    <Compile Include="filter_intro_Result.cs">
+      <DependentUpon>DB_Stock.tt</DependentUpon>
+    </Compile>
+    <Compile Include="filter_main_Result.cs">
+      <DependentUpon>DB_Stock.tt</DependentUpon>
+    </Compile>
+    <Compile Include="fundamental.cs">
+      <DependentUpon>DB_Stock.tt</DependentUpon>
+    </Compile>
+    <Compile Include="fundamental_v1.cs">
+      <DependentUpon>DB_Stock.tt</DependentUpon>
+    </Compile>
+    <Compile Include="income.cs">
+      <DependentUpon>DB_Stock.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Index_Analyzer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Index_Analyzer.Designer.cs">
+      <DependentUpon>Index_Analyzer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Analysis.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Analysis.Designer.cs">
+      <DependentUpon>Analysis.cs</DependentUpon>
+    </Compile>
     <Compile Include="GetData.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="GetData.Designer.cs">
       <DependentUpon>GetData.cs</DependentUpon>
     </Compile>
-    <Compile Include="income.cs">
+    <Compile Include="industry_v1.cs">
+      <DependentUpon>DB_Stock.tt</DependentUpon>
+    </Compile>
+    <Compile Include="list_history.cs">
+      <DependentUpon>DB_Stock.tt</DependentUpon>
+    </Compile>
+    <Compile Include="list_history_v1.cs">
       <DependentUpon>DB_Stock.tt</DependentUpon>
     </Compile>
     <Compile Include="lookup.cs">
       <DependentUpon>DB_Stock.tt</DependentUpon>
     </Compile>
+    <Compile Include="MessageUI.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MessageUI.Designer.cs">
+      <DependentUpon>MessageUI.cs</DependentUpon>
+    </Compile>
+    <Compile Include="prediction.cs">
+      <DependentUpon>DB_Stock.tt</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Query.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Query.Designer.cs">
+      <DependentUpon>Query.cs</DependentUpon>
+    </Compile>
+    <Compile Include="sector_v1.cs">
+      <DependentUpon>DB_Stock.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sp_get_prediction_history_Result.cs">
+      <DependentUpon>DB_Stock.tt</DependentUpon>
+    </Compile>
     <Compile Include="SQL.cs" />
+    <Compile Include="stockDataSet.cs">
+      <DependentUpon>stockDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="stockDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>stockDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="symbol_att.cs">
+      <DependentUpon>DB_Stock.tt</DependentUpon>
+    </Compile>
+    <Compile Include="test_plan.cs">
+      <DependentUpon>DB_Stock.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Utility.cs" />
     <Compile Include="watch_list.cs">
       <DependentUpon>DB_Stock.tt</DependentUpon>
     </Compile>
     <Compile Include="watch_list_v1.cs">
       <DependentUpon>DB_Stock.tt</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Index_Analyzer.resx">
+      <DependentUpon>Index_Analyzer.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Analysis.resx">
       <DependentUpon>Analysis.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GetData.resx">
       <DependentUpon>GetData.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MessageUI.resx">
+      <DependentUpon>MessageUI.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -158,6 +288,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Query.resx">
+      <DependentUpon>Query.cs</DependentUpon>
+    </EmbeddedResource>
     <EntityDeploy Include="DB_Stock.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>DB_Stock.Designer.cs</LastGenOutput>
@@ -166,6 +299,7 @@
       <DependentUpon>DB_Stock.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
+    <None Include="Properties\DataSources\saved.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -175,6 +309,17 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <None Include="stockDataSet.xsc">
+      <DependentUpon>stockDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="stockDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>stockDataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="stockDataSet.xss">
+      <DependentUpon>stockDataSet.xsd</DependentUpon>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -183,10 +328,11 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="CraftSynth.ImageEditor.dll" />
     <Content Include="DB_Stock.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>DB_Stock.Context.cs</LastGenOutput>
       <DependentUpon>DB_Stock.edmx</DependentUpon>
+      <LastGenOutput>DB_Stock.Context.cs</LastGenOutput>
     </Content>
     <Content Include="DB_Stock.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
