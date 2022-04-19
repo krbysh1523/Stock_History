@@ -183,6 +183,9 @@
     <Compile Include="filter_main_Result.cs">
       <DependentUpon>DB_Stock.tt</DependentUpon>
     </Compile>
+    <Compile Include="filter_simul_header_Result.cs">
+      <DependentUpon>DB_Stock.tt</DependentUpon>
+    </Compile>
     <Compile Include="fundamental.cs">
       <DependentUpon>DB_Stock.tt</DependentUpon>
     </Compile>

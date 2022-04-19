@@ -25,7 +25,8 @@ namespace History
         #region + Form
         Query query = null;
         int[] days = new int[] { 5, 10, 20, 30, 60, 120, 240 };
-        string API_KEY = "YFMAAM655H11S0KV";
+        string API_KEY = "";
+        //string API_KEY = "YFMAAM655H11S0KV";
         //string API_KEY = "BWN5J2GY9613F0D0";
         List<lookup> data_types = new List<lookup>();
         int wait_sleep = 500;

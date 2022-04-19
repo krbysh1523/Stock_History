@@ -240,6 +240,7 @@ warning 6002: The table/view 'stock.dbo.daily_sector' does not have a primary ke
     <Property Name="SMA_060" Type="float" />
     <Property Name="SMA_120" Type="float" />
     <Property Name="SMA_240" Type="float" />
+    <Property Name="volume_chg_perc" Type="float" />
   </EntityType>
   <EntityType Name="earning">
     <Key>
@@ -347,7 +348,8 @@ warning 6002: The table/view 'stock.dbo.daily_sector' does not have a primary ke
     <Property Name="att3" Type="nvarchar" MaxLength="250" />
     <Property Name="att4" Type="nvarchar" MaxLength="250" />
     <Property Name="att5" Type="nvarchar" MaxLength="250" />
-    <Property Name="option_desc" Type="nvarchar(max)" />
+    <Property Name="option_desc" Type="varchar(max)" />
+    <Property Name="description" Type="varchar" MaxLength="250" />
   </EntityType>
   <EntityType Name="lookup">
     <Key>
@@ -406,6 +408,7 @@ warning 6002: The table/view 'stock.dbo.daily_sector' does not have a primary ke
     <Property Name="filter_att4" Type="nvarchar" MaxLength="250" />
     <Property Name="filter_att5" Type="nvarchar" MaxLength="250" />
     <Property Name="filter_desc" Type="nvarchar" MaxLength="250" />
+    <Property Name="remark" Type="nvarchar" MaxLength="4000" />
   </EntityType>
   <EntityType Name="watch_list">
     <Key>
@@ -916,6 +919,7 @@ warning 6002: The table/view 'stock.dbo.daily_volume_v1' does not have a primary
     <Property Name="symbol" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="date_hist" Type="date" Nullable="false" />
     <Property Name="volume" Type="float" />
+    <Property Name="volume_pre" Type="float" />
     <Property Name="sma_005" Type="float" />
     <Property Name="sma_010" Type="float" />
     <Property Name="sma_020" Type="float" />
@@ -1053,7 +1057,14 @@ warning 6002: The table/view 'stock.dbo.watch_list_v1' does not have a primary k
     <Parameter Name="att3" Type="nvarchar" Mode="In" />
     <Parameter Name="att4" Type="nvarchar" Mode="In" />
     <Parameter Name="att5" Type="nvarchar" Mode="In" />
-    <Parameter Name="is_simul" Type="nvarchar" Mode="In" />
+    <Parameter Name="description" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="filter_simul_header" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="end_dttm" Type="datetime" Mode="In" />
+  </Function>
+  <Function Name="get_nth_day" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="date">
+    <Parameter Name="today" Type="date" Mode="In" />
+    <Parameter Name="nth" Type="int" Mode="In" />
   </Function>
   <Function Name="process_analysis" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="symbol" Type="nvarchar" Mode="In" />
@@ -1645,6 +1656,7 @@ warning 6002: The table/view 'stock.dbo.watch_list_v1' does not have a primary k
     [daily_volume_v1].[symbol] AS [symbol], 
     [daily_volume_v1].[date_hist] AS [date_hist], 
     [daily_volume_v1].[volume] AS [volume], 
+    [daily_volume_v1].[volume_pre] AS [volume_pre], 
     [daily_volume_v1].[sma_005] AS [sma_005], 
     [daily_volume_v1].[sma_010] AS [sma_010], 
     [daily_volume_v1].[sma_020] AS [sma_020], 

@@ -245,6 +245,7 @@ warning 6002: The table/view 'stock.dbo.daily_sector' does not have a primary ke
           <Property Name="SMA_060" Type="float" />
           <Property Name="SMA_120" Type="float" />
           <Property Name="SMA_240" Type="float" />
+          <Property Name="volume_chg_perc" Type="float" />
         </EntityType>
         <EntityType Name="earning">
           <Key>
@@ -352,7 +353,8 @@ warning 6002: The table/view 'stock.dbo.daily_sector' does not have a primary ke
           <Property Name="att3" Type="nvarchar" MaxLength="250" />
           <Property Name="att4" Type="nvarchar" MaxLength="250" />
           <Property Name="att5" Type="nvarchar" MaxLength="250" />
-          <Property Name="option_desc" Type="nvarchar(max)" />
+          <Property Name="option_desc" Type="varchar(max)" />
+          <Property Name="description" Type="varchar" MaxLength="250" />
         </EntityType>
         <EntityType Name="lookup">
           <Key>
@@ -411,6 +413,7 @@ warning 6002: The table/view 'stock.dbo.daily_sector' does not have a primary ke
           <Property Name="filter_att4" Type="nvarchar" MaxLength="250" />
           <Property Name="filter_att5" Type="nvarchar" MaxLength="250" />
           <Property Name="filter_desc" Type="nvarchar" MaxLength="250" />
+          <Property Name="remark" Type="nvarchar" MaxLength="4000" />
         </EntityType>
         <EntityType Name="watch_list">
           <Key>
@@ -921,6 +924,7 @@ warning 6002: The table/view 'stock.dbo.daily_volume_v1' does not have a primary
           <Property Name="symbol" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="date_hist" Type="date" Nullable="false" />
           <Property Name="volume" Type="float" />
+          <Property Name="volume_pre" Type="float" />
           <Property Name="sma_005" Type="float" />
           <Property Name="sma_010" Type="float" />
           <Property Name="sma_020" Type="float" />
@@ -1058,7 +1062,14 @@ warning 6002: The table/view 'stock.dbo.watch_list_v1' does not have a primary k
           <Parameter Name="att3" Type="nvarchar" Mode="In" />
           <Parameter Name="att4" Type="nvarchar" Mode="In" />
           <Parameter Name="att5" Type="nvarchar" Mode="In" />
-          <Parameter Name="is_simul" Type="nvarchar" Mode="In" />
+          <Parameter Name="description" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="filter_simul_header" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="end_dttm" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="get_nth_day" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="date">
+          <Parameter Name="today" Type="date" Mode="In" />
+          <Parameter Name="nth" Type="int" Mode="In" />
         </Function>
         <Function Name="process_analysis" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="symbol" Type="nvarchar" Mode="In" />
@@ -1650,6 +1661,7 @@ warning 6002: The table/view 'stock.dbo.watch_list_v1' does not have a primary k
     [daily_volume_v1].[symbol] AS [symbol], 
     [daily_volume_v1].[date_hist] AS [date_hist], 
     [daily_volume_v1].[volume] AS [volume], 
+    [daily_volume_v1].[volume_pre] AS [volume_pre], 
     [daily_volume_v1].[sma_005] AS [sma_005], 
     [daily_volume_v1].[sma_010] AS [sma_010], 
     [daily_volume_v1].[sma_020] AS [sma_020], 
@@ -1902,7 +1914,7 @@ warning 6002: The table/view 'stock.dbo.watch_list_v1' does not have a primary k
             <Parameter Name="att3" Mode="In" Type="String" />
             <Parameter Name="att4" Mode="In" Type="String" />
             <Parameter Name="att5" Mode="In" Type="String" />
-            <Parameter Name="is_simul" Mode="In" Type="String" />
+            <Parameter Name="description" Mode="In" Type="String" />
           </FunctionImport>
           <EntitySet Name="list_history" EntityType="stockModel.list_history" />
           <EntitySet Name="predictions" EntityType="stockModel.prediction" />
@@ -1911,6 +1923,9 @@ warning 6002: The table/view 'stock.dbo.watch_list_v1' does not have a primary k
           <Parameter Name="hist_id" Mode="In" Type="Int32" />
           </FunctionImport>
           <EntitySet Name="list_history_v1" EntityType="stockModel.list_history_v1" />
+          <FunctionImport Name="filter_simul_header" ReturnType="Collection(stockModel.filter_simul_header_Result)">
+          <Parameter Name="end_dttm" Mode="In" Type="DateTime" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="filter_intro_Result">
           <Property Type="String" Name="symbol" Nullable="false" MaxLength="50" />
@@ -2029,6 +2044,7 @@ warning 6002: The table/view 'stock.dbo.watch_list_v1' does not have a primary k
           <Property Name="SMA_060" Type="Double" />
           <Property Name="SMA_120" Type="Double" />
           <Property Name="SMA_240" Type="Double" />
+          <Property Name="volume_chg_perc" Type="Double" />
         </EntityType>
         <EntityType Name="earning">
           <Key>
@@ -2721,6 +2737,7 @@ warning 6002: The table/view 'stock.dbo.watch_list_v1' does not have a primary k
           <Property Name="sma_060" Type="Double" />
           <Property Name="sma_120" Type="Double" />
           <Property Name="sma_240" Type="Double" />
+          <Property Name="volume_pre" Type="Double" />
         </EntityType>
         <EntityType Name="fundamental_v1">
           <Key>
@@ -2814,6 +2831,7 @@ warning 6002: The table/view 'stock.dbo.watch_list_v1' does not have a primary k
           <Property Name="filter_att4" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
           <Property Name="filter_att5" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
           <Property Name="filter_desc" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="remark" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
         </EntityType>
         <ComplexType Name="filter_main_Result">
           <Property Type="String" Name="symbol" Nullable="false" MaxLength="50" />
@@ -2842,7 +2860,8 @@ warning 6002: The table/view 'stock.dbo.watch_list_v1' does not have a primary k
           <Property Name="att3" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
           <Property Name="att4" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
           <Property Name="att5" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
-          <Property Name="option_desc" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="option_desc" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="description" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="prediction">
           <Key>
@@ -2902,6 +2921,14 @@ warning 6002: The table/view 'stock.dbo.watch_list_v1' does not have a primary k
           <Property Name="rate_40" Type="Double" />
           <Property Name="rate_60" Type="Double" />
         </EntityType>
+        <ComplexType Name="filter_simul_header_Result">
+          <Property Type="DateTime" Name="d5" Nullable="true" />
+          <Property Type="DateTime" Name="d10" Nullable="true" />
+          <Property Type="DateTime" Name="d15" Nullable="true" />
+          <Property Type="DateTime" Name="d20" Nullable="true" />
+          <Property Type="DateTime" Name="d40" Nullable="true" />
+          <Property Type="DateTime" Name="d60" Nullable="true" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -3047,6 +3074,7 @@ warning 6002: The table/view 'stock.dbo.watch_list_v1' does not have a primary k
           <EntitySetMapping Name="daily_volume">
             <EntityTypeMapping TypeName="stockModel.daily_volume">
               <MappingFragment StoreEntitySet="daily_volume">
+                <ScalarProperty Name="volume_chg_perc" ColumnName="volume_chg_perc" />
                 <ScalarProperty Name="SMA_240" ColumnName="SMA_240" />
                 <ScalarProperty Name="SMA_120" ColumnName="SMA_120" />
                 <ScalarProperty Name="SMA_060" ColumnName="SMA_060" />
@@ -3735,6 +3763,7 @@ warning 6002: The table/view 'stock.dbo.watch_list_v1' does not have a primary k
           <EntitySetMapping Name="daily_volume_v1">
             <EntityTypeMapping TypeName="stockModel.daily_volume_v1">
               <MappingFragment StoreEntitySet="daily_volume_v1">
+                <ScalarProperty Name="volume_pre" ColumnName="volume_pre" />
                 <ScalarProperty Name="sma_240" ColumnName="sma_240" />
                 <ScalarProperty Name="sma_120" ColumnName="sma_120" />
                 <ScalarProperty Name="sma_060" ColumnName="sma_060" />
@@ -3839,6 +3868,7 @@ warning 6002: The table/view 'stock.dbo.watch_list_v1' does not have a primary k
           <EntitySetMapping Name="test_plan">
             <EntityTypeMapping TypeName="stockModel.test_plan">
               <MappingFragment StoreEntitySet="test_plan">
+                <ScalarProperty Name="remark" ColumnName="remark" />
                 <ScalarProperty Name="filter_desc" ColumnName="filter_desc" />
                 <ScalarProperty Name="filter_att5" ColumnName="filter_att5" />
                 <ScalarProperty Name="filter_att4" ColumnName="filter_att4" />
@@ -3872,6 +3902,7 @@ warning 6002: The table/view 'stock.dbo.watch_list_v1' does not have a primary k
           <EntitySetMapping Name="list_history">
             <EntityTypeMapping TypeName="stockModel.list_history">
               <MappingFragment StoreEntitySet="list_history">
+                <ScalarProperty Name="description" ColumnName="description" />
                 <ScalarProperty Name="option_desc" ColumnName="option_desc" />
                 <ScalarProperty Name="att5" ColumnName="att5" />
                 <ScalarProperty Name="att4" ColumnName="att4" />
@@ -3947,6 +3978,18 @@ warning 6002: The table/view 'stock.dbo.watch_list_v1' does not have a primary k
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="filter_simul_header" FunctionName="stockModel.Store.filter_simul_header">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="stockModel.filter_simul_header_Result">
+                <ScalarProperty Name="d5" ColumnName="d5" />
+                <ScalarProperty Name="d10" ColumnName="d10" />
+                <ScalarProperty Name="d15" ColumnName="d15" />
+                <ScalarProperty Name="d20" ColumnName="d20" />
+                <ScalarProperty Name="d40" ColumnName="d40" />
+                <ScalarProperty Name="d60" ColumnName="d60" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

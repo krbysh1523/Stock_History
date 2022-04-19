@@ -239,7 +239,7 @@ namespace History
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("update_daily_v1");
         }
     
-        public virtual ObjectResult<filter_main_Result> filter_main(Nullable<System.DateTime> start_dttm, Nullable<System.DateTime> end_dttm, Nullable<int> option, string passing_list, string passing_symbols, string att1, string att2, string att3, string att4, string att5, string is_simul)
+        public virtual ObjectResult<filter_main_Result> filter_main(Nullable<System.DateTime> start_dttm, Nullable<System.DateTime> end_dttm, Nullable<int> option, string passing_list, string passing_symbols, string att1, string att2, string att3, string att4, string att5, string description)
         {
             var start_dttmParameter = start_dttm.HasValue ?
                 new ObjectParameter("start_dttm", start_dttm) :
@@ -281,11 +281,11 @@ namespace History
                 new ObjectParameter("att5", att5) :
                 new ObjectParameter("att5", typeof(string));
     
-            var is_simulParameter = is_simul != null ?
-                new ObjectParameter("is_simul", is_simul) :
-                new ObjectParameter("is_simul", typeof(string));
+            var descriptionParameter = description != null ?
+                new ObjectParameter("description", description) :
+                new ObjectParameter("description", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<filter_main_Result>("filter_main", start_dttmParameter, end_dttmParameter, optionParameter, passing_listParameter, passing_symbolsParameter, att1Parameter, att2Parameter, att3Parameter, att4Parameter, att5Parameter, is_simulParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<filter_main_Result>("filter_main", start_dttmParameter, end_dttmParameter, optionParameter, passing_listParameter, passing_symbolsParameter, att1Parameter, att2Parameter, att3Parameter, att4Parameter, att5Parameter, descriptionParameter);
         }
     
         public virtual int sp_generate_idx()
@@ -300,6 +300,15 @@ namespace History
                 new ObjectParameter("hist_id", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_get_prediction_history_Result>("sp_get_prediction_history", hist_idParameter);
+        }
+    
+        public virtual ObjectResult<filter_simul_header_Result> filter_simul_header(Nullable<System.DateTime> end_dttm)
+        {
+            var end_dttmParameter = end_dttm.HasValue ?
+                new ObjectParameter("end_dttm", end_dttm) :
+                new ObjectParameter("end_dttm", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<filter_simul_header_Result>("filter_simul_header", end_dttmParameter);
         }
     }
 }

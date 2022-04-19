@@ -142,7 +142,7 @@
       <Parameter Name="att3" Mode="In" Type="String" />
       <Parameter Name="att4" Mode="In" Type="String" />
       <Parameter Name="att5" Mode="In" Type="String" />
-      <Parameter Name="is_simul" Mode="In" Type="String" />
+      <Parameter Name="description" Mode="In" Type="String" />
     </FunctionImport>
     <EntitySet Name="list_history" EntityType="stockModel.list_history" />
     <EntitySet Name="predictions" EntityType="stockModel.prediction" />
@@ -151,6 +151,9 @@
       <Parameter Name="hist_id" Mode="In" Type="Int32" />
     </FunctionImport>
     <EntitySet Name="list_history_v1" EntityType="stockModel.list_history_v1" />
+    <FunctionImport Name="filter_simul_header" ReturnType="Collection(stockModel.filter_simul_header_Result)">
+      <Parameter Name="end_dttm" Mode="In" Type="DateTime" />
+    </FunctionImport>
   </EntityContainer>
   <ComplexType Name="filter_intro_Result">
     <Property Type="String" Name="symbol" Nullable="false" MaxLength="50" />
@@ -269,6 +272,7 @@
     <Property Name="SMA_060" Type="Double" />
     <Property Name="SMA_120" Type="Double" />
     <Property Name="SMA_240" Type="Double" />
+    <Property Name="volume_chg_perc" Type="Double" />
   </EntityType>
   <EntityType Name="earning">
     <Key>
@@ -961,6 +965,7 @@
     <Property Name="sma_060" Type="Double" />
     <Property Name="sma_120" Type="Double" />
     <Property Name="sma_240" Type="Double" />
+    <Property Name="volume_pre" Type="Double" />
   </EntityType>
   <EntityType Name="fundamental_v1">
     <Key>
@@ -1054,6 +1059,7 @@
     <Property Name="filter_att4" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
     <Property Name="filter_att5" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
     <Property Name="filter_desc" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="remark" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
   </EntityType>
   <ComplexType Name="filter_main_Result">
     <Property Type="String" Name="symbol" Nullable="false" MaxLength="50" />
@@ -1082,7 +1088,8 @@
     <Property Name="att3" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
     <Property Name="att4" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
     <Property Name="att5" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
-    <Property Name="option_desc" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="option_desc" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="description" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
   </EntityType>
   <EntityType Name="prediction">
     <Key>
@@ -1142,4 +1149,12 @@
     <Property Name="rate_40" Type="Double" />
     <Property Name="rate_60" Type="Double" />
   </EntityType>
+  <ComplexType Name="filter_simul_header_Result">
+    <Property Type="DateTime" Name="d5" Nullable="true" />
+    <Property Type="DateTime" Name="d10" Nullable="true" />
+    <Property Type="DateTime" Name="d15" Nullable="true" />
+    <Property Type="DateTime" Name="d20" Nullable="true" />
+    <Property Type="DateTime" Name="d40" Nullable="true" />
+    <Property Type="DateTime" Name="d60" Nullable="true" />
+  </ComplexType>
 </Schema>

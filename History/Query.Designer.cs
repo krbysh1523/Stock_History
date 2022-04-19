@@ -34,11 +34,14 @@ namespace History
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            this.flowLayoutPanel4 = new System.Windows.Forms.FlowLayoutPanel();
+            this.rd_Chart = new System.Windows.Forms.RadioButton();
+            this.rd_List = new System.Windows.Forms.RadioButton();
+            this.rd_Full = new System.Windows.Forms.RadioButton();
             this.btn_Chart = new System.Windows.Forms.Button();
             this.btn_Import = new System.Windows.Forms.Button();
             this.btn_Index = new System.Windows.Forms.Button();
             this.btn_Message = new System.Windows.Forms.Button();
-            this.cmb_Layout = new System.Windows.Forms.ComboBox();
             this.btn_Refresh = new System.Windows.Forms.Button();
             this.btn_Save = new System.Windows.Forms.Button();
             this.dgv_Lookup = new System.Windows.Forms.DataGridView();
@@ -66,6 +69,7 @@ namespace History
             this.filter_att3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.filter_att4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.filter_att5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.remark = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.test_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.bindTest = new System.Windows.Forms.BindingSource(this.components);
             this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
@@ -77,6 +81,7 @@ namespace History
             this.lookupTableAdapter = new History.stockDataSetTableAdapters.lookupTableAdapter();
             this.test_planTableAdapter = new History.stockDataSetTableAdapters.test_planTableAdapter();
             this.flowLayoutPanel1.SuspendLayout();
+            this.flowLayoutPanel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_Lookup)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindLookup)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.stockDataSet)).BeginInit();
@@ -92,22 +97,68 @@ namespace History
             // 
             // flowLayoutPanel1
             // 
+            this.flowLayoutPanel1.Controls.Add(this.flowLayoutPanel4);
             this.flowLayoutPanel1.Controls.Add(this.btn_Chart);
             this.flowLayoutPanel1.Controls.Add(this.btn_Import);
             this.flowLayoutPanel1.Controls.Add(this.btn_Index);
             this.flowLayoutPanel1.Controls.Add(this.btn_Message);
-            this.flowLayoutPanel1.Controls.Add(this.cmb_Layout);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             this.flowLayoutPanel1.Size = new System.Drawing.Size(1154, 39);
             this.flowLayoutPanel1.TabIndex = 0;
             // 
+            // flowLayoutPanel4
+            // 
+            this.flowLayoutPanel4.Controls.Add(this.rd_Chart);
+            this.flowLayoutPanel4.Controls.Add(this.rd_List);
+            this.flowLayoutPanel4.Controls.Add(this.rd_Full);
+            this.flowLayoutPanel4.Location = new System.Drawing.Point(3, 3);
+            this.flowLayoutPanel4.Name = "flowLayoutPanel4";
+            this.flowLayoutPanel4.Size = new System.Drawing.Size(182, 30);
+            this.flowLayoutPanel4.TabIndex = 15;
+            // 
+            // rd_Chart
+            // 
+            this.rd_Chart.AutoSize = true;
+            this.rd_Chart.Location = new System.Drawing.Point(3, 3);
+            this.rd_Chart.Name = "rd_Chart";
+            this.rd_Chart.Size = new System.Drawing.Size(50, 17);
+            this.rd_Chart.TabIndex = 0;
+            this.rd_Chart.TabStop = true;
+            this.rd_Chart.Text = "Chart";
+            this.rd_Chart.UseVisualStyleBackColor = true;
+            this.rd_Chart.CheckedChanged += new System.EventHandler(this.rd_CheckedChanged);
+            // 
+            // rd_List
+            // 
+            this.rd_List.AutoSize = true;
+            this.rd_List.Location = new System.Drawing.Point(59, 3);
+            this.rd_List.Name = "rd_List";
+            this.rd_List.Size = new System.Drawing.Size(41, 17);
+            this.rd_List.TabIndex = 1;
+            this.rd_List.TabStop = true;
+            this.rd_List.Text = "List";
+            this.rd_List.UseVisualStyleBackColor = true;
+            this.rd_List.CheckedChanged += new System.EventHandler(this.rd_CheckedChanged);
+            // 
+            // rd_Full
+            // 
+            this.rd_Full.AutoSize = true;
+            this.rd_Full.Location = new System.Drawing.Point(106, 3);
+            this.rd_Full.Name = "rd_Full";
+            this.rd_Full.Size = new System.Drawing.Size(41, 17);
+            this.rd_Full.TabIndex = 2;
+            this.rd_Full.TabStop = true;
+            this.rd_Full.Text = "Full";
+            this.rd_Full.UseVisualStyleBackColor = true;
+            this.rd_Full.CheckedChanged += new System.EventHandler(this.rd_CheckedChanged);
+            // 
             // btn_Chart
             // 
-            this.btn_Chart.Location = new System.Drawing.Point(3, 3);
+            this.btn_Chart.Location = new System.Drawing.Point(191, 3);
             this.btn_Chart.Name = "btn_Chart";
-            this.btn_Chart.Size = new System.Drawing.Size(75, 23);
+            this.btn_Chart.Size = new System.Drawing.Size(61, 23);
             this.btn_Chart.TabIndex = 2;
             this.btn_Chart.Text = "Chart";
             this.btn_Chart.UseVisualStyleBackColor = true;
@@ -115,9 +166,9 @@ namespace History
             // 
             // btn_Import
             // 
-            this.btn_Import.Location = new System.Drawing.Point(84, 3);
+            this.btn_Import.Location = new System.Drawing.Point(258, 3);
             this.btn_Import.Name = "btn_Import";
-            this.btn_Import.Size = new System.Drawing.Size(75, 23);
+            this.btn_Import.Size = new System.Drawing.Size(60, 23);
             this.btn_Import.TabIndex = 3;
             this.btn_Import.Text = "Import";
             this.btn_Import.UseVisualStyleBackColor = true;
@@ -125,9 +176,9 @@ namespace History
             // 
             // btn_Index
             // 
-            this.btn_Index.Location = new System.Drawing.Point(165, 3);
+            this.btn_Index.Location = new System.Drawing.Point(324, 3);
             this.btn_Index.Name = "btn_Index";
-            this.btn_Index.Size = new System.Drawing.Size(103, 23);
+            this.btn_Index.Size = new System.Drawing.Size(87, 23);
             this.btn_Index.TabIndex = 12;
             this.btn_Index.Text = "Index Analysis";
             this.btn_Index.UseVisualStyleBackColor = true;
@@ -135,26 +186,13 @@ namespace History
             // 
             // btn_Message
             // 
-            this.btn_Message.Location = new System.Drawing.Point(274, 3);
+            this.btn_Message.Location = new System.Drawing.Point(417, 3);
             this.btn_Message.Name = "btn_Message";
-            this.btn_Message.Size = new System.Drawing.Size(103, 23);
+            this.btn_Message.Size = new System.Drawing.Size(66, 23);
             this.btn_Message.TabIndex = 13;
             this.btn_Message.Text = "Message";
             this.btn_Message.UseVisualStyleBackColor = true;
             this.btn_Message.Click += new System.EventHandler(this.btn_Message_Click);
-            // 
-            // cmb_Layout
-            // 
-            this.cmb_Layout.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmb_Layout.FormattingEnabled = true;
-            this.cmb_Layout.Items.AddRange(new object[] {
-            "Index Graph",
-            "List Filter"});
-            this.cmb_Layout.Location = new System.Drawing.Point(383, 3);
-            this.cmb_Layout.Name = "cmb_Layout";
-            this.cmb_Layout.Size = new System.Drawing.Size(121, 21);
-            this.cmb_Layout.TabIndex = 14;
-            this.cmb_Layout.SelectedIndexChanged += new System.EventHandler(this.cmb_Layout_SelectedIndexChanged);
             // 
             // btn_Refresh
             // 
@@ -206,7 +244,7 @@ namespace History
             this.dgv_Lookup.RowHeadersVisible = false;
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dgv_Lookup.RowsDefaultCellStyle = dataGridViewCellStyle2;
-            this.dgv_Lookup.Size = new System.Drawing.Size(1032, 268);
+            this.dgv_Lookup.Size = new System.Drawing.Size(1032, 309);
             this.dgv_Lookup.TabIndex = 1;
             this.dgv_Lookup.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgv_Lookup_CellMouseClick);
             // 
@@ -302,7 +340,7 @@ namespace History
             this.splitContainer1.Panel2.Controls.Add(this.dgv_TestPlan);
             this.splitContainer1.Panel2.Controls.Add(this.flowLayoutPanel2);
             this.splitContainer1.Size = new System.Drawing.Size(1154, 608);
-            this.splitContainer1.SplitterDistance = 272;
+            this.splitContainer1.SplitterDistance = 313;
             this.splitContainer1.TabIndex = 2;
             // 
             // flowLayoutPanel3
@@ -312,13 +350,13 @@ namespace History
             this.flowLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Right;
             this.flowLayoutPanel3.Location = new System.Drawing.Point(1032, 0);
             this.flowLayoutPanel3.Name = "flowLayoutPanel3";
-            this.flowLayoutPanel3.Size = new System.Drawing.Size(118, 268);
+            this.flowLayoutPanel3.Size = new System.Drawing.Size(118, 309);
             this.flowLayoutPanel3.TabIndex = 2;
             // 
             // dgv_TestPlan
             // 
-            this.dgv_TestPlan.AllowUserToResizeRows = false;
             this.dgv_TestPlan.AutoGenerateColumns = false;
+            this.dgv_TestPlan.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells;
             this.dgv_TestPlan.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgv_TestPlan.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.plannameDataGridViewTextBoxColumn,
@@ -331,6 +369,7 @@ namespace History
             this.filter_att3,
             this.filter_att4,
             this.filter_att5,
+            this.remark,
             this.test_id});
             this.dgv_TestPlan.DataSource = this.bindTest;
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
@@ -339,22 +378,22 @@ namespace History
             dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
             dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dgv_TestPlan.DefaultCellStyle = dataGridViewCellStyle3;
             this.dgv_TestPlan.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgv_TestPlan.Location = new System.Drawing.Point(0, 0);
             this.dgv_TestPlan.Name = "dgv_TestPlan";
             this.dgv_TestPlan.RowHeadersVisible = false;
-            this.dgv_TestPlan.Size = new System.Drawing.Size(1032, 328);
+            this.dgv_TestPlan.Size = new System.Drawing.Size(1032, 287);
             this.dgv_TestPlan.TabIndex = 0;
             this.dgv_TestPlan.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv_TestPlan_CellValueChanged);
+            this.dgv_TestPlan.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dgv_TestPlan_DataBindingComplete);
             // 
             // plannameDataGridViewTextBoxColumn
             // 
             this.plannameDataGridViewTextBoxColumn.DataPropertyName = "plan_name";
             this.plannameDataGridViewTextBoxColumn.HeaderText = "Plan Name";
             this.plannameDataGridViewTextBoxColumn.Name = "plannameDataGridViewTextBoxColumn";
-            this.plannameDataGridViewTextBoxColumn.Width = 200;
             // 
             // testseqDataGridViewTextBoxColumn
             // 
@@ -382,7 +421,7 @@ namespace History
             this.filter_desc.DataPropertyName = "filter_desc";
             this.filter_desc.HeaderText = "Description";
             this.filter_desc.Name = "filter_desc";
-            this.filter_desc.Width = 400;
+            this.filter_desc.Width = 250;
             // 
             // filter_att1
             // 
@@ -419,6 +458,13 @@ namespace History
             this.filter_att5.Name = "filter_att5";
             this.filter_att5.Width = 50;
             // 
+            // remark
+            // 
+            this.remark.DataPropertyName = "remark";
+            this.remark.HeaderText = "Remark";
+            this.remark.Name = "remark";
+            this.remark.Width = 250;
+            // 
             // test_id
             // 
             this.test_id.DataPropertyName = "test_id";
@@ -442,7 +488,7 @@ namespace History
             this.flowLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Right;
             this.flowLayoutPanel2.Location = new System.Drawing.Point(1032, 0);
             this.flowLayoutPanel2.Name = "flowLayoutPanel2";
-            this.flowLayoutPanel2.Size = new System.Drawing.Size(118, 328);
+            this.flowLayoutPanel2.Size = new System.Drawing.Size(118, 287);
             this.flowLayoutPanel2.TabIndex = 1;
             // 
             // btn_Test_Refresh
@@ -512,11 +558,12 @@ namespace History
             this.Controls.Add(this.flowLayoutPanel1);
             this.KeyPreview = true;
             this.Name = "Query";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Query";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Query_FormClosing);
             this.Load += new System.EventHandler(this.Query_Load);
             this.flowLayoutPanel1.ResumeLayout(false);
+            this.flowLayoutPanel4.ResumeLayout(false);
+            this.flowLayoutPanel4.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_Lookup)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindLookup)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.stockDataSet)).EndInit();
@@ -563,6 +610,19 @@ namespace History
         private System.Windows.Forms.Button btn_Test_Run;
         private System.Windows.Forms.Button btn_Message;
         private System.Windows.Forms.Button btn_Delete;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ltypeDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn lidDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn lnameDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn lorderDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn latt1DataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn latt2DataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn latt3DataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn latt4DataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn latt5DataGridViewTextBoxColumn;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel4;
+        public System.Windows.Forms.RadioButton rd_Chart;
+        public System.Windows.Forms.RadioButton rd_List;
+        public System.Windows.Forms.RadioButton rd_Full;
         private System.Windows.Forms.DataGridViewTextBoxColumn plannameDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn testseqDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn passlistDataGridViewTextBoxColumn;
@@ -573,16 +633,7 @@ namespace History
         private System.Windows.Forms.DataGridViewTextBoxColumn filter_att3;
         private System.Windows.Forms.DataGridViewTextBoxColumn filter_att4;
         private System.Windows.Forms.DataGridViewTextBoxColumn filter_att5;
+        private System.Windows.Forms.DataGridViewTextBoxColumn remark;
         private System.Windows.Forms.DataGridViewTextBoxColumn test_id;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ltypeDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn lidDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn lnameDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn lorderDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn latt1DataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn latt2DataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn latt3DataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn latt4DataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn latt5DataGridViewTextBoxColumn;
-        public System.Windows.Forms.ComboBox cmb_Layout;
     }
 }

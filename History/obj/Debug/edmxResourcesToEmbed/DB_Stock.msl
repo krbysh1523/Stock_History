@@ -140,6 +140,7 @@
     <EntitySetMapping Name="daily_volume">
       <EntityTypeMapping TypeName="stockModel.daily_volume">
         <MappingFragment StoreEntitySet="daily_volume">
+          <ScalarProperty Name="volume_chg_perc" ColumnName="volume_chg_perc" />
           <ScalarProperty Name="SMA_240" ColumnName="SMA_240" />
           <ScalarProperty Name="SMA_120" ColumnName="SMA_120" />
           <ScalarProperty Name="SMA_060" ColumnName="SMA_060" />
@@ -828,6 +829,7 @@
     <EntitySetMapping Name="daily_volume_v1">
       <EntityTypeMapping TypeName="stockModel.daily_volume_v1">
         <MappingFragment StoreEntitySet="daily_volume_v1">
+          <ScalarProperty Name="volume_pre" ColumnName="volume_pre" />
           <ScalarProperty Name="sma_240" ColumnName="sma_240" />
           <ScalarProperty Name="sma_120" ColumnName="sma_120" />
           <ScalarProperty Name="sma_060" ColumnName="sma_060" />
@@ -932,6 +934,7 @@
     <EntitySetMapping Name="test_plan">
       <EntityTypeMapping TypeName="stockModel.test_plan">
         <MappingFragment StoreEntitySet="test_plan">
+          <ScalarProperty Name="remark" ColumnName="remark" />
           <ScalarProperty Name="filter_desc" ColumnName="filter_desc" />
           <ScalarProperty Name="filter_att5" ColumnName="filter_att5" />
           <ScalarProperty Name="filter_att4" ColumnName="filter_att4" />
@@ -965,6 +968,7 @@
     <EntitySetMapping Name="list_history">
       <EntityTypeMapping TypeName="stockModel.list_history">
         <MappingFragment StoreEntitySet="list_history">
+          <ScalarProperty Name="description" ColumnName="description" />
           <ScalarProperty Name="option_desc" ColumnName="option_desc" />
           <ScalarProperty Name="att5" ColumnName="att5" />
           <ScalarProperty Name="att4" ColumnName="att4" />
@@ -1040,5 +1044,17 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="filter_simul_header" FunctionName="stockModel.Store.filter_simul_header">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="stockModel.filter_simul_header_Result">
+          <ScalarProperty Name="d5" ColumnName="d5" />
+          <ScalarProperty Name="d10" ColumnName="d10" />
+          <ScalarProperty Name="d15" ColumnName="d15" />
+          <ScalarProperty Name="d20" ColumnName="d20" />
+          <ScalarProperty Name="d40" ColumnName="d40" />
+          <ScalarProperty Name="d60" ColumnName="d60" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
   </EntityContainerMapping>
 </Mapping>

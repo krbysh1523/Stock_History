@@ -162,6 +162,8 @@ namespace History
                         _YMin = ((LiveCharts.Helpers.NoisyCollection<double>)_chart_Main.Series[s].Values).Min();
                 }
             }
+            Func<double, string> formatFunc = (x) => string.Format("{0:0}", x);
+            _chart_Main.AxisY[0].LabelFormatter = formatFunc;
         }
 
         public static LineSeries AddLine(List<daily_close> _hist, int _sma)
@@ -280,6 +282,31 @@ namespace History
             _x.Add(x);
         }
 
+        public static void GetXLabels(AxesCollection _x, List<DateTime> _hist, DateTime _end_dttm)
+        {
+            Axis x = new Axis();
+            List<string> labels = new List<string>();
+            foreach (var h in _hist)
+            {
+                labels.Add(h.ToString("M/dd") + "(" + Get_Week_Diff(_end_dttm, h).ToString() + ")");
+            }
+            x.Labels = labels;
+            _x.Add(x);
+        }
+        public static int Get_Week_Diff(DateTime d1, DateTime d2)
+        {
+            var diff = StartOfWeek(d2, DayOfWeek.Monday).Subtract(StartOfWeek(d1, DayOfWeek.Monday));
+
+            var weeks = (int)diff.Days / 7;
+
+            return weeks;
+        }
+        public static DateTime StartOfWeek(this DateTime dt, DayOfWeek startOfWeek)
+        {
+            int diff = (7 + (dt.DayOfWeek - startOfWeek)) % 7;
+            return dt.AddDays(-1 * diff).Date;
+        }
+
         public static void SetAxis(LiveCharts.WinForms.CartesianChart _cht, int _cnt)
         {
             int step = 1;
@@ -329,7 +356,48 @@ namespace History
                 step = 12;
             if (_cht.AxisX.Count > 0)
             {
-                _cht.AxisX[0].Separator = new Separator
+                foreach (Axis x in _cht.AxisX)
+                {
+                    x.Separator = new Separator
+                    {
+                        Step = step,
+                        StrokeThickness = 1,
+                        StrokeDashArray = new System.Windows.Media.DoubleCollection(new double[] { 1 }),
+                        Stroke = new System.Windows.Media.SolidColorBrush(System.Windows.Media.Colors.Gainsboro)
+                    };
+                }
+            }
+            if (_cht.AxisY.Count > 0)
+            {
+                foreach (Axis y in _cht.AxisY)
+                {
+                    y.Separator = new Separator
+                    {
+                        StrokeThickness = 1,
+                        StrokeDashArray = new System.Windows.Media.DoubleCollection(new double[] { 1 }),
+                        Stroke = new System.Windows.Media.SolidColorBrush(System.Windows.Media.Colors.Gainsboro)
+                    };
+                    y.MaxValue = _y_Max;
+                    y.MinValue = _y_Min;
+                }
+            }
+        }
+        public static void SetAxis(LiveCharts.WinForms.CartesianChart _cht, int _index, int _cnt, double _y_Max, double _y_Min)
+        {
+            int step = 1;
+            if (_cnt > 40)
+                step = 4;
+            else if (_cnt > 60)
+                step = 6;
+            else if (_cnt > 80)
+                step = 8;
+            else if (_cnt > 100)
+                step = 10;
+            else if (_cnt > 140)
+                step = 12;
+            if (_cht.AxisX.Count - 1 >= _index)
+            {
+                _cht.AxisX[_index].Separator = new Separator
                 {
                     Step = step,
                     StrokeThickness = 1,
@@ -337,16 +405,16 @@ namespace History
                     Stroke = new System.Windows.Media.SolidColorBrush(System.Windows.Media.Colors.Gainsboro)
                 };
             }
-            if (_cht.AxisY.Count > 0)
+            if (_cht.AxisY.Count - 1 >= _index)
             {
-                _cht.AxisY[0].Separator = new Separator
+                _cht.AxisY[_index].Separator = new Separator
                 {
                     StrokeThickness = 1,
                     StrokeDashArray = new System.Windows.Media.DoubleCollection(new double[] { 1 }),
                     Stroke = new System.Windows.Media.SolidColorBrush(System.Windows.Media.Colors.Gainsboro)
                 };
-                _cht.AxisY[0].MaxValue = _y_Max;
-                _cht.AxisY[0].MinValue = _y_Min;
+                _cht.AxisY[_index].MaxValue = _y_Max;
+                _cht.AxisY[_index].MinValue = _y_Min;
             }
         }
         public static CandleSeries AddCandle(List<daily_history> _hist)
@@ -454,6 +522,8 @@ namespace History
         public static void ResetChart(LiveCharts.WinForms.CartesianChart _cht)
         {
             _cht.AxisX.Clear();
+            if (_cht.AxisY.Count > 1)
+                _cht.AxisY.RemoveAt(1);
             _cht.Series.Clear();
         }
 

@@ -39,8 +39,7 @@ namespace History
             btn_Index_Click(this, null);
             btn_Message_Click(this, null);
 
-            cmb_Layout.SelectedIndex = 1;
-            cmb_Layout_SelectedIndexChanged(this, null);
+            rd_List.Checked = true;
         }
 
         private void AddGVButtons()
@@ -151,31 +150,6 @@ namespace History
                 msg.BringToFront();
             }
         }
-        private void cmb_Layout_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (cmb_Layout.Text == "Index Graph")
-            {
-                this.Location = new Point(1380, 0);
-                index.Location = new Point(0, 0);
-                msg.Location = new Point(1380, 660);
-
-                this.Size = new Size(600, 700);
-                index.Size = new Size(1400, 800);
-                msg.Size = new Size(600, 400);
-            }
-            else if (cmb_Layout.Text == "List Filter")
-            {
-                this.Location = new Point(500, 0);
-                index.Location = new Point(0, 0);
-                msg.Location = new Point(500, 660);
-
-                this.Size = new Size(1200, 700);
-                index.Size = new Size(510, 1080);
-                msg.Size = new Size(1200, 400);
-            }
-        }
-
-
         #endregion
 
         #region + User Event
@@ -261,7 +235,8 @@ namespace History
                         dgv_Lookup["latt2DataGridViewTextBoxColumn", e.RowIndex].Value.ToString(),
                         dgv_Lookup["latt3DataGridViewTextBoxColumn", e.RowIndex].Value.ToString(),
                         dgv_Lookup["latt4DataGridViewTextBoxColumn", e.RowIndex].Value.ToString(),
-                        dgv_Lookup["latt5DataGridViewTextBoxColumn", e.RowIndex].Value.ToString()
+                        dgv_Lookup["latt5DataGridViewTextBoxColumn", e.RowIndex].Value.ToString(),
+                        "Individual"
                         );
                 }
                 else if (e.ColumnIndex == 1) // Simulate
@@ -272,7 +247,8 @@ namespace History
                         dgv_Lookup["latt2DataGridViewTextBoxColumn", e.RowIndex].Value.ToString(),
                         dgv_Lookup["latt3DataGridViewTextBoxColumn", e.RowIndex].Value.ToString(),
                         dgv_Lookup["latt4DataGridViewTextBoxColumn", e.RowIndex].Value.ToString(),
-                        dgv_Lookup["latt5DataGridViewTextBoxColumn", e.RowIndex].Value.ToString()
+                        dgv_Lookup["latt5DataGridViewTextBoxColumn", e.RowIndex].Value.ToString(),
+                        "Individual"
                         );
                 }
                 else if (e.ColumnIndex == 2) // Update Test Plan
@@ -296,10 +272,36 @@ namespace History
         {
             this.test_planTableAdapter.Fill(this.stockDataSet.test_plan);
         }
+        private void dgv_TestPlan_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
+        {
+            if (dgv_TestPlan.RowCount <= 1)
+                return;
+
+            string prev_test = "";
+            Color prev_color = Color.Gainsboro;
+            for(int r = 1; r < dgv_TestPlan.RowCount-1; r++)
+            {
+                if (prev_test == "" ||
+                    prev_test != dgv_TestPlan[0, r].Value.ToString())
+                {
+                    if (prev_color == Color.Gainsboro)
+                        prev_color = Color.White;
+                    else
+                        prev_color = Color.Gainsboro;
+                    dgv_TestPlan.Rows[r].DefaultCellStyle.BackColor = prev_color;
+                    prev_test = dgv_TestPlan[0, r].Value.ToString();
+                }
+                else
+                {
+                    dgv_TestPlan.Rows[r].DefaultCellStyle.BackColor = prev_color;
+                }
+            }
+        }
 
         private void btn_Test_Save_Click(object sender, EventArgs e)
         {
             this.test_planTableAdapter.Update(this.stockDataSet.test_plan);
+            btn_Test_Refresh_Click(this, null);
         }
 
         private void btn_Test_FillIn_Click(object sender, EventArgs e)
@@ -338,13 +340,15 @@ namespace History
 
         private void btn_Delete_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show("Delete to confirm?", "Warning", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning) == DialogResult.Yes)
+            if (dgv_TestPlan.SelectedCells.Count > 0 && dgv_TestPlan.SelectedCells[0].RowIndex >= 0)
             {
-                if (dgv_TestPlan.SelectedCells.Count > 0 && dgv_TestPlan.SelectedCells[0].RowIndex >= 0)
+                string Msg = "Delete to " + dgv_TestPlan[1, dgv_TestPlan.SelectedCells[0].RowIndex].Value.ToString() + " of " +
+                    dgv_TestPlan[0, dgv_TestPlan.SelectedCells[0].RowIndex].Value.ToString() + "?";
+                if (MessageBox.Show(Msg, "Warning", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning) == DialogResult.Yes)
                 {
                     int test_id = Convert.ToInt32(dgv_TestPlan["test_id", dgv_TestPlan.SelectedCells[0].RowIndex].Value.ToString());
                     this.test_planTableAdapter.Delete(test_id);
-                    btn_Refresh_Click(this, null);
+                    btn_Test_Refresh_Click(this, null);
                 }
             }
         }
@@ -381,13 +385,20 @@ namespace History
 
             foreach(var test in tests)
             {
-                Show_Message("Testing " + test.test_seq + " of " + test.plan_name);
+                string status = test.test_seq + " of " + test.plan_name;
+                Show_Message(status);
 
-                index.populate_List(test.filter_option.ToString(), test.pass_list, test.filter_att1, test.filter_att2, test.filter_att3, test.filter_att4, test.filter_att5);
+                index.populate_List(test.filter_option.ToString(), test.pass_list, test.filter_att1, test.filter_att2, test.filter_att3, test.filter_att4, test.filter_att5, status);
 
                 Thread.Sleep(1000);
 
-                index.CaptureList(test.plan_name + "_" + test.test_seq.ToString());
+                while (index.is_processing)
+                {
+                    Thread.Sleep(1000);
+                    Show_Message("Waiting...");
+                }
+
+                index.CaptureList(status);
                 
                 Thread.Sleep(500);
             }
@@ -410,14 +421,50 @@ namespace History
 
             msg.Load_History();
         }
-        public void RetrieveHistoryList(string _hist_id)
+        public void RetrieveHistoryList(string _hist_id, string _start_dttm, string _end_dttm)
         {
             if (index == null)
                 this.btn_Index_Click(this, null);
 
-            index.GetHistory_List(_hist_id);
+            index.GetHistory_List(_hist_id, _start_dttm, _end_dttm);
         }
 
+        #endregion
+
+        #region + Layout
+        private void rd_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rd_Chart.Checked)
+            {
+                index.Location = new Point(0, 0);
+                this.Location = new Point(1380, 0);
+                msg.Location = new Point(1380, 660);
+
+                index.Size = new Size(1060, 960);
+                this.Size = new Size(600, 700);
+                msg.Size = new Size(600, 400);
+            }
+            else if (rd_List.Checked)
+            {
+                index.Location = new Point(0, 0);
+                this.Location = new Point(500, 0);
+                msg.Location = new Point(500, 660);
+
+                index.Size = new Size(510, 960);
+                this.Size = new Size(1200, 700);
+                msg.Size = new Size(1200, 400);
+            }
+            else if (rd_Full.Checked)
+            {
+                index.Location = new Point(0, 0);
+                this.Location = new Point(1690, 30);
+                msg.Location = new Point(1690, 690);
+
+                index.Size = new Size(1680, 960);
+                this.Size = new Size(1680, 700);
+                msg.Size = new Size(1680, 400);
+            }
+        }
         #endregion
 
     }

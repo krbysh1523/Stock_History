@@ -73,7 +73,13 @@ namespace History
         {
             if(e.RowIndex>=0 && e.ColumnIndex == 0)
             {
-                query.RetrieveHistoryList(dgv_History[0, e.RowIndex].Value.ToString());
+                query.RetrieveHistoryList(dgv_History[0, e.RowIndex].Value.ToString(),
+                    dgv_History["sTARTDTTMDataGridViewTextBoxColumn", e.RowIndex].Value.ToString(),
+                    dgv_History["eNDDTTMDataGridViewTextBoxColumn", e.RowIndex].Value.ToString());
+            }
+            if (e.RowIndex >= 0 && e.ColumnIndex == dgv_History.Columns["option_desc"].Index)
+            {
+                show_Message(dgv_History[e.ColumnIndex, e.RowIndex].ToolTipText);
             }
         }
         #endregion
@@ -83,6 +89,8 @@ namespace History
         {
             for (int r = 0; r < dgv_History.Rows.Count - 1; r++)
             {
+                if(dgv_History.Rows[r].Cells[4].Value != DBNull.Value &&
+                    dgv_History.Rows[r+1].Cells[4].Value != DBNull.Value)
                 for (int c = 4; c < 10; c++)
                 {
                     double pre = Convert.ToDouble(dgv_History.Rows[r+1].Cells[c].Value.ToString());
@@ -98,5 +106,12 @@ namespace History
         }
         #endregion
 
+        private void dgv_History_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            if(e.ColumnIndex == dgv_History.Columns["option_desc"].Index && e.Value != null)
+            {
+                dgv_History[e.ColumnIndex, e.RowIndex].ToolTipText = e.Value.ToString();
+            }
+        }
     }
 }

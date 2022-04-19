@@ -25,5 +25,6 @@ namespace History
         public string filter_att4 { get; set; }
         public string filter_att5 { get; set; }
         public string filter_desc { get; set; }
+        public string remark { get; set; }
     }
 }

@@ -751,6 +751,8 @@ namespace History {
             
             private global::System.Data.DataColumn columnfilter_desc;
             
+            private global::System.Data.DataColumn columnremark;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public test_planDataTable() {
@@ -874,6 +876,14 @@ namespace History {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn remarkColumn {
+                get {
+                    return this.columnremark;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -909,7 +919,7 @@ namespace History {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public test_planRow Addtest_planRow(string plan_name, int test_seq, string pass_list, int filter_option, string filter_att1, string filter_att2, string filter_att3, string filter_att4, string filter_att5, string filter_desc) {
+            public test_planRow Addtest_planRow(string plan_name, int test_seq, string pass_list, int filter_option, string filter_att1, string filter_att2, string filter_att3, string filter_att4, string filter_att5, string filter_desc, string remark) {
                 test_planRow rowtest_planRow = ((test_planRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         plan_name,
@@ -922,7 +932,8 @@ namespace History {
                         filter_att3,
                         filter_att4,
                         filter_att5,
-                        filter_desc};
+                        filter_desc,
+                        remark};
                 rowtest_planRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowtest_planRow);
                 return rowtest_planRow;
@@ -963,6 +974,7 @@ namespace History {
                 this.columnfilter_att4 = base.Columns["filter_att4"];
                 this.columnfilter_att5 = base.Columns["filter_att5"];
                 this.columnfilter_desc = base.Columns["filter_desc"];
+                this.columnremark = base.Columns["remark"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -990,6 +1002,8 @@ namespace History {
                 base.Columns.Add(this.columnfilter_att5);
                 this.columnfilter_desc = new global::System.Data.DataColumn("filter_desc", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnfilter_desc);
+                this.columnremark = new global::System.Data.DataColumn("remark", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnremark);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
                                 this.columntest_id}, true));
                 this.columnplan_name.AllowDBNull = false;
@@ -1010,6 +1024,7 @@ namespace History {
                 this.columnfilter_att4.MaxLength = 250;
                 this.columnfilter_att5.MaxLength = 250;
                 this.columnfilter_desc.MaxLength = 250;
+                this.columnremark.MaxLength = 4000;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1184,6 +1199,8 @@ namespace History {
             private global::System.Data.DataColumn columnrate_40;
             
             private global::System.Data.DataColumn columnrate_60;
+            
+            private global::System.Data.DataColumn columndescription;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
@@ -1388,6 +1405,14 @@ namespace History {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn descriptionColumn {
+                get {
+                    return this.columndescription;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -1443,7 +1468,8 @@ namespace History {
                         double rate_15, 
                         double rate_20, 
                         double rate_40, 
-                        double rate_60) {
+                        double rate_60, 
+                        string description) {
                 list_historyRow rowlist_historyRow = ((list_historyRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         null,
@@ -1466,7 +1492,8 @@ namespace History {
                         rate_15,
                         rate_20,
                         rate_40,
-                        rate_60};
+                        rate_60,
+                        description};
                 rowlist_historyRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowlist_historyRow);
                 return rowlist_historyRow;
@@ -1517,6 +1544,7 @@ namespace History {
                 this.columnrate_20 = base.Columns["rate_20"];
                 this.columnrate_40 = base.Columns["rate_40"];
                 this.columnrate_60 = base.Columns["rate_60"];
+                this.columndescription = base.Columns["description"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1564,6 +1592,8 @@ namespace History {
                 base.Columns.Add(this.columnrate_40);
                 this.columnrate_60 = new global::System.Data.DataColumn("rate_60", typeof(double), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnrate_60);
+                this.columndescription = new global::System.Data.DataColumn("description", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columndescription);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
                                 this.columnHIST_ID}, true));
                 this.columnHIST_ID.AutoIncrement = true;
@@ -1584,6 +1614,7 @@ namespace History {
                 this.columnatt4.MaxLength = 250;
                 this.columnatt5.MaxLength = 250;
                 this.columnoption_desc.MaxLength = 2147483647;
+                this.columndescription.MaxLength = 250;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -2110,6 +2141,22 @@ namespace History {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public string remark {
+                get {
+                    try {
+                        return ((string)(this[this.tabletest_plan.remarkColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'remark\' in table \'test_plan\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tabletest_plan.remarkColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public bool Isfilter_att1Null() {
                 return this.IsNull(this.tabletest_plan.filter_att1Column);
             }
@@ -2178,6 +2225,18 @@ namespace History {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public void Setfilter_descNull() {
                 this[this.tabletest_plan.filter_descColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool IsremarkNull() {
+                return this.IsNull(this.tabletest_plan.remarkColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void SetremarkNull() {
+                this[this.tabletest_plan.remarkColumn] = global::System.Convert.DBNull;
             }
         }
         
@@ -2503,6 +2562,22 @@ namespace History {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public string description {
+                get {
+                    try {
+                        return ((string)(this[this.tablelist_history.descriptionColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'description\' in table \'list_history\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tablelist_history.descriptionColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public bool Isatt1Null() {
                 return this.IsNull(this.tablelist_history.att1Column);
             }
@@ -2679,6 +2754,18 @@ namespace History {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public void Setrate_60Null() {
                 this[this.tablelist_history.rate_60Column] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool IsdescriptionNull() {
+                return this.IsNull(this.tablelist_history.descriptionColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void SetdescriptionNull() {
+                this[this.tablelist_history.descriptionColumn] = global::System.Convert.DBNull;
             }
         }
         
@@ -3538,6 +3625,7 @@ SELECT l_type, l_id, l_name, l_order, l_att1, l_att2, l_att3, l_att4, l_att5 FRO
             tableMapping.ColumnMappings.Add("filter_att4", "filter_att4");
             tableMapping.ColumnMappings.Add("filter_att5", "filter_att5");
             tableMapping.ColumnMappings.Add("filter_desc", "filter_desc");
+            tableMapping.ColumnMappings.Add("remark", "remark");
             this._adapter.TableMappings.Add(tableMapping);
             this._adapter.DeleteCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.DeleteCommand.Connection = this.Connection;
@@ -3546,8 +3634,8 @@ SELECT l_type, l_id, l_name, l_order, l_att1, l_att2, l_att3, l_att4, l_att5 FRO
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_test_id", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "test_id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.InsertCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.InsertCommand.Connection = this.Connection;
-            this._adapter.InsertCommand.CommandText = @"INSERT INTO [test_plan] ([plan_name], [test_seq], [pass_list], [filter_option], [filter_att1], [filter_att2], [filter_att3], [filter_att4], [filter_att5], [filter_desc]) VALUES (@plan_name, @test_seq, @pass_list, @filter_option, @filter_att1, @filter_att2, @filter_att3, @filter_att4, @filter_att5, @filter_desc);
-SELECT test_id, plan_name, test_seq, pass_list, filter_option, filter_att1, filter_att2, filter_att3, filter_att4, filter_att5, filter_desc FROM test_plan WHERE (test_id = SCOPE_IDENTITY())";
+            this._adapter.InsertCommand.CommandText = @"INSERT INTO [test_plan] ([plan_name], [test_seq], [pass_list], [filter_option], [filter_att1], [filter_att2], [filter_att3], [filter_att4], [filter_att5], [filter_desc], [remark]) VALUES (@plan_name, @test_seq, @pass_list, @filter_option, @filter_att1, @filter_att2, @filter_att3, @filter_att4, @filter_att5, @filter_desc, @remark);
+SELECT test_id, plan_name, test_seq, pass_list, filter_option, filter_att1, filter_att2, filter_att3, filter_att4, filter_att5, filter_desc, remark FROM test_plan WHERE (test_id = SCOPE_IDENTITY()) ORDER BY plan_name, test_seq";
             this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@plan_name", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "plan_name", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@test_seq", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "test_seq", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
@@ -3559,10 +3647,11 @@ SELECT test_id, plan_name, test_seq, pass_list, filter_option, filter_att1, filt
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@filter_att4", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "filter_att4", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@filter_att5", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "filter_att5", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@filter_desc", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "filter_desc", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@remark", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "remark", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.UpdateCommand.Connection = this.Connection;
-            this._adapter.UpdateCommand.CommandText = @"UPDATE [test_plan] SET [plan_name] = @plan_name, [test_seq] = @test_seq, [pass_list] = @pass_list, [filter_option] = @filter_option, [filter_att1] = @filter_att1, [filter_att2] = @filter_att2, [filter_att3] = @filter_att3, [filter_att4] = @filter_att4, [filter_att5] = @filter_att5, [filter_desc] = @filter_desc WHERE (([test_id] = @Original_test_id) AND ([plan_name] = @Original_plan_name) AND ([test_seq] = @Original_test_seq) AND ([pass_list] = @Original_pass_list) AND ([filter_option] = @Original_filter_option) AND ((@IsNull_filter_att1 = 1 AND [filter_att1] IS NULL) OR ([filter_att1] = @Original_filter_att1)) AND ((@IsNull_filter_att2 = 1 AND [filter_att2] IS NULL) OR ([filter_att2] = @Original_filter_att2)) AND ((@IsNull_filter_att3 = 1 AND [filter_att3] IS NULL) OR ([filter_att3] = @Original_filter_att3)) AND ((@IsNull_filter_att4 = 1 AND [filter_att4] IS NULL) OR ([filter_att4] = @Original_filter_att4)) AND ((@IsNull_filter_att5 = 1 AND [filter_att5] IS NULL) OR ([filter_att5] = @Original_filter_att5)) AND ((@IsNull_filter_desc = 1 AND [filter_desc] IS NULL) OR ([filter_desc] = @Original_filter_desc)));
-SELECT test_id, plan_name, test_seq, pass_list, filter_option, filter_att1, filter_att2, filter_att3, filter_att4, filter_att5, filter_desc FROM test_plan WHERE (test_id = @test_id)";
+            this._adapter.UpdateCommand.CommandText = @"UPDATE [test_plan] SET [plan_name] = @plan_name, [test_seq] = @test_seq, [pass_list] = @pass_list, [filter_option] = @filter_option, [filter_att1] = @filter_att1, [filter_att2] = @filter_att2, [filter_att3] = @filter_att3, [filter_att4] = @filter_att4, [filter_att5] = @filter_att5, [filter_desc] = @filter_desc, [remark] = @remark WHERE (([test_id] = @Original_test_id) AND ([plan_name] = @Original_plan_name) AND ([test_seq] = @Original_test_seq) AND ([pass_list] = @Original_pass_list) AND ([filter_option] = @Original_filter_option) AND ((@IsNull_filter_att1 = 1 AND [filter_att1] IS NULL) OR ([filter_att1] = @Original_filter_att1)) AND ((@IsNull_filter_att2 = 1 AND [filter_att2] IS NULL) OR ([filter_att2] = @Original_filter_att2)) AND ((@IsNull_filter_att3 = 1 AND [filter_att3] IS NULL) OR ([filter_att3] = @Original_filter_att3)) AND ((@IsNull_filter_att4 = 1 AND [filter_att4] IS NULL) OR ([filter_att4] = @Original_filter_att4)) AND ((@IsNull_filter_att5 = 1 AND [filter_att5] IS NULL) OR ([filter_att5] = @Original_filter_att5)) AND ((@IsNull_filter_desc = 1 AND [filter_desc] IS NULL) OR ([filter_desc] = @Original_filter_desc)) AND ((@IsNull_remark = 1 AND [remark] IS NULL) OR ([remark] = @Original_remark)));
+SELECT test_id, plan_name, test_seq, pass_list, filter_option, filter_att1, filter_att2, filter_att3, filter_att4, filter_att5, filter_desc, remark FROM test_plan WHERE (test_id = @test_id) ORDER BY plan_name, test_seq";
             this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@plan_name", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "plan_name", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@test_seq", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "test_seq", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
@@ -3574,6 +3663,7 @@ SELECT test_id, plan_name, test_seq, pass_list, filter_option, filter_att1, filt
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@filter_att4", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "filter_att4", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@filter_att5", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "filter_att5", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@filter_desc", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "filter_desc", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@remark", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "remark", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_test_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "test_id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_plan_name", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "plan_name", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_test_seq", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "test_seq", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
@@ -3591,6 +3681,8 @@ SELECT test_id, plan_name, test_seq, pass_list, filter_option, filter_att1, filt
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_filter_att5", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "filter_att5", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_filter_desc", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "filter_desc", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_filter_desc", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "filter_desc", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_remark", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "remark", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_remark", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "remark", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@test_id", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "test_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
         }
         
@@ -3608,8 +3700,8 @@ SELECT test_id, plan_name, test_seq, pass_list, filter_option, filter_att1, filt
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
             this._commandCollection[0].CommandText = "SELECT        test_id, plan_name, test_seq, pass_list, filter_option, filter_att1" +
-                ", filter_att2, filter_att3, filter_att4, filter_att5, filter_desc\r\nFROM         " +
-                "   test_plan\r\nORDER BY plan_name, test_seq";
+                ", filter_att2, filter_att3, filter_att4, filter_att5, filter_desc, remark\r\nFROM " +
+                "           test_plan\r\nORDER BY plan_name, test_seq";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
         }
         
@@ -3692,7 +3784,7 @@ SELECT test_id, plan_name, test_seq, pass_list, filter_option, filter_att1, filt
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
-        public virtual int Insert(string plan_name, int test_seq, string pass_list, int filter_option, string filter_att1, string filter_att2, string filter_att3, string filter_att4, string filter_att5, string filter_desc) {
+        public virtual int Insert(string plan_name, int test_seq, string pass_list, int filter_option, string filter_att1, string filter_att2, string filter_att3, string filter_att4, string filter_att5, string filter_desc, string remark) {
             if ((plan_name == null)) {
                 throw new global::System.ArgumentNullException("plan_name");
             }
@@ -3743,6 +3835,12 @@ SELECT test_id, plan_name, test_seq, pass_list, filter_option, filter_att1, filt
             else {
                 this.Adapter.InsertCommand.Parameters[9].Value = ((string)(filter_desc));
             }
+            if ((remark == null)) {
+                this.Adapter.InsertCommand.Parameters[10].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[10].Value = ((string)(remark));
+            }
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
             if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -3774,6 +3872,7 @@ SELECT test_id, plan_name, test_seq, pass_list, filter_option, filter_att1, filt
                     string filter_att4, 
                     string filter_att5, 
                     string filter_desc, 
+                    string remark, 
                     int Original_test_id, 
                     string Original_plan_name, 
                     int Original_test_seq, 
@@ -3785,6 +3884,7 @@ SELECT test_id, plan_name, test_seq, pass_list, filter_option, filter_att1, filt
                     string Original_filter_att4, 
                     string Original_filter_att5, 
                     string Original_filter_desc, 
+                    string Original_remark, 
                     int test_id) {
             if ((plan_name == null)) {
                 throw new global::System.ArgumentNullException("plan_name");
@@ -3836,70 +3936,84 @@ SELECT test_id, plan_name, test_seq, pass_list, filter_option, filter_att1, filt
             else {
                 this.Adapter.UpdateCommand.Parameters[9].Value = ((string)(filter_desc));
             }
-            this.Adapter.UpdateCommand.Parameters[10].Value = ((int)(Original_test_id));
+            if ((remark == null)) {
+                this.Adapter.UpdateCommand.Parameters[10].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[10].Value = ((string)(remark));
+            }
+            this.Adapter.UpdateCommand.Parameters[11].Value = ((int)(Original_test_id));
             if ((Original_plan_name == null)) {
                 throw new global::System.ArgumentNullException("Original_plan_name");
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[11].Value = ((string)(Original_plan_name));
+                this.Adapter.UpdateCommand.Parameters[12].Value = ((string)(Original_plan_name));
             }
-            this.Adapter.UpdateCommand.Parameters[12].Value = ((int)(Original_test_seq));
+            this.Adapter.UpdateCommand.Parameters[13].Value = ((int)(Original_test_seq));
             if ((Original_pass_list == null)) {
                 throw new global::System.ArgumentNullException("Original_pass_list");
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[13].Value = ((string)(Original_pass_list));
+                this.Adapter.UpdateCommand.Parameters[14].Value = ((string)(Original_pass_list));
             }
-            this.Adapter.UpdateCommand.Parameters[14].Value = ((int)(Original_filter_option));
+            this.Adapter.UpdateCommand.Parameters[15].Value = ((int)(Original_filter_option));
             if ((Original_filter_att1 == null)) {
-                this.Adapter.UpdateCommand.Parameters[15].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[16].Value = global::System.DBNull.Value;
+                this.Adapter.UpdateCommand.Parameters[16].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[17].Value = global::System.DBNull.Value;
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[15].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[16].Value = ((string)(Original_filter_att1));
+                this.Adapter.UpdateCommand.Parameters[16].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[17].Value = ((string)(Original_filter_att1));
             }
             if ((Original_filter_att2 == null)) {
-                this.Adapter.UpdateCommand.Parameters[17].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[18].Value = global::System.DBNull.Value;
+                this.Adapter.UpdateCommand.Parameters[18].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[19].Value = global::System.DBNull.Value;
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[17].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[18].Value = ((string)(Original_filter_att2));
+                this.Adapter.UpdateCommand.Parameters[18].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[19].Value = ((string)(Original_filter_att2));
             }
             if ((Original_filter_att3 == null)) {
-                this.Adapter.UpdateCommand.Parameters[19].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[20].Value = global::System.DBNull.Value;
+                this.Adapter.UpdateCommand.Parameters[20].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[21].Value = global::System.DBNull.Value;
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[19].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[20].Value = ((string)(Original_filter_att3));
+                this.Adapter.UpdateCommand.Parameters[20].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[21].Value = ((string)(Original_filter_att3));
             }
             if ((Original_filter_att4 == null)) {
-                this.Adapter.UpdateCommand.Parameters[21].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[22].Value = global::System.DBNull.Value;
+                this.Adapter.UpdateCommand.Parameters[22].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[23].Value = global::System.DBNull.Value;
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[21].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[22].Value = ((string)(Original_filter_att4));
+                this.Adapter.UpdateCommand.Parameters[22].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[23].Value = ((string)(Original_filter_att4));
             }
             if ((Original_filter_att5 == null)) {
-                this.Adapter.UpdateCommand.Parameters[23].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[24].Value = global::System.DBNull.Value;
+                this.Adapter.UpdateCommand.Parameters[24].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[25].Value = global::System.DBNull.Value;
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[23].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[24].Value = ((string)(Original_filter_att5));
+                this.Adapter.UpdateCommand.Parameters[24].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[25].Value = ((string)(Original_filter_att5));
             }
             if ((Original_filter_desc == null)) {
-                this.Adapter.UpdateCommand.Parameters[25].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[26].Value = global::System.DBNull.Value;
+                this.Adapter.UpdateCommand.Parameters[26].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[27].Value = global::System.DBNull.Value;
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[25].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[26].Value = ((string)(Original_filter_desc));
+                this.Adapter.UpdateCommand.Parameters[26].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[27].Value = ((string)(Original_filter_desc));
             }
-            this.Adapter.UpdateCommand.Parameters[27].Value = ((int)(test_id));
+            if ((Original_remark == null)) {
+                this.Adapter.UpdateCommand.Parameters[28].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[29].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[28].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[29].Value = ((string)(Original_remark));
+            }
+            this.Adapter.UpdateCommand.Parameters[30].Value = ((int)(test_id));
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
             if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -3931,6 +4045,7 @@ SELECT test_id, plan_name, test_seq, pass_list, filter_option, filter_att1, filt
                     string filter_att4, 
                     string filter_att5, 
                     string filter_desc, 
+                    string remark, 
                     int Original_test_id, 
                     string Original_plan_name, 
                     int Original_test_seq, 
@@ -3941,8 +4056,9 @@ SELECT test_id, plan_name, test_seq, pass_list, filter_option, filter_att1, filt
                     string Original_filter_att3, 
                     string Original_filter_att4, 
                     string Original_filter_att5, 
-                    string Original_filter_desc) {
-            return this.Update(plan_name, test_seq, pass_list, filter_option, filter_att1, filter_att2, filter_att3, filter_att4, filter_att5, filter_desc, Original_test_id, Original_plan_name, Original_test_seq, Original_pass_list, Original_filter_option, Original_filter_att1, Original_filter_att2, Original_filter_att3, Original_filter_att4, Original_filter_att5, Original_filter_desc, Original_test_id);
+                    string Original_filter_desc, 
+                    string Original_remark) {
+            return this.Update(plan_name, test_seq, pass_list, filter_option, filter_att1, filter_att2, filter_att3, filter_att4, filter_att5, filter_desc, remark, Original_test_id, Original_plan_name, Original_test_seq, Original_pass_list, Original_filter_option, Original_filter_att1, Original_filter_att2, Original_filter_att3, Original_filter_att4, Original_filter_att5, Original_filter_desc, Original_remark, Original_test_id);
         }
     }
     
@@ -4088,6 +4204,7 @@ SELECT test_id, plan_name, test_seq, pass_list, filter_option, filter_att1, filt
             tableMapping.ColumnMappings.Add("rate_20", "rate_20");
             tableMapping.ColumnMappings.Add("rate_40", "rate_40");
             tableMapping.ColumnMappings.Add("rate_60", "rate_60");
+            tableMapping.ColumnMappings.Add("description", "description");
             this._adapter.TableMappings.Add(tableMapping);
         }
         

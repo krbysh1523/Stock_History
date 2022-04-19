@@ -40,12 +40,16 @@ namespace History
             this.btn_N1 = new System.Windows.Forms.Button();
             this.btn_Index = new System.Windows.Forms.Button();
             this.cmb_Type = new System.Windows.Forms.ComboBox();
+            this.flowLayoutPanel7 = new System.Windows.Forms.FlowLayoutPanel();
+            this.label8 = new System.Windows.Forms.Label();
+            this.nmb_CaptureList = new System.Windows.Forms.NumericUpDown();
+            this.btn_Capture = new System.Windows.Forms.Button();
             this.flowLayoutPanel3 = new System.Windows.Forms.FlowLayoutPanel();
             this.dt_Symbol_From = new System.Windows.Forms.DateTimePicker();
             this.label4 = new System.Windows.Forms.Label();
             this.dt_Symbol_To = new System.Windows.Forms.DateTimePicker();
-            this.chk_Simul = new System.Windows.Forms.CheckBox();
             this.chk_PassingList = new System.Windows.Forms.CheckBox();
+            this.chk_Analysis = new System.Windows.Forms.CheckBox();
             this.flowLayoutPanel6 = new System.Windows.Forms.FlowLayoutPanel();
             this.label6 = new System.Windows.Forms.Label();
             this.nmb_Y_Min = new System.Windows.Forms.NumericUpDown();
@@ -55,27 +59,32 @@ namespace History
             this.btn_RaiseAxis = new System.Windows.Forms.Button();
             this.btn_NarrowAxis = new System.Windows.Forms.Button();
             this.btn_WideAxis = new System.Windows.Forms.Button();
-            this.chk_Analysis = new System.Windows.Forms.CheckBox();
-            this.flowLayoutPanel7 = new System.Windows.Forms.FlowLayoutPanel();
-            this.label8 = new System.Windows.Forms.Label();
-            this.nmb_CaptureList = new System.Windows.Forms.NumericUpDown();
-            this.btn_Capture = new System.Windows.Forms.Button();
+            this.chk_FixedRange = new System.Windows.Forms.CheckBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.nmb_2nd_Axix_Y_Max = new System.Windows.Forms.NumericUpDown();
+            this.chk_Simul = new System.Windows.Forms.CheckBox();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.dgv_List = new System.Windows.Forms.DataGridView();
+            this.flowLayoutPanel4 = new System.Windows.Forms.FlowLayoutPanel();
             this.txt_OptionDesc = new System.Windows.Forms.TextBox();
+            this.nmb_2nd_Axix_Y_Min = new System.Windows.Forms.NumericUpDown();
+            this.label3 = new System.Windows.Forms.Label();
             this.flowLayoutPanel1.SuspendLayout();
             this.flowLayoutPanel2.SuspendLayout();
+            this.flowLayoutPanel7.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nmb_CaptureList)).BeginInit();
             this.flowLayoutPanel3.SuspendLayout();
             this.flowLayoutPanel6.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nmb_Y_Min)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nmb_Y_Max)).BeginInit();
-            this.flowLayoutPanel7.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nmb_CaptureList)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nmb_2nd_Axix_Y_Max)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_List)).BeginInit();
+            this.flowLayoutPanel4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nmb_2nd_Axix_Y_Min)).BeginInit();
             this.SuspendLayout();
             // 
             // chart_Main
@@ -190,13 +199,67 @@ namespace History
             this.cmb_Type.Size = new System.Drawing.Size(76, 21);
             this.cmb_Type.TabIndex = 13;
             // 
+            // flowLayoutPanel7
+            // 
+            this.flowLayoutPanel7.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.flowLayoutPanel7.Controls.Add(this.label8);
+            this.flowLayoutPanel7.Controls.Add(this.nmb_CaptureList);
+            this.flowLayoutPanel7.Controls.Add(this.btn_Capture);
+            this.flowLayoutPanel7.Location = new System.Drawing.Point(201, 3);
+            this.flowLayoutPanel7.Name = "flowLayoutPanel7";
+            this.flowLayoutPanel7.Size = new System.Drawing.Size(91, 62);
+            this.flowLayoutPanel7.TabIndex = 41;
+            // 
+            // label8
+            // 
+            this.label8.Location = new System.Drawing.Point(2, 0);
+            this.label8.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(29, 26);
+            this.label8.TabIndex = 33;
+            this.label8.Text = "List:";
+            this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // nmb_CaptureList
+            // 
+            this.nmb_CaptureList.Location = new System.Drawing.Point(36, 3);
+            this.nmb_CaptureList.Maximum = new decimal(new int[] {
+            9999,
+            0,
+            0,
+            0});
+            this.nmb_CaptureList.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.nmb_CaptureList.Name = "nmb_CaptureList";
+            this.nmb_CaptureList.Size = new System.Drawing.Size(46, 20);
+            this.nmb_CaptureList.TabIndex = 32;
+            this.nmb_CaptureList.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.nmb_CaptureList.Value = new decimal(new int[] {
+            20,
+            0,
+            0,
+            0});
+            // 
+            // btn_Capture
+            // 
+            this.btn_Capture.Location = new System.Drawing.Point(2, 28);
+            this.btn_Capture.Margin = new System.Windows.Forms.Padding(2);
+            this.btn_Capture.Name = "btn_Capture";
+            this.btn_Capture.Size = new System.Drawing.Size(62, 24);
+            this.btn_Capture.TabIndex = 31;
+            this.btn_Capture.Text = "Capture";
+            this.btn_Capture.UseVisualStyleBackColor = true;
+            this.btn_Capture.Click += new System.EventHandler(this.btn_Capture_Click);
+            // 
             // flowLayoutPanel3
             // 
             this.flowLayoutPanel3.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.flowLayoutPanel3.Controls.Add(this.dt_Symbol_From);
             this.flowLayoutPanel3.Controls.Add(this.label4);
             this.flowLayoutPanel3.Controls.Add(this.dt_Symbol_To);
-            this.flowLayoutPanel3.Controls.Add(this.chk_Simul);
             this.flowLayoutPanel3.Controls.Add(this.chk_PassingList);
             this.flowLayoutPanel3.Controls.Add(this.chk_Analysis);
             this.flowLayoutPanel3.Location = new System.Drawing.Point(298, 3);
@@ -232,29 +295,27 @@ namespace History
             this.dt_Symbol_To.Size = new System.Drawing.Size(77, 20);
             this.dt_Symbol_To.TabIndex = 20;
             // 
-            // chk_Simul
-            // 
-            this.chk_Simul.AutoSize = true;
-            this.chk_Simul.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.chk_Simul.Checked = true;
-            this.chk_Simul.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chk_Simul.Location = new System.Drawing.Point(3, 29);
-            this.chk_Simul.Name = "chk_Simul";
-            this.chk_Simul.Size = new System.Drawing.Size(66, 17);
-            this.chk_Simul.TabIndex = 30;
-            this.chk_Simul.Text = "Simulate";
-            this.chk_Simul.UseVisualStyleBackColor = true;
-            // 
             // chk_PassingList
             // 
             this.chk_PassingList.AutoSize = true;
             this.chk_PassingList.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.chk_PassingList.Location = new System.Drawing.Point(75, 29);
+            this.chk_PassingList.Location = new System.Drawing.Point(3, 29);
             this.chk_PassingList.Name = "chk_PassingList";
             this.chk_PassingList.Size = new System.Drawing.Size(88, 17);
             this.chk_PassingList.TabIndex = 36;
             this.chk_PassingList.Text = "Passing List?";
             this.chk_PassingList.UseVisualStyleBackColor = true;
+            // 
+            // chk_Analysis
+            // 
+            this.chk_Analysis.AutoSize = true;
+            this.chk_Analysis.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.chk_Analysis.Location = new System.Drawing.Point(97, 29);
+            this.chk_Analysis.Name = "chk_Analysis";
+            this.chk_Analysis.Size = new System.Drawing.Size(51, 17);
+            this.chk_Analysis.TabIndex = 35;
+            this.chk_Analysis.Text = "Chart";
+            this.chk_Analysis.UseVisualStyleBackColor = true;
             // 
             // flowLayoutPanel6
             // 
@@ -267,9 +328,14 @@ namespace History
             this.flowLayoutPanel6.Controls.Add(this.btn_RaiseAxis);
             this.flowLayoutPanel6.Controls.Add(this.btn_NarrowAxis);
             this.flowLayoutPanel6.Controls.Add(this.btn_WideAxis);
+            this.flowLayoutPanel6.Controls.Add(this.chk_FixedRange);
+            this.flowLayoutPanel6.Controls.Add(this.label1);
+            this.flowLayoutPanel6.Controls.Add(this.nmb_2nd_Axix_Y_Min);
+            this.flowLayoutPanel6.Controls.Add(this.label3);
+            this.flowLayoutPanel6.Controls.Add(this.nmb_2nd_Axix_Y_Max);
             this.flowLayoutPanel6.Location = new System.Drawing.Point(541, 3);
             this.flowLayoutPanel6.Name = "flowLayoutPanel6";
-            this.flowLayoutPanel6.Size = new System.Drawing.Size(212, 62);
+            this.flowLayoutPanel6.Size = new System.Drawing.Size(343, 62);
             this.flowLayoutPanel6.TabIndex = 40;
             // 
             // label6
@@ -340,7 +406,7 @@ namespace History
             // 
             // btn_LowerAxis
             // 
-            this.btn_LowerAxis.Location = new System.Drawing.Point(2, 28);
+            this.btn_LowerAxis.Location = new System.Drawing.Point(206, 2);
             this.btn_LowerAxis.Margin = new System.Windows.Forms.Padding(2);
             this.btn_LowerAxis.Name = "btn_LowerAxis";
             this.btn_LowerAxis.Size = new System.Drawing.Size(19, 25);
@@ -351,7 +417,7 @@ namespace History
             // 
             // btn_RaiseAxis
             // 
-            this.btn_RaiseAxis.Location = new System.Drawing.Point(25, 28);
+            this.btn_RaiseAxis.Location = new System.Drawing.Point(229, 2);
             this.btn_RaiseAxis.Margin = new System.Windows.Forms.Padding(2);
             this.btn_RaiseAxis.Name = "btn_RaiseAxis";
             this.btn_RaiseAxis.Size = new System.Drawing.Size(19, 25);
@@ -362,7 +428,7 @@ namespace History
             // 
             // btn_NarrowAxis
             // 
-            this.btn_NarrowAxis.Location = new System.Drawing.Point(48, 28);
+            this.btn_NarrowAxis.Location = new System.Drawing.Point(252, 2);
             this.btn_NarrowAxis.Margin = new System.Windows.Forms.Padding(2);
             this.btn_NarrowAxis.Name = "btn_NarrowAxis";
             this.btn_NarrowAxis.Size = new System.Drawing.Size(19, 25);
@@ -373,7 +439,7 @@ namespace History
             // 
             // btn_WideAxis
             // 
-            this.btn_WideAxis.Location = new System.Drawing.Point(71, 28);
+            this.btn_WideAxis.Location = new System.Drawing.Point(275, 2);
             this.btn_WideAxis.Margin = new System.Windows.Forms.Padding(2);
             this.btn_WideAxis.Name = "btn_WideAxis";
             this.btn_WideAxis.Size = new System.Drawing.Size(19, 25);
@@ -382,71 +448,59 @@ namespace History
             this.btn_WideAxis.UseVisualStyleBackColor = true;
             this.btn_WideAxis.Click += new System.EventHandler(this.btn_WideAxis_Click);
             // 
-            // chk_Analysis
+            // chk_FixedRange
             // 
-            this.chk_Analysis.AutoSize = true;
-            this.chk_Analysis.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.chk_Analysis.Location = new System.Drawing.Point(169, 29);
-            this.chk_Analysis.Name = "chk_Analysis";
-            this.chk_Analysis.Size = new System.Drawing.Size(51, 17);
-            this.chk_Analysis.TabIndex = 35;
-            this.chk_Analysis.Text = "Chart";
-            this.chk_Analysis.UseVisualStyleBackColor = true;
+            this.chk_FixedRange.AutoSize = true;
+            this.chk_FixedRange.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.chk_FixedRange.Location = new System.Drawing.Point(3, 32);
+            this.chk_FixedRange.Name = "chk_FixedRange";
+            this.chk_FixedRange.Size = new System.Drawing.Size(97, 17);
+            this.chk_FixedRange.TabIndex = 36;
+            this.chk_FixedRange.Text = "Is Fixed Range";
+            this.chk_FixedRange.UseVisualStyleBackColor = true;
             // 
-            // flowLayoutPanel7
+            // label1
             // 
-            this.flowLayoutPanel7.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.flowLayoutPanel7.Controls.Add(this.label8);
-            this.flowLayoutPanel7.Controls.Add(this.nmb_CaptureList);
-            this.flowLayoutPanel7.Controls.Add(this.btn_Capture);
-            this.flowLayoutPanel7.Location = new System.Drawing.Point(201, 3);
-            this.flowLayoutPanel7.Name = "flowLayoutPanel7";
-            this.flowLayoutPanel7.Size = new System.Drawing.Size(91, 62);
-            this.flowLayoutPanel7.TabIndex = 41;
+            this.label1.Location = new System.Drawing.Point(105, 29);
+            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(96, 26);
+            this.label1.TabIndex = 37;
+            this.label1.Text = "2nd Y Axis (Max):";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // label8
+            // nmb_2nd_Axix_Y_Max
             // 
-            this.label8.Location = new System.Drawing.Point(2, 0);
-            this.label8.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(29, 26);
-            this.label8.TabIndex = 33;
-            this.label8.Text = "List:";
-            this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // nmb_CaptureList
-            // 
-            this.nmb_CaptureList.Location = new System.Drawing.Point(36, 3);
-            this.nmb_CaptureList.Maximum = new decimal(new int[] {
+            this.nmb_2nd_Axix_Y_Max.Location = new System.Drawing.Point(282, 32);
+            this.nmb_2nd_Axix_Y_Max.Maximum = new decimal(new int[] {
             9999,
             0,
             0,
             0});
-            this.nmb_CaptureList.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.nmb_CaptureList.Name = "nmb_CaptureList";
-            this.nmb_CaptureList.Size = new System.Drawing.Size(46, 20);
-            this.nmb_CaptureList.TabIndex = 32;
-            this.nmb_CaptureList.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.nmb_CaptureList.Value = new decimal(new int[] {
-            20,
+            this.nmb_2nd_Axix_Y_Max.Name = "nmb_2nd_Axix_Y_Max";
+            this.nmb_2nd_Axix_Y_Max.Size = new System.Drawing.Size(46, 20);
+            this.nmb_2nd_Axix_Y_Max.TabIndex = 38;
+            this.nmb_2nd_Axix_Y_Max.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.nmb_2nd_Axix_Y_Max.Value = new decimal(new int[] {
+            200,
             0,
             0,
             0});
             // 
-            // btn_Capture
+            // chk_Simul
             // 
-            this.btn_Capture.Location = new System.Drawing.Point(2, 28);
-            this.btn_Capture.Margin = new System.Windows.Forms.Padding(2);
-            this.btn_Capture.Name = "btn_Capture";
-            this.btn_Capture.Size = new System.Drawing.Size(62, 24);
-            this.btn_Capture.TabIndex = 31;
-            this.btn_Capture.Text = "Capture";
-            this.btn_Capture.UseVisualStyleBackColor = true;
-            this.btn_Capture.Click += new System.EventHandler(this.btn_Capture_Click);
+            this.chk_Simul.AutoSize = true;
+            this.chk_Simul.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.chk_Simul.Checked = true;
+            this.chk_Simul.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chk_Simul.Dock = System.Windows.Forms.DockStyle.Left;
+            this.chk_Simul.Location = new System.Drawing.Point(3, 3);
+            this.chk_Simul.Name = "chk_Simul";
+            this.chk_Simul.Size = new System.Drawing.Size(137, 17);
+            this.chk_Simul.TabIndex = 30;
+            this.chk_Simul.Text = "Show Simulation Result";
+            this.chk_Simul.UseVisualStyleBackColor = true;
+            this.chk_Simul.CheckedChanged += new System.EventHandler(this.chk_Simul_CheckedChanged);
             // 
             // splitContainer1
             // 
@@ -464,7 +518,7 @@ namespace History
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.dgv_List);
-            this.splitContainer1.Panel2.Controls.Add(this.txt_OptionDesc);
+            this.splitContainer1.Panel2.Controls.Add(this.flowLayoutPanel4);
             this.splitContainer1.Size = new System.Drawing.Size(1384, 729);
             this.splitContainer1.SplitterDistance = 1003;
             this.splitContainer1.TabIndex = 2;
@@ -486,24 +540,67 @@ namespace History
             dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dgv_List.DefaultCellStyle = dataGridViewCellStyle1;
             this.dgv_List.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgv_List.Location = new System.Drawing.Point(0, 20);
+            this.dgv_List.Location = new System.Drawing.Point(0, 31);
             this.dgv_List.MultiSelect = false;
             this.dgv_List.Name = "dgv_List";
             this.dgv_List.ReadOnly = true;
             this.dgv_List.RowHeadersVisible = false;
-            this.dgv_List.Size = new System.Drawing.Size(373, 705);
+            this.dgv_List.Size = new System.Drawing.Size(373, 694);
             this.dgv_List.TabIndex = 0;
-            this.dgv_List.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgv_List_CellMouseDoubleClick);
+            this.dgv_List.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgv_List_CellMouseClick);
             this.dgv_List.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgv_List_ColumnHeaderMouseClick);
             this.dgv_List.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dgv_List_DataBindingComplete);
             // 
+            // flowLayoutPanel4
+            // 
+            this.flowLayoutPanel4.Controls.Add(this.chk_Simul);
+            this.flowLayoutPanel4.Controls.Add(this.txt_OptionDesc);
+            this.flowLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Top;
+            this.flowLayoutPanel4.Location = new System.Drawing.Point(0, 0);
+            this.flowLayoutPanel4.Name = "flowLayoutPanel4";
+            this.flowLayoutPanel4.Size = new System.Drawing.Size(373, 31);
+            this.flowLayoutPanel4.TabIndex = 43;
+            // 
             // txt_OptionDesc
             // 
-            this.txt_OptionDesc.Dock = System.Windows.Forms.DockStyle.Top;
-            this.txt_OptionDesc.Location = new System.Drawing.Point(0, 0);
+            this.txt_OptionDesc.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txt_OptionDesc.Location = new System.Drawing.Point(146, 3);
             this.txt_OptionDesc.Name = "txt_OptionDesc";
-            this.txt_OptionDesc.Size = new System.Drawing.Size(373, 20);
+            this.txt_OptionDesc.Size = new System.Drawing.Size(205, 20);
             this.txt_OptionDesc.TabIndex = 42;
+            // 
+            // nmb_2nd_Axix_Y_Min
+            // 
+            this.nmb_2nd_Axix_Y_Min.Location = new System.Drawing.Point(206, 32);
+            this.nmb_2nd_Axix_Y_Min.Maximum = new decimal(new int[] {
+            9999,
+            0,
+            0,
+            0});
+            this.nmb_2nd_Axix_Y_Min.Minimum = new decimal(new int[] {
+            9999,
+            0,
+            0,
+            -2147483648});
+            this.nmb_2nd_Axix_Y_Min.Name = "nmb_2nd_Axix_Y_Min";
+            this.nmb_2nd_Axix_Y_Min.Size = new System.Drawing.Size(46, 20);
+            this.nmb_2nd_Axix_Y_Min.TabIndex = 39;
+            this.nmb_2nd_Axix_Y_Min.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.nmb_2nd_Axix_Y_Min.Value = new decimal(new int[] {
+            20,
+            0,
+            0,
+            -2147483648});
+            // 
+            // label3
+            // 
+            this.label3.Location = new System.Drawing.Point(257, 29);
+            this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(20, 26);
+            this.label3.TabIndex = 40;
+            this.label3.Text = "~";
+            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // Index_Analyzer
             // 
@@ -521,19 +618,23 @@ namespace History
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Index_Analyzer_KeyDown);
             this.flowLayoutPanel1.ResumeLayout(false);
             this.flowLayoutPanel2.ResumeLayout(false);
+            this.flowLayoutPanel7.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.nmb_CaptureList)).EndInit();
             this.flowLayoutPanel3.ResumeLayout(false);
             this.flowLayoutPanel3.PerformLayout();
             this.flowLayoutPanel6.ResumeLayout(false);
+            this.flowLayoutPanel6.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nmb_Y_Min)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nmb_Y_Max)).EndInit();
-            this.flowLayoutPanel7.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.nmb_CaptureList)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nmb_2nd_Axix_Y_Max)).EndInit();
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
-            this.splitContainer1.Panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgv_List)).EndInit();
+            this.flowLayoutPanel4.ResumeLayout(false);
+            this.flowLayoutPanel4.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nmb_2nd_Axix_Y_Min)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -572,5 +673,11 @@ namespace History
         public System.Windows.Forms.CheckBox chk_Simul;
         private System.Windows.Forms.TextBox txt_OptionDesc;
         private System.Windows.Forms.ComboBox cmb_Type;
+        private System.Windows.Forms.CheckBox chk_FixedRange;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel4;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.NumericUpDown nmb_2nd_Axix_Y_Max;
+        private System.Windows.Forms.NumericUpDown nmb_2nd_Axix_Y_Min;
+        private System.Windows.Forms.Label label3;
     }
 }

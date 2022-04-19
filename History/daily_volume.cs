@@ -24,5 +24,6 @@ namespace History
         public Nullable<double> SMA_060 { get; set; }
         public Nullable<double> SMA_120 { get; set; }
         public Nullable<double> SMA_240 { get; set; }
+        public Nullable<double> volume_chg_perc { get; set; }
     }
 }

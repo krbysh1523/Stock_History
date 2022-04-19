@@ -72,7 +72,7 @@ namespace History
             this.txt_Log.Dock = System.Windows.Forms.DockStyle.Fill;
             this.txt_Log.Location = new System.Drawing.Point(0, 0);
             this.txt_Log.Name = "txt_Log";
-            this.txt_Log.Size = new System.Drawing.Size(356, 357);
+            this.txt_Log.Size = new System.Drawing.Size(263, 357);
             this.txt_Log.TabIndex = 5;
             this.txt_Log.Text = "";
             // 
@@ -91,7 +91,7 @@ namespace History
             // 
             this.splitContainer1.Panel2.Controls.Add(this.dgv_History);
             this.splitContainer1.Size = new System.Drawing.Size(1008, 361);
-            this.splitContainer1.SplitterDistance = 360;
+            this.splitContainer1.SplitterDistance = 267;
             this.splitContainer1.SplitterWidth = 8;
             this.splitContainer1.TabIndex = 6;
             // 
@@ -128,9 +128,10 @@ namespace History
             this.dgv_History.Name = "dgv_History";
             this.dgv_History.ReadOnly = true;
             this.dgv_History.RowHeadersVisible = false;
-            this.dgv_History.Size = new System.Drawing.Size(636, 357);
+            this.dgv_History.Size = new System.Drawing.Size(729, 357);
             this.dgv_History.TabIndex = 0;
             this.dgv_History.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv_History_CellContentClick);
+            this.dgv_History.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgv_History_CellFormatting);
             this.dgv_History.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dgv_History_DataBindingComplete);
             // 
             // listhistoryBindingSource
@@ -172,7 +173,7 @@ namespace History
             // 
             // option_desc
             // 
-            this.option_desc.DataPropertyName = "option_desc";
+            this.option_desc.DataPropertyName = "description";
             this.option_desc.HeaderText = "Description";
             this.option_desc.Name = "option_desc";
             this.option_desc.ReadOnly = true;
