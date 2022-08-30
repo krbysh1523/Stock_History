@@ -10,19 +10,23 @@
 namespace History
 {
     using System;
+    using System.Collections.Generic;
     
-    public partial class filter_intro_Result
+    public partial class prediction_history
     {
+        public int result_id { get; set; }
+        public int hist_id { get; set; }
         public string symbol { get; set; }
         public Nullable<int> ranking { get; set; }
         public Nullable<double> ratio1 { get; set; }
         public Nullable<double> ratio2 { get; set; }
-        public Nullable<double> rate { get; set; }
         public Nullable<double> rate_5 { get; set; }
         public Nullable<double> rate_10 { get; set; }
         public Nullable<double> rate_15 { get; set; }
         public Nullable<double> rate_20 { get; set; }
         public Nullable<double> rate_40 { get; set; }
         public Nullable<double> rate_60 { get; set; }
+        public string result { get; set; }
+        public string result_desc { get; set; }
     }
 }

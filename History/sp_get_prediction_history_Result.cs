@@ -13,6 +13,8 @@ namespace History
     
     public partial class sp_get_prediction_history_Result
     {
+        public int result_id { get; set; }
+        public int hist_id { get; set; }
         public string symbol { get; set; }
         public Nullable<int> ranking { get; set; }
         public Nullable<double> ratio1 { get; set; }
@@ -23,5 +25,7 @@ namespace History
         public Nullable<double> rate_20 { get; set; }
         public Nullable<double> rate_40 { get; set; }
         public Nullable<double> rate_60 { get; set; }
+        public string result { get; set; }
+        public string result_desc { get; set; }
     }
 }

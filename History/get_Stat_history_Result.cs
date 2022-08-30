@@ -11,10 +11,10 @@ namespace History
 {
     using System;
     
-    public partial class filter_main_Result
+    public partial class get_Stat_history_Result
     {
-        public int result_id { get; set; }
-        public int hist_id { get; set; }
+        public Nullable<int> result_id { get; set; }
+        public Nullable<int> hist_id { get; set; }
         public string symbol { get; set; }
         public Nullable<int> ranking { get; set; }
         public Nullable<double> ratio1 { get; set; }

@@ -34,6 +34,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>financial-profit.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="CraftSynth.ImageEditor, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -177,14 +180,20 @@
     <Compile Include="earning.cs">
       <DependentUpon>DB_Stock.tt</DependentUpon>
     </Compile>
-    <Compile Include="filter_intro_Result.cs">
-      <DependentUpon>DB_Stock.tt</DependentUpon>
-    </Compile>
     <Compile Include="filter_main_Result.cs">
       <DependentUpon>DB_Stock.tt</DependentUpon>
     </Compile>
     <Compile Include="filter_simul_header_Result.cs">
       <DependentUpon>DB_Stock.tt</DependentUpon>
+    </Compile>
+    <Compile Include="get_Stat_history_Result.cs">
+      <DependentUpon>DB_Stock.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ResultUI.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ResultUI.Designer.cs">
+      <DependentUpon>ResultUI.cs</DependentUpon>
     </Compile>
     <Compile Include="fundamental.cs">
       <DependentUpon>DB_Stock.tt</DependentUpon>
@@ -234,6 +243,9 @@
     <Compile Include="prediction.cs">
       <DependentUpon>DB_Stock.tt</DependentUpon>
     </Compile>
+    <Compile Include="prediction_history.cs">
+      <DependentUpon>DB_Stock.tt</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Query.cs">
@@ -270,6 +282,9 @@
     <Compile Include="watch_list_v1.cs">
       <DependentUpon>DB_Stock.tt</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="ResultUI.resx">
+      <DependentUpon>ResultUI.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Index_Analyzer.resx">
       <DependentUpon>Index_Analyzer.cs</DependentUpon>
     </EmbeddedResource>
@@ -342,6 +357,7 @@
       <DependentUpon>DB_Stock.edmx</DependentUpon>
       <LastGenOutput>DB_Stock.cs</LastGenOutput>
     </Content>
+    <Content Include="financial-profit.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

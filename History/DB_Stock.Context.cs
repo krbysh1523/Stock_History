@@ -15,10 +15,10 @@ namespace History
     using System.Data.Entity.Core.Objects;
     using System.Linq;
     
-    public partial class stockEntities : DbContext
+    public partial class stockEntity : DbContext
     {
-        public stockEntities()
-            : base("name=stockEntities")
+        public stockEntity()
+            : base("name=stockEntity")
         {
         }
     
@@ -27,18 +27,22 @@ namespace History
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<daily_history> daily_history { get; set; }
-        public virtual DbSet<daily_strong> daily_strong { get; set; }
-        public virtual DbSet<daily_close> daily_close { get; set; }
-        public virtual DbSet<lookup> lookups { get; set; }
         public virtual DbSet<daily_analysis> daily_analysis { get; set; }
+        public virtual DbSet<daily_close> daily_close { get; set; }
+        public virtual DbSet<daily_history> daily_history { get; set; }
         public virtual DbSet<daily_sma5> daily_sma5 { get; set; }
         public virtual DbSet<daily_source> daily_source { get; set; }
+        public virtual DbSet<daily_strong> daily_strong { get; set; }
         public virtual DbSet<daily_volume> daily_volume { get; set; }
         public virtual DbSet<earning> earnings { get; set; }
         public virtual DbSet<fundamental> fundamentals { get; set; }
         public virtual DbSet<income> incomes { get; set; }
+        public virtual DbSet<list_history> list_history { get; set; }
+        public virtual DbSet<lookup> lookups { get; set; }
+        public virtual DbSet<prediction> predictions { get; set; }
+        public virtual DbSet<prediction_history> prediction_history { get; set; }
         public virtual DbSet<symbol_att> symbol_att { get; set; }
+        public virtual DbSet<test_plan> test_plan { get; set; }
         public virtual DbSet<watch_list> watch_list { get; set; }
         public virtual DbSet<api> apis { get; set; }
         public virtual DbSet<daily_avg> daily_avg { get; set; }
@@ -58,14 +62,11 @@ namespace History
         public virtual DbSet<daily_volume_v1> daily_volume_v1 { get; set; }
         public virtual DbSet<fundamental_v1> fundamental_v1 { get; set; }
         public virtual DbSet<industry_v1> industry_v1 { get; set; }
+        public virtual DbSet<list_history_v1> list_history_v1 { get; set; }
         public virtual DbSet<sector_v1> sector_v1 { get; set; }
         public virtual DbSet<watch_list_v1> watch_list_v1 { get; set; }
-        public virtual DbSet<test_plan> test_plan { get; set; }
-        public virtual DbSet<list_history> list_history { get; set; }
-        public virtual DbSet<prediction> predictions { get; set; }
-        public virtual DbSet<list_history_v1> list_history_v1 { get; set; }
     
-        public virtual ObjectResult<filter_intro_Result> filter_intro(Nullable<System.DateTime> start_dttm, Nullable<System.DateTime> end_dttm, string filter_used, Nullable<int> filter_option, Nullable<int> filter_limit, string filter_symbols, Nullable<int> rank_option, Nullable<int> rank_limit, string is_simul)
+        public virtual ObjectResult<filter_main_Result> filter_main(Nullable<System.DateTime> start_dttm, Nullable<System.DateTime> end_dttm, Nullable<int> option, string passing_list, string passing_symbols, string att1, string att2, string att3, string att4, string att5, string description)
         {
             var start_dttmParameter = start_dttm.HasValue ?
                 new ObjectParameter("start_dttm", start_dttm) :
@@ -75,35 +76,625 @@ namespace History
                 new ObjectParameter("end_dttm", end_dttm) :
                 new ObjectParameter("end_dttm", typeof(System.DateTime));
     
-            var filter_usedParameter = filter_used != null ?
-                new ObjectParameter("filter_used", filter_used) :
-                new ObjectParameter("filter_used", typeof(string));
+            var optionParameter = option.HasValue ?
+                new ObjectParameter("option", option) :
+                new ObjectParameter("option", typeof(int));
     
-            var filter_optionParameter = filter_option.HasValue ?
-                new ObjectParameter("filter_option", filter_option) :
-                new ObjectParameter("filter_option", typeof(int));
+            var passing_listParameter = passing_list != null ?
+                new ObjectParameter("passing_list", passing_list) :
+                new ObjectParameter("passing_list", typeof(string));
     
-            var filter_limitParameter = filter_limit.HasValue ?
-                new ObjectParameter("filter_limit", filter_limit) :
-                new ObjectParameter("filter_limit", typeof(int));
+            var passing_symbolsParameter = passing_symbols != null ?
+                new ObjectParameter("passing_symbols", passing_symbols) :
+                new ObjectParameter("passing_symbols", typeof(string));
     
-            var filter_symbolsParameter = filter_symbols != null ?
-                new ObjectParameter("filter_symbols", filter_symbols) :
-                new ObjectParameter("filter_symbols", typeof(string));
+            var att1Parameter = att1 != null ?
+                new ObjectParameter("att1", att1) :
+                new ObjectParameter("att1", typeof(string));
     
-            var rank_optionParameter = rank_option.HasValue ?
-                new ObjectParameter("rank_option", rank_option) :
-                new ObjectParameter("rank_option", typeof(int));
+            var att2Parameter = att2 != null ?
+                new ObjectParameter("att2", att2) :
+                new ObjectParameter("att2", typeof(string));
     
-            var rank_limitParameter = rank_limit.HasValue ?
-                new ObjectParameter("rank_limit", rank_limit) :
-                new ObjectParameter("rank_limit", typeof(int));
+            var att3Parameter = att3 != null ?
+                new ObjectParameter("att3", att3) :
+                new ObjectParameter("att3", typeof(string));
     
-            var is_simulParameter = is_simul != null ?
-                new ObjectParameter("is_simul", is_simul) :
-                new ObjectParameter("is_simul", typeof(string));
+            var att4Parameter = att4 != null ?
+                new ObjectParameter("att4", att4) :
+                new ObjectParameter("att4", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<filter_intro_Result>("filter_intro", start_dttmParameter, end_dttmParameter, filter_usedParameter, filter_optionParameter, filter_limitParameter, filter_symbolsParameter, rank_optionParameter, rank_limitParameter, is_simulParameter);
+            var att5Parameter = att5 != null ?
+                new ObjectParameter("att5", att5) :
+                new ObjectParameter("att5", typeof(string));
+    
+            var descriptionParameter = description != null ?
+                new ObjectParameter("description", description) :
+                new ObjectParameter("description", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<filter_main_Result>("filter_main", start_dttmParameter, end_dttmParameter, optionParameter, passing_listParameter, passing_symbolsParameter, att1Parameter, att2Parameter, att3Parameter, att4Parameter, att5Parameter, descriptionParameter);
+        }
+    
+        public virtual int filter_simul(Nullable<System.DateTime> start_dttm, Nullable<System.DateTime> end_dttm)
+        {
+            var start_dttmParameter = start_dttm.HasValue ?
+                new ObjectParameter("start_dttm", start_dttm) :
+                new ObjectParameter("start_dttm", typeof(System.DateTime));
+    
+            var end_dttmParameter = end_dttm.HasValue ?
+                new ObjectParameter("end_dttm", end_dttm) :
+                new ObjectParameter("end_dttm", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("filter_simul", start_dttmParameter, end_dttmParameter);
+        }
+    
+        public virtual ObjectResult<filter_simul_header_Result> filter_simul_header(Nullable<System.DateTime> end_dttm)
+        {
+            var end_dttmParameter = end_dttm.HasValue ?
+                new ObjectParameter("end_dttm", end_dttm) :
+                new ObjectParameter("end_dttm", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<filter_simul_header_Result>("filter_simul_header", end_dttmParameter);
+        }
+    
+        public virtual int filter_simul_summary()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("filter_simul_summary");
+        }
+    
+        public virtual int option_01(Nullable<System.DateTime> start_dttm, Nullable<System.DateTime> end_dttm, string passing_list, string att1, string att2, string att3, string att4, string att5, ObjectParameter option_desc)
+        {
+            var start_dttmParameter = start_dttm.HasValue ?
+                new ObjectParameter("start_dttm", start_dttm) :
+                new ObjectParameter("start_dttm", typeof(System.DateTime));
+    
+            var end_dttmParameter = end_dttm.HasValue ?
+                new ObjectParameter("end_dttm", end_dttm) :
+                new ObjectParameter("end_dttm", typeof(System.DateTime));
+    
+            var passing_listParameter = passing_list != null ?
+                new ObjectParameter("passing_list", passing_list) :
+                new ObjectParameter("passing_list", typeof(string));
+    
+            var att1Parameter = att1 != null ?
+                new ObjectParameter("att1", att1) :
+                new ObjectParameter("att1", typeof(string));
+    
+            var att2Parameter = att2 != null ?
+                new ObjectParameter("att2", att2) :
+                new ObjectParameter("att2", typeof(string));
+    
+            var att3Parameter = att3 != null ?
+                new ObjectParameter("att3", att3) :
+                new ObjectParameter("att3", typeof(string));
+    
+            var att4Parameter = att4 != null ?
+                new ObjectParameter("att4", att4) :
+                new ObjectParameter("att4", typeof(string));
+    
+            var att5Parameter = att5 != null ?
+                new ObjectParameter("att5", att5) :
+                new ObjectParameter("att5", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("option_01", start_dttmParameter, end_dttmParameter, passing_listParameter, att1Parameter, att2Parameter, att3Parameter, att4Parameter, att5Parameter, option_desc);
+        }
+    
+        public virtual int option_02(Nullable<System.DateTime> start_dttm, Nullable<System.DateTime> end_dttm, string passing_list, string att1, string att2, string att3, string att4, string att5, ObjectParameter option_desc)
+        {
+            var start_dttmParameter = start_dttm.HasValue ?
+                new ObjectParameter("start_dttm", start_dttm) :
+                new ObjectParameter("start_dttm", typeof(System.DateTime));
+    
+            var end_dttmParameter = end_dttm.HasValue ?
+                new ObjectParameter("end_dttm", end_dttm) :
+                new ObjectParameter("end_dttm", typeof(System.DateTime));
+    
+            var passing_listParameter = passing_list != null ?
+                new ObjectParameter("passing_list", passing_list) :
+                new ObjectParameter("passing_list", typeof(string));
+    
+            var att1Parameter = att1 != null ?
+                new ObjectParameter("att1", att1) :
+                new ObjectParameter("att1", typeof(string));
+    
+            var att2Parameter = att2 != null ?
+                new ObjectParameter("att2", att2) :
+                new ObjectParameter("att2", typeof(string));
+    
+            var att3Parameter = att3 != null ?
+                new ObjectParameter("att3", att3) :
+                new ObjectParameter("att3", typeof(string));
+    
+            var att4Parameter = att4 != null ?
+                new ObjectParameter("att4", att4) :
+                new ObjectParameter("att4", typeof(string));
+    
+            var att5Parameter = att5 != null ?
+                new ObjectParameter("att5", att5) :
+                new ObjectParameter("att5", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("option_02", start_dttmParameter, end_dttmParameter, passing_listParameter, att1Parameter, att2Parameter, att3Parameter, att4Parameter, att5Parameter, option_desc);
+        }
+    
+        public virtual int option_03(Nullable<System.DateTime> start_dttm, Nullable<System.DateTime> end_dttm, string passing_list, string att1, string att2, string att3, string att4, string att5, ObjectParameter option_desc)
+        {
+            var start_dttmParameter = start_dttm.HasValue ?
+                new ObjectParameter("start_dttm", start_dttm) :
+                new ObjectParameter("start_dttm", typeof(System.DateTime));
+    
+            var end_dttmParameter = end_dttm.HasValue ?
+                new ObjectParameter("end_dttm", end_dttm) :
+                new ObjectParameter("end_dttm", typeof(System.DateTime));
+    
+            var passing_listParameter = passing_list != null ?
+                new ObjectParameter("passing_list", passing_list) :
+                new ObjectParameter("passing_list", typeof(string));
+    
+            var att1Parameter = att1 != null ?
+                new ObjectParameter("att1", att1) :
+                new ObjectParameter("att1", typeof(string));
+    
+            var att2Parameter = att2 != null ?
+                new ObjectParameter("att2", att2) :
+                new ObjectParameter("att2", typeof(string));
+    
+            var att3Parameter = att3 != null ?
+                new ObjectParameter("att3", att3) :
+                new ObjectParameter("att3", typeof(string));
+    
+            var att4Parameter = att4 != null ?
+                new ObjectParameter("att4", att4) :
+                new ObjectParameter("att4", typeof(string));
+    
+            var att5Parameter = att5 != null ?
+                new ObjectParameter("att5", att5) :
+                new ObjectParameter("att5", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("option_03", start_dttmParameter, end_dttmParameter, passing_listParameter, att1Parameter, att2Parameter, att3Parameter, att4Parameter, att5Parameter, option_desc);
+        }
+    
+        public virtual int option_04(Nullable<System.DateTime> start_dttm, Nullable<System.DateTime> end_dttm, string passing_list, string att1, string att2, string att3, string att4, string att5, ObjectParameter option_desc)
+        {
+            var start_dttmParameter = start_dttm.HasValue ?
+                new ObjectParameter("start_dttm", start_dttm) :
+                new ObjectParameter("start_dttm", typeof(System.DateTime));
+    
+            var end_dttmParameter = end_dttm.HasValue ?
+                new ObjectParameter("end_dttm", end_dttm) :
+                new ObjectParameter("end_dttm", typeof(System.DateTime));
+    
+            var passing_listParameter = passing_list != null ?
+                new ObjectParameter("passing_list", passing_list) :
+                new ObjectParameter("passing_list", typeof(string));
+    
+            var att1Parameter = att1 != null ?
+                new ObjectParameter("att1", att1) :
+                new ObjectParameter("att1", typeof(string));
+    
+            var att2Parameter = att2 != null ?
+                new ObjectParameter("att2", att2) :
+                new ObjectParameter("att2", typeof(string));
+    
+            var att3Parameter = att3 != null ?
+                new ObjectParameter("att3", att3) :
+                new ObjectParameter("att3", typeof(string));
+    
+            var att4Parameter = att4 != null ?
+                new ObjectParameter("att4", att4) :
+                new ObjectParameter("att4", typeof(string));
+    
+            var att5Parameter = att5 != null ?
+                new ObjectParameter("att5", att5) :
+                new ObjectParameter("att5", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("option_04", start_dttmParameter, end_dttmParameter, passing_listParameter, att1Parameter, att2Parameter, att3Parameter, att4Parameter, att5Parameter, option_desc);
+        }
+    
+        public virtual int option_05(Nullable<System.DateTime> start_dttm, Nullable<System.DateTime> end_dttm, string passing_list, string att1, string att2, string att3, string att4, string att5, ObjectParameter option_desc)
+        {
+            var start_dttmParameter = start_dttm.HasValue ?
+                new ObjectParameter("start_dttm", start_dttm) :
+                new ObjectParameter("start_dttm", typeof(System.DateTime));
+    
+            var end_dttmParameter = end_dttm.HasValue ?
+                new ObjectParameter("end_dttm", end_dttm) :
+                new ObjectParameter("end_dttm", typeof(System.DateTime));
+    
+            var passing_listParameter = passing_list != null ?
+                new ObjectParameter("passing_list", passing_list) :
+                new ObjectParameter("passing_list", typeof(string));
+    
+            var att1Parameter = att1 != null ?
+                new ObjectParameter("att1", att1) :
+                new ObjectParameter("att1", typeof(string));
+    
+            var att2Parameter = att2 != null ?
+                new ObjectParameter("att2", att2) :
+                new ObjectParameter("att2", typeof(string));
+    
+            var att3Parameter = att3 != null ?
+                new ObjectParameter("att3", att3) :
+                new ObjectParameter("att3", typeof(string));
+    
+            var att4Parameter = att4 != null ?
+                new ObjectParameter("att4", att4) :
+                new ObjectParameter("att4", typeof(string));
+    
+            var att5Parameter = att5 != null ?
+                new ObjectParameter("att5", att5) :
+                new ObjectParameter("att5", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("option_05", start_dttmParameter, end_dttmParameter, passing_listParameter, att1Parameter, att2Parameter, att3Parameter, att4Parameter, att5Parameter, option_desc);
+        }
+    
+        public virtual int option_06(Nullable<System.DateTime> start_dttm, Nullable<System.DateTime> end_dttm, string passing_list, string att1, string att2, string att3, string att4, string att5, ObjectParameter option_desc)
+        {
+            var start_dttmParameter = start_dttm.HasValue ?
+                new ObjectParameter("start_dttm", start_dttm) :
+                new ObjectParameter("start_dttm", typeof(System.DateTime));
+    
+            var end_dttmParameter = end_dttm.HasValue ?
+                new ObjectParameter("end_dttm", end_dttm) :
+                new ObjectParameter("end_dttm", typeof(System.DateTime));
+    
+            var passing_listParameter = passing_list != null ?
+                new ObjectParameter("passing_list", passing_list) :
+                new ObjectParameter("passing_list", typeof(string));
+    
+            var att1Parameter = att1 != null ?
+                new ObjectParameter("att1", att1) :
+                new ObjectParameter("att1", typeof(string));
+    
+            var att2Parameter = att2 != null ?
+                new ObjectParameter("att2", att2) :
+                new ObjectParameter("att2", typeof(string));
+    
+            var att3Parameter = att3 != null ?
+                new ObjectParameter("att3", att3) :
+                new ObjectParameter("att3", typeof(string));
+    
+            var att4Parameter = att4 != null ?
+                new ObjectParameter("att4", att4) :
+                new ObjectParameter("att4", typeof(string));
+    
+            var att5Parameter = att5 != null ?
+                new ObjectParameter("att5", att5) :
+                new ObjectParameter("att5", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("option_06", start_dttmParameter, end_dttmParameter, passing_listParameter, att1Parameter, att2Parameter, att3Parameter, att4Parameter, att5Parameter, option_desc);
+        }
+    
+        public virtual int option_07(Nullable<System.DateTime> start_dttm, Nullable<System.DateTime> end_dttm, string passing_list, string att1, string att2, string att3, string att4, string att5, ObjectParameter option_desc)
+        {
+            var start_dttmParameter = start_dttm.HasValue ?
+                new ObjectParameter("start_dttm", start_dttm) :
+                new ObjectParameter("start_dttm", typeof(System.DateTime));
+    
+            var end_dttmParameter = end_dttm.HasValue ?
+                new ObjectParameter("end_dttm", end_dttm) :
+                new ObjectParameter("end_dttm", typeof(System.DateTime));
+    
+            var passing_listParameter = passing_list != null ?
+                new ObjectParameter("passing_list", passing_list) :
+                new ObjectParameter("passing_list", typeof(string));
+    
+            var att1Parameter = att1 != null ?
+                new ObjectParameter("att1", att1) :
+                new ObjectParameter("att1", typeof(string));
+    
+            var att2Parameter = att2 != null ?
+                new ObjectParameter("att2", att2) :
+                new ObjectParameter("att2", typeof(string));
+    
+            var att3Parameter = att3 != null ?
+                new ObjectParameter("att3", att3) :
+                new ObjectParameter("att3", typeof(string));
+    
+            var att4Parameter = att4 != null ?
+                new ObjectParameter("att4", att4) :
+                new ObjectParameter("att4", typeof(string));
+    
+            var att5Parameter = att5 != null ?
+                new ObjectParameter("att5", att5) :
+                new ObjectParameter("att5", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("option_07", start_dttmParameter, end_dttmParameter, passing_listParameter, att1Parameter, att2Parameter, att3Parameter, att4Parameter, att5Parameter, option_desc);
+        }
+    
+        public virtual int option_08(Nullable<System.DateTime> start_dttm, Nullable<System.DateTime> end_dttm, string passing_list, string att1, string att2, string att3, string att4, string att5, ObjectParameter option_desc)
+        {
+            var start_dttmParameter = start_dttm.HasValue ?
+                new ObjectParameter("start_dttm", start_dttm) :
+                new ObjectParameter("start_dttm", typeof(System.DateTime));
+    
+            var end_dttmParameter = end_dttm.HasValue ?
+                new ObjectParameter("end_dttm", end_dttm) :
+                new ObjectParameter("end_dttm", typeof(System.DateTime));
+    
+            var passing_listParameter = passing_list != null ?
+                new ObjectParameter("passing_list", passing_list) :
+                new ObjectParameter("passing_list", typeof(string));
+    
+            var att1Parameter = att1 != null ?
+                new ObjectParameter("att1", att1) :
+                new ObjectParameter("att1", typeof(string));
+    
+            var att2Parameter = att2 != null ?
+                new ObjectParameter("att2", att2) :
+                new ObjectParameter("att2", typeof(string));
+    
+            var att3Parameter = att3 != null ?
+                new ObjectParameter("att3", att3) :
+                new ObjectParameter("att3", typeof(string));
+    
+            var att4Parameter = att4 != null ?
+                new ObjectParameter("att4", att4) :
+                new ObjectParameter("att4", typeof(string));
+    
+            var att5Parameter = att5 != null ?
+                new ObjectParameter("att5", att5) :
+                new ObjectParameter("att5", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("option_08", start_dttmParameter, end_dttmParameter, passing_listParameter, att1Parameter, att2Parameter, att3Parameter, att4Parameter, att5Parameter, option_desc);
+        }
+    
+        public virtual int option_09(Nullable<System.DateTime> start_dttm, Nullable<System.DateTime> end_dttm, string passing_list, string att1, string att2, string att3, string att4, string att5, ObjectParameter option_desc)
+        {
+            var start_dttmParameter = start_dttm.HasValue ?
+                new ObjectParameter("start_dttm", start_dttm) :
+                new ObjectParameter("start_dttm", typeof(System.DateTime));
+    
+            var end_dttmParameter = end_dttm.HasValue ?
+                new ObjectParameter("end_dttm", end_dttm) :
+                new ObjectParameter("end_dttm", typeof(System.DateTime));
+    
+            var passing_listParameter = passing_list != null ?
+                new ObjectParameter("passing_list", passing_list) :
+                new ObjectParameter("passing_list", typeof(string));
+    
+            var att1Parameter = att1 != null ?
+                new ObjectParameter("att1", att1) :
+                new ObjectParameter("att1", typeof(string));
+    
+            var att2Parameter = att2 != null ?
+                new ObjectParameter("att2", att2) :
+                new ObjectParameter("att2", typeof(string));
+    
+            var att3Parameter = att3 != null ?
+                new ObjectParameter("att3", att3) :
+                new ObjectParameter("att3", typeof(string));
+    
+            var att4Parameter = att4 != null ?
+                new ObjectParameter("att4", att4) :
+                new ObjectParameter("att4", typeof(string));
+    
+            var att5Parameter = att5 != null ?
+                new ObjectParameter("att5", att5) :
+                new ObjectParameter("att5", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("option_09", start_dttmParameter, end_dttmParameter, passing_listParameter, att1Parameter, att2Parameter, att3Parameter, att4Parameter, att5Parameter, option_desc);
+        }
+    
+        public virtual int option_10(Nullable<System.DateTime> start_dttm, Nullable<System.DateTime> end_dttm, string passing_list, string att1, string att2, string att3, string att4, string att5, ObjectParameter option_desc)
+        {
+            var start_dttmParameter = start_dttm.HasValue ?
+                new ObjectParameter("start_dttm", start_dttm) :
+                new ObjectParameter("start_dttm", typeof(System.DateTime));
+    
+            var end_dttmParameter = end_dttm.HasValue ?
+                new ObjectParameter("end_dttm", end_dttm) :
+                new ObjectParameter("end_dttm", typeof(System.DateTime));
+    
+            var passing_listParameter = passing_list != null ?
+                new ObjectParameter("passing_list", passing_list) :
+                new ObjectParameter("passing_list", typeof(string));
+    
+            var att1Parameter = att1 != null ?
+                new ObjectParameter("att1", att1) :
+                new ObjectParameter("att1", typeof(string));
+    
+            var att2Parameter = att2 != null ?
+                new ObjectParameter("att2", att2) :
+                new ObjectParameter("att2", typeof(string));
+    
+            var att3Parameter = att3 != null ?
+                new ObjectParameter("att3", att3) :
+                new ObjectParameter("att3", typeof(string));
+    
+            var att4Parameter = att4 != null ?
+                new ObjectParameter("att4", att4) :
+                new ObjectParameter("att4", typeof(string));
+    
+            var att5Parameter = att5 != null ?
+                new ObjectParameter("att5", att5) :
+                new ObjectParameter("att5", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("option_10", start_dttmParameter, end_dttmParameter, passing_listParameter, att1Parameter, att2Parameter, att3Parameter, att4Parameter, att5Parameter, option_desc);
+        }
+    
+        public virtual int option_11(Nullable<System.DateTime> start_dttm, Nullable<System.DateTime> end_dttm, string passing_list, string att1, string att2, string att3, string att4, string att5, ObjectParameter option_desc)
+        {
+            var start_dttmParameter = start_dttm.HasValue ?
+                new ObjectParameter("start_dttm", start_dttm) :
+                new ObjectParameter("start_dttm", typeof(System.DateTime));
+    
+            var end_dttmParameter = end_dttm.HasValue ?
+                new ObjectParameter("end_dttm", end_dttm) :
+                new ObjectParameter("end_dttm", typeof(System.DateTime));
+    
+            var passing_listParameter = passing_list != null ?
+                new ObjectParameter("passing_list", passing_list) :
+                new ObjectParameter("passing_list", typeof(string));
+    
+            var att1Parameter = att1 != null ?
+                new ObjectParameter("att1", att1) :
+                new ObjectParameter("att1", typeof(string));
+    
+            var att2Parameter = att2 != null ?
+                new ObjectParameter("att2", att2) :
+                new ObjectParameter("att2", typeof(string));
+    
+            var att3Parameter = att3 != null ?
+                new ObjectParameter("att3", att3) :
+                new ObjectParameter("att3", typeof(string));
+    
+            var att4Parameter = att4 != null ?
+                new ObjectParameter("att4", att4) :
+                new ObjectParameter("att4", typeof(string));
+    
+            var att5Parameter = att5 != null ?
+                new ObjectParameter("att5", att5) :
+                new ObjectParameter("att5", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("option_11", start_dttmParameter, end_dttmParameter, passing_listParameter, att1Parameter, att2Parameter, att3Parameter, att4Parameter, att5Parameter, option_desc);
+        }
+    
+        public virtual int option_12(Nullable<System.DateTime> start_dttm, Nullable<System.DateTime> end_dttm, string passing_list, string att1, string att2, string att3, string att4, string att5, ObjectParameter option_desc)
+        {
+            var start_dttmParameter = start_dttm.HasValue ?
+                new ObjectParameter("start_dttm", start_dttm) :
+                new ObjectParameter("start_dttm", typeof(System.DateTime));
+    
+            var end_dttmParameter = end_dttm.HasValue ?
+                new ObjectParameter("end_dttm", end_dttm) :
+                new ObjectParameter("end_dttm", typeof(System.DateTime));
+    
+            var passing_listParameter = passing_list != null ?
+                new ObjectParameter("passing_list", passing_list) :
+                new ObjectParameter("passing_list", typeof(string));
+    
+            var att1Parameter = att1 != null ?
+                new ObjectParameter("att1", att1) :
+                new ObjectParameter("att1", typeof(string));
+    
+            var att2Parameter = att2 != null ?
+                new ObjectParameter("att2", att2) :
+                new ObjectParameter("att2", typeof(string));
+    
+            var att3Parameter = att3 != null ?
+                new ObjectParameter("att3", att3) :
+                new ObjectParameter("att3", typeof(string));
+    
+            var att4Parameter = att4 != null ?
+                new ObjectParameter("att4", att4) :
+                new ObjectParameter("att4", typeof(string));
+    
+            var att5Parameter = att5 != null ?
+                new ObjectParameter("att5", att5) :
+                new ObjectParameter("att5", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("option_12", start_dttmParameter, end_dttmParameter, passing_listParameter, att1Parameter, att2Parameter, att3Parameter, att4Parameter, att5Parameter, option_desc);
+        }
+    
+        public virtual int option_13(Nullable<System.DateTime> start_dttm, Nullable<System.DateTime> end_dttm, string passing_list, string att1, string att2, string att3, string att4, string att5, ObjectParameter option_desc)
+        {
+            var start_dttmParameter = start_dttm.HasValue ?
+                new ObjectParameter("start_dttm", start_dttm) :
+                new ObjectParameter("start_dttm", typeof(System.DateTime));
+    
+            var end_dttmParameter = end_dttm.HasValue ?
+                new ObjectParameter("end_dttm", end_dttm) :
+                new ObjectParameter("end_dttm", typeof(System.DateTime));
+    
+            var passing_listParameter = passing_list != null ?
+                new ObjectParameter("passing_list", passing_list) :
+                new ObjectParameter("passing_list", typeof(string));
+    
+            var att1Parameter = att1 != null ?
+                new ObjectParameter("att1", att1) :
+                new ObjectParameter("att1", typeof(string));
+    
+            var att2Parameter = att2 != null ?
+                new ObjectParameter("att2", att2) :
+                new ObjectParameter("att2", typeof(string));
+    
+            var att3Parameter = att3 != null ?
+                new ObjectParameter("att3", att3) :
+                new ObjectParameter("att3", typeof(string));
+    
+            var att4Parameter = att4 != null ?
+                new ObjectParameter("att4", att4) :
+                new ObjectParameter("att4", typeof(string));
+    
+            var att5Parameter = att5 != null ?
+                new ObjectParameter("att5", att5) :
+                new ObjectParameter("att5", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("option_13", start_dttmParameter, end_dttmParameter, passing_listParameter, att1Parameter, att2Parameter, att3Parameter, att4Parameter, att5Parameter, option_desc);
+        }
+    
+        public virtual int option_14(Nullable<System.DateTime> start_dttm, Nullable<System.DateTime> end_dttm, string passing_list, string att1, string att2, string att3, string att4, string att5, ObjectParameter option_desc)
+        {
+            var start_dttmParameter = start_dttm.HasValue ?
+                new ObjectParameter("start_dttm", start_dttm) :
+                new ObjectParameter("start_dttm", typeof(System.DateTime));
+    
+            var end_dttmParameter = end_dttm.HasValue ?
+                new ObjectParameter("end_dttm", end_dttm) :
+                new ObjectParameter("end_dttm", typeof(System.DateTime));
+    
+            var passing_listParameter = passing_list != null ?
+                new ObjectParameter("passing_list", passing_list) :
+                new ObjectParameter("passing_list", typeof(string));
+    
+            var att1Parameter = att1 != null ?
+                new ObjectParameter("att1", att1) :
+                new ObjectParameter("att1", typeof(string));
+    
+            var att2Parameter = att2 != null ?
+                new ObjectParameter("att2", att2) :
+                new ObjectParameter("att2", typeof(string));
+    
+            var att3Parameter = att3 != null ?
+                new ObjectParameter("att3", att3) :
+                new ObjectParameter("att3", typeof(string));
+    
+            var att4Parameter = att4 != null ?
+                new ObjectParameter("att4", att4) :
+                new ObjectParameter("att4", typeof(string));
+    
+            var att5Parameter = att5 != null ?
+                new ObjectParameter("att5", att5) :
+                new ObjectParameter("att5", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("option_14", start_dttmParameter, end_dttmParameter, passing_listParameter, att1Parameter, att2Parameter, att3Parameter, att4Parameter, att5Parameter, option_desc);
+        }
+    
+        public virtual int option_15(Nullable<System.DateTime> start_dttm, Nullable<System.DateTime> end_dttm, string passing_list, string att1, string att2, string att3, string att4, string att5, ObjectParameter option_desc)
+        {
+            var start_dttmParameter = start_dttm.HasValue ?
+                new ObjectParameter("start_dttm", start_dttm) :
+                new ObjectParameter("start_dttm", typeof(System.DateTime));
+    
+            var end_dttmParameter = end_dttm.HasValue ?
+                new ObjectParameter("end_dttm", end_dttm) :
+                new ObjectParameter("end_dttm", typeof(System.DateTime));
+    
+            var passing_listParameter = passing_list != null ?
+                new ObjectParameter("passing_list", passing_list) :
+                new ObjectParameter("passing_list", typeof(string));
+    
+            var att1Parameter = att1 != null ?
+                new ObjectParameter("att1", att1) :
+                new ObjectParameter("att1", typeof(string));
+    
+            var att2Parameter = att2 != null ?
+                new ObjectParameter("att2", att2) :
+                new ObjectParameter("att2", typeof(string));
+    
+            var att3Parameter = att3 != null ?
+                new ObjectParameter("att3", att3) :
+                new ObjectParameter("att3", typeof(string));
+    
+            var att4Parameter = att4 != null ?
+                new ObjectParameter("att4", att4) :
+                new ObjectParameter("att4", typeof(string));
+    
+            var att5Parameter = att5 != null ?
+                new ObjectParameter("att5", att5) :
+                new ObjectParameter("att5", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("option_15", start_dttmParameter, end_dttmParameter, passing_listParameter, att1Parameter, att2Parameter, att3Parameter, att4Parameter, att5Parameter, option_desc);
         }
     
         public virtual int process_analysis(string symbol)
@@ -183,6 +774,74 @@ namespace History
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("process_volume", symbolParameter);
         }
     
+        public virtual int sp_add_list_history(Nullable<System.DateTime> start_dttm, Nullable<System.DateTime> end_dttm, Nullable<int> option, string passing_list, string att1, string att2, string att3, string att4, string att5, string option_desc, string description, ObjectParameter hist_id)
+        {
+            var start_dttmParameter = start_dttm.HasValue ?
+                new ObjectParameter("start_dttm", start_dttm) :
+                new ObjectParameter("start_dttm", typeof(System.DateTime));
+    
+            var end_dttmParameter = end_dttm.HasValue ?
+                new ObjectParameter("end_dttm", end_dttm) :
+                new ObjectParameter("end_dttm", typeof(System.DateTime));
+    
+            var optionParameter = option.HasValue ?
+                new ObjectParameter("option", option) :
+                new ObjectParameter("option", typeof(int));
+    
+            var passing_listParameter = passing_list != null ?
+                new ObjectParameter("passing_list", passing_list) :
+                new ObjectParameter("passing_list", typeof(string));
+    
+            var att1Parameter = att1 != null ?
+                new ObjectParameter("att1", att1) :
+                new ObjectParameter("att1", typeof(string));
+    
+            var att2Parameter = att2 != null ?
+                new ObjectParameter("att2", att2) :
+                new ObjectParameter("att2", typeof(string));
+    
+            var att3Parameter = att3 != null ?
+                new ObjectParameter("att3", att3) :
+                new ObjectParameter("att3", typeof(string));
+    
+            var att4Parameter = att4 != null ?
+                new ObjectParameter("att4", att4) :
+                new ObjectParameter("att4", typeof(string));
+    
+            var att5Parameter = att5 != null ?
+                new ObjectParameter("att5", att5) :
+                new ObjectParameter("att5", typeof(string));
+    
+            var option_descParameter = option_desc != null ?
+                new ObjectParameter("option_desc", option_desc) :
+                new ObjectParameter("option_desc", typeof(string));
+    
+            var descriptionParameter = description != null ?
+                new ObjectParameter("description", description) :
+                new ObjectParameter("description", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_add_list_history", start_dttmParameter, end_dttmParameter, optionParameter, passing_listParameter, att1Parameter, att2Parameter, att3Parameter, att4Parameter, att5Parameter, option_descParameter, descriptionParameter, hist_id);
+        }
+    
+        public virtual int sp_generate_idx()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_generate_idx");
+        }
+    
+        public virtual ObjectResult<sp_get_prediction_history_Result> sp_get_prediction_history(Nullable<int> hist_id)
+        {
+            var hist_idParameter = hist_id.HasValue ?
+                new ObjectParameter("hist_id", hist_id) :
+                new ObjectParameter("hist_id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_get_prediction_history_Result>("sp_get_prediction_history", hist_idParameter);
+        }
+    
+        public virtual int sp_prediction_history_cleanup()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_prediction_history_cleanup");
+        }
+    
         public virtual int sp_simulation(string symbols, Nullable<System.DateTime> start_dttm, Nullable<double> drop_limit_perc, Nullable<double> sell_limit_perc, Nullable<int> max_days_hold, string show_detail)
         {
             var symbolsParameter = symbols != null ?
@@ -212,7 +871,7 @@ namespace History
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_simulation", symbolsParameter, start_dttmParameter, drop_limit_percParameter, sell_limit_percParameter, max_days_holdParameter, show_detailParameter);
         }
     
-        public virtual int sp_weekly_v1(string symbols, Nullable<System.DateTime> start_dttm, Nullable<int> week_count)
+        public virtual int XXX_sp_weekly_v1(string symbols, Nullable<System.DateTime> start_dttm, Nullable<int> week_count)
         {
             var symbolsParameter = symbols != null ?
                 new ObjectParameter("symbols", symbols) :
@@ -226,20 +885,20 @@ namespace History
                 new ObjectParameter("week_count", week_count) :
                 new ObjectParameter("week_count", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_weekly_v1", symbolsParameter, start_dttmParameter, week_countParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("XXX_sp_weekly_v1", symbolsParameter, start_dttmParameter, week_countParameter);
         }
     
-        public virtual int update_daily_analysis_v1()
+        public virtual int XXX_update_daily_analysis_v1()
         {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("update_daily_analysis_v1");
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("XXX_update_daily_analysis_v1");
         }
     
-        public virtual int update_daily_v1()
+        public virtual int XXX_update_daily_v1()
         {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("update_daily_v1");
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("XXX_update_daily_v1");
         }
     
-        public virtual ObjectResult<filter_main_Result> filter_main(Nullable<System.DateTime> start_dttm, Nullable<System.DateTime> end_dttm, Nullable<int> option, string passing_list, string passing_symbols, string att1, string att2, string att3, string att4, string att5, string description)
+        public virtual ObjectResult<get_Stat_history_Result> get_Stat_history(Nullable<System.DateTime> start_dttm, Nullable<System.DateTime> end_dttm, Nullable<int> hist_count, string final_only)
         {
             var start_dttmParameter = start_dttm.HasValue ?
                 new ObjectParameter("start_dttm", start_dttm) :
@@ -249,66 +908,15 @@ namespace History
                 new ObjectParameter("end_dttm", end_dttm) :
                 new ObjectParameter("end_dttm", typeof(System.DateTime));
     
-            var optionParameter = option.HasValue ?
-                new ObjectParameter("option", option) :
-                new ObjectParameter("option", typeof(int));
+            var hist_countParameter = hist_count.HasValue ?
+                new ObjectParameter("hist_count", hist_count) :
+                new ObjectParameter("hist_count", typeof(int));
     
-            var passing_listParameter = passing_list != null ?
-                new ObjectParameter("passing_list", passing_list) :
-                new ObjectParameter("passing_list", typeof(string));
+            var final_onlyParameter = final_only != null ?
+                new ObjectParameter("final_only", final_only) :
+                new ObjectParameter("final_only", typeof(string));
     
-            var passing_symbolsParameter = passing_symbols != null ?
-                new ObjectParameter("passing_symbols", passing_symbols) :
-                new ObjectParameter("passing_symbols", typeof(string));
-    
-            var att1Parameter = att1 != null ?
-                new ObjectParameter("att1", att1) :
-                new ObjectParameter("att1", typeof(string));
-    
-            var att2Parameter = att2 != null ?
-                new ObjectParameter("att2", att2) :
-                new ObjectParameter("att2", typeof(string));
-    
-            var att3Parameter = att3 != null ?
-                new ObjectParameter("att3", att3) :
-                new ObjectParameter("att3", typeof(string));
-    
-            var att4Parameter = att4 != null ?
-                new ObjectParameter("att4", att4) :
-                new ObjectParameter("att4", typeof(string));
-    
-            var att5Parameter = att5 != null ?
-                new ObjectParameter("att5", att5) :
-                new ObjectParameter("att5", typeof(string));
-    
-            var descriptionParameter = description != null ?
-                new ObjectParameter("description", description) :
-                new ObjectParameter("description", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<filter_main_Result>("filter_main", start_dttmParameter, end_dttmParameter, optionParameter, passing_listParameter, passing_symbolsParameter, att1Parameter, att2Parameter, att3Parameter, att4Parameter, att5Parameter, descriptionParameter);
-        }
-    
-        public virtual int sp_generate_idx()
-        {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_generate_idx");
-        }
-    
-        public virtual ObjectResult<sp_get_prediction_history_Result> sp_get_prediction_history(Nullable<int> hist_id)
-        {
-            var hist_idParameter = hist_id.HasValue ?
-                new ObjectParameter("hist_id", hist_id) :
-                new ObjectParameter("hist_id", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_get_prediction_history_Result>("sp_get_prediction_history", hist_idParameter);
-        }
-    
-        public virtual ObjectResult<filter_simul_header_Result> filter_simul_header(Nullable<System.DateTime> end_dttm)
-        {
-            var end_dttmParameter = end_dttm.HasValue ?
-                new ObjectParameter("end_dttm", end_dttm) :
-                new ObjectParameter("end_dttm", typeof(System.DateTime));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<filter_simul_header_Result>("filter_simul_header", end_dttmParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<get_Stat_history_Result>("get_Stat_history", start_dttmParameter, end_dttmParameter, hist_countParameter, final_onlyParameter);
         }
     }
 }

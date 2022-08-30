@@ -58,7 +58,7 @@ namespace History
 
         private void Load_Symbols()
         {
-            using (stockEntities stock = new stockEntities())
+            using (stockEntity stock = new stockEntity())
             {
                 SortableBindingList<watch_list_v1> watches = new SortableBindingList<watch_list_v1>();
                 foreach(var w in stock.watch_list_v1)
@@ -78,7 +78,7 @@ namespace History
         }
         private void Load_Lookup()
         {
-            using (stockEntities stock = new stockEntities())
+            using (stockEntity stock = new stockEntity())
             {
                 data_types = stock.lookups.Where(r => r.l_type == "data_type").ToList();
             }
@@ -113,7 +113,7 @@ namespace History
         private void btn_Check_Not_Updated_Click(object sender, EventArgs e)
         {
             var max_dttm = DateTime.Today;
-            using (stockEntities stock = new stockEntities())
+            using (stockEntity stock = new stockEntity())
             {
                 max_dttm = stock.watch_list_v1.Max(r => r.last_updated).Value;
             }
@@ -256,7 +256,7 @@ namespace History
                 show_Message(_symbol + ": " + ex.Message);
                 return;
             }
-            using (stockEntities api = new stockEntities())
+            using (stockEntity api = new stockEntity())
             {
                 List<daily_source> history = new List<daily_source>();
                 history = api.daily_source.Where(r => r.symbol == _symbol).ToList();
@@ -319,7 +319,7 @@ namespace History
                 show_Message(s + ": " + ex.Message);
                 return;
             }
-            using (stockEntities api = new stockEntities())
+            using (stockEntity api = new stockEntity())
             {
                 List<earning> history = new List<earning>();
                 history = api.earnings.Where(r => r.symbol == s).ToList();
@@ -410,7 +410,7 @@ namespace History
                 show_Message(s + ": " + ex.Message);
                 return;
             }
-            using (stockEntities api = new stockEntities())
+            using (stockEntity api = new stockEntity())
             {
                 List<income> history = new List<income>();
                 history = api.incomes.Where(r => r.symbol == s).ToList();
@@ -538,7 +538,7 @@ namespace History
         }
         private void ProcHistory()
         {
-            using (stockEntities stock = new stockEntities())
+            using (stockEntity stock = new stockEntity())
             {
                 stock.Database.CommandTimeout = 300000;
                 foreach (var s in Ret_Checked(chk_Symbols))
@@ -553,7 +553,7 @@ namespace History
         }
         private void ProcSMA()
         {
-            using (stockEntities stock = new stockEntities())
+            using (stockEntity stock = new stockEntity())
             {
                 stock.Database.CommandTimeout = 300000;
                 foreach (var s in Ret_Checked(chk_Symbols))
@@ -573,7 +573,7 @@ namespace History
         }
         private void ProcEMA()
         {
-            using (stockEntities stock = new stockEntities())
+            using (stockEntity stock = new stockEntity())
             {
                 stock.Database.CommandTimeout = 300000;
 
@@ -600,7 +600,7 @@ namespace History
         }
         private void ProcRSI()
         {
-            using (stockEntities stock = new stockEntities())
+            using (stockEntity stock = new stockEntity())
             {
                 stock.Database.CommandTimeout = 300000;
 
@@ -621,7 +621,7 @@ namespace History
 
         private void ProcMACD()
         {
-            using (stockEntities stock = new stockEntities())
+            using (stockEntity stock = new stockEntity())
             {
                 stock.Database.CommandTimeout = 300000;
 
@@ -657,7 +657,7 @@ namespace History
         }
         private void ProcChange()
         {
-            using (stockEntities stock = new stockEntities())
+            using (stockEntity stock = new stockEntity())
             {
                 stock.Database.CommandTimeout = 300000;
 
@@ -679,7 +679,7 @@ namespace History
         }
         private void ProcForecast()
         {
-            using (stockEntities stock = new stockEntities())
+            using (stockEntity stock = new stockEntity())
             {
                 stock.Database.CommandTimeout = 300000;
 
@@ -705,7 +705,7 @@ namespace History
         }
         private void ProcAnalysis()
         {
-            using (stockEntities stock = new stockEntities())
+            using (stockEntity stock = new stockEntity())
             {
                 stock.Database.CommandTimeout = 300000;
 
@@ -721,7 +721,7 @@ namespace History
         }
         private void ProcEPR()
         {
-            using (stockEntities stock = new stockEntities())
+            using (stockEntity stock = new stockEntity())
             {
                 stock.Database.CommandTimeout = 300000;
 
@@ -747,7 +747,7 @@ namespace History
         }
         private void ProcVolume()
         {
-            using (stockEntities stock = new stockEntities())
+            using (stockEntity stock = new stockEntity())
             {
                 stock.Database.CommandTimeout = 300000;
 
@@ -763,7 +763,7 @@ namespace History
         }
         private void ProcIndex()
         {
-            using (stockEntities stock = new stockEntities())
+            using (stockEntity stock = new stockEntity())
             {
                 stock.Database.CommandTimeout = 300000;
 
@@ -805,7 +805,7 @@ namespace History
         }
         private void UpdateView()
         {
-            using (stockEntities stock = new stockEntities())
+            using (stockEntity stock = new stockEntity())
             {
                 stock.Database.CommandTimeout = 300000;
                 stock.Database.ExecuteSqlCommand(" exec update_daily_v1 ", new object[] { });

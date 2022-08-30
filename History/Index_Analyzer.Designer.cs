@@ -29,7 +29,8 @@ namespace History
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.chart_Main = new LiveCharts.WinForms.CartesianChart();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
@@ -40,14 +41,12 @@ namespace History
             this.btn_N1 = new System.Windows.Forms.Button();
             this.btn_Index = new System.Windows.Forms.Button();
             this.cmb_Type = new System.Windows.Forms.ComboBox();
-            this.flowLayoutPanel7 = new System.Windows.Forms.FlowLayoutPanel();
-            this.label8 = new System.Windows.Forms.Label();
-            this.nmb_CaptureList = new System.Windows.Forms.NumericUpDown();
-            this.btn_Capture = new System.Windows.Forms.Button();
             this.flowLayoutPanel3 = new System.Windows.Forms.FlowLayoutPanel();
             this.dt_Symbol_From = new System.Windows.Forms.DateTimePicker();
             this.label4 = new System.Windows.Forms.Label();
             this.dt_Symbol_To = new System.Windows.Forms.DateTimePicker();
+            this.btn_PD1 = new System.Windows.Forms.Button();
+            this.btn_ND1 = new System.Windows.Forms.Button();
             this.chk_PassingList = new System.Windows.Forms.CheckBox();
             this.chk_Analysis = new System.Windows.Forms.CheckBox();
             this.flowLayoutPanel6 = new System.Windows.Forms.FlowLayoutPanel();
@@ -59,32 +58,54 @@ namespace History
             this.btn_RaiseAxis = new System.Windows.Forms.Button();
             this.btn_NarrowAxis = new System.Windows.Forms.Button();
             this.btn_WideAxis = new System.Windows.Forms.Button();
+            this.btn_Fixed = new System.Windows.Forms.Button();
             this.chk_FixedRange = new System.Windows.Forms.CheckBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.nmb_2nd_Axix_Y_Max = new System.Windows.Forms.NumericUpDown();
-            this.chk_Simul = new System.Windows.Forms.CheckBox();
-            this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-            this.dgv_List = new System.Windows.Forms.DataGridView();
-            this.flowLayoutPanel4 = new System.Windows.Forms.FlowLayoutPanel();
-            this.txt_OptionDesc = new System.Windows.Forms.TextBox();
             this.nmb_2nd_Axix_Y_Min = new System.Windows.Forms.NumericUpDown();
             this.label3 = new System.Windows.Forms.Label();
+            this.nmb_2nd_Axix_Y_Max = new System.Windows.Forms.NumericUpDown();
+            this.flowLayoutPanel5 = new System.Windows.Forms.FlowLayoutPanel();
+            this.chk_IndexPrice = new System.Windows.Forms.CheckBox();
+            this.chk_IndexSMA5 = new System.Windows.Forms.CheckBox();
+            this.chk_S_Price = new System.Windows.Forms.CheckBox();
+            this.chk_S_Volume = new System.Windows.Forms.CheckBox();
+            this.chk_S_SMA5 = new System.Windows.Forms.CheckBox();
+            this.chk_S_Candle = new System.Windows.Forms.CheckBox();
+            this.flowLayoutPanel7 = new System.Windows.Forms.FlowLayoutPanel();
+            this.label8 = new System.Windows.Forms.Label();
+            this.nmb_CaptureList = new System.Windows.Forms.NumericUpDown();
+            this.btn_Capture = new System.Windows.Forms.Button();
+            this.btn_Capture_One = new System.Windows.Forms.Button();
+            this.label5 = new System.Windows.Forms.Label();
+            this.nmb_Sleep = new System.Windows.Forms.NumericUpDown();
+            this.chk_Simul = new System.Windows.Forms.CheckBox();
+            this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.pic_Chart = new System.Windows.Forms.PictureBox();
+            this.dgv_List = new System.Windows.Forms.DataGridView();
+            this.flowLayoutPanel4 = new System.Windows.Forms.FlowLayoutPanel();
+            this.chk_Show_Pic = new System.Windows.Forms.CheckBox();
+            this.txt_OptionDesc = new System.Windows.Forms.TextBox();
+            this.menu_Result = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.btn_CopyList = new System.Windows.Forms.Button();
             this.flowLayoutPanel1.SuspendLayout();
             this.flowLayoutPanel2.SuspendLayout();
-            this.flowLayoutPanel7.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nmb_CaptureList)).BeginInit();
             this.flowLayoutPanel3.SuspendLayout();
             this.flowLayoutPanel6.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nmb_Y_Min)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nmb_Y_Max)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nmb_2nd_Axix_Y_Min)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nmb_2nd_Axix_Y_Max)).BeginInit();
+            this.flowLayoutPanel5.SuspendLayout();
+            this.flowLayoutPanel7.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nmb_CaptureList)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nmb_Sleep)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pic_Chart)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_List)).BeginInit();
             this.flowLayoutPanel4.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nmb_2nd_Axix_Y_Min)).BeginInit();
             this.SuspendLayout();
             // 
             // chart_Main
@@ -101,9 +122,10 @@ namespace History
             // flowLayoutPanel1
             // 
             this.flowLayoutPanel1.Controls.Add(this.flowLayoutPanel2);
-            this.flowLayoutPanel1.Controls.Add(this.flowLayoutPanel7);
             this.flowLayoutPanel1.Controls.Add(this.flowLayoutPanel3);
             this.flowLayoutPanel1.Controls.Add(this.flowLayoutPanel6);
+            this.flowLayoutPanel1.Controls.Add(this.flowLayoutPanel5);
+            this.flowLayoutPanel1.Controls.Add(this.flowLayoutPanel7);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(2);
@@ -123,7 +145,7 @@ namespace History
             this.flowLayoutPanel2.Controls.Add(this.cmb_Type);
             this.flowLayoutPanel2.Location = new System.Drawing.Point(3, 3);
             this.flowLayoutPanel2.Name = "flowLayoutPanel2";
-            this.flowLayoutPanel2.Size = new System.Drawing.Size(192, 62);
+            this.flowLayoutPanel2.Size = new System.Drawing.Size(199, 62);
             this.flowLayoutPanel2.TabIndex = 36;
             // 
             // dt_From
@@ -199,72 +221,20 @@ namespace History
             this.cmb_Type.Size = new System.Drawing.Size(76, 21);
             this.cmb_Type.TabIndex = 13;
             // 
-            // flowLayoutPanel7
-            // 
-            this.flowLayoutPanel7.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.flowLayoutPanel7.Controls.Add(this.label8);
-            this.flowLayoutPanel7.Controls.Add(this.nmb_CaptureList);
-            this.flowLayoutPanel7.Controls.Add(this.btn_Capture);
-            this.flowLayoutPanel7.Location = new System.Drawing.Point(201, 3);
-            this.flowLayoutPanel7.Name = "flowLayoutPanel7";
-            this.flowLayoutPanel7.Size = new System.Drawing.Size(91, 62);
-            this.flowLayoutPanel7.TabIndex = 41;
-            // 
-            // label8
-            // 
-            this.label8.Location = new System.Drawing.Point(2, 0);
-            this.label8.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(29, 26);
-            this.label8.TabIndex = 33;
-            this.label8.Text = "List:";
-            this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // nmb_CaptureList
-            // 
-            this.nmb_CaptureList.Location = new System.Drawing.Point(36, 3);
-            this.nmb_CaptureList.Maximum = new decimal(new int[] {
-            9999,
-            0,
-            0,
-            0});
-            this.nmb_CaptureList.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.nmb_CaptureList.Name = "nmb_CaptureList";
-            this.nmb_CaptureList.Size = new System.Drawing.Size(46, 20);
-            this.nmb_CaptureList.TabIndex = 32;
-            this.nmb_CaptureList.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.nmb_CaptureList.Value = new decimal(new int[] {
-            20,
-            0,
-            0,
-            0});
-            // 
-            // btn_Capture
-            // 
-            this.btn_Capture.Location = new System.Drawing.Point(2, 28);
-            this.btn_Capture.Margin = new System.Windows.Forms.Padding(2);
-            this.btn_Capture.Name = "btn_Capture";
-            this.btn_Capture.Size = new System.Drawing.Size(62, 24);
-            this.btn_Capture.TabIndex = 31;
-            this.btn_Capture.Text = "Capture";
-            this.btn_Capture.UseVisualStyleBackColor = true;
-            this.btn_Capture.Click += new System.EventHandler(this.btn_Capture_Click);
-            // 
             // flowLayoutPanel3
             // 
+            this.flowLayoutPanel3.AutoScroll = true;
             this.flowLayoutPanel3.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.flowLayoutPanel3.Controls.Add(this.dt_Symbol_From);
             this.flowLayoutPanel3.Controls.Add(this.label4);
             this.flowLayoutPanel3.Controls.Add(this.dt_Symbol_To);
+            this.flowLayoutPanel3.Controls.Add(this.btn_PD1);
+            this.flowLayoutPanel3.Controls.Add(this.btn_ND1);
             this.flowLayoutPanel3.Controls.Add(this.chk_PassingList);
             this.flowLayoutPanel3.Controls.Add(this.chk_Analysis);
-            this.flowLayoutPanel3.Location = new System.Drawing.Point(298, 3);
+            this.flowLayoutPanel3.Location = new System.Drawing.Point(208, 3);
             this.flowLayoutPanel3.Name = "flowLayoutPanel3";
-            this.flowLayoutPanel3.Size = new System.Drawing.Size(237, 62);
+            this.flowLayoutPanel3.Size = new System.Drawing.Size(179, 62);
             this.flowLayoutPanel3.TabIndex = 37;
             // 
             // dt_Symbol_From
@@ -289,17 +259,39 @@ namespace History
             // dt_Symbol_To
             // 
             this.dt_Symbol_To.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dt_Symbol_To.Location = new System.Drawing.Point(107, 2);
+            this.dt_Symbol_To.Location = new System.Drawing.Point(2, 28);
             this.dt_Symbol_To.Margin = new System.Windows.Forms.Padding(2);
             this.dt_Symbol_To.Name = "dt_Symbol_To";
             this.dt_Symbol_To.Size = new System.Drawing.Size(77, 20);
             this.dt_Symbol_To.TabIndex = 20;
             // 
+            // btn_PD1
+            // 
+            this.btn_PD1.Location = new System.Drawing.Point(83, 28);
+            this.btn_PD1.Margin = new System.Windows.Forms.Padding(2);
+            this.btn_PD1.Name = "btn_PD1";
+            this.btn_PD1.Size = new System.Drawing.Size(19, 19);
+            this.btn_PD1.TabIndex = 14;
+            this.btn_PD1.Text = "-";
+            this.btn_PD1.UseVisualStyleBackColor = true;
+            this.btn_PD1.Click += new System.EventHandler(this.btn_PD1_Click);
+            // 
+            // btn_ND1
+            // 
+            this.btn_ND1.Location = new System.Drawing.Point(106, 28);
+            this.btn_ND1.Margin = new System.Windows.Forms.Padding(2);
+            this.btn_ND1.Name = "btn_ND1";
+            this.btn_ND1.Size = new System.Drawing.Size(19, 19);
+            this.btn_ND1.TabIndex = 15;
+            this.btn_ND1.Text = "+";
+            this.btn_ND1.UseVisualStyleBackColor = true;
+            this.btn_ND1.Click += new System.EventHandler(this.btn_ND1_Click);
+            // 
             // chk_PassingList
             // 
             this.chk_PassingList.AutoSize = true;
             this.chk_PassingList.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.chk_PassingList.Location = new System.Drawing.Point(3, 29);
+            this.chk_PassingList.Location = new System.Drawing.Point(3, 53);
             this.chk_PassingList.Name = "chk_PassingList";
             this.chk_PassingList.Size = new System.Drawing.Size(88, 17);
             this.chk_PassingList.TabIndex = 36;
@@ -310,7 +302,7 @@ namespace History
             // 
             this.chk_Analysis.AutoSize = true;
             this.chk_Analysis.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.chk_Analysis.Location = new System.Drawing.Point(97, 29);
+            this.chk_Analysis.Location = new System.Drawing.Point(97, 53);
             this.chk_Analysis.Name = "chk_Analysis";
             this.chk_Analysis.Size = new System.Drawing.Size(51, 17);
             this.chk_Analysis.TabIndex = 35;
@@ -328,14 +320,15 @@ namespace History
             this.flowLayoutPanel6.Controls.Add(this.btn_RaiseAxis);
             this.flowLayoutPanel6.Controls.Add(this.btn_NarrowAxis);
             this.flowLayoutPanel6.Controls.Add(this.btn_WideAxis);
+            this.flowLayoutPanel6.Controls.Add(this.btn_Fixed);
             this.flowLayoutPanel6.Controls.Add(this.chk_FixedRange);
             this.flowLayoutPanel6.Controls.Add(this.label1);
             this.flowLayoutPanel6.Controls.Add(this.nmb_2nd_Axix_Y_Min);
             this.flowLayoutPanel6.Controls.Add(this.label3);
             this.flowLayoutPanel6.Controls.Add(this.nmb_2nd_Axix_Y_Max);
-            this.flowLayoutPanel6.Location = new System.Drawing.Point(541, 3);
+            this.flowLayoutPanel6.Location = new System.Drawing.Point(393, 3);
             this.flowLayoutPanel6.Name = "flowLayoutPanel6";
-            this.flowLayoutPanel6.Size = new System.Drawing.Size(343, 62);
+            this.flowLayoutPanel6.Size = new System.Drawing.Size(336, 62);
             this.flowLayoutPanel6.TabIndex = 40;
             // 
             // label6
@@ -448,10 +441,23 @@ namespace History
             this.btn_WideAxis.UseVisualStyleBackColor = true;
             this.btn_WideAxis.Click += new System.EventHandler(this.btn_WideAxis_Click);
             // 
+            // btn_Fixed
+            // 
+            this.btn_Fixed.Location = new System.Drawing.Point(298, 2);
+            this.btn_Fixed.Margin = new System.Windows.Forms.Padding(2);
+            this.btn_Fixed.Name = "btn_Fixed";
+            this.btn_Fixed.Size = new System.Drawing.Size(19, 25);
+            this.btn_Fixed.TabIndex = 41;
+            this.btn_Fixed.Text = "O";
+            this.btn_Fixed.UseVisualStyleBackColor = true;
+            this.btn_Fixed.Click += new System.EventHandler(this.btn_Fixed_Click);
+            // 
             // chk_FixedRange
             // 
             this.chk_FixedRange.AutoSize = true;
             this.chk_FixedRange.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.chk_FixedRange.Checked = true;
+            this.chk_FixedRange.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chk_FixedRange.Location = new System.Drawing.Point(3, 32);
             this.chk_FixedRange.Name = "chk_FixedRange";
             this.chk_FixedRange.Size = new System.Drawing.Size(97, 17);
@@ -468,106 +474,6 @@ namespace History
             this.label1.TabIndex = 37;
             this.label1.Text = "2nd Y Axis (Max):";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // nmb_2nd_Axix_Y_Max
-            // 
-            this.nmb_2nd_Axix_Y_Max.Location = new System.Drawing.Point(282, 32);
-            this.nmb_2nd_Axix_Y_Max.Maximum = new decimal(new int[] {
-            9999,
-            0,
-            0,
-            0});
-            this.nmb_2nd_Axix_Y_Max.Name = "nmb_2nd_Axix_Y_Max";
-            this.nmb_2nd_Axix_Y_Max.Size = new System.Drawing.Size(46, 20);
-            this.nmb_2nd_Axix_Y_Max.TabIndex = 38;
-            this.nmb_2nd_Axix_Y_Max.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.nmb_2nd_Axix_Y_Max.Value = new decimal(new int[] {
-            200,
-            0,
-            0,
-            0});
-            // 
-            // chk_Simul
-            // 
-            this.chk_Simul.AutoSize = true;
-            this.chk_Simul.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.chk_Simul.Checked = true;
-            this.chk_Simul.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chk_Simul.Dock = System.Windows.Forms.DockStyle.Left;
-            this.chk_Simul.Location = new System.Drawing.Point(3, 3);
-            this.chk_Simul.Name = "chk_Simul";
-            this.chk_Simul.Size = new System.Drawing.Size(137, 17);
-            this.chk_Simul.TabIndex = 30;
-            this.chk_Simul.Text = "Show Simulation Result";
-            this.chk_Simul.UseVisualStyleBackColor = true;
-            this.chk_Simul.CheckedChanged += new System.EventHandler(this.chk_Simul_CheckedChanged);
-            // 
-            // splitContainer1
-            // 
-            this.splitContainer1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainer1.Location = new System.Drawing.Point(0, 0);
-            this.splitContainer1.Margin = new System.Windows.Forms.Padding(2);
-            this.splitContainer1.Name = "splitContainer1";
-            // 
-            // splitContainer1.Panel1
-            // 
-            this.splitContainer1.Panel1.Controls.Add(this.chart_Main);
-            this.splitContainer1.Panel1.Controls.Add(this.flowLayoutPanel1);
-            // 
-            // splitContainer1.Panel2
-            // 
-            this.splitContainer1.Panel2.Controls.Add(this.dgv_List);
-            this.splitContainer1.Panel2.Controls.Add(this.flowLayoutPanel4);
-            this.splitContainer1.Size = new System.Drawing.Size(1384, 729);
-            this.splitContainer1.SplitterDistance = 1003;
-            this.splitContainer1.TabIndex = 2;
-            this.splitContainer1.SizeChanged += new System.EventHandler(this.splitContainer1_SizeChanged);
-            // 
-            // dgv_List
-            // 
-            this.dgv_List.AllowUserToAddRows = false;
-            this.dgv_List.AllowUserToDeleteRows = false;
-            this.dgv_List.AllowUserToResizeColumns = false;
-            this.dgv_List.AllowUserToResizeRows = false;
-            this.dgv_List.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.Chartreuse;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgv_List.DefaultCellStyle = dataGridViewCellStyle1;
-            this.dgv_List.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgv_List.Location = new System.Drawing.Point(0, 31);
-            this.dgv_List.MultiSelect = false;
-            this.dgv_List.Name = "dgv_List";
-            this.dgv_List.ReadOnly = true;
-            this.dgv_List.RowHeadersVisible = false;
-            this.dgv_List.Size = new System.Drawing.Size(373, 694);
-            this.dgv_List.TabIndex = 0;
-            this.dgv_List.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgv_List_CellMouseClick);
-            this.dgv_List.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgv_List_ColumnHeaderMouseClick);
-            this.dgv_List.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dgv_List_DataBindingComplete);
-            // 
-            // flowLayoutPanel4
-            // 
-            this.flowLayoutPanel4.Controls.Add(this.chk_Simul);
-            this.flowLayoutPanel4.Controls.Add(this.txt_OptionDesc);
-            this.flowLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Top;
-            this.flowLayoutPanel4.Location = new System.Drawing.Point(0, 0);
-            this.flowLayoutPanel4.Name = "flowLayoutPanel4";
-            this.flowLayoutPanel4.Size = new System.Drawing.Size(373, 31);
-            this.flowLayoutPanel4.TabIndex = 43;
-            // 
-            // txt_OptionDesc
-            // 
-            this.txt_OptionDesc.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txt_OptionDesc.Location = new System.Drawing.Point(146, 3);
-            this.txt_OptionDesc.Name = "txt_OptionDesc";
-            this.txt_OptionDesc.Size = new System.Drawing.Size(205, 20);
-            this.txt_OptionDesc.TabIndex = 42;
             // 
             // nmb_2nd_Axix_Y_Min
             // 
@@ -602,6 +508,325 @@ namespace History
             this.label3.Text = "~";
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // nmb_2nd_Axix_Y_Max
+            // 
+            this.nmb_2nd_Axix_Y_Max.Location = new System.Drawing.Point(282, 32);
+            this.nmb_2nd_Axix_Y_Max.Maximum = new decimal(new int[] {
+            9999,
+            0,
+            0,
+            0});
+            this.nmb_2nd_Axix_Y_Max.Name = "nmb_2nd_Axix_Y_Max";
+            this.nmb_2nd_Axix_Y_Max.Size = new System.Drawing.Size(46, 20);
+            this.nmb_2nd_Axix_Y_Max.TabIndex = 38;
+            this.nmb_2nd_Axix_Y_Max.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.nmb_2nd_Axix_Y_Max.Value = new decimal(new int[] {
+            200,
+            0,
+            0,
+            0});
+            // 
+            // flowLayoutPanel5
+            // 
+            this.flowLayoutPanel5.AutoScroll = true;
+            this.flowLayoutPanel5.Controls.Add(this.chk_IndexPrice);
+            this.flowLayoutPanel5.Controls.Add(this.chk_IndexSMA5);
+            this.flowLayoutPanel5.Controls.Add(this.chk_S_Price);
+            this.flowLayoutPanel5.Controls.Add(this.chk_S_Volume);
+            this.flowLayoutPanel5.Controls.Add(this.chk_S_SMA5);
+            this.flowLayoutPanel5.Controls.Add(this.chk_S_Candle);
+            this.flowLayoutPanel5.Dock = System.Windows.Forms.DockStyle.Left;
+            this.flowLayoutPanel5.Location = new System.Drawing.Point(735, 3);
+            this.flowLayoutPanel5.Name = "flowLayoutPanel5";
+            this.flowLayoutPanel5.Size = new System.Drawing.Size(111, 62);
+            this.flowLayoutPanel5.TabIndex = 42;
+            // 
+            // chk_IndexPrice
+            // 
+            this.chk_IndexPrice.AutoSize = true;
+            this.chk_IndexPrice.Checked = true;
+            this.chk_IndexPrice.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chk_IndexPrice.Location = new System.Drawing.Point(3, 3);
+            this.chk_IndexPrice.Name = "chk_IndexPrice";
+            this.chk_IndexPrice.Size = new System.Drawing.Size(79, 17);
+            this.chk_IndexPrice.TabIndex = 1;
+            this.chk_IndexPrice.Text = "Index Price";
+            this.chk_IndexPrice.UseVisualStyleBackColor = true;
+            // 
+            // chk_IndexSMA5
+            // 
+            this.chk_IndexSMA5.AutoSize = true;
+            this.chk_IndexSMA5.Location = new System.Drawing.Point(3, 26);
+            this.chk_IndexSMA5.Name = "chk_IndexSMA5";
+            this.chk_IndexSMA5.Size = new System.Drawing.Size(84, 17);
+            this.chk_IndexSMA5.TabIndex = 0;
+            this.chk_IndexSMA5.Text = "Index SMA5";
+            this.chk_IndexSMA5.UseVisualStyleBackColor = true;
+            // 
+            // chk_S_Price
+            // 
+            this.chk_S_Price.Checked = true;
+            this.chk_S_Price.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chk_S_Price.Location = new System.Drawing.Point(3, 49);
+            this.chk_S_Price.Name = "chk_S_Price";
+            this.chk_S_Price.Size = new System.Drawing.Size(50, 17);
+            this.chk_S_Price.TabIndex = 2;
+            this.chk_S_Price.Text = "Price";
+            this.chk_S_Price.UseVisualStyleBackColor = true;
+            // 
+            // chk_S_Volume
+            // 
+            this.chk_S_Volume.AutoSize = true;
+            this.chk_S_Volume.Checked = true;
+            this.chk_S_Volume.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chk_S_Volume.Location = new System.Drawing.Point(3, 72);
+            this.chk_S_Volume.Name = "chk_S_Volume";
+            this.chk_S_Volume.Size = new System.Drawing.Size(61, 17);
+            this.chk_S_Volume.TabIndex = 4;
+            this.chk_S_Volume.Text = "Volume";
+            this.chk_S_Volume.UseVisualStyleBackColor = true;
+            // 
+            // chk_S_SMA5
+            // 
+            this.chk_S_SMA5.AutoSize = true;
+            this.chk_S_SMA5.Location = new System.Drawing.Point(3, 95);
+            this.chk_S_SMA5.Name = "chk_S_SMA5";
+            this.chk_S_SMA5.Size = new System.Drawing.Size(55, 17);
+            this.chk_S_SMA5.TabIndex = 3;
+            this.chk_S_SMA5.Text = "SMA5";
+            this.chk_S_SMA5.UseVisualStyleBackColor = true;
+            // 
+            // chk_S_Candle
+            // 
+            this.chk_S_Candle.AutoSize = true;
+            this.chk_S_Candle.Checked = true;
+            this.chk_S_Candle.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chk_S_Candle.Location = new System.Drawing.Point(3, 118);
+            this.chk_S_Candle.Name = "chk_S_Candle";
+            this.chk_S_Candle.Size = new System.Drawing.Size(59, 17);
+            this.chk_S_Candle.TabIndex = 5;
+            this.chk_S_Candle.Text = "Candle";
+            this.chk_S_Candle.UseVisualStyleBackColor = true;
+            // 
+            // flowLayoutPanel7
+            // 
+            this.flowLayoutPanel7.AutoScroll = true;
+            this.flowLayoutPanel7.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.flowLayoutPanel7.Controls.Add(this.label8);
+            this.flowLayoutPanel7.Controls.Add(this.nmb_CaptureList);
+            this.flowLayoutPanel7.Controls.Add(this.btn_Capture);
+            this.flowLayoutPanel7.Controls.Add(this.btn_Capture_One);
+            this.flowLayoutPanel7.Controls.Add(this.label5);
+            this.flowLayoutPanel7.Controls.Add(this.nmb_Sleep);
+            this.flowLayoutPanel7.Location = new System.Drawing.Point(852, 3);
+            this.flowLayoutPanel7.Name = "flowLayoutPanel7";
+            this.flowLayoutPanel7.Size = new System.Drawing.Size(133, 62);
+            this.flowLayoutPanel7.TabIndex = 41;
+            // 
+            // label8
+            // 
+            this.label8.Location = new System.Drawing.Point(2, 0);
+            this.label8.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(29, 26);
+            this.label8.TabIndex = 33;
+            this.label8.Text = "List:";
+            this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // nmb_CaptureList
+            // 
+            this.nmb_CaptureList.Location = new System.Drawing.Point(36, 3);
+            this.nmb_CaptureList.Maximum = new decimal(new int[] {
+            9999,
+            0,
+            0,
+            0});
+            this.nmb_CaptureList.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.nmb_CaptureList.Name = "nmb_CaptureList";
+            this.nmb_CaptureList.Size = new System.Drawing.Size(46, 20);
+            this.nmb_CaptureList.TabIndex = 32;
+            this.nmb_CaptureList.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.nmb_CaptureList.Value = new decimal(new int[] {
+            20,
+            0,
+            0,
+            0});
+            // 
+            // btn_Capture
+            // 
+            this.btn_Capture.Location = new System.Drawing.Point(2, 28);
+            this.btn_Capture.Margin = new System.Windows.Forms.Padding(2);
+            this.btn_Capture.Name = "btn_Capture";
+            this.btn_Capture.Size = new System.Drawing.Size(62, 24);
+            this.btn_Capture.TabIndex = 31;
+            this.btn_Capture.Text = "Capture";
+            this.btn_Capture.UseVisualStyleBackColor = true;
+            this.btn_Capture.Click += new System.EventHandler(this.btn_Capture_Click);
+            // 
+            // btn_Capture_One
+            // 
+            this.btn_Capture_One.Location = new System.Drawing.Point(68, 28);
+            this.btn_Capture_One.Margin = new System.Windows.Forms.Padding(2);
+            this.btn_Capture_One.Name = "btn_Capture_One";
+            this.btn_Capture_One.Size = new System.Drawing.Size(29, 24);
+            this.btn_Capture_One.TabIndex = 34;
+            this.btn_Capture_One.Text = "⨀";
+            this.btn_Capture_One.UseVisualStyleBackColor = true;
+            this.btn_Capture_One.Click += new System.EventHandler(this.btn_Capture_One_Click);
+            // 
+            // label5
+            // 
+            this.label5.Location = new System.Drawing.Point(2, 54);
+            this.label5.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(41, 26);
+            this.label5.TabIndex = 36;
+            this.label5.Text = "Sleep";
+            this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // nmb_Sleep
+            // 
+            this.nmb_Sleep.Location = new System.Drawing.Point(48, 57);
+            this.nmb_Sleep.Maximum = new decimal(new int[] {
+            9999,
+            0,
+            0,
+            0});
+            this.nmb_Sleep.Name = "nmb_Sleep";
+            this.nmb_Sleep.Size = new System.Drawing.Size(46, 20);
+            this.nmb_Sleep.TabIndex = 35;
+            this.nmb_Sleep.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.nmb_Sleep.Value = new decimal(new int[] {
+            4,
+            0,
+            0,
+            0});
+            // 
+            // chk_Simul
+            // 
+            this.chk_Simul.AutoSize = true;
+            this.chk_Simul.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.chk_Simul.Dock = System.Windows.Forms.DockStyle.Left;
+            this.chk_Simul.Location = new System.Drawing.Point(3, 3);
+            this.chk_Simul.Name = "chk_Simul";
+            this.chk_Simul.Size = new System.Drawing.Size(137, 22);
+            this.chk_Simul.TabIndex = 30;
+            this.chk_Simul.Text = "Show Simulation Result";
+            this.chk_Simul.UseVisualStyleBackColor = true;
+            this.chk_Simul.CheckedChanged += new System.EventHandler(this.chk_Simul_CheckedChanged);
+            // 
+            // splitContainer1
+            // 
+            this.splitContainer1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer1.Location = new System.Drawing.Point(0, 0);
+            this.splitContainer1.Margin = new System.Windows.Forms.Padding(2);
+            this.splitContainer1.Name = "splitContainer1";
+            // 
+            // splitContainer1.Panel1
+            // 
+            this.splitContainer1.Panel1.Controls.Add(this.pic_Chart);
+            this.splitContainer1.Panel1.Controls.Add(this.chart_Main);
+            this.splitContainer1.Panel1.Controls.Add(this.flowLayoutPanel1);
+            // 
+            // splitContainer1.Panel2
+            // 
+            this.splitContainer1.Panel2.Controls.Add(this.dgv_List);
+            this.splitContainer1.Panel2.Controls.Add(this.flowLayoutPanel4);
+            this.splitContainer1.Size = new System.Drawing.Size(1384, 729);
+            this.splitContainer1.SplitterDistance = 1003;
+            this.splitContainer1.TabIndex = 2;
+            this.splitContainer1.SizeChanged += new System.EventHandler(this.splitContainer1_SizeChanged);
+            // 
+            // pic_Chart
+            // 
+            this.pic_Chart.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pic_Chart.Location = new System.Drawing.Point(0, 70);
+            this.pic_Chart.Name = "pic_Chart";
+            this.pic_Chart.Size = new System.Drawing.Size(999, 655);
+            this.pic_Chart.TabIndex = 2;
+            this.pic_Chart.TabStop = false;
+            // 
+            // dgv_List
+            // 
+            this.dgv_List.AllowUserToAddRows = false;
+            this.dgv_List.AllowUserToDeleteRows = false;
+            this.dgv_List.AllowUserToResizeColumns = false;
+            this.dgv_List.AllowUserToResizeRows = false;
+            this.dgv_List.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.Chartreuse;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgv_List.DefaultCellStyle = dataGridViewCellStyle2;
+            this.dgv_List.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgv_List.Location = new System.Drawing.Point(0, 31);
+            this.dgv_List.MultiSelect = false;
+            this.dgv_List.Name = "dgv_List";
+            this.dgv_List.ReadOnly = true;
+            this.dgv_List.RowHeadersVisible = false;
+            this.dgv_List.Size = new System.Drawing.Size(373, 694);
+            this.dgv_List.TabIndex = 0;
+            this.dgv_List.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgv_List_CellMouseClick);
+            this.dgv_List.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgv_List_ColumnHeaderMouseClick);
+            this.dgv_List.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dgv_List_DataBindingComplete);
+            // 
+            // flowLayoutPanel4
+            // 
+            this.flowLayoutPanel4.Controls.Add(this.chk_Simul);
+            this.flowLayoutPanel4.Controls.Add(this.chk_Show_Pic);
+            this.flowLayoutPanel4.Controls.Add(this.btn_CopyList);
+            this.flowLayoutPanel4.Controls.Add(this.txt_OptionDesc);
+            this.flowLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Top;
+            this.flowLayoutPanel4.Location = new System.Drawing.Point(0, 0);
+            this.flowLayoutPanel4.Name = "flowLayoutPanel4";
+            this.flowLayoutPanel4.Size = new System.Drawing.Size(373, 31);
+            this.flowLayoutPanel4.TabIndex = 43;
+            // 
+            // chk_Show_Pic
+            // 
+            this.chk_Show_Pic.AutoSize = true;
+            this.chk_Show_Pic.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.chk_Show_Pic.Checked = true;
+            this.chk_Show_Pic.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chk_Show_Pic.Dock = System.Windows.Forms.DockStyle.Left;
+            this.chk_Show_Pic.Location = new System.Drawing.Point(146, 3);
+            this.chk_Show_Pic.Name = "chk_Show_Pic";
+            this.chk_Show_Pic.Size = new System.Drawing.Size(89, 22);
+            this.chk_Show_Pic.TabIndex = 31;
+            this.chk_Show_Pic.Text = "Show Picture";
+            this.chk_Show_Pic.UseVisualStyleBackColor = true;
+            // 
+            // txt_OptionDesc
+            // 
+            this.txt_OptionDesc.Location = new System.Drawing.Point(292, 3);
+            this.txt_OptionDesc.Name = "txt_OptionDesc";
+            this.txt_OptionDesc.Size = new System.Drawing.Size(29, 20);
+            this.txt_OptionDesc.TabIndex = 32;
+            // 
+            // menu_Result
+            // 
+            this.menu_Result.Name = "menu_Result";
+            this.menu_Result.Size = new System.Drawing.Size(61, 4);
+            // 
+            // btn_CopyList
+            // 
+            this.btn_CopyList.Location = new System.Drawing.Point(240, 2);
+            this.btn_CopyList.Margin = new System.Windows.Forms.Padding(2);
+            this.btn_CopyList.Name = "btn_CopyList";
+            this.btn_CopyList.Size = new System.Drawing.Size(47, 24);
+            this.btn_CopyList.TabIndex = 35;
+            this.btn_CopyList.Text = "Copy";
+            this.btn_CopyList.UseVisualStyleBackColor = true;
+            this.btn_CopyList.Click += new System.EventHandler(this.btn_CopyList_Click);
+            // 
             // Index_Analyzer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -618,23 +843,27 @@ namespace History
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Index_Analyzer_KeyDown);
             this.flowLayoutPanel1.ResumeLayout(false);
             this.flowLayoutPanel2.ResumeLayout(false);
-            this.flowLayoutPanel7.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.nmb_CaptureList)).EndInit();
             this.flowLayoutPanel3.ResumeLayout(false);
             this.flowLayoutPanel3.PerformLayout();
             this.flowLayoutPanel6.ResumeLayout(false);
             this.flowLayoutPanel6.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nmb_Y_Min)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nmb_Y_Max)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nmb_2nd_Axix_Y_Min)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nmb_2nd_Axix_Y_Max)).EndInit();
+            this.flowLayoutPanel5.ResumeLayout(false);
+            this.flowLayoutPanel5.PerformLayout();
+            this.flowLayoutPanel7.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.nmb_CaptureList)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nmb_Sleep)).EndInit();
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pic_Chart)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_List)).EndInit();
             this.flowLayoutPanel4.ResumeLayout(false);
             this.flowLayoutPanel4.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nmb_2nd_Axix_Y_Min)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -671,7 +900,6 @@ namespace History
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel7;
         public System.Windows.Forms.CheckBox chk_PassingList;
         public System.Windows.Forms.CheckBox chk_Simul;
-        private System.Windows.Forms.TextBox txt_OptionDesc;
         private System.Windows.Forms.ComboBox cmb_Type;
         private System.Windows.Forms.CheckBox chk_FixedRange;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel4;
@@ -679,5 +907,23 @@ namespace History
         private System.Windows.Forms.NumericUpDown nmb_2nd_Axix_Y_Max;
         private System.Windows.Forms.NumericUpDown nmb_2nd_Axix_Y_Min;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Button btn_PD1;
+        private System.Windows.Forms.Button btn_ND1;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel5;
+        private System.Windows.Forms.CheckBox chk_IndexSMA5;
+        private System.Windows.Forms.CheckBox chk_IndexPrice;
+        private System.Windows.Forms.CheckBox chk_S_Price;
+        private System.Windows.Forms.CheckBox chk_S_Volume;
+        private System.Windows.Forms.CheckBox chk_S_SMA5;
+        private System.Windows.Forms.Button btn_Fixed;
+        public System.Windows.Forms.Button btn_Capture_One;
+        private System.Windows.Forms.CheckBox chk_S_Candle;
+        private System.Windows.Forms.Label label5;
+        public System.Windows.Forms.NumericUpDown nmb_Sleep;
+        private System.Windows.Forms.ContextMenuStrip menu_Result;
+        private System.Windows.Forms.PictureBox pic_Chart;
+        public System.Windows.Forms.CheckBox chk_Show_Pic;
+        public System.Windows.Forms.TextBox txt_OptionDesc;
+        public System.Windows.Forms.Button btn_CopyList;
     }
 }

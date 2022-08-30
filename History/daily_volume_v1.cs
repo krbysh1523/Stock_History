@@ -24,6 +24,5 @@ namespace History
         public Nullable<double> sma_060 { get; set; }
         public Nullable<double> sma_120 { get; set; }
         public Nullable<double> sma_240 { get; set; }
-        public Nullable<double> volume_pre { get; set; }
     }
 }

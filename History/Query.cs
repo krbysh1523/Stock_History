@@ -39,7 +39,7 @@ namespace History
             btn_Index_Click(this, null);
             btn_Message_Click(this, null);
 
-            rd_List.Checked = true;
+            btn_LayoutRefresh_Click(this, null);
         }
 
         private void AddGVButtons()
@@ -360,7 +360,7 @@ namespace History
                 && dgv_TestPlan.SelectedCells[0].Value != null)
             {
                 thd_Test = new Thread(new ParameterizedThreadStart(Test_Process));
-                thd_Test.Start(new object[] { dgv_TestPlan[0, dgv_TestPlan.SelectedCells[0].RowIndex].Value.ToString() });
+                thd_Test.Start(new object[] { dgv_TestPlan[0, dgv_TestPlan.SelectedCells[0].RowIndex].Value.ToString(), chk_Capture.Checked });
             }
             else
             {
@@ -371,21 +371,58 @@ namespace History
         private void Test_Process(object _param)
         {
             object[] param = (object[])_param;
-            Run_Test(param[0].ToString());
+
+            Run_Test(_param);
+            if (Convert.ToBoolean(param[1]))
+            {
+                try
+                {
+                    // Capture Picture for each Symbol for past
+                    index.Start_Capture(1, -4, 0);
+
+                    Thread.Sleep(1000);
+
+                    while (index.capture_continue)
+                    {
+                        Thread.Sleep(500);
+                    }
+
+                    // Capture Picture for each Symbol for future
+                    index.Start_Capture(2, -1, 3);
+
+                    Thread.Sleep(1000);
+
+                    while (index.capture_continue)
+                    {
+                        Thread.Sleep(500);
+                    }
+                }
+                catch(Exception ex)
+                {
+                    Show_Message("Error:" + ex.Message);
+                }
+            }
         }
 
-        private void Run_Test(string _plan_name)
+        private void Run_Test(object _params)
         {
+            object[] param = (object[])_params;
             if (index == null)
                 this.btn_Index_Click(this, null);
 
             index.BringToFront();
 
-            var tests = stockDataSet.test_plan.Where(r => r.plan_name == _plan_name).OrderBy(r => r.test_seq).ToList();
+            var tests = stockDataSet.test_plan.Where(r => r.plan_name == param[0].ToString()).OrderBy(r => r.test_seq).ToList();
+
+            var count = tests.Count;
+            int step = 1;
 
             foreach(var test in tests)
             {
                 string status = test.test_seq + " of " + test.plan_name;
+                
+                if(step == count)
+                    status = "(Final) " + test.test_seq + " of " + test.plan_name;
                 Show_Message(status);
 
                 index.populate_List(test.filter_option.ToString(), test.pass_list, test.filter_att1, test.filter_att2, test.filter_att3, test.filter_att4, test.filter_att5, status);
@@ -398,10 +435,63 @@ namespace History
                     Show_Message("Waiting...");
                 }
 
-                index.CaptureList(status);
+                //index.CaptureList(status);
                 
                 Thread.Sleep(500);
+                step++;
             }
+        }
+
+        private void btn_Test_All_Click(object sender, EventArgs e)
+        {
+            thd_Test = new Thread(new ParameterizedThreadStart(Test_All));
+            thd_Test.Start(new object[] { chk_Capture.Checked });
+        }
+        private void Test_All(object _params)
+        {
+            object[] param = (object[])_params;
+            var plans = stockDataSet.test_plan.GroupBy(r => r.plan_name).ToList();
+            try
+            {
+                foreach (var plan in plans)
+                {
+                    // Run Test Plan
+                    Run_Test(plan.Key);
+
+                    if (Convert.ToBoolean(param[0]))
+                    {
+                        // Capture Picture for each Symbol for past
+                        index.Start_Capture(1, -4, 0);
+
+                        Thread.Sleep(1000);
+
+                        while (index.capture_continue)
+                        {
+                            Thread.Sleep(500);
+                        }
+
+                        // Capture Picture for each Symbol for future
+                        index.Start_Capture(2, -1, 3);
+
+                        Thread.Sleep(1000);
+
+                        while (index.capture_continue)
+                        {
+                            Thread.Sleep(500);
+                        }
+                    }
+                }
+            }
+            catch(Exception ex)
+            {
+                Show_Message("Error:" + ex.Message);
+            }
+        }
+
+        private void chk_Capture_CheckedChanged(object sender, EventArgs e)
+        {
+            if(!chk_Capture.Checked && index.capture_continue)
+                index.capture_continue = false;
         }
 
         #endregion
@@ -429,40 +519,108 @@ namespace History
             index.GetHistory_List(_hist_id, _start_dttm, _end_dttm);
         }
 
+        public void RetrieveStatHistory(int _hist_count, string _final_only)
+        {
+            if (index == null)
+                this.btn_Index_Click(this, null);
+
+            index.GetStatHistory(_hist_count, _final_only);
+        }
+
         #endregion
 
         #region + Layout
-        private void rd_CheckedChanged(object sender, EventArgs e)
+        private void btn_UpdateLayout_Click(object sender, EventArgs e)
         {
-            if (rd_Chart.Checked)
+            using(stockEntity stock = new stockEntity())
             {
-                index.Location = new Point(0, 0);
-                this.Location = new Point(1380, 0);
-                msg.Location = new Point(1380, 660);
+                var cmb_text = cmb_Layout.Text;
+                lookup layout = stock.lookups.FirstOrDefault(r => r.l_type == "Layout" && r.l_name == cmb_text);
+                string[] layouts = Save_Layout();
+                layout.l_att1 = layouts[0];
+                layout.l_att2 = layouts[1];
+                layout.l_att3 = layouts[2];
 
-                index.Size = new Size(1060, 960);
-                this.Size = new Size(600, 700);
-                msg.Size = new Size(600, 400);
+                stock.SaveChanges();
             }
-            else if (rd_List.Checked)
-            {
-                index.Location = new Point(0, 0);
-                this.Location = new Point(500, 0);
-                msg.Location = new Point(500, 660);
+        }
+        private string[] Save_Layout()
+        {
+            List<string> ret = new List<string>();
 
-                index.Size = new Size(510, 960);
-                this.Size = new Size(1200, 700);
-                msg.Size = new Size(1200, 400);
+            ret.Add(index.Location.X.ToString() + "," + index.Location.Y.ToString() + ","
+                + index.Size.Width.ToString() + "," + index.Size.Height.ToString());
+            ret.Add(this.Location.X.ToString() + "," + this.Location.Y.ToString() + ","
+                + this.Size.Width.ToString() + "," + this.Size.Height.ToString());
+            ret.Add(msg.Location.X.ToString() + "," + msg.Location.Y.ToString() + ","
+                + msg.Size.Width.ToString() + "," + msg.Size.Height.ToString());
+
+            return ret.ToArray();
+        }
+
+        private void btn_LayoutRefresh_Click(object sender, EventArgs e)
+        {
+            cmb_Layout.SelectedIndexChanged -= cmb_Layout_SelectedIndexChanged;
+            using(stockEntity stock = new stockEntity())
+            {
+                var layouts = stock.lookups.Where(r => r.l_type == "Layout").OrderBy(r => r.l_id).ToList();
+
+                cmb_Layout.DataSource = layouts;
+                cmb_Layout.DisplayMember = "l_name";
+                cmb_Layout.ValueMember = "l_id";
+
             }
-            else if (rd_Full.Checked)
-            {
-                index.Location = new Point(0, 0);
-                this.Location = new Point(1690, 30);
-                msg.Location = new Point(1690, 690);
+            cmb_Layout.SelectedIndexChanged += cmb_Layout_SelectedIndexChanged;
+        }
 
-                index.Size = new Size(1680, 960);
-                this.Size = new Size(1680, 700);
-                msg.Size = new Size(1680, 400);
+        private void cmb_Layout_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            using (stockEntity stock = new stockEntity())
+            {
+                var cmb_text = cmb_Layout.Text;
+                lookup layout = stock.lookups.FirstOrDefault(r => r.l_type == "Layout" && r.l_name == cmb_text);
+                Set_Layout(layout);
+            }
+        }
+
+        private void Set_Layout(lookup _layout)
+        {
+            int[] points = ret_points(_layout.l_att1);
+            index.Location = new Point(points[0], points[1]);
+            index.Size = new Size(points[2], points[3]);
+
+            points = ret_points(_layout.l_att2); 
+            this.Location = new Point(points[0], points[1]);
+            this.Size = new Size(points[2], points[3]);
+
+            points = ret_points(_layout.l_att3);
+            msg.Location = new Point(points[0], points[1]);
+            msg.Size = new Size(points[2], points[3]);
+
+        }
+
+        private int[] ret_points(string _att)
+        {
+            string[] s = _att.Split(',');
+            List<int> points = new List<int>();
+            foreach (var p in s)
+                points.Add(Convert.ToInt32(p));
+            return points.ToArray();
+        }
+        #endregion
+
+        #region + Picture Tab
+        public void LoadPicture(string _filename)
+        {
+            this.tabControl1.SelectedTab = tab_Picture;
+
+            if(File.Exists(_filename))
+            {
+                pic_Symbol.Image = Image.FromFile(_filename);
+            }
+            else
+            {
+                pic_Symbol.Image = pic_Symbol.ErrorImage;
             }
         }
         #endregion

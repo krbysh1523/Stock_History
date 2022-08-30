@@ -58,7 +58,7 @@ namespace History
 
         private void LoadSymbols()
         {
-            using(stockEntities stock = new stockEntities())
+            using(stockEntity stock = new stockEntity())
             {
                 List<watch_list> symbols = new List<watch_list>();
                 symbols = stock.watch_list.OrderBy(r => r.symbol).ToList();
@@ -165,7 +165,7 @@ namespace History
 
         private void DrawGraph(LiveCharts.WinForms.CartesianChart _cht, string _symbol, string _type, DateTime _dt_from, DateTime _dt_to)
         {
-            using (stockEntities stock = new stockEntities())
+            using (stockEntity stock = new stockEntity())
             {
                 if (_type == "SMA")
                 {
@@ -320,7 +320,7 @@ namespace History
 
         private void DrawGraph(LiveCharts.WinForms.CartesianChart _cht, string _symbol, string _index, string _type, DateTime _dt_from, DateTime _dt_to)
         {
-            using (stockEntities stock = new stockEntities())
+            using (stockEntity stock = new stockEntity())
             {
                 if (_type == "Change")
                 {

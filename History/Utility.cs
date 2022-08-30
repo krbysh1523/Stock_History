@@ -166,7 +166,9 @@ namespace History
             _chart_Main.AxisY[0].LabelFormatter = formatFunc;
         }
 
-        public static LineSeries AddLine(List<daily_close> _hist, int _sma)
+        public static LineSeries AddLine(List<daily_close> _hist, int _sma,
+            string _point_shape = "", double _point_size = 0
+            )
         {
             LineSeries sma = new LineSeries();
             if (_sma == 1)
@@ -210,7 +212,19 @@ namespace History
                 sma.Title = "SMA " + _sma.ToString();
             }
             sma.Fill = System.Windows.Media.Brushes.Transparent;
-            sma.PointGeometry = null;
+            
+            if (_point_shape.ToLower() == "circle")
+                sma.PointGeometry = DefaultGeometries.Circle;
+            else if (_point_shape.ToLower() == "diamond")
+                sma.PointGeometry = DefaultGeometries.Diamond;
+            else if (_point_shape.ToLower() == "cross")
+                sma.PointGeometry = DefaultGeometries.Cross;
+            else if (_point_shape.ToLower() == "square")
+                sma.PointGeometry = DefaultGeometries.Square;
+            else
+                sma.PointGeometry = DefaultGeometries.None;
+
+            sma.PointGeometrySize = _point_size;
             ChartValues<double> sma_points = new ChartValues<double>();
             foreach (var h in _hist)
             {
@@ -522,8 +536,9 @@ namespace History
         public static void ResetChart(LiveCharts.WinForms.CartesianChart _cht)
         {
             _cht.AxisX.Clear();
-            if (_cht.AxisY.Count > 1)
-                _cht.AxisY.RemoveAt(1);
+            while(_cht.AxisY.Count > 1)
+                    _cht.AxisY.RemoveAt(1);
+
             _cht.Series.Clear();
         }
 
@@ -533,14 +548,16 @@ namespace History
             List<double> ret = new List<double>();
 
             double zero = _list[_zero_index];
-            foreach (double d in _list)
+            if (zero != 0)
             {
-                if ((d - zero) == 0)
-                    ret.Add(0);
-                else
-                    ret.Add(Math.Round(((d - zero) / zero) * 100, _decimal));
+                foreach (double d in _list)
+                {
+                    if ((d - zero) == 0)
+                        ret.Add(0);
+                    else
+                        ret.Add(Math.Round(((d - zero) / zero) * 100, _decimal));
+                }
             }
-
             return ret;
         }
         #endregion

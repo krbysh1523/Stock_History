@@ -240,7 +240,6 @@ warning 6002: The table/view 'stock.dbo.daily_sector' does not have a primary ke
     <Property Name="SMA_060" Type="float" />
     <Property Name="SMA_120" Type="float" />
     <Property Name="SMA_240" Type="float" />
-    <Property Name="volume_chg_perc" Type="float" />
   </EntityType>
   <EntityType Name="earning">
     <Key>
@@ -349,7 +348,7 @@ warning 6002: The table/view 'stock.dbo.daily_sector' does not have a primary ke
     <Property Name="att4" Type="nvarchar" MaxLength="250" />
     <Property Name="att5" Type="nvarchar" MaxLength="250" />
     <Property Name="option_desc" Type="varchar(max)" />
-    <Property Name="description" Type="varchar" MaxLength="250" />
+    <Property Name="description" Type="nvarchar" MaxLength="250" />
   </EntityType>
   <EntityType Name="lookup">
     <Key>
@@ -380,6 +379,25 @@ warning 6002: The table/view 'stock.dbo.daily_sector' does not have a primary ke
     <Property Name="rate_20" Type="float" />
     <Property Name="rate_40" Type="float" />
     <Property Name="rate_60" Type="float" />
+  </EntityType>
+  <EntityType Name="prediction_history">
+    <Key>
+      <PropertyRef Name="result_id" />
+    </Key>
+    <Property Name="result_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="hist_id" Type="int" Nullable="false" />
+    <Property Name="symbol" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="ranking" Type="int" />
+    <Property Name="ratio1" Type="float" />
+    <Property Name="ratio2" Type="float" />
+    <Property Name="rate_5" Type="float" />
+    <Property Name="rate_10" Type="float" />
+    <Property Name="rate_15" Type="float" />
+    <Property Name="rate_20" Type="float" />
+    <Property Name="rate_40" Type="float" />
+    <Property Name="rate_60" Type="float" />
+    <Property Name="result" Type="nvarchar" MaxLength="50" />
+    <Property Name="result_desc" Type="nvarchar" MaxLength="2000" />
   </EntityType>
   <EntityType Name="symbol_att">
     <Key>
@@ -919,7 +937,6 @@ warning 6002: The table/view 'stock.dbo.daily_volume_v1' does not have a primary
     <Property Name="symbol" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="date_hist" Type="date" Nullable="false" />
     <Property Name="volume" Type="float" />
-    <Property Name="volume_pre" Type="float" />
     <Property Name="sma_005" Type="float" />
     <Property Name="sma_010" Type="float" />
     <Property Name="sma_020" Type="float" />
@@ -1008,7 +1025,8 @@ warning 6002: The table/view 'stock.dbo.list_history_v1' does not have a primary
     <Property Name="att3" Type="nvarchar" MaxLength="250" />
     <Property Name="att4" Type="nvarchar" MaxLength="250" />
     <Property Name="att5" Type="nvarchar" MaxLength="250" />
-    <Property Name="option_desc" Type="nvarchar(max)" />
+    <Property Name="option_desc" Type="varchar(max)" />
+    <Property Name="description" Type="varchar" MaxLength="250" />
     <Property Name="ranking" Type="int" />
     <Property Name="ratio1" Type="float" />
     <Property Name="ratio2" Type="float" />
@@ -1059,12 +1077,245 @@ warning 6002: The table/view 'stock.dbo.watch_list_v1' does not have a primary k
     <Parameter Name="att5" Type="nvarchar" Mode="In" />
     <Parameter Name="description" Type="nvarchar" Mode="In" />
   </Function>
+  <Function Name="filter_simul" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="start_dttm" Type="datetime" Mode="In" />
+    <Parameter Name="end_dttm" Type="datetime" Mode="In" />
+  </Function>
   <Function Name="filter_simul_header" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="end_dttm" Type="datetime" Mode="In" />
+  </Function>
+  <Function Name="filter_simul_summary" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="fx_doji_tail_perc" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="float">
+    <Parameter Name="open" Type="float" Mode="In" />
+    <Parameter Name="close" Type="float" Mode="In" />
+    <Parameter Name="high" Type="float" Mode="In" />
+    <Parameter Name="low" Type="float" Mode="In" />
+  </Function>
+  <Function Name="fx_greater" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="float">
+    <Parameter Name="p1" Type="float" Mode="In" />
+    <Parameter Name="p2" Type="float" Mode="In" />
+  </Function>
+  <Function Name="fx_is_up_pattern1" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="char">
+    <Parameter Name="dttm" Type="date" Mode="In" />
+    <Parameter Name="symbol" Type="nvarchar" Mode="In" />
+    <Parameter Name="diff_rate" Type="float" Mode="In" />
+  </Function>
+  <Function Name="fx_lower" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="float">
+    <Parameter Name="p1" Type="float" Mode="In" />
+    <Parameter Name="p2" Type="float" Mode="In" />
+  </Function>
+  <Function Name="fx_rate_perc" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="float">
+    <Parameter Name="p1" Type="float" Mode="In" />
+    <Parameter Name="p2" Type="float" Mode="In" />
+  </Function>
+  <Function Name="fx_ret_high" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="float">
+    <Parameter Name="value" Type="float" Mode="In" />
+    <Parameter Name="limit" Type="float" Mode="In" />
+  </Function>
+  <Function Name="fx_ret_low" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="float">
+    <Parameter Name="value" Type="float" Mode="In" />
+    <Parameter Name="limit" Type="float" Mode="In" />
+  </Function>
+  <Function Name="fx_weight_order_by" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="float">
+    <Parameter Name="col1" Type="float" Mode="In" />
+    <Parameter Name="col1_weight" Type="float" Mode="In" />
+    <Parameter Name="col2" Type="float" Mode="In" />
+    <Parameter Name="col2_weight" Type="float" Mode="In" />
+    <Parameter Name="col3" Type="float" Mode="In" />
+    <Parameter Name="col3_weight" Type="float" Mode="In" />
+    <Parameter Name="col4" Type="float" Mode="In" />
+    <Parameter Name="col4_weight" Type="float" Mode="In" />
+    <Parameter Name="col5" Type="float" Mode="In" />
+    <Parameter Name="col5_weight" Type="float" Mode="In" />
+  </Function>
+  <Function Name="get_cur_day" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="date">
+    <Parameter Name="today" Type="date" Mode="In" />
+  </Function>
+  <Function Name="get_eps" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="float">
+    <Parameter Name="eps_type" Type="nvarchar" Mode="In" />
+    <Parameter Name="symbol" Type="nvarchar" Mode="In" />
+    <Parameter Name="date" Type="date" Mode="In" />
+  </Function>
+  <Function Name="get_next_day" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="date">
+    <Parameter Name="today" Type="date" Mode="In" />
   </Function>
   <Function Name="get_nth_day" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="date">
     <Parameter Name="today" Type="date" Mode="In" />
     <Parameter Name="nth" Type="int" Mode="In" />
+  </Function>
+  <Function Name="get_pre_day" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="date">
+    <Parameter Name="today" Type="date" Mode="In" />
+  </Function>
+  <Function Name="get_Stat_history" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="start_dttm" Type="datetime" Mode="In" />
+    <Parameter Name="end_dttm" Type="datetime" Mode="In" />
+    <Parameter Name="hist_count" Type="int" Mode="In" />
+    <Parameter Name="final_only" Type="char" Mode="In" />
+  </Function>
+  <Function Name="option_01" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="start_dttm" Type="datetime" Mode="In" />
+    <Parameter Name="end_dttm" Type="datetime" Mode="In" />
+    <Parameter Name="passing_list" Type="nvarchar" Mode="In" />
+    <Parameter Name="att1" Type="nvarchar" Mode="In" />
+    <Parameter Name="att2" Type="nvarchar" Mode="In" />
+    <Parameter Name="att3" Type="nvarchar" Mode="In" />
+    <Parameter Name="att4" Type="nvarchar" Mode="In" />
+    <Parameter Name="att5" Type="nvarchar" Mode="In" />
+    <Parameter Name="option_desc" Type="nvarchar(max)" Mode="InOut" />
+  </Function>
+  <Function Name="option_02" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="start_dttm" Type="datetime" Mode="In" />
+    <Parameter Name="end_dttm" Type="datetime" Mode="In" />
+    <Parameter Name="passing_list" Type="nvarchar" Mode="In" />
+    <Parameter Name="att1" Type="nvarchar" Mode="In" />
+    <Parameter Name="att2" Type="nvarchar" Mode="In" />
+    <Parameter Name="att3" Type="nvarchar" Mode="In" />
+    <Parameter Name="att4" Type="nvarchar" Mode="In" />
+    <Parameter Name="att5" Type="nvarchar" Mode="In" />
+    <Parameter Name="option_desc" Type="nvarchar(max)" Mode="InOut" />
+  </Function>
+  <Function Name="option_03" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="start_dttm" Type="datetime" Mode="In" />
+    <Parameter Name="end_dttm" Type="datetime" Mode="In" />
+    <Parameter Name="passing_list" Type="nvarchar" Mode="In" />
+    <Parameter Name="att1" Type="nvarchar" Mode="In" />
+    <Parameter Name="att2" Type="nvarchar" Mode="In" />
+    <Parameter Name="att3" Type="nvarchar" Mode="In" />
+    <Parameter Name="att4" Type="nvarchar" Mode="In" />
+    <Parameter Name="att5" Type="nvarchar" Mode="In" />
+    <Parameter Name="option_desc" Type="nvarchar(max)" Mode="InOut" />
+  </Function>
+  <Function Name="option_04" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="start_dttm" Type="datetime" Mode="In" />
+    <Parameter Name="end_dttm" Type="datetime" Mode="In" />
+    <Parameter Name="passing_list" Type="nvarchar" Mode="In" />
+    <Parameter Name="att1" Type="nvarchar" Mode="In" />
+    <Parameter Name="att2" Type="nvarchar" Mode="In" />
+    <Parameter Name="att3" Type="nvarchar" Mode="In" />
+    <Parameter Name="att4" Type="nvarchar" Mode="In" />
+    <Parameter Name="att5" Type="nvarchar" Mode="In" />
+    <Parameter Name="option_desc" Type="nvarchar(max)" Mode="InOut" />
+  </Function>
+  <Function Name="option_05" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="start_dttm" Type="datetime" Mode="In" />
+    <Parameter Name="end_dttm" Type="datetime" Mode="In" />
+    <Parameter Name="passing_list" Type="nvarchar" Mode="In" />
+    <Parameter Name="att1" Type="nvarchar" Mode="In" />
+    <Parameter Name="att2" Type="nvarchar" Mode="In" />
+    <Parameter Name="att3" Type="nvarchar" Mode="In" />
+    <Parameter Name="att4" Type="nvarchar" Mode="In" />
+    <Parameter Name="att5" Type="nvarchar" Mode="In" />
+    <Parameter Name="option_desc" Type="nvarchar(max)" Mode="InOut" />
+  </Function>
+  <Function Name="option_06" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="start_dttm" Type="datetime" Mode="In" />
+    <Parameter Name="end_dttm" Type="datetime" Mode="In" />
+    <Parameter Name="passing_list" Type="nvarchar" Mode="In" />
+    <Parameter Name="att1" Type="nvarchar" Mode="In" />
+    <Parameter Name="att2" Type="nvarchar" Mode="In" />
+    <Parameter Name="att3" Type="nvarchar" Mode="In" />
+    <Parameter Name="att4" Type="nvarchar" Mode="In" />
+    <Parameter Name="att5" Type="nvarchar" Mode="In" />
+    <Parameter Name="option_desc" Type="nvarchar(max)" Mode="InOut" />
+  </Function>
+  <Function Name="option_07" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="start_dttm" Type="datetime" Mode="In" />
+    <Parameter Name="end_dttm" Type="datetime" Mode="In" />
+    <Parameter Name="passing_list" Type="nvarchar" Mode="In" />
+    <Parameter Name="att1" Type="nvarchar" Mode="In" />
+    <Parameter Name="att2" Type="nvarchar" Mode="In" />
+    <Parameter Name="att3" Type="nvarchar" Mode="In" />
+    <Parameter Name="att4" Type="nvarchar" Mode="In" />
+    <Parameter Name="att5" Type="nvarchar" Mode="In" />
+    <Parameter Name="option_desc" Type="nvarchar(max)" Mode="InOut" />
+  </Function>
+  <Function Name="option_08" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="start_dttm" Type="datetime" Mode="In" />
+    <Parameter Name="end_dttm" Type="datetime" Mode="In" />
+    <Parameter Name="passing_list" Type="nvarchar" Mode="In" />
+    <Parameter Name="att1" Type="nvarchar" Mode="In" />
+    <Parameter Name="att2" Type="nvarchar" Mode="In" />
+    <Parameter Name="att3" Type="nvarchar" Mode="In" />
+    <Parameter Name="att4" Type="nvarchar" Mode="In" />
+    <Parameter Name="att5" Type="nvarchar" Mode="In" />
+    <Parameter Name="option_desc" Type="nvarchar(max)" Mode="InOut" />
+  </Function>
+  <Function Name="option_09" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="start_dttm" Type="datetime" Mode="In" />
+    <Parameter Name="end_dttm" Type="datetime" Mode="In" />
+    <Parameter Name="passing_list" Type="nvarchar" Mode="In" />
+    <Parameter Name="att1" Type="nvarchar" Mode="In" />
+    <Parameter Name="att2" Type="nvarchar" Mode="In" />
+    <Parameter Name="att3" Type="nvarchar" Mode="In" />
+    <Parameter Name="att4" Type="nvarchar" Mode="In" />
+    <Parameter Name="att5" Type="nvarchar" Mode="In" />
+    <Parameter Name="option_desc" Type="nvarchar(max)" Mode="InOut" />
+  </Function>
+  <Function Name="option_10" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="start_dttm" Type="datetime" Mode="In" />
+    <Parameter Name="end_dttm" Type="datetime" Mode="In" />
+    <Parameter Name="passing_list" Type="nvarchar" Mode="In" />
+    <Parameter Name="att1" Type="nvarchar" Mode="In" />
+    <Parameter Name="att2" Type="nvarchar" Mode="In" />
+    <Parameter Name="att3" Type="nvarchar" Mode="In" />
+    <Parameter Name="att4" Type="nvarchar" Mode="In" />
+    <Parameter Name="att5" Type="nvarchar" Mode="In" />
+    <Parameter Name="option_desc" Type="nvarchar(max)" Mode="InOut" />
+  </Function>
+  <Function Name="option_11" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="start_dttm" Type="datetime" Mode="In" />
+    <Parameter Name="end_dttm" Type="datetime" Mode="In" />
+    <Parameter Name="passing_list" Type="nvarchar" Mode="In" />
+    <Parameter Name="att1" Type="nvarchar" Mode="In" />
+    <Parameter Name="att2" Type="nvarchar" Mode="In" />
+    <Parameter Name="att3" Type="nvarchar" Mode="In" />
+    <Parameter Name="att4" Type="nvarchar" Mode="In" />
+    <Parameter Name="att5" Type="nvarchar" Mode="In" />
+    <Parameter Name="option_desc" Type="nvarchar(max)" Mode="InOut" />
+  </Function>
+  <Function Name="option_12" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="start_dttm" Type="datetime" Mode="In" />
+    <Parameter Name="end_dttm" Type="datetime" Mode="In" />
+    <Parameter Name="passing_list" Type="nvarchar" Mode="In" />
+    <Parameter Name="att1" Type="nvarchar" Mode="In" />
+    <Parameter Name="att2" Type="nvarchar" Mode="In" />
+    <Parameter Name="att3" Type="nvarchar" Mode="In" />
+    <Parameter Name="att4" Type="nvarchar" Mode="In" />
+    <Parameter Name="att5" Type="nvarchar" Mode="In" />
+    <Parameter Name="option_desc" Type="nvarchar(max)" Mode="InOut" />
+  </Function>
+  <Function Name="option_13" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="start_dttm" Type="datetime" Mode="In" />
+    <Parameter Name="end_dttm" Type="datetime" Mode="In" />
+    <Parameter Name="passing_list" Type="nvarchar" Mode="In" />
+    <Parameter Name="att1" Type="nvarchar" Mode="In" />
+    <Parameter Name="att2" Type="nvarchar" Mode="In" />
+    <Parameter Name="att3" Type="nvarchar" Mode="In" />
+    <Parameter Name="att4" Type="nvarchar" Mode="In" />
+    <Parameter Name="att5" Type="nvarchar" Mode="In" />
+    <Parameter Name="option_desc" Type="nvarchar(max)" Mode="InOut" />
+  </Function>
+  <Function Name="option_14" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="start_dttm" Type="datetime" Mode="In" />
+    <Parameter Name="end_dttm" Type="datetime" Mode="In" />
+    <Parameter Name="passing_list" Type="nvarchar" Mode="In" />
+    <Parameter Name="att1" Type="nvarchar" Mode="In" />
+    <Parameter Name="att2" Type="nvarchar" Mode="In" />
+    <Parameter Name="att3" Type="nvarchar" Mode="In" />
+    <Parameter Name="att4" Type="nvarchar" Mode="In" />
+    <Parameter Name="att5" Type="nvarchar" Mode="In" />
+    <Parameter Name="option_desc" Type="nvarchar(max)" Mode="InOut" />
+  </Function>
+  <Function Name="option_15" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="start_dttm" Type="datetime" Mode="In" />
+    <Parameter Name="end_dttm" Type="datetime" Mode="In" />
+    <Parameter Name="passing_list" Type="nvarchar" Mode="In" />
+    <Parameter Name="att1" Type="nvarchar" Mode="In" />
+    <Parameter Name="att2" Type="nvarchar" Mode="In" />
+    <Parameter Name="att3" Type="nvarchar" Mode="In" />
+    <Parameter Name="att4" Type="nvarchar" Mode="In" />
+    <Parameter Name="att5" Type="nvarchar" Mode="In" />
+    <Parameter Name="option_desc" Type="nvarchar(max)" Mode="InOut" />
   </Function>
   <Function Name="process_analysis" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="symbol" Type="nvarchar" Mode="In" />
@@ -1089,10 +1340,25 @@ warning 6002: The table/view 'stock.dbo.watch_list_v1' does not have a primary k
   <Function Name="process_volume" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="symbol" Type="nvarchar" Mode="In" />
   </Function>
+  <Function Name="sp_add_list_history" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="start_dttm" Type="datetime" Mode="In" />
+    <Parameter Name="end_dttm" Type="datetime" Mode="In" />
+    <Parameter Name="option" Type="int" Mode="In" />
+    <Parameter Name="passing_list" Type="nvarchar" Mode="In" />
+    <Parameter Name="att1" Type="nvarchar" Mode="In" />
+    <Parameter Name="att2" Type="nvarchar" Mode="In" />
+    <Parameter Name="att3" Type="nvarchar" Mode="In" />
+    <Parameter Name="att4" Type="nvarchar" Mode="In" />
+    <Parameter Name="att5" Type="nvarchar" Mode="In" />
+    <Parameter Name="option_desc" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="description" Type="nvarchar" Mode="In" />
+    <Parameter Name="hist_id" Type="int" Mode="InOut" />
+  </Function>
   <Function Name="sp_generate_idx" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
   <Function Name="sp_get_prediction_history" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="hist_id" Type="int" Mode="In" />
   </Function>
+  <Function Name="sp_prediction_history_cleanup" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
   <Function Name="sp_simulation" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="symbols" Type="nvarchar" Mode="In" />
     <Parameter Name="start_dttm" Type="date" Mode="In" />
@@ -1101,13 +1367,13 @@ warning 6002: The table/view 'stock.dbo.watch_list_v1' does not have a primary k
     <Parameter Name="max_days_hold" Type="int" Mode="In" />
     <Parameter Name="show_detail" Type="char" Mode="In" />
   </Function>
-  <Function Name="sp_weekly_v1" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+  <Function Name="XXX_sp_weekly_v1" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="symbols" Type="nvarchar" Mode="In" />
     <Parameter Name="start_dttm" Type="date" Mode="In" />
     <Parameter Name="week_count" Type="int" Mode="In" />
   </Function>
-  <Function Name="update_daily_analysis_v1" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
-  <Function Name="update_daily_v1" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="XXX_update_daily_analysis_v1" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="XXX_update_daily_v1" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
   <EntityContainer Name="stockModelStoreContainer">
     <EntitySet Name="daily_analysis" EntityType="Self.daily_analysis" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="daily_close" EntityType="Self.daily_close" Schema="dbo" store:Type="Tables" />
@@ -1122,6 +1388,7 @@ warning 6002: The table/view 'stock.dbo.watch_list_v1' does not have a primary k
     <EntitySet Name="list_history" EntityType="Self.list_history" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="lookup" EntityType="Self.lookup" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="prediction" EntityType="Self.prediction" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="prediction_history" EntityType="Self.prediction_history" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="symbol_att" EntityType="Self.symbol_att" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="test_plan" EntityType="Self.test_plan" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="watch_list" EntityType="Self.watch_list" Schema="dbo" store:Type="Tables" />
@@ -1656,7 +1923,6 @@ warning 6002: The table/view 'stock.dbo.watch_list_v1' does not have a primary k
     [daily_volume_v1].[symbol] AS [symbol], 
     [daily_volume_v1].[date_hist] AS [date_hist], 
     [daily_volume_v1].[volume] AS [volume], 
-    [daily_volume_v1].[volume_pre] AS [volume_pre], 
     [daily_volume_v1].[sma_005] AS [sma_005], 
     [daily_volume_v1].[sma_010] AS [sma_010], 
     [daily_volume_v1].[sma_020] AS [sma_020], 
@@ -1730,6 +1996,7 @@ warning 6002: The table/view 'stock.dbo.watch_list_v1' does not have a primary k
     [list_history_v1].[att4] AS [att4], 
     [list_history_v1].[att5] AS [att5], 
     [list_history_v1].[option_desc] AS [option_desc], 
+    [list_history_v1].[description] AS [description], 
     [list_history_v1].[ranking] AS [ranking], 
     [list_history_v1].[ratio1] AS [ratio1], 
     [list_history_v1].[ratio2] AS [ratio2], 

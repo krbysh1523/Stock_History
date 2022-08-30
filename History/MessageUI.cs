@@ -31,6 +31,7 @@ namespace History
         private void MessageUI_Load(object sender, EventArgs e)
         {
             Load_History();
+            btn_Future_Click(this, null);
         }
 
         private void MessageUI_SizeChanged(object sender, EventArgs e)
@@ -71,7 +72,7 @@ namespace History
         }
         private void dgv_History_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            if(e.RowIndex>=0 && e.ColumnIndex == 0)
+            if (e.RowIndex >= 0 && e.ColumnIndex == 0)
             {
                 query.RetrieveHistoryList(dgv_History[0, e.RowIndex].Value.ToString(),
                     dgv_History["sTARTDTTMDataGridViewTextBoxColumn", e.RowIndex].Value.ToString(),
@@ -89,29 +90,60 @@ namespace History
         {
             for (int r = 0; r < dgv_History.Rows.Count - 1; r++)
             {
-                if(dgv_History.Rows[r].Cells[4].Value != DBNull.Value &&
-                    dgv_History.Rows[r+1].Cells[4].Value != DBNull.Value)
-                for (int c = 4; c < 10; c++)
-                {
-                    double pre = Convert.ToDouble(dgv_History.Rows[r+1].Cells[c].Value.ToString());
-                    double cur = Convert.ToDouble(dgv_History.Rows[r].Cells[c].Value.ToString());
-                    if(cur >= 70)
-                        dgv_History.Rows[r].Cells[c].Style.BackColor = Color.SkyBlue;
-                    else if (cur > pre)
-                        dgv_History.Rows[r].Cells[c].Style.BackColor = Color.GreenYellow;
-                    else
-                        dgv_History.Rows[r].Cells[c].Style.BackColor = Color.OrangeRed;
-                }
+                if (dgv_History.Rows[r].Cells[4].Value != DBNull.Value &&
+                    dgv_History.Rows[r + 1].Cells[4].Value != DBNull.Value)
+                    for (int c = 4; c < 10; c++)
+                    {
+                        double pre = Convert.ToDouble(dgv_History.Rows[r + 1].Cells[c].Value.ToString());
+                        double cur = Convert.ToDouble(dgv_History.Rows[r].Cells[c].Value.ToString());
+                        if (cur >= 70)
+                            dgv_History.Rows[r].Cells[c].Style.BackColor = Color.SkyBlue;
+                        else if (cur > pre)
+                            dgv_History.Rows[r].Cells[c].Style.BackColor = Color.GreenYellow;
+                        else
+                            dgv_History.Rows[r].Cells[c].Style.BackColor = Color.OrangeRed;
+                    }
             }
         }
-        #endregion
 
         private void dgv_History_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
-            if(e.ColumnIndex == dgv_History.Columns["option_desc"].Index && e.Value != null)
+            if (e.ColumnIndex == dgv_History.Columns["option_desc"].Index && e.Value != null)
             {
                 dgv_History[e.ColumnIndex, e.RowIndex].ToolTipText = e.Value.ToString();
             }
         }
+        #endregion
+
+        #region + Get Stat
+        private void btn_GetStat_Click(object sender, EventArgs e)
+        {
+            query.RetrieveStatHistory(Convert.ToInt32(nmb_HistoryCount.Value), Utility.RetChecked(chk_FinalOnly));
+        }
+        #endregion
+
+        #region + Button
+        private void btn_Future_Click(object sender, EventArgs e)
+        {
+            if (rate_5.Visible)
+            {
+                rate_5.Visible = false;
+                rate_10.Visible = false;
+                rate_15.Visible = false;
+                rate_20.Visible = false;
+                rate_40.Visible = false;
+                rate_60.Visible = false;
+            }
+            else
+            {
+                rate_5.Visible = true;
+                rate_10.Visible = true;
+                rate_15.Visible = true;
+                rate_20.Visible = true;
+                rate_40.Visible = true;
+                rate_60.Visible = true;
+            }
+        }
+        #endregion
     }
 }

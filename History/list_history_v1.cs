@@ -26,6 +26,7 @@ namespace History
         public string att4 { get; set; }
         public string att5 { get; set; }
         public string option_desc { get; set; }
+        public string description { get; set; }
         public Nullable<int> ranking { get; set; }
         public Nullable<double> ratio1 { get; set; }
         public Nullable<double> ratio2 { get; set; }

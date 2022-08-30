@@ -33,10 +33,6 @@ namespace History
             this.txt_Log = new System.Windows.Forms.RichTextBox();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.dgv_History = new System.Windows.Forms.DataGridView();
-            this.listhistoryBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.stockDataSetBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.stockDataSet = new History.stockDataSet();
-            this.list_historyTableAdapter = new History.stockDataSetTableAdapters.list_historyTableAdapter();
             this.hISTIDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewButtonColumn();
             this.fILTEROPTIONDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.option_desc = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -56,6 +52,16 @@ namespace History
             this.att5DataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.sTARTDTTMDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.eNDDTTMDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.listhistoryBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.stockDataSetBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.stockDataSet = new History.stockDataSet();
+            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            this.label1 = new System.Windows.Forms.Label();
+            this.nmb_HistoryCount = new System.Windows.Forms.NumericUpDown();
+            this.chk_FinalOnly = new System.Windows.Forms.CheckBox();
+            this.btn_GetStat = new System.Windows.Forms.Button();
+            this.list_historyTableAdapter = new History.stockDataSetTableAdapters.list_historyTableAdapter();
+            this.btn_Future = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -64,6 +70,8 @@ namespace History
             ((System.ComponentModel.ISupportInitialize)(this.listhistoryBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.stockDataSetBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.stockDataSet)).BeginInit();
+            this.flowLayoutPanel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nmb_HistoryCount)).BeginInit();
             this.SuspendLayout();
             // 
             // txt_Log
@@ -90,6 +98,7 @@ namespace History
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.dgv_History);
+            this.splitContainer1.Panel2.Controls.Add(this.flowLayoutPanel1);
             this.splitContainer1.Size = new System.Drawing.Size(1008, 361);
             this.splitContainer1.SplitterDistance = 267;
             this.splitContainer1.SplitterWidth = 8;
@@ -124,34 +133,15 @@ namespace History
             this.eNDDTTMDataGridViewTextBoxColumn});
             this.dgv_History.DataSource = this.listhistoryBindingSource;
             this.dgv_History.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgv_History.Location = new System.Drawing.Point(0, 0);
+            this.dgv_History.Location = new System.Drawing.Point(0, 35);
             this.dgv_History.Name = "dgv_History";
             this.dgv_History.ReadOnly = true;
             this.dgv_History.RowHeadersVisible = false;
-            this.dgv_History.Size = new System.Drawing.Size(729, 357);
+            this.dgv_History.Size = new System.Drawing.Size(729, 322);
             this.dgv_History.TabIndex = 0;
             this.dgv_History.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv_History_CellContentClick);
             this.dgv_History.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgv_History_CellFormatting);
             this.dgv_History.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dgv_History_DataBindingComplete);
-            // 
-            // listhistoryBindingSource
-            // 
-            this.listhistoryBindingSource.DataMember = "list_history";
-            this.listhistoryBindingSource.DataSource = this.stockDataSetBindingSource;
-            // 
-            // stockDataSetBindingSource
-            // 
-            this.stockDataSetBindingSource.DataSource = this.stockDataSet;
-            this.stockDataSetBindingSource.Position = 0;
-            // 
-            // stockDataSet
-            // 
-            this.stockDataSet.DataSetName = "stockDataSet";
-            this.stockDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
-            // list_historyTableAdapter
-            // 
-            this.list_historyTableAdapter.ClearBeforeFill = true;
             // 
             // hISTIDDataGridViewTextBoxColumn
             // 
@@ -310,6 +300,96 @@ namespace History
             this.eNDDTTMDataGridViewTextBoxColumn.Name = "eNDDTTMDataGridViewTextBoxColumn";
             this.eNDDTTMDataGridViewTextBoxColumn.ReadOnly = true;
             // 
+            // listhistoryBindingSource
+            // 
+            this.listhistoryBindingSource.DataMember = "list_history";
+            this.listhistoryBindingSource.DataSource = this.stockDataSetBindingSource;
+            // 
+            // stockDataSetBindingSource
+            // 
+            this.stockDataSetBindingSource.DataSource = this.stockDataSet;
+            this.stockDataSetBindingSource.Position = 0;
+            // 
+            // stockDataSet
+            // 
+            this.stockDataSet.DataSetName = "stockDataSet";
+            this.stockDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
+            // flowLayoutPanel1
+            // 
+            this.flowLayoutPanel1.Controls.Add(this.label1);
+            this.flowLayoutPanel1.Controls.Add(this.nmb_HistoryCount);
+            this.flowLayoutPanel1.Controls.Add(this.chk_FinalOnly);
+            this.flowLayoutPanel1.Controls.Add(this.btn_GetStat);
+            this.flowLayoutPanel1.Controls.Add(this.btn_Future);
+            this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 0);
+            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(729, 35);
+            this.flowLayoutPanel1.TabIndex = 1;
+            // 
+            // label1
+            // 
+            this.label1.Location = new System.Drawing.Point(3, 0);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(54, 23);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "History";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // nmb_HistoryCount
+            // 
+            this.nmb_HistoryCount.Location = new System.Drawing.Point(63, 3);
+            this.nmb_HistoryCount.Minimum = new decimal(new int[] {
+            2,
+            0,
+            0,
+            0});
+            this.nmb_HistoryCount.Name = "nmb_HistoryCount";
+            this.nmb_HistoryCount.Size = new System.Drawing.Size(53, 20);
+            this.nmb_HistoryCount.TabIndex = 1;
+            this.nmb_HistoryCount.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.nmb_HistoryCount.Value = new decimal(new int[] {
+            15,
+            0,
+            0,
+            0});
+            // 
+            // chk_FinalOnly
+            // 
+            this.chk_FinalOnly.AutoSize = true;
+            this.chk_FinalOnly.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.chk_FinalOnly.Location = new System.Drawing.Point(122, 3);
+            this.chk_FinalOnly.Name = "chk_FinalOnly";
+            this.chk_FinalOnly.Size = new System.Drawing.Size(72, 17);
+            this.chk_FinalOnly.TabIndex = 2;
+            this.chk_FinalOnly.Text = "Final Only";
+            this.chk_FinalOnly.UseVisualStyleBackColor = true;
+            // 
+            // btn_GetStat
+            // 
+            this.btn_GetStat.Location = new System.Drawing.Point(200, 3);
+            this.btn_GetStat.Name = "btn_GetStat";
+            this.btn_GetStat.Size = new System.Drawing.Size(75, 23);
+            this.btn_GetStat.TabIndex = 3;
+            this.btn_GetStat.Text = "Get Stat";
+            this.btn_GetStat.UseVisualStyleBackColor = true;
+            this.btn_GetStat.Click += new System.EventHandler(this.btn_GetStat_Click);
+            // 
+            // list_historyTableAdapter
+            // 
+            this.list_historyTableAdapter.ClearBeforeFill = true;
+            // 
+            // btn_Future
+            // 
+            this.btn_Future.Location = new System.Drawing.Point(281, 3);
+            this.btn_Future.Name = "btn_Future";
+            this.btn_Future.Size = new System.Drawing.Size(75, 23);
+            this.btn_Future.TabIndex = 4;
+            this.btn_Future.Text = "Future";
+            this.btn_Future.UseVisualStyleBackColor = true;
+            this.btn_Future.Click += new System.EventHandler(this.btn_Future_Click);
+            // 
             // MessageUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -328,6 +408,9 @@ namespace History
             ((System.ComponentModel.ISupportInitialize)(this.listhistoryBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.stockDataSetBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.stockDataSet)).EndInit();
+            this.flowLayoutPanel1.ResumeLayout(false);
+            this.flowLayoutPanel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nmb_HistoryCount)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -360,5 +443,11 @@ namespace History
         private System.Windows.Forms.DataGridViewTextBoxColumn att5DataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn sTARTDTTMDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn eNDDTTMDataGridViewTextBoxColumn;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.NumericUpDown nmb_HistoryCount;
+        private System.Windows.Forms.CheckBox chk_FinalOnly;
+        private System.Windows.Forms.Button btn_GetStat;
+        private System.Windows.Forms.Button btn_Future;
     }
 }

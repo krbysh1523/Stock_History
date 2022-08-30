@@ -240,6 +240,25 @@ ORDER BY HIST_ID DESC</CommandText>
             </Mappings>
             <Sources />
           </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="resultTableAdapter" GeneratorDataComponentClassName="resultTableAdapter" Name="result" UserDataComponentName="resultTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="stockConnectionString (Settings)" DbObjectType="Unknown" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT concat(l_id, '.', l_name) AS result
+  FROM lookup l
+ WHERE l.l_type = 'Result'
+ORDER BY l.l_id</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="result" DataSetColumn="result" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
         </Tables>
         <Sources />
       </DataSource>
@@ -248,7 +267,7 @@ ORDER BY HIST_ID DESC</CommandText>
   <xs:element name="stockDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="True" msprop:Generator_DataSetName="stockDataSet" msprop:Generator_UserDSName="stockDataSet">
     <xs:complexType>
       <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:element name="lookup" msprop:Generator_TableClassName="lookupDataTable" msprop:Generator_TableVarName="tablelookup" msprop:Generator_RowChangedName="lookupRowChanged" msprop:Generator_TablePropName="lookup" msprop:Generator_RowDeletingName="lookupRowDeleting" msprop:Generator_RowChangingName="lookupRowChanging" msprop:Generator_RowEvHandlerName="lookupRowChangeEventHandler" msprop:Generator_RowDeletedName="lookupRowDeleted" msprop:Generator_RowClassName="lookupRow" msprop:Generator_UserTableName="lookup" msprop:Generator_RowEvArgName="lookupRowChangeEvent">
+        <xs:element name="lookup" msprop:Generator_TableClassName="lookupDataTable" msprop:Generator_TableVarName="tablelookup" msprop:Generator_TablePropName="lookup" msprop:Generator_RowDeletingName="lookupRowDeleting" msprop:Generator_RowChangingName="lookupRowChanging" msprop:Generator_RowEvHandlerName="lookupRowChangeEventHandler" msprop:Generator_RowDeletedName="lookupRowDeleted" msprop:Generator_UserTableName="lookup" msprop:Generator_RowChangedName="lookupRowChanged" msprop:Generator_RowEvArgName="lookupRowChangeEvent" msprop:Generator_RowClassName="lookupRow">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="l_type" msprop:Generator_ColumnVarNameInTable="columnl_type" msprop:Generator_ColumnPropNameInRow="l_type" msprop:Generator_ColumnPropNameInTable="l_typeColumn" msprop:Generator_UserColumnName="l_type">
@@ -311,7 +330,7 @@ ORDER BY HIST_ID DESC</CommandText>
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="test_plan" msprop:Generator_TableClassName="test_planDataTable" msprop:Generator_TableVarName="tabletest_plan" msprop:Generator_RowChangedName="test_planRowChanged" msprop:Generator_TablePropName="test_plan" msprop:Generator_RowDeletingName="test_planRowDeleting" msprop:Generator_RowChangingName="test_planRowChanging" msprop:Generator_RowEvHandlerName="test_planRowChangeEventHandler" msprop:Generator_RowDeletedName="test_planRowDeleted" msprop:Generator_RowClassName="test_planRow" msprop:Generator_UserTableName="test_plan" msprop:Generator_RowEvArgName="test_planRowChangeEvent">
+        <xs:element name="test_plan" msprop:Generator_TableClassName="test_planDataTable" msprop:Generator_TableVarName="tabletest_plan" msprop:Generator_TablePropName="test_plan" msprop:Generator_RowDeletingName="test_planRowDeleting" msprop:Generator_RowChangingName="test_planRowChanging" msprop:Generator_RowEvHandlerName="test_planRowChangeEventHandler" msprop:Generator_RowDeletedName="test_planRowDeleted" msprop:Generator_UserTableName="test_plan" msprop:Generator_RowChangedName="test_planRowChanged" msprop:Generator_RowEvArgName="test_planRowChangeEvent" msprop:Generator_RowClassName="test_planRow">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="plan_name" msprop:Generator_ColumnVarNameInTable="columnplan_name" msprop:Generator_ColumnPropNameInRow="plan_name" msprop:Generator_ColumnPropNameInTable="plan_nameColumn" msprop:Generator_UserColumnName="plan_name">
@@ -383,7 +402,7 @@ ORDER BY HIST_ID DESC</CommandText>
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="list_history" msprop:Generator_TableClassName="list_historyDataTable" msprop:Generator_TableVarName="tablelist_history" msprop:Generator_RowChangedName="list_historyRowChanged" msprop:Generator_TablePropName="list_history" msprop:Generator_RowDeletingName="list_historyRowDeleting" msprop:Generator_RowChangingName="list_historyRowChanging" msprop:Generator_RowEvHandlerName="list_historyRowChangeEventHandler" msprop:Generator_RowDeletedName="list_historyRowDeleted" msprop:Generator_RowClassName="list_historyRow" msprop:Generator_UserTableName="list_history" msprop:Generator_RowEvArgName="list_historyRowChangeEvent">
+        <xs:element name="list_history" msprop:Generator_TableClassName="list_historyDataTable" msprop:Generator_TableVarName="tablelist_history" msprop:Generator_TablePropName="list_history" msprop:Generator_RowDeletingName="list_historyRowDeleting" msprop:Generator_RowChangingName="list_historyRowChanging" msprop:Generator_RowEvHandlerName="list_historyRowChangeEventHandler" msprop:Generator_RowDeletedName="list_historyRowDeleted" msprop:Generator_UserTableName="list_history" msprop:Generator_RowChangedName="list_historyRowChanged" msprop:Generator_RowEvArgName="list_historyRowChangeEvent" msprop:Generator_RowClassName="list_historyRow">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="HIST_ID" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnVarNameInTable="columnHIST_ID" msprop:Generator_ColumnPropNameInRow="HIST_ID" msprop:Generator_ColumnPropNameInTable="HIST_IDColumn" msprop:Generator_UserColumnName="HIST_ID" type="xs:int" />
@@ -453,6 +472,19 @@ ORDER BY HIST_ID DESC</CommandText>
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
                     <xs:maxLength value="250" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="result" msprop:Generator_TableClassName="resultDataTable" msprop:Generator_TableVarName="tableresult" msprop:Generator_TablePropName="result" msprop:Generator_RowDeletingName="resultRowDeleting" msprop:Generator_RowChangingName="resultRowChanging" msprop:Generator_RowEvHandlerName="resultRowChangeEventHandler" msprop:Generator_RowDeletedName="resultRowDeleted" msprop:Generator_UserTableName="result" msprop:Generator_RowChangedName="resultRowChanged" msprop:Generator_RowEvArgName="resultRowChangeEvent" msprop:Generator_RowClassName="resultRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="result" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnresult" msprop:Generator_ColumnPropNameInRow="result" msprop:Generator_ColumnPropNameInTable="resultColumn" msprop:Generator_UserColumnName="result" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="301" />
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>

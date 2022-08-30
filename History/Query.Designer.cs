@@ -35,9 +35,9 @@ namespace History
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.flowLayoutPanel4 = new System.Windows.Forms.FlowLayoutPanel();
-            this.rd_Chart = new System.Windows.Forms.RadioButton();
-            this.rd_List = new System.Windows.Forms.RadioButton();
-            this.rd_Full = new System.Windows.Forms.RadioButton();
+            this.cmb_Layout = new System.Windows.Forms.ComboBox();
+            this.btn_UpdateLayout = new System.Windows.Forms.Button();
+            this.btn_LayoutRefresh = new System.Windows.Forms.Button();
             this.btn_Chart = new System.Windows.Forms.Button();
             this.btn_Import = new System.Windows.Forms.Button();
             this.btn_Index = new System.Windows.Forms.Button();
@@ -77,9 +77,15 @@ namespace History
             this.btn_Test_Save = new System.Windows.Forms.Button();
             this.btn_Test_FillIn = new System.Windows.Forms.Button();
             this.btn_Test_Run = new System.Windows.Forms.Button();
+            this.btn_Test_All = new System.Windows.Forms.Button();
             this.btn_Delete = new System.Windows.Forms.Button();
+            this.chk_Capture = new System.Windows.Forms.CheckBox();
             this.lookupTableAdapter = new History.stockDataSetTableAdapters.lookupTableAdapter();
             this.test_planTableAdapter = new History.stockDataSetTableAdapters.test_planTableAdapter();
+            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.tab_Test = new System.Windows.Forms.TabPage();
+            this.tab_Picture = new System.Windows.Forms.TabPage();
+            this.pic_Symbol = new System.Windows.Forms.PictureBox();
             this.flowLayoutPanel1.SuspendLayout();
             this.flowLayoutPanel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_Lookup)).BeginInit();
@@ -93,6 +99,10 @@ namespace History
             ((System.ComponentModel.ISupportInitialize)(this.dgv_TestPlan)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindTest)).BeginInit();
             this.flowLayoutPanel2.SuspendLayout();
+            this.tabControl1.SuspendLayout();
+            this.tab_Test.SuspendLayout();
+            this.tab_Picture.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pic_Symbol)).BeginInit();
             this.SuspendLayout();
             // 
             // flowLayoutPanel1
@@ -110,53 +120,47 @@ namespace History
             // 
             // flowLayoutPanel4
             // 
-            this.flowLayoutPanel4.Controls.Add(this.rd_Chart);
-            this.flowLayoutPanel4.Controls.Add(this.rd_List);
-            this.flowLayoutPanel4.Controls.Add(this.rd_Full);
+            this.flowLayoutPanel4.Controls.Add(this.cmb_Layout);
+            this.flowLayoutPanel4.Controls.Add(this.btn_UpdateLayout);
+            this.flowLayoutPanel4.Controls.Add(this.btn_LayoutRefresh);
             this.flowLayoutPanel4.Location = new System.Drawing.Point(3, 3);
             this.flowLayoutPanel4.Name = "flowLayoutPanel4";
-            this.flowLayoutPanel4.Size = new System.Drawing.Size(182, 30);
+            this.flowLayoutPanel4.Size = new System.Drawing.Size(295, 30);
             this.flowLayoutPanel4.TabIndex = 15;
             // 
-            // rd_Chart
+            // cmb_Layout
             // 
-            this.rd_Chart.AutoSize = true;
-            this.rd_Chart.Location = new System.Drawing.Point(3, 3);
-            this.rd_Chart.Name = "rd_Chart";
-            this.rd_Chart.Size = new System.Drawing.Size(50, 17);
-            this.rd_Chart.TabIndex = 0;
-            this.rd_Chart.TabStop = true;
-            this.rd_Chart.Text = "Chart";
-            this.rd_Chart.UseVisualStyleBackColor = true;
-            this.rd_Chart.CheckedChanged += new System.EventHandler(this.rd_CheckedChanged);
+            this.cmb_Layout.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmb_Layout.FormattingEnabled = true;
+            this.cmb_Layout.Location = new System.Drawing.Point(3, 3);
+            this.cmb_Layout.Name = "cmb_Layout";
+            this.cmb_Layout.Size = new System.Drawing.Size(144, 21);
+            this.cmb_Layout.TabIndex = 17;
+            this.cmb_Layout.SelectedIndexChanged += new System.EventHandler(this.cmb_Layout_SelectedIndexChanged);
             // 
-            // rd_List
+            // btn_UpdateLayout
             // 
-            this.rd_List.AutoSize = true;
-            this.rd_List.Location = new System.Drawing.Point(59, 3);
-            this.rd_List.Name = "rd_List";
-            this.rd_List.Size = new System.Drawing.Size(41, 17);
-            this.rd_List.TabIndex = 1;
-            this.rd_List.TabStop = true;
-            this.rd_List.Text = "List";
-            this.rd_List.UseVisualStyleBackColor = true;
-            this.rd_List.CheckedChanged += new System.EventHandler(this.rd_CheckedChanged);
+            this.btn_UpdateLayout.Location = new System.Drawing.Point(153, 3);
+            this.btn_UpdateLayout.Name = "btn_UpdateLayout";
+            this.btn_UpdateLayout.Size = new System.Drawing.Size(60, 23);
+            this.btn_UpdateLayout.TabIndex = 16;
+            this.btn_UpdateLayout.Text = "Update";
+            this.btn_UpdateLayout.UseVisualStyleBackColor = true;
+            this.btn_UpdateLayout.Click += new System.EventHandler(this.btn_UpdateLayout_Click);
             // 
-            // rd_Full
+            // btn_LayoutRefresh
             // 
-            this.rd_Full.AutoSize = true;
-            this.rd_Full.Location = new System.Drawing.Point(106, 3);
-            this.rd_Full.Name = "rd_Full";
-            this.rd_Full.Size = new System.Drawing.Size(41, 17);
-            this.rd_Full.TabIndex = 2;
-            this.rd_Full.TabStop = true;
-            this.rd_Full.Text = "Full";
-            this.rd_Full.UseVisualStyleBackColor = true;
-            this.rd_Full.CheckedChanged += new System.EventHandler(this.rd_CheckedChanged);
+            this.btn_LayoutRefresh.Location = new System.Drawing.Point(219, 3);
+            this.btn_LayoutRefresh.Name = "btn_LayoutRefresh";
+            this.btn_LayoutRefresh.Size = new System.Drawing.Size(60, 23);
+            this.btn_LayoutRefresh.TabIndex = 18;
+            this.btn_LayoutRefresh.Text = "Refresh";
+            this.btn_LayoutRefresh.UseVisualStyleBackColor = true;
+            this.btn_LayoutRefresh.Click += new System.EventHandler(this.btn_LayoutRefresh_Click);
             // 
             // btn_Chart
             // 
-            this.btn_Chart.Location = new System.Drawing.Point(191, 3);
+            this.btn_Chart.Location = new System.Drawing.Point(304, 3);
             this.btn_Chart.Name = "btn_Chart";
             this.btn_Chart.Size = new System.Drawing.Size(61, 23);
             this.btn_Chart.TabIndex = 2;
@@ -166,7 +170,7 @@ namespace History
             // 
             // btn_Import
             // 
-            this.btn_Import.Location = new System.Drawing.Point(258, 3);
+            this.btn_Import.Location = new System.Drawing.Point(371, 3);
             this.btn_Import.Name = "btn_Import";
             this.btn_Import.Size = new System.Drawing.Size(60, 23);
             this.btn_Import.TabIndex = 3;
@@ -176,7 +180,7 @@ namespace History
             // 
             // btn_Index
             // 
-            this.btn_Index.Location = new System.Drawing.Point(324, 3);
+            this.btn_Index.Location = new System.Drawing.Point(437, 3);
             this.btn_Index.Name = "btn_Index";
             this.btn_Index.Size = new System.Drawing.Size(87, 23);
             this.btn_Index.TabIndex = 12;
@@ -186,7 +190,7 @@ namespace History
             // 
             // btn_Message
             // 
-            this.btn_Message.Location = new System.Drawing.Point(417, 3);
+            this.btn_Message.Location = new System.Drawing.Point(530, 3);
             this.btn_Message.Name = "btn_Message";
             this.btn_Message.Size = new System.Drawing.Size(66, 23);
             this.btn_Message.TabIndex = 13;
@@ -244,7 +248,7 @@ namespace History
             this.dgv_Lookup.RowHeadersVisible = false;
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dgv_Lookup.RowsDefaultCellStyle = dataGridViewCellStyle2;
-            this.dgv_Lookup.Size = new System.Drawing.Size(1032, 309);
+            this.dgv_Lookup.Size = new System.Drawing.Size(1018, 292);
             this.dgv_Lookup.TabIndex = 1;
             this.dgv_Lookup.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgv_Lookup_CellMouseClick);
             // 
@@ -326,7 +330,7 @@ namespace History
             // 
             this.splitContainer1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainer1.Location = new System.Drawing.Point(0, 39);
+            this.splitContainer1.Location = new System.Drawing.Point(3, 3);
             this.splitContainer1.Name = "splitContainer1";
             this.splitContainer1.Orientation = System.Windows.Forms.Orientation.Horizontal;
             // 
@@ -339,8 +343,8 @@ namespace History
             // 
             this.splitContainer1.Panel2.Controls.Add(this.dgv_TestPlan);
             this.splitContainer1.Panel2.Controls.Add(this.flowLayoutPanel2);
-            this.splitContainer1.Size = new System.Drawing.Size(1154, 608);
-            this.splitContainer1.SplitterDistance = 313;
+            this.splitContainer1.Size = new System.Drawing.Size(1140, 576);
+            this.splitContainer1.SplitterDistance = 296;
             this.splitContainer1.TabIndex = 2;
             // 
             // flowLayoutPanel3
@@ -348,9 +352,9 @@ namespace History
             this.flowLayoutPanel3.Controls.Add(this.btn_Refresh);
             this.flowLayoutPanel3.Controls.Add(this.btn_Save);
             this.flowLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Right;
-            this.flowLayoutPanel3.Location = new System.Drawing.Point(1032, 0);
+            this.flowLayoutPanel3.Location = new System.Drawing.Point(1018, 0);
             this.flowLayoutPanel3.Name = "flowLayoutPanel3";
-            this.flowLayoutPanel3.Size = new System.Drawing.Size(118, 309);
+            this.flowLayoutPanel3.Size = new System.Drawing.Size(118, 292);
             this.flowLayoutPanel3.TabIndex = 2;
             // 
             // dgv_TestPlan
@@ -384,7 +388,7 @@ namespace History
             this.dgv_TestPlan.Location = new System.Drawing.Point(0, 0);
             this.dgv_TestPlan.Name = "dgv_TestPlan";
             this.dgv_TestPlan.RowHeadersVisible = false;
-            this.dgv_TestPlan.Size = new System.Drawing.Size(1032, 287);
+            this.dgv_TestPlan.Size = new System.Drawing.Size(1018, 272);
             this.dgv_TestPlan.TabIndex = 0;
             this.dgv_TestPlan.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv_TestPlan_CellValueChanged);
             this.dgv_TestPlan.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dgv_TestPlan_DataBindingComplete);
@@ -484,11 +488,13 @@ namespace History
             this.flowLayoutPanel2.Controls.Add(this.btn_Test_Save);
             this.flowLayoutPanel2.Controls.Add(this.btn_Test_FillIn);
             this.flowLayoutPanel2.Controls.Add(this.btn_Test_Run);
+            this.flowLayoutPanel2.Controls.Add(this.btn_Test_All);
             this.flowLayoutPanel2.Controls.Add(this.btn_Delete);
+            this.flowLayoutPanel2.Controls.Add(this.chk_Capture);
             this.flowLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Right;
-            this.flowLayoutPanel2.Location = new System.Drawing.Point(1032, 0);
+            this.flowLayoutPanel2.Location = new System.Drawing.Point(1018, 0);
             this.flowLayoutPanel2.Name = "flowLayoutPanel2";
-            this.flowLayoutPanel2.Size = new System.Drawing.Size(118, 287);
+            this.flowLayoutPanel2.Size = new System.Drawing.Size(118, 272);
             this.flowLayoutPanel2.TabIndex = 1;
             // 
             // btn_Test_Refresh
@@ -531,15 +537,39 @@ namespace History
             this.btn_Test_Run.UseVisualStyleBackColor = true;
             this.btn_Test_Run.Click += new System.EventHandler(this.btn_Test_Run_Click);
             // 
+            // btn_Test_All
+            // 
+            this.btn_Test_All.Location = new System.Drawing.Point(3, 119);
+            this.btn_Test_All.Name = "btn_Test_All";
+            this.btn_Test_All.Size = new System.Drawing.Size(85, 23);
+            this.btn_Test_All.TabIndex = 20;
+            this.btn_Test_All.Text = "Test All";
+            this.btn_Test_All.UseVisualStyleBackColor = true;
+            this.btn_Test_All.Click += new System.EventHandler(this.btn_Test_All_Click);
+            // 
             // btn_Delete
             // 
-            this.btn_Delete.Location = new System.Drawing.Point(3, 119);
+            this.btn_Delete.Location = new System.Drawing.Point(3, 148);
             this.btn_Delete.Name = "btn_Delete";
             this.btn_Delete.Size = new System.Drawing.Size(85, 23);
             this.btn_Delete.TabIndex = 19;
             this.btn_Delete.Text = "Delete";
             this.btn_Delete.UseVisualStyleBackColor = true;
             this.btn_Delete.Click += new System.EventHandler(this.btn_Delete_Click);
+            // 
+            // chk_Capture
+            // 
+            this.chk_Capture.AutoSize = true;
+            this.chk_Capture.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.chk_Capture.Checked = true;
+            this.chk_Capture.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chk_Capture.Location = new System.Drawing.Point(3, 177);
+            this.chk_Capture.Name = "chk_Capture";
+            this.chk_Capture.Size = new System.Drawing.Size(85, 17);
+            this.chk_Capture.TabIndex = 21;
+            this.chk_Capture.Text = "with Capture";
+            this.chk_Capture.UseVisualStyleBackColor = true;
+            this.chk_Capture.CheckedChanged += new System.EventHandler(this.chk_Capture_CheckedChanged);
             // 
             // lookupTableAdapter
             // 
@@ -549,12 +579,55 @@ namespace History
             // 
             this.test_planTableAdapter.ClearBeforeFill = true;
             // 
+            // tabControl1
+            // 
+            this.tabControl1.Controls.Add(this.tab_Test);
+            this.tabControl1.Controls.Add(this.tab_Picture);
+            this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabControl1.Location = new System.Drawing.Point(0, 39);
+            this.tabControl1.Name = "tabControl1";
+            this.tabControl1.SelectedIndex = 0;
+            this.tabControl1.Size = new System.Drawing.Size(1154, 608);
+            this.tabControl1.TabIndex = 3;
+            // 
+            // tab_Test
+            // 
+            this.tab_Test.Controls.Add(this.splitContainer1);
+            this.tab_Test.Location = new System.Drawing.Point(4, 22);
+            this.tab_Test.Name = "tab_Test";
+            this.tab_Test.Padding = new System.Windows.Forms.Padding(3);
+            this.tab_Test.Size = new System.Drawing.Size(1146, 582);
+            this.tab_Test.TabIndex = 0;
+            this.tab_Test.Text = "Test";
+            this.tab_Test.UseVisualStyleBackColor = true;
+            // 
+            // tab_Picture
+            // 
+            this.tab_Picture.Controls.Add(this.pic_Symbol);
+            this.tab_Picture.Location = new System.Drawing.Point(4, 22);
+            this.tab_Picture.Name = "tab_Picture";
+            this.tab_Picture.Padding = new System.Windows.Forms.Padding(3);
+            this.tab_Picture.Size = new System.Drawing.Size(1146, 582);
+            this.tab_Picture.TabIndex = 1;
+            this.tab_Picture.Text = "Picture";
+            this.tab_Picture.UseVisualStyleBackColor = true;
+            // 
+            // pic_Symbol
+            // 
+            this.pic_Symbol.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pic_Symbol.Location = new System.Drawing.Point(3, 3);
+            this.pic_Symbol.Name = "pic_Symbol";
+            this.pic_Symbol.Size = new System.Drawing.Size(1140, 576);
+            this.pic_Symbol.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pic_Symbol.TabIndex = 0;
+            this.pic_Symbol.TabStop = false;
+            // 
             // Query
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1154, 647);
-            this.Controls.Add(this.splitContainer1);
+            this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.flowLayoutPanel1);
             this.KeyPreview = true;
             this.Name = "Query";
@@ -563,7 +636,6 @@ namespace History
             this.Load += new System.EventHandler(this.Query_Load);
             this.flowLayoutPanel1.ResumeLayout(false);
             this.flowLayoutPanel4.ResumeLayout(false);
-            this.flowLayoutPanel4.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_Lookup)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindLookup)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.stockDataSet)).EndInit();
@@ -575,6 +647,11 @@ namespace History
             ((System.ComponentModel.ISupportInitialize)(this.dgv_TestPlan)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindTest)).EndInit();
             this.flowLayoutPanel2.ResumeLayout(false);
+            this.flowLayoutPanel2.PerformLayout();
+            this.tabControl1.ResumeLayout(false);
+            this.tab_Test.ResumeLayout(false);
+            this.tab_Picture.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pic_Symbol)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -620,9 +697,6 @@ namespace History
         private System.Windows.Forms.DataGridViewTextBoxColumn latt4DataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn latt5DataGridViewTextBoxColumn;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel4;
-        public System.Windows.Forms.RadioButton rd_Chart;
-        public System.Windows.Forms.RadioButton rd_List;
-        public System.Windows.Forms.RadioButton rd_Full;
         private System.Windows.Forms.DataGridViewTextBoxColumn plannameDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn testseqDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn passlistDataGridViewTextBoxColumn;
@@ -635,5 +709,14 @@ namespace History
         private System.Windows.Forms.DataGridViewTextBoxColumn filter_att5;
         private System.Windows.Forms.DataGridViewTextBoxColumn remark;
         private System.Windows.Forms.DataGridViewTextBoxColumn test_id;
+        private System.Windows.Forms.Button btn_UpdateLayout;
+        private System.Windows.Forms.ComboBox cmb_Layout;
+        private System.Windows.Forms.Button btn_LayoutRefresh;
+        private System.Windows.Forms.Button btn_Test_All;
+        public System.Windows.Forms.TabControl tabControl1;
+        public System.Windows.Forms.TabPage tab_Test;
+        public System.Windows.Forms.TabPage tab_Picture;
+        public System.Windows.Forms.PictureBox pic_Symbol;
+        private System.Windows.Forms.CheckBox chk_Capture;
     }
 }
