@@ -30,9 +30,8 @@ namespace History
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.chart_Main = new LiveCharts.WinForms.CartesianChart();
-            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
             this.dt_From = new System.Windows.Forms.DateTimePicker();
             this.label2 = new System.Windows.Forms.Label();
@@ -70,7 +69,13 @@ namespace History
             this.chk_S_Price = new System.Windows.Forms.CheckBox();
             this.chk_S_Volume = new System.Windows.Forms.CheckBox();
             this.chk_S_SMA5 = new System.Windows.Forms.CheckBox();
-            this.chk_S_Candle = new System.Windows.Forms.CheckBox();
+            this.chk_TMB = new System.Windows.Forms.CheckBox();
+            this.chk_TV = new System.Windows.Forms.CheckBox();
+            this.chk_MV = new System.Windows.Forms.CheckBox();
+            this.chk_BV = new System.Windows.Forms.CheckBox();
+            this.chk_TMB_Ratio1 = new System.Windows.Forms.CheckBox();
+            this.chk_TMB_Ratio2 = new System.Windows.Forms.CheckBox();
+            this.chk_TMB_Ratio3 = new System.Windows.Forms.CheckBox();
             this.flowLayoutPanel7 = new System.Windows.Forms.FlowLayoutPanel();
             this.label8 = new System.Windows.Forms.Label();
             this.nmb_CaptureList = new System.Windows.Forms.NumericUpDown();
@@ -81,13 +86,16 @@ namespace History
             this.chk_Simul = new System.Windows.Forms.CheckBox();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.pic_Chart = new System.Windows.Forms.PictureBox();
+            this.table_View_Option = new System.Windows.Forms.TableLayoutPanel();
+            this.btn_Option = new System.Windows.Forms.Button();
+            this.table_Option = new System.Windows.Forms.TableLayoutPanel();
             this.dgv_List = new System.Windows.Forms.DataGridView();
             this.flowLayoutPanel4 = new System.Windows.Forms.FlowLayoutPanel();
             this.chk_Show_Pic = new System.Windows.Forms.CheckBox();
+            this.btn_CopyList = new System.Windows.Forms.Button();
             this.txt_OptionDesc = new System.Windows.Forms.TextBox();
             this.menu_Result = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.btn_CopyList = new System.Windows.Forms.Button();
-            this.flowLayoutPanel1.SuspendLayout();
+            this.chk_EPS = new System.Windows.Forms.CheckBox();
             this.flowLayoutPanel2.SuspendLayout();
             this.flowLayoutPanel3.SuspendLayout();
             this.flowLayoutPanel6.SuspendLayout();
@@ -104,6 +112,8 @@ namespace History
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pic_Chart)).BeginInit();
+            this.table_View_Option.SuspendLayout();
+            this.table_Option.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_List)).BeginInit();
             this.flowLayoutPanel4.SuspendLayout();
             this.SuspendLayout();
@@ -111,27 +121,13 @@ namespace History
             // chart_Main
             // 
             this.chart_Main.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.chart_Main.Location = new System.Drawing.Point(0, 70);
+            this.chart_Main.Location = new System.Drawing.Point(0, 100);
             this.chart_Main.Margin = new System.Windows.Forms.Padding(2);
             this.chart_Main.Name = "chart_Main";
-            this.chart_Main.Size = new System.Drawing.Size(999, 655);
+            this.chart_Main.Size = new System.Drawing.Size(999, 625);
             this.chart_Main.TabIndex = 0;
             this.chart_Main.Text = "cartesianChart1";
             this.chart_Main.DataClick += new LiveCharts.Events.DataClickHandler(this.chart_Main_DataClick);
-            // 
-            // flowLayoutPanel1
-            // 
-            this.flowLayoutPanel1.Controls.Add(this.flowLayoutPanel2);
-            this.flowLayoutPanel1.Controls.Add(this.flowLayoutPanel3);
-            this.flowLayoutPanel1.Controls.Add(this.flowLayoutPanel6);
-            this.flowLayoutPanel1.Controls.Add(this.flowLayoutPanel5);
-            this.flowLayoutPanel1.Controls.Add(this.flowLayoutPanel7);
-            this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 0);
-            this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(2);
-            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(999, 70);
-            this.flowLayoutPanel1.TabIndex = 1;
             // 
             // flowLayoutPanel2
             // 
@@ -143,9 +139,10 @@ namespace History
             this.flowLayoutPanel2.Controls.Add(this.btn_N1);
             this.flowLayoutPanel2.Controls.Add(this.btn_Index);
             this.flowLayoutPanel2.Controls.Add(this.cmb_Type);
+            this.flowLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.flowLayoutPanel2.Location = new System.Drawing.Point(3, 3);
             this.flowLayoutPanel2.Name = "flowLayoutPanel2";
-            this.flowLayoutPanel2.Size = new System.Drawing.Size(199, 62);
+            this.flowLayoutPanel2.Size = new System.Drawing.Size(194, 94);
             this.flowLayoutPanel2.TabIndex = 36;
             // 
             // dt_From
@@ -232,9 +229,10 @@ namespace History
             this.flowLayoutPanel3.Controls.Add(this.btn_ND1);
             this.flowLayoutPanel3.Controls.Add(this.chk_PassingList);
             this.flowLayoutPanel3.Controls.Add(this.chk_Analysis);
-            this.flowLayoutPanel3.Location = new System.Drawing.Point(208, 3);
+            this.flowLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.flowLayoutPanel3.Location = new System.Drawing.Point(203, 3);
             this.flowLayoutPanel3.Name = "flowLayoutPanel3";
-            this.flowLayoutPanel3.Size = new System.Drawing.Size(179, 62);
+            this.flowLayoutPanel3.Size = new System.Drawing.Size(194, 94);
             this.flowLayoutPanel3.TabIndex = 37;
             // 
             // dt_Symbol_From
@@ -259,7 +257,7 @@ namespace History
             // dt_Symbol_To
             // 
             this.dt_Symbol_To.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dt_Symbol_To.Location = new System.Drawing.Point(2, 28);
+            this.dt_Symbol_To.Location = new System.Drawing.Point(107, 2);
             this.dt_Symbol_To.Margin = new System.Windows.Forms.Padding(2);
             this.dt_Symbol_To.Name = "dt_Symbol_To";
             this.dt_Symbol_To.Size = new System.Drawing.Size(77, 20);
@@ -267,7 +265,7 @@ namespace History
             // 
             // btn_PD1
             // 
-            this.btn_PD1.Location = new System.Drawing.Point(83, 28);
+            this.btn_PD1.Location = new System.Drawing.Point(2, 28);
             this.btn_PD1.Margin = new System.Windows.Forms.Padding(2);
             this.btn_PD1.Name = "btn_PD1";
             this.btn_PD1.Size = new System.Drawing.Size(19, 19);
@@ -278,7 +276,7 @@ namespace History
             // 
             // btn_ND1
             // 
-            this.btn_ND1.Location = new System.Drawing.Point(106, 28);
+            this.btn_ND1.Location = new System.Drawing.Point(25, 28);
             this.btn_ND1.Margin = new System.Windows.Forms.Padding(2);
             this.btn_ND1.Name = "btn_ND1";
             this.btn_ND1.Size = new System.Drawing.Size(19, 19);
@@ -291,7 +289,7 @@ namespace History
             // 
             this.chk_PassingList.AutoSize = true;
             this.chk_PassingList.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.chk_PassingList.Location = new System.Drawing.Point(3, 53);
+            this.chk_PassingList.Location = new System.Drawing.Point(49, 29);
             this.chk_PassingList.Name = "chk_PassingList";
             this.chk_PassingList.Size = new System.Drawing.Size(88, 17);
             this.chk_PassingList.TabIndex = 36;
@@ -302,7 +300,7 @@ namespace History
             // 
             this.chk_Analysis.AutoSize = true;
             this.chk_Analysis.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.chk_Analysis.Location = new System.Drawing.Point(97, 53);
+            this.chk_Analysis.Location = new System.Drawing.Point(3, 52);
             this.chk_Analysis.Name = "chk_Analysis";
             this.chk_Analysis.Size = new System.Drawing.Size(51, 17);
             this.chk_Analysis.TabIndex = 35;
@@ -326,9 +324,10 @@ namespace History
             this.flowLayoutPanel6.Controls.Add(this.nmb_2nd_Axix_Y_Min);
             this.flowLayoutPanel6.Controls.Add(this.label3);
             this.flowLayoutPanel6.Controls.Add(this.nmb_2nd_Axix_Y_Max);
-            this.flowLayoutPanel6.Location = new System.Drawing.Point(393, 3);
+            this.flowLayoutPanel6.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.flowLayoutPanel6.Location = new System.Drawing.Point(403, 3);
             this.flowLayoutPanel6.Name = "flowLayoutPanel6";
-            this.flowLayoutPanel6.Size = new System.Drawing.Size(336, 62);
+            this.flowLayoutPanel6.Size = new System.Drawing.Size(294, 94);
             this.flowLayoutPanel6.TabIndex = 40;
             // 
             // label6
@@ -432,7 +431,7 @@ namespace History
             // 
             // btn_WideAxis
             // 
-            this.btn_WideAxis.Location = new System.Drawing.Point(275, 2);
+            this.btn_WideAxis.Location = new System.Drawing.Point(2, 31);
             this.btn_WideAxis.Margin = new System.Windows.Forms.Padding(2);
             this.btn_WideAxis.Name = "btn_WideAxis";
             this.btn_WideAxis.Size = new System.Drawing.Size(19, 25);
@@ -443,7 +442,7 @@ namespace History
             // 
             // btn_Fixed
             // 
-            this.btn_Fixed.Location = new System.Drawing.Point(298, 2);
+            this.btn_Fixed.Location = new System.Drawing.Point(25, 31);
             this.btn_Fixed.Margin = new System.Windows.Forms.Padding(2);
             this.btn_Fixed.Name = "btn_Fixed";
             this.btn_Fixed.Size = new System.Drawing.Size(19, 25);
@@ -458,7 +457,7 @@ namespace History
             this.chk_FixedRange.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.chk_FixedRange.Checked = true;
             this.chk_FixedRange.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chk_FixedRange.Location = new System.Drawing.Point(3, 32);
+            this.chk_FixedRange.Location = new System.Drawing.Point(49, 32);
             this.chk_FixedRange.Name = "chk_FixedRange";
             this.chk_FixedRange.Size = new System.Drawing.Size(97, 17);
             this.chk_FixedRange.TabIndex = 36;
@@ -467,7 +466,7 @@ namespace History
             // 
             // label1
             // 
-            this.label1.Location = new System.Drawing.Point(105, 29);
+            this.label1.Location = new System.Drawing.Point(151, 29);
             this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(96, 26);
@@ -477,7 +476,7 @@ namespace History
             // 
             // nmb_2nd_Axix_Y_Min
             // 
-            this.nmb_2nd_Axix_Y_Min.Location = new System.Drawing.Point(206, 32);
+            this.nmb_2nd_Axix_Y_Min.Location = new System.Drawing.Point(3, 61);
             this.nmb_2nd_Axix_Y_Min.Maximum = new decimal(new int[] {
             9999,
             0,
@@ -500,7 +499,7 @@ namespace History
             // 
             // label3
             // 
-            this.label3.Location = new System.Drawing.Point(257, 29);
+            this.label3.Location = new System.Drawing.Point(54, 58);
             this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(20, 26);
@@ -510,7 +509,7 @@ namespace History
             // 
             // nmb_2nd_Axix_Y_Max
             // 
-            this.nmb_2nd_Axix_Y_Max.Location = new System.Drawing.Point(282, 32);
+            this.nmb_2nd_Axix_Y_Max.Location = new System.Drawing.Point(79, 61);
             this.nmb_2nd_Axix_Y_Max.Maximum = new decimal(new int[] {
             9999,
             0,
@@ -534,23 +533,28 @@ namespace History
             this.flowLayoutPanel5.Controls.Add(this.chk_S_Price);
             this.flowLayoutPanel5.Controls.Add(this.chk_S_Volume);
             this.flowLayoutPanel5.Controls.Add(this.chk_S_SMA5);
-            this.flowLayoutPanel5.Controls.Add(this.chk_S_Candle);
-            this.flowLayoutPanel5.Dock = System.Windows.Forms.DockStyle.Left;
-            this.flowLayoutPanel5.Location = new System.Drawing.Point(735, 3);
+            this.flowLayoutPanel5.Controls.Add(this.chk_TMB);
+            this.flowLayoutPanel5.Controls.Add(this.chk_TV);
+            this.flowLayoutPanel5.Controls.Add(this.chk_MV);
+            this.flowLayoutPanel5.Controls.Add(this.chk_BV);
+            this.flowLayoutPanel5.Controls.Add(this.chk_TMB_Ratio1);
+            this.flowLayoutPanel5.Controls.Add(this.chk_TMB_Ratio2);
+            this.flowLayoutPanel5.Controls.Add(this.chk_TMB_Ratio3);
+            this.flowLayoutPanel5.Controls.Add(this.chk_EPS);
+            this.flowLayoutPanel5.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.flowLayoutPanel5.Location = new System.Drawing.Point(703, 3);
             this.flowLayoutPanel5.Name = "flowLayoutPanel5";
-            this.flowLayoutPanel5.Size = new System.Drawing.Size(111, 62);
+            this.flowLayoutPanel5.Size = new System.Drawing.Size(144, 94);
             this.flowLayoutPanel5.TabIndex = 42;
             // 
             // chk_IndexPrice
             // 
             this.chk_IndexPrice.AutoSize = true;
-            this.chk_IndexPrice.Checked = true;
-            this.chk_IndexPrice.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chk_IndexPrice.Location = new System.Drawing.Point(3, 3);
             this.chk_IndexPrice.Name = "chk_IndexPrice";
-            this.chk_IndexPrice.Size = new System.Drawing.Size(79, 17);
-            this.chk_IndexPrice.TabIndex = 1;
-            this.chk_IndexPrice.Text = "Index Price";
+            this.chk_IndexPrice.Size = new System.Drawing.Size(82, 17);
+            this.chk_IndexPrice.TabIndex = 11;
+            this.chk_IndexPrice.Text = "Index  Price";
             this.chk_IndexPrice.UseVisualStyleBackColor = true;
             // 
             // chk_IndexSMA5
@@ -565,8 +569,6 @@ namespace History
             // 
             // chk_S_Price
             // 
-            this.chk_S_Price.Checked = true;
-            this.chk_S_Price.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chk_S_Price.Location = new System.Drawing.Point(3, 49);
             this.chk_S_Price.Name = "chk_S_Price";
             this.chk_S_Price.Size = new System.Drawing.Size(50, 17);
@@ -579,7 +581,7 @@ namespace History
             this.chk_S_Volume.AutoSize = true;
             this.chk_S_Volume.Checked = true;
             this.chk_S_Volume.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chk_S_Volume.Location = new System.Drawing.Point(3, 72);
+            this.chk_S_Volume.Location = new System.Drawing.Point(59, 49);
             this.chk_S_Volume.Name = "chk_S_Volume";
             this.chk_S_Volume.Size = new System.Drawing.Size(61, 17);
             this.chk_S_Volume.TabIndex = 4;
@@ -589,24 +591,82 @@ namespace History
             // chk_S_SMA5
             // 
             this.chk_S_SMA5.AutoSize = true;
-            this.chk_S_SMA5.Location = new System.Drawing.Point(3, 95);
+            this.chk_S_SMA5.Location = new System.Drawing.Point(3, 72);
             this.chk_S_SMA5.Name = "chk_S_SMA5";
             this.chk_S_SMA5.Size = new System.Drawing.Size(55, 17);
             this.chk_S_SMA5.TabIndex = 3;
             this.chk_S_SMA5.Text = "SMA5";
             this.chk_S_SMA5.UseVisualStyleBackColor = true;
             // 
-            // chk_S_Candle
+            // chk_TMB
             // 
-            this.chk_S_Candle.AutoSize = true;
-            this.chk_S_Candle.Checked = true;
-            this.chk_S_Candle.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chk_S_Candle.Location = new System.Drawing.Point(3, 118);
-            this.chk_S_Candle.Name = "chk_S_Candle";
-            this.chk_S_Candle.Size = new System.Drawing.Size(59, 17);
-            this.chk_S_Candle.TabIndex = 5;
-            this.chk_S_Candle.Text = "Candle";
-            this.chk_S_Candle.UseVisualStyleBackColor = true;
+            this.chk_TMB.AutoSize = true;
+            this.chk_TMB.Location = new System.Drawing.Point(3, 95);
+            this.chk_TMB.Name = "chk_TMB";
+            this.chk_TMB.Size = new System.Drawing.Size(81, 17);
+            this.chk_TMB.TabIndex = 6;
+            this.chk_TMB.Text = "TMB Signal";
+            this.chk_TMB.UseVisualStyleBackColor = true;
+            // 
+            // chk_TV
+            // 
+            this.chk_TV.AutoSize = true;
+            this.chk_TV.Location = new System.Drawing.Point(3, 118);
+            this.chk_TV.Name = "chk_TV";
+            this.chk_TV.Size = new System.Drawing.Size(83, 17);
+            this.chk_TV.TabIndex = 13;
+            this.chk_TV.Text = "Top Volume";
+            this.chk_TV.UseVisualStyleBackColor = true;
+            // 
+            // chk_MV
+            // 
+            this.chk_MV.AutoSize = true;
+            this.chk_MV.Location = new System.Drawing.Point(3, 141);
+            this.chk_MV.Name = "chk_MV";
+            this.chk_MV.Size = new System.Drawing.Size(95, 17);
+            this.chk_MV.TabIndex = 12;
+            this.chk_MV.Text = "Middle Volume";
+            this.chk_MV.UseVisualStyleBackColor = true;
+            // 
+            // chk_BV
+            // 
+            this.chk_BV.AutoSize = true;
+            this.chk_BV.Location = new System.Drawing.Point(3, 164);
+            this.chk_BV.Name = "chk_BV";
+            this.chk_BV.Size = new System.Drawing.Size(97, 17);
+            this.chk_BV.TabIndex = 7;
+            this.chk_BV.Text = "Bottom Volume";
+            this.chk_BV.UseVisualStyleBackColor = true;
+            // 
+            // chk_TMB_Ratio1
+            // 
+            this.chk_TMB_Ratio1.AutoSize = true;
+            this.chk_TMB_Ratio1.Location = new System.Drawing.Point(3, 187);
+            this.chk_TMB_Ratio1.Name = "chk_TMB_Ratio1";
+            this.chk_TMB_Ratio1.Size = new System.Drawing.Size(86, 17);
+            this.chk_TMB_Ratio1.TabIndex = 10;
+            this.chk_TMB_Ratio1.Text = "TMB Ratio 1";
+            this.chk_TMB_Ratio1.UseVisualStyleBackColor = true;
+            // 
+            // chk_TMB_Ratio2
+            // 
+            this.chk_TMB_Ratio2.AutoSize = true;
+            this.chk_TMB_Ratio2.Location = new System.Drawing.Point(3, 210);
+            this.chk_TMB_Ratio2.Name = "chk_TMB_Ratio2";
+            this.chk_TMB_Ratio2.Size = new System.Drawing.Size(86, 17);
+            this.chk_TMB_Ratio2.TabIndex = 14;
+            this.chk_TMB_Ratio2.Text = "TMB Ratio 2";
+            this.chk_TMB_Ratio2.UseVisualStyleBackColor = true;
+            // 
+            // chk_TMB_Ratio3
+            // 
+            this.chk_TMB_Ratio3.AutoSize = true;
+            this.chk_TMB_Ratio3.Location = new System.Drawing.Point(3, 233);
+            this.chk_TMB_Ratio3.Name = "chk_TMB_Ratio3";
+            this.chk_TMB_Ratio3.Size = new System.Drawing.Size(86, 17);
+            this.chk_TMB_Ratio3.TabIndex = 15;
+            this.chk_TMB_Ratio3.Text = "TMB Ratio 3";
+            this.chk_TMB_Ratio3.UseVisualStyleBackColor = true;
             // 
             // flowLayoutPanel7
             // 
@@ -618,9 +678,10 @@ namespace History
             this.flowLayoutPanel7.Controls.Add(this.btn_Capture_One);
             this.flowLayoutPanel7.Controls.Add(this.label5);
             this.flowLayoutPanel7.Controls.Add(this.nmb_Sleep);
-            this.flowLayoutPanel7.Location = new System.Drawing.Point(852, 3);
+            this.flowLayoutPanel7.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.flowLayoutPanel7.Location = new System.Drawing.Point(853, 3);
             this.flowLayoutPanel7.Name = "flowLayoutPanel7";
-            this.flowLayoutPanel7.Size = new System.Drawing.Size(133, 62);
+            this.flowLayoutPanel7.Size = new System.Drawing.Size(143, 94);
             this.flowLayoutPanel7.TabIndex = 41;
             // 
             // label8
@@ -730,8 +791,9 @@ namespace History
             // splitContainer1.Panel1
             // 
             this.splitContainer1.Panel1.Controls.Add(this.pic_Chart);
+            this.splitContainer1.Panel1.Controls.Add(this.table_View_Option);
             this.splitContainer1.Panel1.Controls.Add(this.chart_Main);
-            this.splitContainer1.Panel1.Controls.Add(this.flowLayoutPanel1);
+            this.splitContainer1.Panel1.Controls.Add(this.table_Option);
             // 
             // splitContainer1.Panel2
             // 
@@ -745,11 +807,58 @@ namespace History
             // pic_Chart
             // 
             this.pic_Chart.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pic_Chart.Location = new System.Drawing.Point(0, 70);
+            this.pic_Chart.Location = new System.Drawing.Point(0, 135);
             this.pic_Chart.Name = "pic_Chart";
-            this.pic_Chart.Size = new System.Drawing.Size(999, 655);
+            this.pic_Chart.Size = new System.Drawing.Size(999, 590);
             this.pic_Chart.TabIndex = 2;
             this.pic_Chart.TabStop = false;
+            // 
+            // table_View_Option
+            // 
+            this.table_View_Option.ColumnCount = 3;
+            this.table_View_Option.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.table_View_Option.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 120F));
+            this.table_View_Option.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.table_View_Option.Controls.Add(this.btn_Option, 1, 0);
+            this.table_View_Option.Dock = System.Windows.Forms.DockStyle.Top;
+            this.table_View_Option.Location = new System.Drawing.Point(0, 100);
+            this.table_View_Option.Name = "table_View_Option";
+            this.table_View_Option.RowCount = 1;
+            this.table_View_Option.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.table_View_Option.Size = new System.Drawing.Size(999, 35);
+            this.table_View_Option.TabIndex = 4;
+            // 
+            // btn_Option
+            // 
+            this.btn_Option.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btn_Option.Location = new System.Drawing.Point(442, 3);
+            this.btn_Option.Name = "btn_Option";
+            this.btn_Option.Size = new System.Drawing.Size(114, 29);
+            this.btn_Option.TabIndex = 3;
+            this.btn_Option.Text = "View Option 3";
+            this.btn_Option.UseVisualStyleBackColor = true;
+            this.btn_Option.Click += new System.EventHandler(this.btn_Option_Click);
+            // 
+            // table_Option
+            // 
+            this.table_Option.ColumnCount = 5;
+            this.table_Option.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 200F));
+            this.table_Option.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 200F));
+            this.table_Option.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 300F));
+            this.table_Option.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 150F));
+            this.table_Option.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.table_Option.Controls.Add(this.flowLayoutPanel7, 4, 0);
+            this.table_Option.Controls.Add(this.flowLayoutPanel5, 3, 0);
+            this.table_Option.Controls.Add(this.flowLayoutPanel2, 0, 0);
+            this.table_Option.Controls.Add(this.flowLayoutPanel3, 1, 0);
+            this.table_Option.Controls.Add(this.flowLayoutPanel6, 2, 0);
+            this.table_Option.Dock = System.Windows.Forms.DockStyle.Top;
+            this.table_Option.Location = new System.Drawing.Point(0, 0);
+            this.table_Option.Name = "table_Option";
+            this.table_Option.RowCount = 1;
+            this.table_Option.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.table_Option.Size = new System.Drawing.Size(999, 100);
+            this.table_Option.TabIndex = 43;
             // 
             // dgv_List
             // 
@@ -758,14 +867,14 @@ namespace History
             this.dgv_List.AllowUserToResizeColumns = false;
             this.dgv_List.AllowUserToResizeRows = false;
             this.dgv_List.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.Chartreuse;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgv_List.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.Chartreuse;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgv_List.DefaultCellStyle = dataGridViewCellStyle1;
             this.dgv_List.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgv_List.Location = new System.Drawing.Point(0, 31);
             this.dgv_List.MultiSelect = false;
@@ -804,6 +913,17 @@ namespace History
             this.chk_Show_Pic.Text = "Show Picture";
             this.chk_Show_Pic.UseVisualStyleBackColor = true;
             // 
+            // btn_CopyList
+            // 
+            this.btn_CopyList.Location = new System.Drawing.Point(240, 2);
+            this.btn_CopyList.Margin = new System.Windows.Forms.Padding(2);
+            this.btn_CopyList.Name = "btn_CopyList";
+            this.btn_CopyList.Size = new System.Drawing.Size(47, 24);
+            this.btn_CopyList.TabIndex = 35;
+            this.btn_CopyList.Text = "Copy";
+            this.btn_CopyList.UseVisualStyleBackColor = true;
+            this.btn_CopyList.Click += new System.EventHandler(this.btn_CopyList_Click);
+            // 
             // txt_OptionDesc
             // 
             this.txt_OptionDesc.Location = new System.Drawing.Point(292, 3);
@@ -816,16 +936,17 @@ namespace History
             this.menu_Result.Name = "menu_Result";
             this.menu_Result.Size = new System.Drawing.Size(61, 4);
             // 
-            // btn_CopyList
+            // chk_EPS
             // 
-            this.btn_CopyList.Location = new System.Drawing.Point(240, 2);
-            this.btn_CopyList.Margin = new System.Windows.Forms.Padding(2);
-            this.btn_CopyList.Name = "btn_CopyList";
-            this.btn_CopyList.Size = new System.Drawing.Size(47, 24);
-            this.btn_CopyList.TabIndex = 35;
-            this.btn_CopyList.Text = "Copy";
-            this.btn_CopyList.UseVisualStyleBackColor = true;
-            this.btn_CopyList.Click += new System.EventHandler(this.btn_CopyList_Click);
+            this.chk_EPS.AutoSize = true;
+            this.chk_EPS.Checked = true;
+            this.chk_EPS.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chk_EPS.Location = new System.Drawing.Point(3, 256);
+            this.chk_EPS.Name = "chk_EPS";
+            this.chk_EPS.Size = new System.Drawing.Size(73, 17);
+            this.chk_EPS.TabIndex = 16;
+            this.chk_EPS.Text = "EPS Date";
+            this.chk_EPS.UseVisualStyleBackColor = true;
             // 
             // Index_Analyzer
             // 
@@ -841,7 +962,6 @@ namespace History
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Index_Analyzer_FormClosing);
             this.Load += new System.EventHandler(this.Index_Analyzer_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Index_Analyzer_KeyDown);
-            this.flowLayoutPanel1.ResumeLayout(false);
             this.flowLayoutPanel2.ResumeLayout(false);
             this.flowLayoutPanel3.ResumeLayout(false);
             this.flowLayoutPanel3.PerformLayout();
@@ -861,6 +981,8 @@ namespace History
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pic_Chart)).EndInit();
+            this.table_View_Option.ResumeLayout(false);
+            this.table_Option.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgv_List)).EndInit();
             this.flowLayoutPanel4.ResumeLayout(false);
             this.flowLayoutPanel4.PerformLayout();
@@ -869,7 +991,6 @@ namespace History
         }
 
         #endregion
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button btn_Index;
         private System.Windows.Forms.SplitContainer splitContainer1;
@@ -911,13 +1032,11 @@ namespace History
         private System.Windows.Forms.Button btn_ND1;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel5;
         private System.Windows.Forms.CheckBox chk_IndexSMA5;
-        private System.Windows.Forms.CheckBox chk_IndexPrice;
         private System.Windows.Forms.CheckBox chk_S_Price;
         private System.Windows.Forms.CheckBox chk_S_Volume;
         private System.Windows.Forms.CheckBox chk_S_SMA5;
         private System.Windows.Forms.Button btn_Fixed;
         public System.Windows.Forms.Button btn_Capture_One;
-        private System.Windows.Forms.CheckBox chk_S_Candle;
         private System.Windows.Forms.Label label5;
         public System.Windows.Forms.NumericUpDown nmb_Sleep;
         private System.Windows.Forms.ContextMenuStrip menu_Result;
@@ -925,5 +1044,17 @@ namespace History
         public System.Windows.Forms.CheckBox chk_Show_Pic;
         public System.Windows.Forms.TextBox txt_OptionDesc;
         public System.Windows.Forms.Button btn_CopyList;
+        private System.Windows.Forms.TableLayoutPanel table_View_Option;
+        private System.Windows.Forms.Button btn_Option;
+        private System.Windows.Forms.TableLayoutPanel table_Option;
+        private System.Windows.Forms.CheckBox chk_TMB;
+        private System.Windows.Forms.CheckBox chk_BV;
+        private System.Windows.Forms.CheckBox chk_TMB_Ratio1;
+        private System.Windows.Forms.CheckBox chk_IndexPrice;
+        private System.Windows.Forms.CheckBox chk_MV;
+        private System.Windows.Forms.CheckBox chk_TV;
+        private System.Windows.Forms.CheckBox chk_TMB_Ratio2;
+        private System.Windows.Forms.CheckBox chk_TMB_Ratio3;
+        private System.Windows.Forms.CheckBox chk_EPS;
     }
 }

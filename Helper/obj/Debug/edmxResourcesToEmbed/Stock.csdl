@@ -1,0 +1,1165 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="stockModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="stockEntities" annotation:LazyLoadingEnabled="true">
+    <FunctionImport Name="filter_main" ReturnType="Collection(stockModel.filter_main_Result)">
+      <Parameter Name="start_dttm" Mode="In" Type="DateTime" />
+      <Parameter Name="end_dttm" Mode="In" Type="DateTime" />
+      <Parameter Name="option" Mode="In" Type="Int32" />
+      <Parameter Name="passing_list" Mode="In" Type="String" />
+      <Parameter Name="passing_symbols" Mode="In" Type="String" />
+      <Parameter Name="att1" Mode="In" Type="String" />
+      <Parameter Name="att2" Mode="In" Type="String" />
+      <Parameter Name="att3" Mode="In" Type="String" />
+      <Parameter Name="att4" Mode="In" Type="String" />
+      <Parameter Name="att5" Mode="In" Type="String" />
+      <Parameter Name="description" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="filter_simul">
+      <Parameter Name="start_dttm" Mode="In" Type="DateTime" />
+      <Parameter Name="end_dttm" Mode="In" Type="DateTime" />
+    </FunctionImport>
+    <FunctionImport Name="filter_simul_header" ReturnType="Collection(stockModel.filter_simul_header_Result)">
+      <Parameter Name="end_dttm" Mode="In" Type="DateTime" />
+    </FunctionImport>
+    <FunctionImport Name="filter_simul_summary" />
+    <FunctionImport Name="get_Stat_history" ReturnType="Collection(stockModel.get_Stat_history_Result)">
+      <Parameter Name="start_dttm" Mode="In" Type="DateTime" />
+      <Parameter Name="end_dttm" Mode="In" Type="DateTime" />
+      <Parameter Name="hist_count" Mode="In" Type="Int32" />
+      <Parameter Name="final_only" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="option_01">
+      <Parameter Name="start_dttm" Mode="In" Type="DateTime" />
+      <Parameter Name="end_dttm" Mode="In" Type="DateTime" />
+      <Parameter Name="passing_list" Mode="In" Type="String" />
+      <Parameter Name="att1" Mode="In" Type="String" />
+      <Parameter Name="att2" Mode="In" Type="String" />
+      <Parameter Name="att3" Mode="In" Type="String" />
+      <Parameter Name="att4" Mode="In" Type="String" />
+      <Parameter Name="att5" Mode="In" Type="String" />
+      <Parameter Name="option_desc" Mode="InOut" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="option_02">
+      <Parameter Name="start_dttm" Mode="In" Type="DateTime" />
+      <Parameter Name="end_dttm" Mode="In" Type="DateTime" />
+      <Parameter Name="passing_list" Mode="In" Type="String" />
+      <Parameter Name="att1" Mode="In" Type="String" />
+      <Parameter Name="att2" Mode="In" Type="String" />
+      <Parameter Name="att3" Mode="In" Type="String" />
+      <Parameter Name="att4" Mode="In" Type="String" />
+      <Parameter Name="att5" Mode="In" Type="String" />
+      <Parameter Name="option_desc" Mode="InOut" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="option_03">
+      <Parameter Name="start_dttm" Mode="In" Type="DateTime" />
+      <Parameter Name="end_dttm" Mode="In" Type="DateTime" />
+      <Parameter Name="passing_list" Mode="In" Type="String" />
+      <Parameter Name="att1" Mode="In" Type="String" />
+      <Parameter Name="att2" Mode="In" Type="String" />
+      <Parameter Name="att3" Mode="In" Type="String" />
+      <Parameter Name="att4" Mode="In" Type="String" />
+      <Parameter Name="att5" Mode="In" Type="String" />
+      <Parameter Name="option_desc" Mode="InOut" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="option_04">
+      <Parameter Name="start_dttm" Mode="In" Type="DateTime" />
+      <Parameter Name="end_dttm" Mode="In" Type="DateTime" />
+      <Parameter Name="passing_list" Mode="In" Type="String" />
+      <Parameter Name="att1" Mode="In" Type="String" />
+      <Parameter Name="att2" Mode="In" Type="String" />
+      <Parameter Name="att3" Mode="In" Type="String" />
+      <Parameter Name="att4" Mode="In" Type="String" />
+      <Parameter Name="att5" Mode="In" Type="String" />
+      <Parameter Name="option_desc" Mode="InOut" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="option_05">
+      <Parameter Name="start_dttm" Mode="In" Type="DateTime" />
+      <Parameter Name="end_dttm" Mode="In" Type="DateTime" />
+      <Parameter Name="passing_list" Mode="In" Type="String" />
+      <Parameter Name="att1" Mode="In" Type="String" />
+      <Parameter Name="att2" Mode="In" Type="String" />
+      <Parameter Name="att3" Mode="In" Type="String" />
+      <Parameter Name="att4" Mode="In" Type="String" />
+      <Parameter Name="att5" Mode="In" Type="String" />
+      <Parameter Name="option_desc" Mode="InOut" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="option_06">
+      <Parameter Name="start_dttm" Mode="In" Type="DateTime" />
+      <Parameter Name="end_dttm" Mode="In" Type="DateTime" />
+      <Parameter Name="passing_list" Mode="In" Type="String" />
+      <Parameter Name="att1" Mode="In" Type="String" />
+      <Parameter Name="att2" Mode="In" Type="String" />
+      <Parameter Name="att3" Mode="In" Type="String" />
+      <Parameter Name="att4" Mode="In" Type="String" />
+      <Parameter Name="att5" Mode="In" Type="String" />
+      <Parameter Name="option_desc" Mode="InOut" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="option_07">
+      <Parameter Name="start_dttm" Mode="In" Type="DateTime" />
+      <Parameter Name="end_dttm" Mode="In" Type="DateTime" />
+      <Parameter Name="passing_list" Mode="In" Type="String" />
+      <Parameter Name="att1" Mode="In" Type="String" />
+      <Parameter Name="att2" Mode="In" Type="String" />
+      <Parameter Name="att3" Mode="In" Type="String" />
+      <Parameter Name="att4" Mode="In" Type="String" />
+      <Parameter Name="att5" Mode="In" Type="String" />
+      <Parameter Name="option_desc" Mode="InOut" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="option_08">
+      <Parameter Name="start_dttm" Mode="In" Type="DateTime" />
+      <Parameter Name="end_dttm" Mode="In" Type="DateTime" />
+      <Parameter Name="passing_list" Mode="In" Type="String" />
+      <Parameter Name="att1" Mode="In" Type="String" />
+      <Parameter Name="att2" Mode="In" Type="String" />
+      <Parameter Name="att3" Mode="In" Type="String" />
+      <Parameter Name="att4" Mode="In" Type="String" />
+      <Parameter Name="att5" Mode="In" Type="String" />
+      <Parameter Name="option_desc" Mode="InOut" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="option_09">
+      <Parameter Name="start_dttm" Mode="In" Type="DateTime" />
+      <Parameter Name="end_dttm" Mode="In" Type="DateTime" />
+      <Parameter Name="passing_list" Mode="In" Type="String" />
+      <Parameter Name="att1" Mode="In" Type="String" />
+      <Parameter Name="att2" Mode="In" Type="String" />
+      <Parameter Name="att3" Mode="In" Type="String" />
+      <Parameter Name="att4" Mode="In" Type="String" />
+      <Parameter Name="att5" Mode="In" Type="String" />
+      <Parameter Name="option_desc" Mode="InOut" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="option_10">
+      <Parameter Name="start_dttm" Mode="In" Type="DateTime" />
+      <Parameter Name="end_dttm" Mode="In" Type="DateTime" />
+      <Parameter Name="passing_list" Mode="In" Type="String" />
+      <Parameter Name="att1" Mode="In" Type="String" />
+      <Parameter Name="att2" Mode="In" Type="String" />
+      <Parameter Name="att3" Mode="In" Type="String" />
+      <Parameter Name="att4" Mode="In" Type="String" />
+      <Parameter Name="att5" Mode="In" Type="String" />
+      <Parameter Name="option_desc" Mode="InOut" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="option_11">
+      <Parameter Name="start_dttm" Mode="In" Type="DateTime" />
+      <Parameter Name="end_dttm" Mode="In" Type="DateTime" />
+      <Parameter Name="passing_list" Mode="In" Type="String" />
+      <Parameter Name="att1" Mode="In" Type="String" />
+      <Parameter Name="att2" Mode="In" Type="String" />
+      <Parameter Name="att3" Mode="In" Type="String" />
+      <Parameter Name="att4" Mode="In" Type="String" />
+      <Parameter Name="att5" Mode="In" Type="String" />
+      <Parameter Name="option_desc" Mode="InOut" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="option_12">
+      <Parameter Name="start_dttm" Mode="In" Type="DateTime" />
+      <Parameter Name="end_dttm" Mode="In" Type="DateTime" />
+      <Parameter Name="passing_list" Mode="In" Type="String" />
+      <Parameter Name="att1" Mode="In" Type="String" />
+      <Parameter Name="att2" Mode="In" Type="String" />
+      <Parameter Name="att3" Mode="In" Type="String" />
+      <Parameter Name="att4" Mode="In" Type="String" />
+      <Parameter Name="att5" Mode="In" Type="String" />
+      <Parameter Name="option_desc" Mode="InOut" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="option_13">
+      <Parameter Name="start_dttm" Mode="In" Type="DateTime" />
+      <Parameter Name="end_dttm" Mode="In" Type="DateTime" />
+      <Parameter Name="passing_list" Mode="In" Type="String" />
+      <Parameter Name="att1" Mode="In" Type="String" />
+      <Parameter Name="att2" Mode="In" Type="String" />
+      <Parameter Name="att3" Mode="In" Type="String" />
+      <Parameter Name="att4" Mode="In" Type="String" />
+      <Parameter Name="att5" Mode="In" Type="String" />
+      <Parameter Name="option_desc" Mode="InOut" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="option_14">
+      <Parameter Name="start_dttm" Mode="In" Type="DateTime" />
+      <Parameter Name="end_dttm" Mode="In" Type="DateTime" />
+      <Parameter Name="passing_list" Mode="In" Type="String" />
+      <Parameter Name="att1" Mode="In" Type="String" />
+      <Parameter Name="att2" Mode="In" Type="String" />
+      <Parameter Name="att3" Mode="In" Type="String" />
+      <Parameter Name="att4" Mode="In" Type="String" />
+      <Parameter Name="att5" Mode="In" Type="String" />
+      <Parameter Name="option_desc" Mode="InOut" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="option_15">
+      <Parameter Name="start_dttm" Mode="In" Type="DateTime" />
+      <Parameter Name="end_dttm" Mode="In" Type="DateTime" />
+      <Parameter Name="passing_list" Mode="In" Type="String" />
+      <Parameter Name="att1" Mode="In" Type="String" />
+      <Parameter Name="att2" Mode="In" Type="String" />
+      <Parameter Name="att3" Mode="In" Type="String" />
+      <Parameter Name="att4" Mode="In" Type="String" />
+      <Parameter Name="att5" Mode="In" Type="String" />
+      <Parameter Name="option_desc" Mode="InOut" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="option_16">
+      <Parameter Name="start_dttm" Mode="In" Type="DateTime" />
+      <Parameter Name="end_dttm" Mode="In" Type="DateTime" />
+      <Parameter Name="passing_list" Mode="In" Type="String" />
+      <Parameter Name="att1" Mode="In" Type="String" />
+      <Parameter Name="att2" Mode="In" Type="String" />
+      <Parameter Name="att3" Mode="In" Type="String" />
+      <Parameter Name="att4" Mode="In" Type="String" />
+      <Parameter Name="att5" Mode="In" Type="String" />
+      <Parameter Name="option_desc" Mode="InOut" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="option_17">
+      <Parameter Name="start_dttm" Mode="In" Type="DateTime" />
+      <Parameter Name="end_dttm" Mode="In" Type="DateTime" />
+      <Parameter Name="passing_list" Mode="In" Type="String" />
+      <Parameter Name="att1" Mode="In" Type="String" />
+      <Parameter Name="att2" Mode="In" Type="String" />
+      <Parameter Name="att3" Mode="In" Type="String" />
+      <Parameter Name="att4" Mode="In" Type="String" />
+      <Parameter Name="att5" Mode="In" Type="String" />
+      <Parameter Name="option_desc" Mode="InOut" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="option_18">
+      <Parameter Name="start_dttm" Mode="In" Type="DateTime" />
+      <Parameter Name="end_dttm" Mode="In" Type="DateTime" />
+      <Parameter Name="passing_list" Mode="In" Type="String" />
+      <Parameter Name="att1" Mode="In" Type="String" />
+      <Parameter Name="att2" Mode="In" Type="String" />
+      <Parameter Name="att3" Mode="In" Type="String" />
+      <Parameter Name="att4" Mode="In" Type="String" />
+      <Parameter Name="att5" Mode="In" Type="String" />
+      <Parameter Name="option_desc" Mode="InOut" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="option_19">
+      <Parameter Name="start_dttm" Mode="In" Type="DateTime" />
+      <Parameter Name="end_dttm" Mode="In" Type="DateTime" />
+      <Parameter Name="passing_list" Mode="In" Type="String" />
+      <Parameter Name="att1" Mode="In" Type="String" />
+      <Parameter Name="att2" Mode="In" Type="String" />
+      <Parameter Name="att3" Mode="In" Type="String" />
+      <Parameter Name="att4" Mode="In" Type="String" />
+      <Parameter Name="att5" Mode="In" Type="String" />
+      <Parameter Name="option_desc" Mode="InOut" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="option_20">
+      <Parameter Name="start_dttm" Mode="In" Type="DateTime" />
+      <Parameter Name="end_dttm" Mode="In" Type="DateTime" />
+      <Parameter Name="passing_list" Mode="In" Type="String" />
+      <Parameter Name="att1" Mode="In" Type="String" />
+      <Parameter Name="att2" Mode="In" Type="String" />
+      <Parameter Name="att3" Mode="In" Type="String" />
+      <Parameter Name="att4" Mode="In" Type="String" />
+      <Parameter Name="att5" Mode="In" Type="String" />
+      <Parameter Name="option_desc" Mode="InOut" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="option_99">
+      <Parameter Name="start_dttm" Mode="In" Type="DateTime" />
+      <Parameter Name="end_dttm" Mode="In" Type="DateTime" />
+      <Parameter Name="passing_list" Mode="In" Type="String" />
+      <Parameter Name="att1" Mode="In" Type="String" />
+      <Parameter Name="att2" Mode="In" Type="String" />
+      <Parameter Name="att3" Mode="In" Type="String" />
+      <Parameter Name="att4" Mode="In" Type="String" />
+      <Parameter Name="att5" Mode="In" Type="String" />
+      <Parameter Name="option_desc" Mode="InOut" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="process_analysis">
+      <Parameter Name="symbol" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="process_history">
+      <Parameter Name="symbol" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="process_rsi_detail">
+      <Parameter Name="symbol" Mode="In" Type="String" />
+      <Parameter Name="last_ran" Mode="In" Type="DateTime" />
+      <Parameter Name="table_name" Mode="In" Type="String" />
+      <Parameter Name="col_name" Mode="In" Type="String" />
+      <Parameter Name="days" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="process_sma_detail">
+      <Parameter Name="symbol" Mode="In" Type="String" />
+      <Parameter Name="last_ran" Mode="In" Type="DateTime" />
+      <Parameter Name="table_name" Mode="In" Type="String" />
+      <Parameter Name="col_name" Mode="In" Type="String" />
+      <Parameter Name="days" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="process_volume">
+      <Parameter Name="symbol" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_add_list_history">
+      <Parameter Name="start_dttm" Mode="In" Type="DateTime" />
+      <Parameter Name="end_dttm" Mode="In" Type="DateTime" />
+      <Parameter Name="option" Mode="In" Type="Int32" />
+      <Parameter Name="passing_list" Mode="In" Type="String" />
+      <Parameter Name="att1" Mode="In" Type="String" />
+      <Parameter Name="att2" Mode="In" Type="String" />
+      <Parameter Name="att3" Mode="In" Type="String" />
+      <Parameter Name="att4" Mode="In" Type="String" />
+      <Parameter Name="att5" Mode="In" Type="String" />
+      <Parameter Name="option_desc" Mode="In" Type="String" />
+      <Parameter Name="description" Mode="In" Type="String" />
+      <Parameter Name="hist_id" Mode="InOut" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_generate_idx" />
+    <FunctionImport Name="sp_get_prediction_history" ReturnType="Collection(stockModel.sp_get_prediction_history_Result)">
+      <Parameter Name="hist_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_prediction_history_cleanup" />
+    <FunctionImport Name="sp_simul_test">
+      <Parameter Name="simul_header_id" Mode="In" Type="Int32" />
+      <Parameter Name="hist_id" Mode="In" Type="Int32" />
+      <Parameter Name="plan_name" Mode="In" Type="String" />
+      <Parameter Name="plan_desc" Mode="In" Type="String" />
+      <Parameter Name="filter_option" Mode="In" Type="Int32" />
+      <Parameter Name="week_no" Mode="In" Type="Int32" />
+      <Parameter Name="start_dttm" Mode="In" Type="DateTime" />
+      <Parameter Name="end_dttm" Mode="In" Type="DateTime" />
+      <Parameter Name="ratio1" Mode="In" Type="Double" />
+      <Parameter Name="ratio2" Mode="In" Type="Double" />
+      <Parameter Name="rate_5" Mode="In" Type="Double" />
+      <Parameter Name="rate_10" Mode="In" Type="Double" />
+      <Parameter Name="rate_15" Mode="In" Type="Double" />
+      <Parameter Name="rate_20" Mode="In" Type="Double" />
+      <Parameter Name="rate_40" Mode="In" Type="Double" />
+      <Parameter Name="rate_60" Mode="In" Type="Double" />
+    </FunctionImport>
+    <FunctionImport Name="sp_simul_test_delete">
+      <Parameter Name="simul_header_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_simulation">
+      <Parameter Name="symbols" Mode="In" Type="String" />
+      <Parameter Name="start_dttm" Mode="In" Type="DateTime" />
+      <Parameter Name="drop_limit_perc" Mode="In" Type="Double" />
+      <Parameter Name="sell_limit_perc" Mode="In" Type="Double" />
+      <Parameter Name="max_days_hold" Mode="In" Type="Int32" />
+      <Parameter Name="show_detail" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="XXX_sp_weekly_v1">
+      <Parameter Name="symbols" Mode="In" Type="String" />
+      <Parameter Name="start_dttm" Mode="In" Type="DateTime" />
+      <Parameter Name="week_count" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="XXX_update_daily_analysis_v1" />
+    <FunctionImport Name="XXX_update_daily_v1" />
+    <FunctionImport Name="process_weekly">
+      <Parameter Name="dttm" Mode="In" Type="DateTime" />
+    </FunctionImport>
+    <FunctionImport Name="process_weekly_chg">
+      <Parameter Name="dttm" Mode="In" Type="DateTime" />
+    </FunctionImport>
+    <EntitySet Name="daily_analysis" EntityType="stockModel.daily_analysis" />
+    <EntitySet Name="daily_history" EntityType="stockModel.daily_history" />
+    <EntitySet Name="lookups" EntityType="stockModel.lookup" />
+    <EntitySet Name="predictions" EntityType="stockModel.prediction" />
+    <EntitySet Name="symbol_att" EntityType="stockModel.symbol_att" />
+    <EntitySet Name="weekly_analysis" EntityType="stockModel.weekly_analysis" />
+    <EntitySet Name="daily_analysis_v1" EntityType="stockModel.daily_analysis_v1" />
+    <EntitySet Name="daily_candle_v1" EntityType="stockModel.daily_candle_v1" />
+    <EntitySet Name="daily_close_v1" EntityType="stockModel.daily_close_v1" />
+    <EntitySet Name="daily_sma5_v1" EntityType="stockModel.daily_sma5_v1" />
+    <EntitySet Name="daily_strong_v1" EntityType="stockModel.daily_strong_v1" />
+    <EntitySet Name="daily_v1" EntityType="stockModel.daily_v1" />
+    <EntitySet Name="daily_vol_sma10_v1" EntityType="stockModel.daily_vol_sma10_v1" />
+    <EntitySet Name="daily_vol_sma5_v1" EntityType="stockModel.daily_vol_sma5_v1" />
+    <EntitySet Name="daily_volume_v1" EntityType="stockModel.daily_volume_v1" />
+    <EntitySet Name="fundamental_v1" EntityType="stockModel.fundamental_v1" />
+    <EntitySet Name="industry_v1" EntityType="stockModel.industry_v1" />
+    <EntitySet Name="list_history_v1" EntityType="stockModel.list_history_v1" />
+    <EntitySet Name="sector_v1" EntityType="stockModel.sector_v1" />
+    <EntitySet Name="watch_list_v1" EntityType="stockModel.watch_list_v1" />
+    <EntitySet Name="daily_raw" EntityType="stockModel.daily_raw" />
+    <FunctionImport Name="filter_01_process" ReturnType="Collection(stockModel.filter_01_process_Result)">
+      <Parameter Name="v_day_start" Mode="In" Type="DateTime" />
+      <Parameter Name="v_param1" Mode="In" Type="String" />
+      <Parameter Name="v_param2" Mode="In" Type="String" />
+      <Parameter Name="v_param3" Mode="In" Type="String" />
+      <Parameter Name="v_param4" Mode="In" Type="String" />
+      <Parameter Name="v_param5" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_next_n_days" ReturnType="Collection(stockModel.sp_next_n_days_Result)">
+      <Parameter Name="symbol" Mode="In" Type="String" />
+      <Parameter Name="start_date" Mode="In" Type="DateTime" />
+      <Parameter Name="days" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_simulation1">
+      <Parameter Name="symbols" Mode="In" Type="String" />
+      <Parameter Name="start_dttm" Mode="In" Type="DateTime" />
+      <Parameter Name="sell_limit_perc" Mode="In" Type="Double" />
+      <Parameter Name="max_days_hold" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="filter_main1" ReturnType="Collection(stockModel.filter_main1_Result)">
+      <Parameter Name="start_dttm" Mode="In" Type="DateTime" />
+      <Parameter Name="end_dttm" Mode="In" Type="DateTime" />
+      <Parameter Name="option" Mode="In" Type="Int32" />
+      <Parameter Name="passing_list" Mode="In" Type="String" />
+      <Parameter Name="passing_symbols" Mode="In" Type="String" />
+      <Parameter Name="att1" Mode="In" Type="String" />
+      <Parameter Name="att2" Mode="In" Type="String" />
+      <Parameter Name="att3" Mode="In" Type="String" />
+      <Parameter Name="att4" Mode="In" Type="String" />
+      <Parameter Name="att5" Mode="In" Type="String" />
+      <Parameter Name="is_simul" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="filter_simul1">
+      <Parameter Name="start_dttm" Mode="In" Type="DateTime" />
+      <Parameter Name="end_dttm" Mode="In" Type="DateTime" />
+    </FunctionImport>
+    <FunctionImport Name="option_011" ReturnType="Collection(stockModel.option_011_Result)">
+      <Parameter Name="start_dttm" Mode="In" Type="DateTime" />
+      <Parameter Name="end_dttm" Mode="In" Type="DateTime" />
+      <Parameter Name="passing_list" Mode="In" Type="String" />
+      <Parameter Name="att1" Mode="In" Type="String" />
+      <Parameter Name="att2" Mode="In" Type="String" />
+      <Parameter Name="att3" Mode="In" Type="String" />
+      <Parameter Name="att4" Mode="In" Type="String" />
+      <Parameter Name="att5" Mode="In" Type="String" />
+    </FunctionImport>
+  </EntityContainer>
+  <ComplexType Name="filter_main_Result">
+    <Property Type="Int32" Name="result_id" Nullable="false" />
+    <Property Type="Int32" Name="hist_id" Nullable="false" />
+    <Property Type="String" Name="symbol" Nullable="false" MaxLength="50" />
+    <Property Type="Int32" Name="ranking" Nullable="true" />
+    <Property Type="Double" Name="ratio1" Nullable="true" />
+    <Property Type="Double" Name="ratio2" Nullable="true" />
+    <Property Type="Double" Name="rate_5" Nullable="true" />
+    <Property Type="Double" Name="rate_10" Nullable="true" />
+    <Property Type="Double" Name="rate_15" Nullable="true" />
+    <Property Type="Double" Name="rate_20" Nullable="true" />
+    <Property Type="Double" Name="rate_40" Nullable="true" />
+    <Property Type="Double" Name="rate_60" Nullable="true" />
+    <Property Type="String" Name="result" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="result_desc" Nullable="true" MaxLength="2000" />
+  </ComplexType>
+  <ComplexType Name="filter_simul_header_Result">
+    <Property Type="DateTime" Name="d5" Nullable="true" />
+    <Property Type="DateTime" Name="d10" Nullable="true" />
+    <Property Type="DateTime" Name="d15" Nullable="true" />
+    <Property Type="DateTime" Name="d20" Nullable="true" />
+    <Property Type="DateTime" Name="d40" Nullable="true" />
+    <Property Type="DateTime" Name="d60" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="get_Stat_history_Result">
+    <Property Type="Int32" Name="result_id" Nullable="true" />
+    <Property Type="Int32" Name="hist_id" Nullable="true" />
+    <Property Type="String" Name="symbol" Nullable="false" MaxLength="50" />
+    <Property Type="Int32" Name="ranking" Nullable="true" />
+    <Property Type="Double" Name="ratio1" Nullable="true" />
+    <Property Type="Double" Name="ratio2" Nullable="true" />
+    <Property Type="Double" Name="rate_5" Nullable="true" />
+    <Property Type="Double" Name="rate_10" Nullable="true" />
+    <Property Type="Double" Name="rate_15" Nullable="true" />
+    <Property Type="Double" Name="rate_20" Nullable="true" />
+    <Property Type="Double" Name="rate_40" Nullable="true" />
+    <Property Type="Double" Name="rate_60" Nullable="true" />
+    <Property Type="String" Name="result" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="result_desc" Nullable="true" MaxLength="2000" />
+  </ComplexType>
+  <ComplexType Name="sp_get_prediction_history_Result">
+    <Property Type="Int32" Name="result_id" Nullable="false" />
+    <Property Type="Int32" Name="hist_id" Nullable="false" />
+    <Property Type="String" Name="symbol" Nullable="false" MaxLength="50" />
+    <Property Type="Int32" Name="ranking" Nullable="true" />
+    <Property Type="Double" Name="ratio1" Nullable="true" />
+    <Property Type="Double" Name="ratio2" Nullable="true" />
+    <Property Type="Double" Name="rate_5" Nullable="true" />
+    <Property Type="Double" Name="rate_10" Nullable="true" />
+    <Property Type="Double" Name="rate_15" Nullable="true" />
+    <Property Type="Double" Name="rate_20" Nullable="true" />
+    <Property Type="Double" Name="rate_40" Nullable="true" />
+    <Property Type="Double" Name="rate_60" Nullable="true" />
+    <Property Type="String" Name="result" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="result_desc" Nullable="true" MaxLength="2000" />
+  </ComplexType>
+  <EntityType Name="daily_analysis">
+    <Key>
+      <PropertyRef Name="symbol" />
+      <PropertyRef Name="date_hist" />
+    </Key>
+    <Property Name="symbol" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="date_hist" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="price" Type="Double" />
+    <Property Name="price_chg_perc" Type="Double" />
+    <Property Name="sma3" Type="Double" />
+    <Property Name="sma5" Type="Double" />
+    <Property Name="sma8" Type="Double" />
+    <Property Name="sma15" Type="Double" />
+    <Property Name="sma20" Type="Double" />
+    <Property Name="sma33" Type="Double" />
+    <Property Name="sma45" Type="Double" />
+    <Property Name="sma60" Type="Double" />
+    <Property Name="sma150" Type="Double" />
+    <Property Name="sma200" Type="Double" />
+    <Property Name="volume" Type="Double" />
+    <Property Name="volume_chg_perc" Type="Double" />
+    <Property Name="sma3_chg_perc" Type="Double" />
+    <Property Name="sma5_chg_perc" Type="Double" />
+    <Property Name="sma8_chg_perc" Type="Double" />
+    <Property Name="sma15_chg_perc" Type="Double" />
+    <Property Name="sma20_chg_perc" Type="Double" />
+    <Property Name="sma33_chg_perc" Type="Double" />
+    <Property Name="sma45_chg_perc" Type="Double" />
+    <Property Name="sma60_chg_perc" Type="Double" />
+    <Property Name="sma150_chg_perc" Type="Double" />
+    <Property Name="sma200_chg_perc" Type="Double" />
+    <Property Name="volume_sma5" Type="Double" />
+    <Property Name="volume_sma5_chg_perc" Type="Double" />
+    <Property Name="volume_sma20" Type="Double" />
+    <Property Name="volume_sma20_chg_perc" Type="Double" />
+    <Property Name="volume_sma60" Type="Double" />
+    <Property Name="volume_sma60_chg_perc" Type="Double" />
+    <Property Name="volume_sma150" Type="Double" />
+    <Property Name="volume_sma150_chg_perc" Type="Double" />
+    <Property Name="volume_sma200" Type="Double" />
+    <Property Name="volume_sma200_chg_perc" Type="Double" />
+  </EntityType>
+  <EntityType Name="daily_history">
+    <Key>
+      <PropertyRef Name="symbol" />
+      <PropertyRef Name="date" />
+    </Key>
+    <Property Name="symbol" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="date" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="open" Type="Double" />
+    <Property Name="close" Type="Double" />
+    <Property Name="high" Type="Double" />
+    <Property Name="low" Type="Double" />
+    <Property Name="volume" Type="Double" />
+    <Property Name="avg" Type="Double" />
+    <Property Name="seq" Type="String" Nullable="false" MaxLength="81" FixedLength="false" Unicode="true" annotation:StoreGeneratedPattern="Computed" />
+  </EntityType>
+  <EntityType Name="lookup">
+    <Key>
+      <PropertyRef Name="l_type" />
+      <PropertyRef Name="l_id" />
+    </Key>
+    <Property Name="l_type" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="l_id" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="l_name" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="l_order" Type="Int32" />
+    <Property Name="l_att1" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="l_att2" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="l_att3" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="l_att4" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="l_att5" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="prediction">
+    <Key>
+      <PropertyRef Name="symbol" />
+    </Key>
+    <Property Name="symbol" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ranking" Type="Int32" />
+    <Property Name="ratio1" Type="Double" />
+    <Property Name="ratio2" Type="Double" />
+    <Property Name="rate_5" Type="Double" />
+    <Property Name="rate_10" Type="Double" />
+    <Property Name="rate_15" Type="Double" />
+    <Property Name="rate_20" Type="Double" />
+    <Property Name="rate_40" Type="Double" />
+    <Property Name="rate_60" Type="Double" />
+  </EntityType>
+  <EntityType Name="symbol_att">
+    <Key>
+      <PropertyRef Name="symbol" />
+    </Key>
+    <Property Name="symbol" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="name" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="Sector" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="Industry" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="Sub_Industry" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="dividend_yield" Type="Double" />
+    <Property Name="symbol_type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="weekly_analysis">
+    <Key>
+      <PropertyRef Name="symbol" />
+      <PropertyRef Name="date_hist" />
+    </Key>
+    <Property Name="symbol" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="date_hist" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="price_high" Type="Double" Nullable="false" />
+    <Property Name="price_low" Type="Double" Nullable="false" />
+    <Property Name="price_open" Type="Double" Nullable="false" />
+    <Property Name="price_close" Type="Double" Nullable="false" />
+    <Property Name="price_chg_perc" Type="Double" />
+    <Property Name="volume" Type="Double" />
+    <Property Name="volume_chg_perc" Type="Double" />
+    <Property Name="price_high_chg_perc" Type="Double" />
+    <Property Name="price_low_chg_perc" Type="Double" />
+  </EntityType>
+  <EntityType Name="daily_analysis_v1">
+    <Key>
+      <PropertyRef Name="symbol" />
+      <PropertyRef Name="date_hist" />
+    </Key>
+    <Property Name="symbol" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="date_hist" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="price" Type="Double" />
+    <Property Name="price_pre" Type="Double" />
+    <Property Name="price_chg_perc" Type="Double" />
+    <Property Name="sma3" Type="Double" />
+    <Property Name="sma5" Type="Double" />
+    <Property Name="sma8" Type="Double" />
+    <Property Name="sma15" Type="Double" />
+    <Property Name="sma20" Type="Double" />
+    <Property Name="sma33" Type="Double" />
+    <Property Name="sma45" Type="Double" />
+    <Property Name="sma60" Type="Double" />
+    <Property Name="sma120" Type="Double" />
+    <Property Name="sma360" Type="Double" />
+    <Property Name="volume" Type="Double" />
+    <Property Name="volume_pre" Type="Double" />
+    <Property Name="volume_chg_perc" Type="Double" />
+  </EntityType>
+  <EntityType Name="daily_candle_v1">
+    <Key>
+      <PropertyRef Name="symbol" />
+      <PropertyRef Name="date_hist" />
+      <PropertyRef Name="direction" />
+      <PropertyRef Name="size" />
+      <PropertyRef Name="candle" />
+    </Key>
+    <Property Name="symbol" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="date_hist" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="direction" Type="String" Nullable="false" MaxLength="4" FixedLength="false" Unicode="false" />
+    <Property Name="size" Type="String" Nullable="false" MaxLength="6" FixedLength="false" Unicode="false" />
+    <Property Name="candle" Type="String" Nullable="false" MaxLength="6" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="daily_close_v1">
+    <Key>
+      <PropertyRef Name="symbol" />
+      <PropertyRef Name="date_hist" />
+      <PropertyRef Name="direction" />
+      <PropertyRef Name="candle" />
+    </Key>
+    <Property Name="symbol" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="date_hist" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="price" Type="Double" />
+    <Property Name="sma_005" Type="Double" />
+    <Property Name="sma_010" Type="Double" />
+    <Property Name="sma_020" Type="Double" />
+    <Property Name="sma_030" Type="Double" />
+    <Property Name="sma_060" Type="Double" />
+    <Property Name="sma_120" Type="Double" />
+    <Property Name="sma_240" Type="Double" />
+    <Property Name="direction" Type="String" Nullable="false" MaxLength="4" FixedLength="false" Unicode="false" />
+    <Property Name="head" Type="Double" />
+    <Property Name="center" Type="Double" />
+    <Property Name="tail" Type="Double" />
+    <Property Name="candle" Type="String" Nullable="false" MaxLength="6" FixedLength="false" Unicode="false" />
+    <Property Name="size_sma5" Type="Double" />
+    <Property Name="size_sma10" Type="Double" />
+    <Property Name="size_sma20" Type="Double" />
+    <Property Name="size_sma30" Type="Double" />
+    <Property Name="size_sma60" Type="Double" />
+    <Property Name="size_sma120" Type="Double" />
+    <Property Name="size_sma240" Type="Double" />
+  </EntityType>
+  <EntityType Name="daily_sma5_v1">
+    <Key>
+      <PropertyRef Name="symbol" />
+      <PropertyRef Name="date_hist" />
+    </Key>
+    <Property Name="symbol" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="date_hist" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="price" Type="Double" />
+    <Property Name="price_pre" Type="Double" />
+    <Property Name="price_chg_perc" Type="Double" />
+    <Property Name="sma5" Type="Double" />
+    <Property Name="sma5_pre" Type="Double" />
+    <Property Name="sma5_chg_perc" Type="Double" />
+  </EntityType>
+  <EntityType Name="daily_strong_v1">
+    <Key>
+      <PropertyRef Name="symbol" />
+      <PropertyRef Name="date_hist" />
+    </Key>
+    <Property Name="symbol" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="date_hist" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="price" Type="Double" />
+    <Property Name="price_chg_perc" Type="Double" />
+    <Property Name="sma5" Type="Double" />
+    <Property Name="sma5_chg_perc" Type="Double" />
+    <Property Name="spy_price" Type="Double" />
+    <Property Name="spy_chg" Type="Double" />
+    <Property Name="spy_sma5" Type="Double" />
+    <Property Name="spy_diff" Type="Double" />
+    <Property Name="spy_diff_sma5" Type="Double" />
+    <Property Name="qqq_price" Type="Double" />
+    <Property Name="qqq_chg" Type="Double" />
+    <Property Name="qqq_sma5" Type="Double" />
+    <Property Name="qqq_diff" Type="Double" />
+    <Property Name="qqq_diff_sma5" Type="Double" />
+    <Property Name="dia_price" Type="Double" />
+    <Property Name="dia_chg" Type="Double" />
+    <Property Name="dia_sma5" Type="Double" />
+    <Property Name="dia_diff" Type="Double" />
+    <Property Name="dia_diff_sma5" Type="Double" />
+    <Property Name="idx_price" Type="Double" />
+    <Property Name="idx_sma5" Type="Double" />
+    <Property Name="idx_chg" Type="Double" />
+    <Property Name="idx_diff" Type="Double" />
+    <Property Name="idx_diff_sma5" Type="Double" />
+  </EntityType>
+  <EntityType Name="daily_v1">
+    <Key>
+      <PropertyRef Name="symbol" />
+      <PropertyRef Name="seq" />
+      <PropertyRef Name="date" />
+      <PropertyRef Name="last_created" />
+    </Key>
+    <Property Name="symbol" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="watch_type" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="seq" Type="String" Nullable="false" MaxLength="81" FixedLength="false" Unicode="true" />
+    <Property Name="date" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="open" Type="Double" />
+    <Property Name="close" Type="Double" />
+    <Property Name="high" Type="Double" />
+    <Property Name="low" Type="Double" />
+    <Property Name="volume" Type="Double" />
+    <Property Name="avg" Type="Double" />
+    <Property Name="analysis_dir" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+    <Property Name="analysis_dir_on" Type="Int32" />
+    <Property Name="analysis_high_low_perc" Type="Double" />
+    <Property Name="analysis_oc_by_hl_perc" Type="Double" />
+    <Property Name="analysis_open_close_perc" Type="Double" />
+    <Property Name="analysis_point1" Type="Int32" />
+    <Property Name="analysis_point2" Type="Int32" />
+    <Property Name="analysis_point3" Type="Int32" />
+    <Property Name="avg_after_005_perc" Type="Double" />
+    <Property Name="avg_after_010_perc" Type="Double" />
+    <Property Name="avg_after_015_perc" Type="Double" />
+    <Property Name="avg_after_020_perc" Type="Double" />
+    <Property Name="avg_after_040_perc" Type="Double" />
+    <Property Name="avg_after_060_perc" Type="Double" />
+    <Property Name="avg_after_120_perc" Type="Double" />
+    <Property Name="avg_after_240_perc" Type="Double" />
+    <Property Name="avg_after_480_perc" Type="Double" />
+    <Property Name="avg_after_720_perc" Type="Double" />
+    <Property Name="avg_after_960_perc" Type="Double" />
+    <Property Name="avg_change" Type="Double" />
+    <Property Name="avg_change_perc" Type="Double" />
+    <Property Name="avg_ema_005" Type="Double" />
+    <Property Name="avg_ema_012" Type="Double" />
+    <Property Name="avg_ema_020" Type="Double" />
+    <Property Name="avg_ema_026" Type="Double" />
+    <Property Name="avg_ema_060" Type="Double" />
+    <Property Name="avg_ema_120" Type="Double" />
+    <Property Name="avg_macd_12_26" Type="Double" />
+    <Property Name="avg_macd_12_26_9" Type="Double" />
+    <Property Name="avg_macd_12_26_hist" Type="Double" />
+    <Property Name="avg_per_fiscal" Type="Double" />
+    <Property Name="avg_per_report" Type="Double" />
+    <Property Name="avg_rsi_005" Type="Double" />
+    <Property Name="avg_rsi_012" Type="Double" />
+    <Property Name="avg_rsi_020" Type="Double" />
+    <Property Name="avg_rsi_026" Type="Double" />
+    <Property Name="avg_rsi_060" Type="Double" />
+    <Property Name="avg_rsi_120" Type="Double" />
+    <Property Name="avg_sma_005" Type="Double" />
+    <Property Name="avg_sma_012" Type="Double" />
+    <Property Name="avg_sma_020" Type="Double" />
+    <Property Name="avg_sma_026" Type="Double" />
+    <Property Name="avg_sma_060" Type="Double" />
+    <Property Name="avg_sma_120" Type="Double" />
+    <Property Name="close_after_005_perc" Type="Double" />
+    <Property Name="close_after_010_perc" Type="Double" />
+    <Property Name="close_after_015_perc" Type="Double" />
+    <Property Name="close_after_020_perc" Type="Double" />
+    <Property Name="close_after_040_perc" Type="Double" />
+    <Property Name="close_after_060_perc" Type="Double" />
+    <Property Name="close_after_120_perc" Type="Double" />
+    <Property Name="close_after_240_perc" Type="Double" />
+    <Property Name="close_after_480_perc" Type="Double" />
+    <Property Name="close_after_720_perc" Type="Double" />
+    <Property Name="close_after_960_perc" Type="Double" />
+    <Property Name="close_change" Type="Double" />
+    <Property Name="close_change_perc" Type="Double" />
+    <Property Name="close_ema_005" Type="Double" />
+    <Property Name="close_ema_012" Type="Double" />
+    <Property Name="close_ema_020" Type="Double" />
+    <Property Name="close_ema_026" Type="Double" />
+    <Property Name="close_ema_060" Type="Double" />
+    <Property Name="close_ema_120" Type="Double" />
+    <Property Name="close_macd_12_26" Type="Double" />
+    <Property Name="close_macd_12_26_9" Type="Double" />
+    <Property Name="close_macd_12_26_hist" Type="Double" />
+    <Property Name="close_per_fiscal" Type="Double" />
+    <Property Name="close_per_report" Type="Double" />
+    <Property Name="close_rsi_005" Type="Double" />
+    <Property Name="close_rsi_012" Type="Double" />
+    <Property Name="close_rsi_020" Type="Double" />
+    <Property Name="close_rsi_026" Type="Double" />
+    <Property Name="close_rsi_060" Type="Double" />
+    <Property Name="close_rsi_120" Type="Double" />
+    <Property Name="close_sma_005" Type="Double" />
+    <Property Name="close_sma_012" Type="Double" />
+    <Property Name="high_after_005_perc" Type="Double" />
+    <Property Name="high_after_010_perc" Type="Double" />
+    <Property Name="high_after_015_perc" Type="Double" />
+    <Property Name="high_after_020_perc" Type="Double" />
+    <Property Name="high_after_040_perc" Type="Double" />
+    <Property Name="high_after_060_perc" Type="Double" />
+    <Property Name="high_after_120_perc" Type="Double" />
+    <Property Name="high_after_240_perc" Type="Double" />
+    <Property Name="high_after_480_perc" Type="Double" />
+    <Property Name="high_after_720_perc" Type="Double" />
+    <Property Name="high_after_960_perc" Type="Double" />
+    <Property Name="high_change_perc" Type="Double" />
+    <Property Name="low_after_005_perc" Type="Double" />
+    <Property Name="low_after_010_perc" Type="Double" />
+    <Property Name="low_after_015_perc" Type="Double" />
+    <Property Name="low_after_020_perc" Type="Double" />
+    <Property Name="low_after_040_perc" Type="Double" />
+    <Property Name="low_after_060_perc" Type="Double" />
+    <Property Name="low_after_120_perc" Type="Double" />
+    <Property Name="low_after_240_perc" Type="Double" />
+    <Property Name="low_after_480_perc" Type="Double" />
+    <Property Name="low_after_720_perc" Type="Double" />
+    <Property Name="low_after_960_perc" Type="Double" />
+    <Property Name="low_change_perc" Type="Double" />
+    <Property Name="open_after_005_perc" Type="Double" />
+    <Property Name="open_after_010_perc" Type="Double" />
+    <Property Name="open_after_015_perc" Type="Double" />
+    <Property Name="open_after_020_perc" Type="Double" />
+    <Property Name="open_after_040_perc" Type="Double" />
+    <Property Name="open_after_060_perc" Type="Double" />
+    <Property Name="open_after_120_perc" Type="Double" />
+    <Property Name="open_after_240_perc" Type="Double" />
+    <Property Name="open_after_480_perc" Type="Double" />
+    <Property Name="open_after_720_perc" Type="Double" />
+    <Property Name="open_after_960_perc" Type="Double" />
+    <Property Name="open_change_perc" Type="Double" />
+    <Property Name="volume_after_005_perc" Type="Double" />
+    <Property Name="volume_after_010_perc" Type="Double" />
+    <Property Name="volume_after_015_perc" Type="Double" />
+    <Property Name="volume_after_020_perc" Type="Double" />
+    <Property Name="volume_after_040_perc" Type="Double" />
+    <Property Name="volume_after_060_perc" Type="Double" />
+    <Property Name="volume_after_120_perc" Type="Double" />
+    <Property Name="volume_after_240_perc" Type="Double" />
+    <Property Name="volume_after_480_perc" Type="Double" />
+    <Property Name="volume_after_720_perc" Type="Double" />
+    <Property Name="volume_after_960_perc" Type="Double" />
+    <Property Name="volume_change_perc" Type="Double" />
+    <Property Name="close_sma_020" Type="Double" />
+    <Property Name="close_sma_026" Type="Double" />
+    <Property Name="close_sma_060" Type="Double" />
+    <Property Name="close_sma_120" Type="Double" />
+    <Property Name="high_change" Type="Double" />
+    <Property Name="high_ema_005" Type="Double" />
+    <Property Name="high_ema_012" Type="Double" />
+    <Property Name="high_ema_020" Type="Double" />
+    <Property Name="high_ema_026" Type="Double" />
+    <Property Name="high_ema_060" Type="Double" />
+    <Property Name="high_ema_120" Type="Double" />
+    <Property Name="high_macd_12_26" Type="Double" />
+    <Property Name="high_macd_12_26_9" Type="Double" />
+    <Property Name="high_macd_12_26_hist" Type="Double" />
+    <Property Name="high_per_fiscal" Type="Double" />
+    <Property Name="high_per_report" Type="Double" />
+    <Property Name="high_rsi_005" Type="Double" />
+    <Property Name="high_rsi_012" Type="Double" />
+    <Property Name="high_rsi_020" Type="Double" />
+    <Property Name="high_rsi_026" Type="Double" />
+    <Property Name="high_rsi_060" Type="Double" />
+    <Property Name="high_rsi_120" Type="Double" />
+    <Property Name="high_sma_005" Type="Double" />
+    <Property Name="high_sma_012" Type="Double" />
+    <Property Name="high_sma_020" Type="Double" />
+    <Property Name="high_sma_026" Type="Double" />
+    <Property Name="high_sma_060" Type="Double" />
+    <Property Name="high_sma_120" Type="Double" />
+    <Property Name="low_change" Type="Double" />
+    <Property Name="low_ema_005" Type="Double" />
+    <Property Name="low_ema_012" Type="Double" />
+    <Property Name="low_ema_020" Type="Double" />
+    <Property Name="low_ema_026" Type="Double" />
+    <Property Name="low_ema_060" Type="Double" />
+    <Property Name="low_ema_120" Type="Double" />
+    <Property Name="low_macd_12_26" Type="Double" />
+    <Property Name="low_macd_12_26_9" Type="Double" />
+    <Property Name="low_macd_12_26_hist" Type="Double" />
+    <Property Name="low_per_fiscal" Type="Double" />
+    <Property Name="low_per_report" Type="Double" />
+    <Property Name="low_rsi_005" Type="Double" />
+    <Property Name="low_rsi_012" Type="Double" />
+    <Property Name="low_rsi_020" Type="Double" />
+    <Property Name="low_rsi_026" Type="Double" />
+    <Property Name="low_rsi_060" Type="Double" />
+    <Property Name="low_rsi_120" Type="Double" />
+    <Property Name="low_sma_005" Type="Double" />
+    <Property Name="low_sma_012" Type="Double" />
+    <Property Name="low_sma_020" Type="Double" />
+    <Property Name="low_sma_026" Type="Double" />
+    <Property Name="low_sma_060" Type="Double" />
+    <Property Name="low_sma_120" Type="Double" />
+    <Property Name="open_change" Type="Double" />
+    <Property Name="open_ema_005" Type="Double" />
+    <Property Name="open_ema_012" Type="Double" />
+    <Property Name="open_ema_020" Type="Double" />
+    <Property Name="open_ema_026" Type="Double" />
+    <Property Name="open_ema_060" Type="Double" />
+    <Property Name="open_ema_120" Type="Double" />
+    <Property Name="open_macd_12_26" Type="Double" />
+    <Property Name="open_macd_12_26_9" Type="Double" />
+    <Property Name="open_macd_12_26_hist" Type="Double" />
+    <Property Name="open_per_fiscal" Type="Double" />
+    <Property Name="open_per_report" Type="Double" />
+    <Property Name="open_rsi_005" Type="Double" />
+    <Property Name="open_rsi_012" Type="Double" />
+    <Property Name="open_rsi_020" Type="Double" />
+    <Property Name="open_rsi_026" Type="Double" />
+    <Property Name="open_rsi_060" Type="Double" />
+    <Property Name="open_rsi_120" Type="Double" />
+    <Property Name="open_sma_005" Type="Double" />
+    <Property Name="open_sma_012" Type="Double" />
+    <Property Name="open_sma_020" Type="Double" />
+    <Property Name="open_sma_026" Type="Double" />
+    <Property Name="open_sma_060" Type="Double" />
+    <Property Name="open_sma_120" Type="Double" />
+    <Property Name="source_adjusted_close" Type="Double" />
+    <Property Name="source_close" Type="Double" />
+    <Property Name="source_dividend_amount" Type="Double" />
+    <Property Name="source_high" Type="Double" />
+    <Property Name="source_low" Type="Double" />
+    <Property Name="source_open" Type="Double" />
+    <Property Name="source_split_coefficient" Type="Double" />
+    <Property Name="source_volume" Type="Double" />
+    <Property Name="volume_change" Type="Double" />
+    <Property Name="volume_ema_005" Type="Double" />
+    <Property Name="volume_ema_012" Type="Double" />
+    <Property Name="volume_ema_020" Type="Double" />
+    <Property Name="volume_ema_026" Type="Double" />
+    <Property Name="volume_ema_060" Type="Double" />
+    <Property Name="volume_ema_120" Type="Double" />
+    <Property Name="volume_macd_12_26" Type="Double" />
+    <Property Name="volume_macd_12_26_9" Type="Double" />
+    <Property Name="volume_macd_12_26_hist" Type="Double" />
+    <Property Name="volume_obv" Type="Double" />
+    <Property Name="volume_per_fiscal" Type="Double" />
+    <Property Name="volume_per_report" Type="Double" />
+    <Property Name="volume_rsi_005" Type="Double" />
+    <Property Name="volume_rsi_012" Type="Double" />
+    <Property Name="volume_rsi_020" Type="Double" />
+    <Property Name="volume_rsi_026" Type="Double" />
+    <Property Name="volume_rsi_060" Type="Double" />
+    <Property Name="volume_rsi_120" Type="Double" />
+    <Property Name="volume_sma_005" Type="Double" />
+    <Property Name="volume_sma_012" Type="Double" />
+    <Property Name="volume_sma_020" Type="Double" />
+    <Property Name="volume_sma_026" Type="Double" />
+    <Property Name="volume_sma_060" Type="Double" />
+    <Property Name="volume_sma_120" Type="Double" />
+    <Property Name="volume_vr" Type="Double" />
+    <Property Name="last_created" Type="DateTime" Nullable="false" Precision="3" />
+  </EntityType>
+  <EntityType Name="daily_vol_sma10_v1">
+    <Key>
+      <PropertyRef Name="symbol" />
+      <PropertyRef Name="date_hist" />
+    </Key>
+    <Property Name="symbol" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="date_hist" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="volume" Type="Double" />
+    <Property Name="volume_pre" Type="Double" />
+    <Property Name="volume_chg_perc" Type="Double" />
+    <Property Name="sma10" Type="Double" />
+    <Property Name="sma10_pre" Type="Double" />
+    <Property Name="sma10_chg_perc" Type="Double" />
+  </EntityType>
+  <EntityType Name="daily_vol_sma5_v1">
+    <Key>
+      <PropertyRef Name="symbol" />
+      <PropertyRef Name="date_hist" />
+    </Key>
+    <Property Name="symbol" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="date_hist" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="volume" Type="Double" />
+    <Property Name="volume_pre" Type="Double" />
+    <Property Name="volume_chg_perc" Type="Double" />
+    <Property Name="sma5" Type="Double" />
+    <Property Name="sma5_pre" Type="Double" />
+    <Property Name="sma5_chg_perc" Type="Double" />
+  </EntityType>
+  <EntityType Name="daily_volume_v1">
+    <Key>
+      <PropertyRef Name="symbol" />
+      <PropertyRef Name="date_hist" />
+    </Key>
+    <Property Name="symbol" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="date_hist" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="volume" Type="Double" />
+    <Property Name="sma_005" Type="Double" />
+    <Property Name="sma_010" Type="Double" />
+    <Property Name="sma_020" Type="Double" />
+    <Property Name="sma_030" Type="Double" />
+    <Property Name="sma_060" Type="Double" />
+    <Property Name="sma_120" Type="Double" />
+    <Property Name="sma_240" Type="Double" />
+  </EntityType>
+  <EntityType Name="fundamental_v1">
+    <Key>
+      <PropertyRef Name="symbol" />
+      <PropertyRef Name="date_hist" />
+      <PropertyRef Name="date_fiscal" />
+    </Key>
+    <Property Name="symbol" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="date_hist" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="date_fiscal" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="eps" Type="Double" />
+    <Property Name="perc_eps" Type="Double" />
+    <Property Name="perc_eps_1year" Type="Double" />
+    <Property Name="perc_eps_3year" Type="Double" />
+    <Property Name="est" Type="Double" />
+    <Property Name="perc_est" Type="Double" />
+    <Property Name="perc_est_1year" Type="Double" />
+    <Property Name="perc_est_3year" Type="Double" />
+    <Property Name="surprise" Type="Double" />
+    <Property Name="surprise_1year" Type="Double" />
+    <Property Name="surprise_3year" Type="Double" />
+    <Property Name="perc_after_expense" Type="Double" />
+    <Property Name="perc_after_expense_1year" Type="Double" />
+    <Property Name="perc_after_expense_3year" Type="Double" />
+    <Property Name="perc_profit" Type="Double" />
+    <Property Name="perc_profit_1year" Type="Double" />
+    <Property Name="perc_profit_3year" Type="Double" />
+    <Property Name="perc_total" Type="Double" />
+    <Property Name="perc_total_1year" Type="Double" />
+    <Property Name="perc_total_3year" Type="Double" />
+    <Property Name="eps_close_rate" Type="Double" />
+    <Property Name="pre_30" Type="Double" />
+    <Property Name="pre_20" Type="Double" />
+    <Property Name="pre_10" Type="Double" />
+    <Property Name="pre_5" Type="Double" />
+    <Property Name="pre_3" Type="Double" />
+    <Property Name="pre_1" Type="Double" />
+    <Property Name="next_1" Type="Double" />
+    <Property Name="next_3" Type="Double" />
+    <Property Name="next_5" Type="Double" />
+    <Property Name="next_10" Type="Double" />
+    <Property Name="next_20" Type="Double" />
+    <Property Name="next_30" Type="Double" />
+  </EntityType>
+  <EntityType Name="industry_v1">
+    <Key>
+      <PropertyRef Name="date_hist" />
+    </Key>
+    <Property Name="industry" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="date_hist" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="price_chg" Type="Double" />
+    <Property Name="idx_chg" Type="Double" />
+    <Property Name="strong" Type="Double" />
+    <Property Name="strong_sma5" Type="Double" />
+  </EntityType>
+  <EntityType Name="list_history_v1">
+    <Key>
+      <PropertyRef Name="HIST_ID" />
+      <PropertyRef Name="HIST_DTTM" />
+      <PropertyRef Name="START_DTTM" />
+      <PropertyRef Name="END_DTTM" />
+      <PropertyRef Name="PASS_LIST" />
+      <PropertyRef Name="FILTER_OPTION" />
+    </Key>
+    <Property Name="HIST_ID" Type="Int32" Nullable="false" />
+    <Property Name="HIST_DTTM" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="START_DTTM" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="END_DTTM" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="PASS_LIST" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+    <Property Name="FILTER_OPTION" Type="Int32" Nullable="false" />
+    <Property Name="att1" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="att2" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="att3" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="att4" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="att5" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="option_desc" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="description" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="ranking" Type="Int32" />
+    <Property Name="ratio1" Type="Double" />
+    <Property Name="ratio2" Type="Double" />
+    <Property Name="rate_5" Type="Double" />
+    <Property Name="rate_10" Type="Double" />
+    <Property Name="rate_15" Type="Double" />
+    <Property Name="rate_20" Type="Double" />
+    <Property Name="rate_40" Type="Double" />
+    <Property Name="rate_60" Type="Double" />
+  </EntityType>
+  <EntityType Name="sector_v1">
+    <Key>
+      <PropertyRef Name="date_hist" />
+    </Key>
+    <Property Name="sector" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="date_hist" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="price_chg" Type="Double" />
+    <Property Name="idx_chg" Type="Double" />
+    <Property Name="strong" Type="Double" />
+    <Property Name="strong_sma5" Type="Double" />
+  </EntityType>
+  <EntityType Name="watch_list_v1">
+    <Key>
+      <PropertyRef Name="symbol" />
+    </Key>
+    <Property Name="symbol" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="watch_type" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="company" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="industry" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="sector" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="last_updated" Type="DateTime" Precision="0" />
+    <Property Name="last_earning" Type="DateTime" Precision="0" />
+  </EntityType>
+  <EntityType Name="daily_raw">
+    <Key>
+      <PropertyRef Name="TICKER" />
+      <PropertyRef Name="PER" />
+      <PropertyRef Name="DATE" />
+      <PropertyRef Name="TIME" />
+    </Key>
+    <Property Name="TICKER" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="PER" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="DATE" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="TIME" Type="Byte" Nullable="false" />
+    <Property Name="OPEN" Type="Double" />
+    <Property Name="HIGH" Type="Double" />
+    <Property Name="LOW" Type="Double" />
+    <Property Name="CLOSE" Type="Double" />
+    <Property Name="VOL" Type="Int32" />
+    <Property Name="OPENINT" Type="Byte" />
+  </EntityType>
+  <ComplexType Name="filter_01_process_Result">
+    <Property Type="String" Name="symbol" Nullable="false" MaxLength="50" />
+    <Property Type="Int32" Name="ranking" Nullable="true" />
+    <Property Type="Double" Name="ratio1" Nullable="true" />
+    <Property Type="Double" Name="ratio2" Nullable="true" />
+    <Property Type="Double" Name="rate_5" Nullable="true" />
+    <Property Type="Double" Name="rate_10" Nullable="true" />
+    <Property Type="Double" Name="rate_15" Nullable="true" />
+    <Property Type="Double" Name="rate_20" Nullable="true" />
+    <Property Type="Double" Name="rate_40" Nullable="true" />
+    <Property Type="Double" Name="rate_60" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="sp_next_n_days_Result">
+    <Property Type="DateTime" Name="date" Nullable="false" />
+    <Property Type="Double" Name="close_perc" Nullable="true" />
+    <Property Type="Double" Name="low_perc" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="filter_main1_Result">
+    <Property Type="String" Name="symbol" Nullable="false" MaxLength="50" />
+    <Property Type="Int32" Name="ranking" Nullable="true" />
+    <Property Type="Double" Name="ratio1" Nullable="true" />
+    <Property Type="Double" Name="ratio2" Nullable="true" />
+    <Property Type="Double" Name="rate_5" Nullable="true" />
+    <Property Type="Double" Name="rate_10" Nullable="true" />
+    <Property Type="Double" Name="rate_15" Nullable="true" />
+    <Property Type="Double" Name="rate_20" Nullable="true" />
+    <Property Type="Double" Name="rate_40" Nullable="true" />
+    <Property Type="Double" Name="rate_60" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="option_011_Result">
+    <Property Type="String" Name="symbol" Nullable="false" MaxLength="50" />
+    <Property Type="Int32" Name="ranking" Nullable="true" />
+    <Property Type="Double" Name="ratio1" Nullable="true" />
+    <Property Type="Double" Name="ratio2" Nullable="true" />
+    <Property Type="Double" Name="rate_5" Nullable="true" />
+    <Property Type="Double" Name="rate_10" Nullable="true" />
+    <Property Type="Double" Name="rate_15" Nullable="true" />
+    <Property Type="Double" Name="rate_20" Nullable="true" />
+    <Property Type="Double" Name="rate_40" Nullable="true" />
+    <Property Type="Double" Name="rate_60" Nullable="true" />
+  </ComplexType>
+</Schema>

@@ -256,8 +256,8 @@ namespace History
                 else if (_type == "Earning")
                 {
                     List<fundamental> hists = new List<fundamental>();
-                    hists = stock.fundamentals.Where(r => r.symbol == _symbol &&
-                    r.date_hist >= _dt_from && r.date_hist <= _dt_to).OrderBy(r => r.date_hist).ToList();
+                    //hists = stock.fundamentals.Where(r => r.symbol == _symbol &&
+                    //r.date_hist >= _dt_from && r.date_hist <= _dt_to).OrderBy(r => r.date_hist).ToList();
 
                     if (hists.Count < 1)
                         return;

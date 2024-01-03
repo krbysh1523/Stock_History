@@ -65,6 +65,7 @@ namespace History
             btn_Fixed_Click(this, null);
             LoadLast();
             Load_Result_Menu();
+            btn_Option_Click(this, null);
         }
 
         private void Index_Analyzer_FormClosing(object sender, FormClosingEventArgs e)
@@ -114,13 +115,290 @@ namespace History
         }
         #endregion
 
+        #region + User Button
+        private void btn_P1_Click(object sender, EventArgs e)
+        {
+            dt_From.Value = dt_From.Value.AddMonths(-1);
+            dt_To.Value = dt_To.Value.AddMonths(-1);
+            btn_Index_Click(this, null);
+        }
+
+        private void btn_N1_Click(object sender, EventArgs e)
+        {
+            dt_From.Value = dt_From.Value.AddMonths(1);
+            dt_To.Value = dt_To.Value.AddMonths(1);
+            btn_Index_Click(this, null);
+        }
+        private void btn_PD1_Click(object sender, EventArgs e)
+        {
+            dt_Symbol_From.Value = dt_Symbol_From.Value.AddDays(-7);
+            dt_Symbol_To.Value = dt_Symbol_To.Value.AddDays(-7);
+        }
+
+        private void btn_ND1_Click(object sender, EventArgs e)
+        {
+            dt_Symbol_From.Value = dt_Symbol_From.Value.AddDays(7);
+            dt_Symbol_To.Value = dt_Symbol_To.Value.AddDays(7);
+        }
+
+        private void btn_LowerAxis_Click(object sender, EventArgs e)
+        {
+            nmb_Y_Min.Value = nmb_Y_Min.Value + 5;
+            nmb_Y_Max.Value = nmb_Y_Max.Value + 5;
+
+            chart_Main.AxisY[0].MinValue = chart_Main.AxisY[0].MinValue + 5;
+            chart_Main.AxisY[0].MaxValue = chart_Main.AxisY[0].MaxValue + 5;
+        }
+
+        private void btn_RaiseAxis_Click(object sender, EventArgs e)
+        {
+            nmb_Y_Min.Value = nmb_Y_Min.Value - 5;
+            nmb_Y_Max.Value = nmb_Y_Max.Value - 5;
+
+            chart_Main.AxisY[0].MinValue = chart_Main.AxisY[0].MinValue - 5;
+            chart_Main.AxisY[0].MaxValue = chart_Main.AxisY[0].MaxValue - 5;
+        }
+
+        private void btn_NarrowAxis_Click(object sender, EventArgs e)
+        {
+            nmb_Y_Min.Value = nmb_Y_Min.Value - 5;
+            nmb_Y_Max.Value = nmb_Y_Max.Value + 5;
+
+            chart_Main.AxisY[0].MinValue = chart_Main.AxisY[0].MinValue - 5;
+            chart_Main.AxisY[0].MaxValue = chart_Main.AxisY[0].MaxValue + 5;
+        }
+
+        private void btn_WideAxis_Click(object sender, EventArgs e)
+        {
+
+            nmb_Y_Min.Value = nmb_Y_Min.Value + 5;
+            nmb_Y_Max.Value = nmb_Y_Max.Value - 5;
+
+            chart_Main.AxisY[0].MinValue = chart_Main.AxisY[0].MinValue + 5;
+            chart_Main.AxisY[0].MaxValue = chart_Main.AxisY[0].MaxValue - 5;
+
+        }
+        private void btn_Fixed_Click(object sender, EventArgs e)
+        {
+            nmb_Y_Min.Value = -50;
+            nmb_Y_Max.Value = 50;
+
+            nmb_2nd_Axix_Y_Min.Value = -200;
+            nmb_2nd_Axix_Y_Max.Value = 500;
+        }
+
+        private void btn_Option_Click(object sender, EventArgs e)
+        {
+            switch (btn_Option.Text)
+            {
+                case "View Option 1":
+                    btn_Option.Text = "View Option 2";
+                    table_Option.Size = new Size(table_Option.Size.Width, 300);
+                    break;
+                case "View Option 2":
+                    btn_Option.Text = "View Option 3";
+                    table_Option.Size = new Size(table_Option.Size.Width, 0);
+                    break;
+                case "View Option 3":
+                    btn_Option.Text = "View Option 1";
+                    table_Option.Size = new Size(table_Option.Size.Width, 70);
+                    break;
+            }
+        }
+
+        #endregion
+
+        #region + User Event
+        private void splitContainer1_SizeChanged(object sender, EventArgs e)
+        {
+            if (this.Width > 500)
+                splitContainer1.SplitterDistance = this.Width - 500;
+        }
+        private void chart_Main_DataClick(object sender, ChartPoint chartPoint)
+        {
+            if (is_1st_click_chart)
+            {
+                dt_Symbol_From.Value = hists[chartPoint.Key].date_hist;
+                is_1st_click_chart = false;
+                click_key_1st = chartPoint.Key;
+            }
+            else
+            {
+                if (dt_Symbol_From.Value <= hists[chartPoint.Key].date_hist)
+                {
+                    dt_Symbol_To.Value = hists[chartPoint.Key].date_hist;
+                    is_1st_click_chart = true;
+                    double pre = Math.Round(hists[click_key_1st].price.Value, 2);
+                    double nex = Math.Round(hists[chartPoint.Key].price.Value, 2);
+                    query.Show_Message(string.Format("Price: {0} → {1} Change: {2}%",
+                        pre.ToString(),
+                        nex.ToString(),
+                        Math.Round((nex - pre) / nex * 100, 1).ToString()));
+                }
+            }
+        }
+        private void dgv_List_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            if (e.ColumnIndex < 4 || e.ColumnIndex > 10)
+                return;
+
+            try
+            {
+                var dg_type = dgv_List.DataSource.GetType();
+                if (dg_type.FullName.Contains("sp_get_prediction_history_Result"))
+                {
+                    List<sp_get_prediction_history_Result> ranks = ((System.Collections.ObjectModel.Collection<History.sp_get_prediction_history_Result>)dgv_List.DataSource).ToList();
+                    List<sp_get_prediction_history_Result> _ranks = new List<sp_get_prediction_history_Result>();
+                    if (e.ColumnIndex == 4)
+                        _ranks = ranks.OrderByDescending(r => r.ratio1).ToList();
+                    else if (e.ColumnIndex == 5)
+                        _ranks = ranks.OrderByDescending(r => r.ratio2).ToList();
+                    else if (e.ColumnIndex == 6)
+                        _ranks = ranks.OrderByDescending(r => r.rate_5).ToList();
+                    else if (e.ColumnIndex == 7)
+                        _ranks = ranks.OrderByDescending(r => r.rate_10).ToList();
+                    else if (e.ColumnIndex == 8)
+                        _ranks = ranks.OrderByDescending(r => r.rate_15).ToList();
+                    else if (e.ColumnIndex == 9)
+                        _ranks = ranks.OrderByDescending(r => r.rate_20).ToList();
+                    else if (e.ColumnIndex == 10)
+                        _ranks = ranks.OrderByDescending(r => r.rate_40).ToList();
+                    else if (e.ColumnIndex == 11)
+                        _ranks = ranks.OrderByDescending(r => r.rate_60).ToList();
+
+                    dgv_List.DataSource = _ranks;
+                }
+                else
+                {
+                    List<filter_main_Result> ranks = (List<filter_main_Result>)dgv_List.DataSource;
+                    List<filter_main_Result> _ranks = new List<filter_main_Result>();
+                    if (e.ColumnIndex == 4)
+                        _ranks = ranks.OrderByDescending(r => r.ratio1).ToList();
+                    else if (e.ColumnIndex == 5)
+                        _ranks = ranks.OrderByDescending(r => r.ratio2).ToList();
+                    else if (e.ColumnIndex == 6)
+                        _ranks = ranks.OrderByDescending(r => r.rate_5).ToList();
+                    else if (e.ColumnIndex == 7)
+                        _ranks = ranks.OrderByDescending(r => r.rate_10).ToList();
+                    else if (e.ColumnIndex == 8)
+                        _ranks = ranks.OrderByDescending(r => r.rate_15).ToList();
+                    else if (e.ColumnIndex == 9)
+                        _ranks = ranks.OrderByDescending(r => r.rate_20).ToList();
+                    else if (e.ColumnIndex == 10)
+                        _ranks = ranks.OrderByDescending(r => r.rate_40).ToList();
+                    else if (e.ColumnIndex == 11)
+                        _ranks = ranks.OrderByDescending(r => r.rate_60).ToList();
+
+                    dgv_List.DataSource = _ranks;
+                }
+            }
+            catch (Exception ex)
+            {
+                query.Show_Message("Error:" + ex.Message);
+            }
+        }
+
+
+        private void dgv_List_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
+        {
+            foreach (DataGridViewRow dr in dgv_List.Rows)
+            {
+                if (dr.Index > 1)
+                {
+                    for (int c = 6; c < dgv_List.ColumnCount - 2; c++)
+                    {
+                        if (Convert.ToDouble(dgv_List[c, dr.Index].Value) < -10)
+                            dr.Cells[c].Style.BackColor = Color.Red;
+                        else if (Convert.ToDouble(dgv_List[c, dr.Index].Value) >= -10 && Convert.ToDouble(dgv_List[c, dr.Index].Value) < -5)
+                            dr.Cells[c].Style.BackColor = Color.Orange;
+                        else if (Convert.ToDouble(dgv_List[c, dr.Index].Value) >= -5 && Convert.ToDouble(dgv_List[c, dr.Index].Value) < 0)
+                            dr.Cells[c].Style.BackColor = Color.Yellow;
+                        else if (Convert.ToDouble(dgv_List[c, dr.Index].Value) >= 5 && Convert.ToDouble(dgv_List[c, dr.Index].Value) < 10)
+                            dr.Cells[c].Style.BackColor = Color.YellowGreen;
+                        else if (Convert.ToDouble(dgv_List[c, dr.Index].Value) >= 10 && Convert.ToDouble(dgv_List[c, dr.Index].Value) < 20)
+                            dr.Cells[c].Style.BackColor = Color.Green;
+                        else if (Convert.ToDouble(dgv_List[c, dr.Index].Value) >= 20 && Convert.ToDouble(dgv_List[c, dr.Index].Value) < 30)
+                            dr.Cells[c].Style.BackColor = Color.SkyBlue;
+                        else if (Convert.ToDouble(dgv_List[c, dr.Index].Value) >= 30)
+                            dr.Cells[c].Style.BackColor = Color.Blue;
+                        else
+                            dr.Cells[c].Style.BackColor = Color.White;
+                    }
+
+                    if (dgv_List[12, dr.Index].Value == null)
+                        dr.Cells[12].Style.ForeColor = Color.White;
+                    else if (dgv_List[12, dr.Index].Value.ToString() == "UP")
+                        dr.Cells[12].Style.ForeColor = Color.Green;
+                    else if (dgv_List[12, dr.Index].Value.ToString() == "DOWN")
+                        dr.Cells[12].Style.ForeColor = Color.Red;
+                    else if (dgv_List[12, dr.Index].Value.ToString() == "EXCLUDE")
+                        dr.Cells[12].Style.ForeColor = Color.Gray;
+
+                }
+                else
+                {
+                    dr.DefaultCellStyle.BackColor = Color.Pink;
+                }
+            }
+        }
+
+        private string GetSymbolList()
+        {
+            StringBuilder sb = new StringBuilder();
+            try
+            {
+                for (int r = 0; r < dgv_List.Rows.Count; r++)
+                {
+                    if (!dgv_List[2, r].Value.ToString().StartsWith("_"))
+                    {
+                        sb.Append(dgv_List[2, r].Value.ToString());
+                        if (r < dgv_List.Rows.Count - 1)
+                            sb.Append(",");
+                    }
+                }
+            }
+            catch (Exception)
+            {
+            }
+            return sb.ToString();
+        }
+
+        private void Index_Analyzer_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Modifiers == Keys.Control && e.KeyCode == Keys.Enter)
+            {
+                this.btn_Symbol_Click(this, null);
+            }
+        }
+
+        private void chk_Simul_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chk_Simul.Checked)
+            {
+                for (int c = 5; c < dgv_List.ColumnCount - 2; c++)
+                    dgv_List.Columns[c].Visible = true;
+            }
+            else
+            {
+                for (int c = 5; c < dgv_List.ColumnCount - 2; c++)
+                    dgv_List.Columns[c].Visible = false;
+            }
+        }
+
+        private void btn_CopyList_Click(object sender, EventArgs e)
+        {
+            Utility.Copy_DGV_to_Clipboard(dgv_List, 2);
+        }
+
+        #endregion
+
         #region + Result Menu
 
         private void Load_Result_Menu()
         { 
             using(stockEntity stock = new stockEntity())
             {
-                var results = stock.lookups.Where(r => r.l_type == "Result").ToList();
+                var results = stock.lookup.Where(r => r.l_type == "Result").ToList();
 
                 foreach(var r in results)
                 {
@@ -204,7 +482,7 @@ r.date_hist >= dt_from && r.date_hist <= dt_to).OrderBy(r => r.date_hist).ToList
                     }
                     chg = Utility.ConverToPerc(chg, 0, 1);
 
-                    chart_Main.Series.Add(AddLine(chg, System.Windows.Media.Colors.Tomato, "Index SMA5", "index_sma5"));
+                    chart_Main.Series.Add(Utility.AddLine(chg, System.Windows.Media.Colors.Tomato, "Index SMA5", "index_sma5"));
 
                     List<DateTime> dts = new List<DateTime>();
                     for (int i = 0; i < hists.Count; i++)
@@ -214,16 +492,16 @@ r.date_hist >= dt_from && r.date_hist <= dt_to).OrderBy(r => r.date_hist).ToList
 
                     Utility.GetXLabels(chart_Main.AxisX, dts, dt_compare_end);
 
-                    double yMax = 0;
-                    double yMin = 0;
-                    Utility.RetYAxis(chart_Main, out yMax, out yMin);
+                    //double yMax = 0;
+                    //double yMin = 0;
+                    //Utility.RetYAxis(chart_Main, out yMax, out yMin);
 
-                    Utility.SetAxis(chart_Main, hists.Count, (double)yMax, (double)yMin);
+                    //Utility.SetAxis(chart_Main, hists.Count, (double)yMax, (double)yMin);
 
                     //Draw Section 
                     var start_idx = hists.FindIndex(r => r.date_hist == dt_compare_start);
                     var end_idx = hists.FindIndex(r => r.date_hist == dt_compare_end);
-                    chart_Main.AxisX[0].Sections.Add(AddSection(start_idx, end_idx - start_idx, System.Windows.Media.Colors.Purple, 0.4));
+                    chart_Main.AxisX[0].Sections.Add(Utility.AddSection(start_idx, end_idx - start_idx, System.Windows.Media.Colors.Purple, 0.4));
 
                 }
                 else if (cmb_Type.SelectedIndex == 1) //SMA
@@ -247,16 +525,16 @@ r.date_hist >= dt_from && r.date_hist <= dt_to).OrderBy(r => r.date_hist).ToList
                     chart_Main.Series.Add(Utility.AddLine(hist2, 5));
                     chart_Main.Series.Add(Utility.AddLine(hist2, 1, "circle", 10));
 
-                    double yMax = 0;
-                    double yMin = 0;
-                    Utility.RetYAxis(chart_Main, out yMax, out yMin);
+                    //double yMax = 0;
+                    //double yMin = 0;
+                    //Utility.RetYAxis(chart_Main, out yMax, out yMin);
 
-                    Utility.SetAxis(chart_Main, hists.Count, (double)yMax, (double)yMin);
+                    //Utility.SetAxis(chart_Main, hists.Count, (double)yMax, (double)yMin);
 
                     //Draw Section 
                     var start_idx = hist2.FindIndex(r => r.date_hist == dt_compare_start);
                     var end_idx = hist2.FindIndex(r => r.date_hist == dt_compare_end);
-                    chart_Main.AxisX[0].Sections.Add(AddSection(start_idx, end_idx - start_idx, System.Windows.Media.Colors.Purple, 0.4));
+                    chart_Main.AxisX[0].Sections.Add(Utility.AddSection(start_idx, end_idx - start_idx, System.Windows.Media.Colors.Purple, 0.4));
 
                 }
             }
@@ -546,330 +824,6 @@ r.date_hist >= dt_from && r.date_hist <= dt_to).OrderBy(r => r.date_hist).ToList
             }
             return ranks;
         }
-        private LineSeries AddLine(List<double> _hist, System.Windows.Media.Color _color, string _title, string _name, string _point_shape, double _point_size)
-        {
-            LineSeries series = new LineSeries();
-            series.Name = _name;
-            series.Stroke = new System.Windows.Media.SolidColorBrush(_color);
-            series.Title = _title;
-            if (_point_shape.ToLower() == "circle")
-                series.PointGeometry = DefaultGeometries.Circle;
-            else if (_point_shape.ToLower() == "diamond")
-                series.PointGeometry = DefaultGeometries.Diamond;
-            else if (_point_shape.ToLower() == "cross")
-                series.PointGeometry = DefaultGeometries.Cross;
-            else if (_point_shape.ToLower() == "square")
-                series.PointGeometry = DefaultGeometries.Square;
-            else
-                series.PointGeometry = DefaultGeometries.None;
-
-            series.PointGeometrySize = _point_size;
-            ChartValues<double> points = new ChartValues<double>();
-            foreach (var h in _hist)
-            {
-                points.Add(h);
-            }
-            series.Values = points;
-
-            return series;
-        }
-        private LineSeries AddLine(List<double> _hist, System.Windows.Media.Color _color, string _title, string _name)
-        {
-            return AddLine(_hist, _color, _title, _name, "circle", 10);
-        }
-        private LineSeries AddLine(List<double> _hist, System.Windows.Media.Color _color, string _title, string _name, int _AxisY)
-        {
-            LineSeries line = AddLine(_hist, _color, _title, _name, "circle", 5);
-            line.ScalesYAt = _AxisY;
-            return line;
-        }
-
-        private AxisSection AddSection(double _start, double _width, System.Windows.Media.Color _color, double _opacity)
-        {
-            AxisSection axis = new AxisSection();
-
-            axis.Value = _start;
-            axis.SectionWidth = _width;
-            axis.Fill = new System.Windows.Media.SolidColorBrush
-            {
-                Color = _color,
-                Opacity = _opacity
-            };
-
-            return axis;
-        }
-
-        #endregion
-
-        #region + User Button
-        private void btn_P1_Click(object sender, EventArgs e)
-        {
-            dt_From.Value = dt_From.Value.AddMonths(-1);
-            dt_To.Value = dt_To.Value.AddMonths(-1);
-            btn_Index_Click(this, null);
-        }
-
-        private void btn_N1_Click(object sender, EventArgs e)
-        {
-            dt_From.Value = dt_From.Value.AddMonths(1);
-            dt_To.Value = dt_To.Value.AddMonths(1);
-            btn_Index_Click(this, null);
-        }
-        private void btn_PD1_Click(object sender, EventArgs e)
-        {
-            dt_Symbol_From.Value = dt_Symbol_From.Value.AddDays(-7);
-            dt_Symbol_To.Value = dt_Symbol_To.Value.AddDays(-7);
-        }
-
-        private void btn_ND1_Click(object sender, EventArgs e)
-        {
-            dt_Symbol_From.Value = dt_Symbol_From.Value.AddDays(7);
-            dt_Symbol_To.Value = dt_Symbol_To.Value.AddDays(7);
-        }
-
-        private void btn_LowerAxis_Click(object sender, EventArgs e)
-        {
-            nmb_Y_Min.Value = nmb_Y_Min.Value + 5;
-            nmb_Y_Max.Value = nmb_Y_Max.Value + 5;
-
-            chart_Main.AxisY[0].MinValue = chart_Main.AxisY[0].MinValue + 5;
-            chart_Main.AxisY[0].MaxValue = chart_Main.AxisY[0].MaxValue + 5;
-        }
-
-        private void btn_RaiseAxis_Click(object sender, EventArgs e)
-        {
-            nmb_Y_Min.Value = nmb_Y_Min.Value - 5;
-            nmb_Y_Max.Value = nmb_Y_Max.Value - 5;
-
-            chart_Main.AxisY[0].MinValue = chart_Main.AxisY[0].MinValue - 5;
-            chart_Main.AxisY[0].MaxValue = chart_Main.AxisY[0].MaxValue - 5;
-        }
-
-        private void btn_NarrowAxis_Click(object sender, EventArgs e)
-        {
-            nmb_Y_Min.Value = nmb_Y_Min.Value - 5;
-            nmb_Y_Max.Value = nmb_Y_Max.Value + 5;
-
-            chart_Main.AxisY[0].MinValue = chart_Main.AxisY[0].MinValue - 5;
-            chart_Main.AxisY[0].MaxValue = chart_Main.AxisY[0].MaxValue + 5;
-        }
-
-        private void btn_WideAxis_Click(object sender, EventArgs e)
-        {
-
-            nmb_Y_Min.Value = nmb_Y_Min.Value + 5;
-            nmb_Y_Max.Value = nmb_Y_Max.Value - 5;
-
-            chart_Main.AxisY[0].MinValue = chart_Main.AxisY[0].MinValue + 5;
-            chart_Main.AxisY[0].MaxValue = chart_Main.AxisY[0].MaxValue - 5;
-
-        }
-        private void btn_Fixed_Click(object sender, EventArgs e)
-        {
-            nmb_Y_Min.Value = -50;
-            nmb_Y_Max.Value = 50;
-
-            nmb_2nd_Axix_Y_Min.Value = -200;
-            nmb_2nd_Axix_Y_Max.Value = 500;
-        }
-
-        #endregion
-
-        #region + User Event
-        private void splitContainer1_SizeChanged(object sender, EventArgs e)
-        {
-            if (this.Width > 500)
-                splitContainer1.SplitterDistance = this.Width - 500;
-        }
-        private void chart_Main_DataClick(object sender, ChartPoint chartPoint)
-        {
-            if (is_1st_click_chart)
-            {
-                dt_Symbol_From.Value = hists[chartPoint.Key].date_hist;
-                is_1st_click_chart = false;
-                click_key_1st = chartPoint.Key;
-            }
-            else
-            {
-                if (dt_Symbol_From.Value <= hists[chartPoint.Key].date_hist)
-                {
-                    dt_Symbol_To.Value = hists[chartPoint.Key].date_hist;
-                    is_1st_click_chart = true;
-                    double pre = Math.Round(hists[click_key_1st].price.Value, 2);
-                    double nex = Math.Round(hists[chartPoint.Key].price.Value, 2);
-                    query.Show_Message(string.Format("Price: {0} → {1} Change: {2}%",
-                        pre.ToString(),
-                        nex.ToString(),
-                        Math.Round((nex - pre) / nex * 100, 1).ToString()));
-                }
-            }
-        }
-        private void dgv_List_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
-        {
-            if (e.ColumnIndex < 4 || e.ColumnIndex > 10)
-                return;
-
-            try
-            {
-                var dg_type = dgv_List.DataSource.GetType();
-                if (dg_type.FullName.Contains("sp_get_prediction_history_Result"))
-                {
-                    List<sp_get_prediction_history_Result> ranks = ((System.Collections.ObjectModel.Collection<History.sp_get_prediction_history_Result>)dgv_List.DataSource).ToList();
-                    List<sp_get_prediction_history_Result> _ranks = new List<sp_get_prediction_history_Result>();
-                    if (e.ColumnIndex == 4)
-                        _ranks = ranks.OrderByDescending(r => r.ratio1).ToList();
-                    else if (e.ColumnIndex == 5)
-                        _ranks = ranks.OrderByDescending(r => r.ratio2).ToList();
-                    else if (e.ColumnIndex == 6)
-                        _ranks = ranks.OrderByDescending(r => r.rate_5).ToList();
-                    else if (e.ColumnIndex == 7)
-                        _ranks = ranks.OrderByDescending(r => r.rate_10).ToList();
-                    else if (e.ColumnIndex == 8)
-                        _ranks = ranks.OrderByDescending(r => r.rate_15).ToList();
-                    else if (e.ColumnIndex == 9)
-                        _ranks = ranks.OrderByDescending(r => r.rate_20).ToList();
-                    else if (e.ColumnIndex == 10)
-                        _ranks = ranks.OrderByDescending(r => r.rate_40).ToList();
-                    else if (e.ColumnIndex == 11)
-                        _ranks = ranks.OrderByDescending(r => r.rate_60).ToList();
-
-                    dgv_List.DataSource = _ranks;
-                }
-                else
-                {
-                    List<filter_main_Result> ranks = (List<filter_main_Result>)dgv_List.DataSource;
-                    List<filter_main_Result> _ranks = new List<filter_main_Result>();
-                    if (e.ColumnIndex == 4)
-                        _ranks = ranks.OrderByDescending(r => r.ratio1).ToList();
-                    else if (e.ColumnIndex == 5)
-                        _ranks = ranks.OrderByDescending(r => r.ratio2).ToList();
-                    else if (e.ColumnIndex == 6)
-                        _ranks = ranks.OrderByDescending(r => r.rate_5).ToList();
-                    else if (e.ColumnIndex == 7)
-                        _ranks = ranks.OrderByDescending(r => r.rate_10).ToList();
-                    else if (e.ColumnIndex == 8)
-                        _ranks = ranks.OrderByDescending(r => r.rate_15).ToList();
-                    else if (e.ColumnIndex == 9)
-                        _ranks = ranks.OrderByDescending(r => r.rate_20).ToList();
-                    else if (e.ColumnIndex == 10)
-                        _ranks = ranks.OrderByDescending(r => r.rate_40).ToList();
-                    else if (e.ColumnIndex == 11)
-                        _ranks = ranks.OrderByDescending(r => r.rate_60).ToList();
-
-                    dgv_List.DataSource = _ranks;
-                }
-            }
-            catch (Exception ex)
-            {
-                query.Show_Message("Error:" + ex.Message);
-            }
-        }
-
-
-        private void dgv_List_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
-        {
-            foreach (DataGridViewRow dr in dgv_List.Rows)
-            {
-                if (dr.Index > 1)
-                {
-                    for (int c = 6; c < dgv_List.ColumnCount - 2; c++)
-                    {
-                        if (Convert.ToDouble(dgv_List[c, dr.Index].Value) < -10)
-                            dr.Cells[c].Style.BackColor = Color.Red;
-                        else if (Convert.ToDouble(dgv_List[c, dr.Index].Value) >= -10 && Convert.ToDouble(dgv_List[c, dr.Index].Value) < -5)
-                            dr.Cells[c].Style.BackColor = Color.Orange;
-                        else if (Convert.ToDouble(dgv_List[c, dr.Index].Value) >= -5 && Convert.ToDouble(dgv_List[c, dr.Index].Value) < 0)
-                            dr.Cells[c].Style.BackColor = Color.Yellow;
-                        else if (Convert.ToDouble(dgv_List[c, dr.Index].Value) >= 5 && Convert.ToDouble(dgv_List[c, dr.Index].Value) < 10)
-                            dr.Cells[c].Style.BackColor = Color.YellowGreen;
-                        else if (Convert.ToDouble(dgv_List[c, dr.Index].Value) >= 10 && Convert.ToDouble(dgv_List[c, dr.Index].Value) < 20)
-                            dr.Cells[c].Style.BackColor = Color.Green;
-                        else if (Convert.ToDouble(dgv_List[c, dr.Index].Value) >= 20 && Convert.ToDouble(dgv_List[c, dr.Index].Value) < 30)
-                            dr.Cells[c].Style.BackColor = Color.SkyBlue;
-                        else if (Convert.ToDouble(dgv_List[c, dr.Index].Value) >= 30)
-                            dr.Cells[c].Style.BackColor = Color.Blue;
-                        else
-                            dr.Cells[c].Style.BackColor = Color.White;
-                    }
-
-                    if (dgv_List[12, dr.Index].Value == null)
-                        dr.Cells[12].Style.ForeColor = Color.White;
-                    else if (dgv_List[12, dr.Index].Value.ToString() == "UP")
-                        dr.Cells[12].Style.ForeColor = Color.Green;
-                    else if (dgv_List[12, dr.Index].Value.ToString() == "DOWN")
-                        dr.Cells[12].Style.ForeColor = Color.Red;
-                    else if (dgv_List[12, dr.Index].Value.ToString() == "EXCLUDE")
-                        dr.Cells[12].Style.ForeColor = Color.Gray;
-
-                }
-                else
-                {
-                    dr.DefaultCellStyle.BackColor = Color.Pink;
-                }
-            }
-        }
-
-        private string GetSymbolList()
-        {
-            StringBuilder sb = new StringBuilder();
-            try
-            {
-                for (int r = 0; r < dgv_List.Rows.Count; r++)
-                {
-                    sb.Append(dgv_List[2, r].Value.ToString());
-                    if (r < dgv_List.Rows.Count - 1)
-                        sb.Append(",");
-                }
-            }
-            catch (Exception)
-            {
-            }
-            return sb.ToString();
-        }
-
-        private void Index_Analyzer_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.Modifiers == Keys.Control && e.KeyCode == Keys.Enter)
-            {
-                this.btn_Symbol_Click(this, null);
-            }
-        }
-
-        private void chk_Simul_CheckedChanged(object sender, EventArgs e)
-        {
-            if (chk_Simul.Checked)
-            {
-                for (int c = 5; c < dgv_List.ColumnCount - 2; c++)
-                    dgv_List.Columns[c].Visible = true;
-            }
-            else
-            {
-                for (int c = 5; c < dgv_List.ColumnCount - 2; c++)
-                    dgv_List.Columns[c].Visible = false;
-            }
-        }
-
-        private void btn_CopyList_Click(object sender, EventArgs e)
-        {
-            var newline = System.Environment.NewLine;
-            var tab = "\t";
-            var clipboard_string = new StringBuilder();
-            for (int c = 0; c < dgv_List.Columns.Count; c++)
-            {
-                clipboard_string.Append(dgv_List.Columns[c].HeaderText + tab);
-            }
-            clipboard_string.Append(newline);
-            for (int r = 2; r < dgv_List.Rows.Count; r++)
-            {
-                for (int c = 0; c < dgv_List.Columns.Count; c++)
-                {
-                        clipboard_string.Append(dgv_List[c, r].Value + tab);
-                }
-                clipboard_string.Append(newline);
-            }
-
-            Clipboard.SetText(clipboard_string.ToString());
-        }
 
         #endregion
 
@@ -880,15 +834,16 @@ r.date_hist >= dt_from && r.date_hist <= dt_to).OrderBy(r => r.date_hist).ToList
             {
                 Monitor.Enter(process);
 
-                var filename = dt_Symbol_From.Value.ToString("yyyyMMdd") + "_" + dt_Symbol_To.Value.ToString("yyyyMMdd") + "_" + dgv_List[2, e.RowIndex].Value.ToString();
-                string fullpath = Picture_Dir + "\\chart\\" + filename + "_1.png";
-                query.LoadPicture(fullpath);
-
-                filename = dt_Symbol_From.Value.ToString("yyyyMMdd") + "_" + dt_Symbol_To.Value.ToString("yyyyMMdd") + "_" + dgv_List[2, e.RowIndex].Value.ToString();
-                fullpath = Picture_Dir + "\\chart\\" + filename + "_2.png";
-                if (File.Exists(fullpath) && chk_Show_Pic.Checked)
+                if (chk_Show_Pic.Checked)
                 {
-                    Load_Picture(fullpath);
+                    var filename = dt_Symbol_From.Value.ToString("yyyyMMdd") + "_" + dt_Symbol_To.Value.ToString("yyyyMMdd") + "_" + dgv_List[2, e.RowIndex].Value.ToString();
+                    string fullpath = Picture_Dir + "\\chart\\" + filename + "_1.png";
+                    query.LoadPicture(fullpath);
+
+                    filename = dt_Symbol_From.Value.ToString("yyyyMMdd") + "_" + dt_Symbol_To.Value.ToString("yyyyMMdd") + "_" + dgv_List[2, e.RowIndex].Value.ToString();
+                    fullpath = Picture_Dir + "\\chart\\" + filename + "_2.png";
+                    if(File.Exists(fullpath))
+                        Load_Picture(fullpath);
                 }
                 else
                     DrawSymbolChart(e.RowIndex, -1, 3);
@@ -983,6 +938,34 @@ r.date_hist >= dt_from && r.date_hist <= dt_to).OrderBy(r => r.date_hist).ToList
 
                         List<double> chg = new List<double>();
 
+                        var TVs = stock.daily_analysis_v1.Where(r => r.symbol == symbol &&
+                            r.date >= dt_from && r.date <= dt_to).OrderBy(r => r.date).ToList();
+
+                        // Candle
+                        var candle_axis_Y = new Axis();
+                        candle_axis_Y.Name = "Candle";
+                        chart_Main.AxisY.Add(candle_axis_Y);
+
+                        List<daily_history> candles = new List<daily_history>();
+                        candles = stock.daily_history.Where(r => r.symbol == symbol &&
+                        r.date >= dt_from && r.date <= dt_to).OrderBy(r => r.date).ToList();
+
+                        CandleSeries candle = Utility.AddCandle(candles);
+                        candle.ScalesYAt = Utility.FindAxis_Name(chart_Main, "Candle");
+                        chart_Main.Series.Add(candle);
+
+                        Utility.GetXLabels(chart_Main.AxisX, candles);
+                        chart_Main.AxisY[Utility.FindAxis_Name(chart_Main, "Candle")].ShowLabels = false;
+
+                        //Section
+                        chart_Main.AxisX[0].Sections.Clear();
+
+                        int buy_week = end_idx + (5 * _past_week);
+                        int sell_week = end_idx + (5 * _future_week);
+                        chart_Main.AxisX[0].Sections.Add(Utility.AddSection(start_idx, end_idx - start_idx, System.Windows.Media.Colors.Purple, 0.4));
+                        chart_Main.AxisX[0].Sections.Add(Utility.AddSection(buy_week + 1, 5, System.Windows.Media.Colors.Red, 0.4));
+                        chart_Main.AxisX[0].Sections.Add(Utility.AddSection(sell_week + 1, 5, System.Windows.Media.Colors.Blue, 0.4));
+
                         // Index Price
                         if (chk_IndexPrice.Checked)
                         {
@@ -994,9 +977,11 @@ r.date_hist >= dt_from && r.date_hist <= dt_to).OrderBy(r => r.date_hist).ToList
                             }
                             chg = Utility.ConverToPerc(chg, end_idx, 1);
 
-                            chart_Main.Series.Add(AddLine(chg, System.Windows.Media.Colors.Tomato, "Index", "index"));
+                            Utility.AddLine_Axis(chart_Main, chg, System.Windows.Media.Colors.Red, "Index");
+                            // Fixed
+                            if (chk_FixedRange.Checked)
+                                Utility.SetAxis_Fixed(chart_Main, "Index", (double)nmb_Y_Max.Value, (double)nmb_Y_Min.Value);
                         }
-
                         // Index SMA5
                         if (chk_IndexSMA5.Checked)
                         {
@@ -1008,7 +993,10 @@ r.date_hist >= dt_from && r.date_hist <= dt_to).OrderBy(r => r.date_hist).ToList
                             }
                             chg = Utility.ConverToPerc(chg, end_idx, 1);
 
-                            chart_Main.Series.Add(AddLine(chg, System.Windows.Media.Colors.Red, "Index SMA5", "index_sma5"));
+                            Utility.AddLine_Axis(chart_Main, chg, System.Windows.Media.Colors.Orange, "Index_SMA5");
+                            // Fixed
+                            if (chk_FixedRange.Checked)
+                                Utility.SetAxis_Fixed(chart_Main, "Index_SMA5", (double)nmb_Y_Max.Value, (double)nmb_Y_Min.Value);
                         }
 
                         // Symbol Pric
@@ -1022,7 +1010,10 @@ r.date_hist >= dt_from && r.date_hist <= dt_to).OrderBy(r => r.date_hist).ToList
                             }
                             chg = Utility.ConverToPerc(chg, end_idx, 1);
 
-                            chart_Main.Series.Add(AddLine(chg, System.Windows.Media.Colors.Black, "Price", "price"));
+                            Utility.AddLine_Axis(chart_Main, chg, System.Windows.Media.Colors.Black, "Price");
+                            // Fixed
+                            if (chk_FixedRange.Checked)
+                                Utility.SetAxis_Fixed(chart_Main, "Price", (double)nmb_Y_Max.Value, (double)nmb_Y_Min.Value);
                         }
 
                         // Symbol SMA5
@@ -1036,49 +1027,15 @@ r.date_hist >= dt_from && r.date_hist <= dt_to).OrderBy(r => r.date_hist).ToList
                             }
                             chg = Utility.ConverToPerc(chg, end_idx, 1);
 
-                            chart_Main.Series.Add(AddLine(chg, System.Windows.Media.Colors.LightSkyBlue, "SMA5", "sma5"));
-                        }
-
-                        //Axis Label
-                        List<DateTime> dts = new List<DateTime>();
-                        for (int i = 0; i < hists.Count; i++)
-                        {
-                            dts.Add(hists[i].date_hist.Date);
-                        }
-                        Utility.GetXLabels(chart_Main.AxisX, dts, dt_compare_end);
-
-                        chart_Main.AxisX[0].Sections.Clear();
-
-                            int buy_week = end_idx + (5 * _past_week);
-                            int sell_week = end_idx + (5 * _future_week);
-                            chart_Main.AxisX[0].Sections.Add(AddSection(start_idx, end_idx - start_idx, System.Windows.Media.Colors.Purple, 0.4));
-                            chart_Main.AxisX[0].Sections.Add(AddSection(buy_week + 1, 5, System.Windows.Media.Colors.Red, 0.4));
-                            chart_Main.AxisX[0].Sections.Add(AddSection(sell_week + 1, 5, System.Windows.Media.Colors.Blue, 0.4));
-
-                        // Fixed or Relative Range
-                        if (!chk_FixedRange.Checked)
-                        {
-                            double yMax = 0;
-                            double yMin = 0;
-                            Utility.RetYAxis(chart_Main, out yMax, out yMin);
-
-                            nmb_Y_Max.Value = (decimal)yMax;
-                            nmb_Y_Min.Value = (decimal)yMin;
-
-                            Utility.SetAxis(chart_Main, 0, hists.Count, (double)nmb_Y_Max.Value, (double)nmb_Y_Min.Value);
-                        }
-                        else
-                        {
-                            Utility.SetAxis(chart_Main, 0, hists.Count, (double)nmb_Y_Max.Value, (double)nmb_Y_Min.Value);
+                            Utility.AddLine_Axis(chart_Main, chg, System.Windows.Media.Colors.Silver, "SMA5");
+                            // Fixed
+                            if (chk_FixedRange.Checked)
+                                Utility.SetAxis_Fixed(chart_Main, "SMA5", (double)nmb_Y_Max.Value, (double)nmb_Y_Min.Value);
                         }
 
                         // Volume
                         if (chk_S_Volume.Checked)
                         {
-                            // 2nd Axis Y
-                            var sec_axis_Y = new Axis();
-                            chart_Main.AxisY.Add(sec_axis_Y);
-
                             //Volume Changes
                             var volume = stock.daily_volume.Where(r => r.symbol == symbol &&
                             r.date_hist >= dt_from && r.date_hist <= dt_to).OrderBy(r => r.date_hist).ToList();
@@ -1091,30 +1048,116 @@ r.date_hist >= dt_from && r.date_hist <= dt_to).OrderBy(r => r.date_hist).ToList
                             }
                             chg = Utility.ConverToPerc(chg, end_idx, 1);
 
-                            chart_Main.Series.Add(AddLine(chg, System.Windows.Media.Colors.Purple, "Volume", "volume", 1));
-
-                            // Fixed or Relative Range
+                            Utility.AddLine_Axis(chart_Main, chg, System.Windows.Media.Colors.Purple, "Volume");
+                            // Fixed
                             if (chk_FixedRange.Checked)
-                            {
-                                Utility.SetAxis(chart_Main, 1, hists.Count, (double)nmb_2nd_Axix_Y_Max.Value, (double)nmb_2nd_Axix_Y_Min.Value);
-                            }
+                                Utility.SetAxis_Fixed(chart_Main, "Volume", (double)nmb_2nd_Axix_Y_Max.Value, (double)nmb_2nd_Axix_Y_Min.Value);
                         }
 
-                        // Candle
-                        if (chk_S_Candle.Checked)
+
+                        // TMB
+                        if (chk_TMB.Checked)
                         {
-                            // 3rd Axis Y
-                            var candle_axis_Y = new Axis();
-                            chart_Main.AxisY.Add(candle_axis_Y);
+                            chg = new List<double>();
+                            for (int i = 0; i < TVs.Count; i++)
+                            {
+                                chg.Add(Convert.ToDouble(TVs[i].tmb_no));
+                            }
+                            Utility.AddLine_Axis(chart_Main, chg, System.Windows.Media.Colors.Blue, "TMB");
+                        }
 
-                            List<daily_history> candles = new List<daily_history>();
-                            candles = stock.daily_history.Where(r => r.symbol == symbol &&
-                            r.date >= dt_from && r.date <= dt_to).OrderBy(r => r.date).ToList();
+                        // Top Volume
+                        if (chk_TV.Checked)
+                        {
+                            //Top 
+                            chg = new List<double>();
+                            for (int i = 0; i < TVs.Count; i++)
+                            {
+                                chg.Add(Convert.ToDouble(TVs[i].VT));
+                            }
 
-                            CandleSeries candle = Utility.AddCandle(candles);
-                            candle.ScalesYAt = chart_Main.AxisY.Count - 1;
-                            chart_Main.Series.Add(candle);
+                            Utility.AddLine_Axis(chart_Main, chg, System.Windows.Media.Colors.Orange, "Top_V");
+                            chart_Main.AxisY[Utility.FindAxis_Name(chart_Main, "Top_V")].ShowLabels = false;
+                        }
 
+                        // Middle Volume
+                        if (chk_MV.Checked)
+                        {
+                            //Middle 
+                            chg = new List<double>();
+                            for (int i = 0; i < TVs.Count; i++)
+                            {
+                                chg.Add(Convert.ToDouble(TVs[i].VM));
+                            }
+
+                            Utility.AddLine_Axis(chart_Main, chg, System.Windows.Media.Colors.Red, "Middle_V");
+                            chart_Main.AxisY[Utility.FindAxis_Name(chart_Main, "Middle_V")].ShowLabels = false;
+                        }
+
+                        // Bottom Volume
+                        if (chk_BV.Checked)
+                        {
+                            //Bottom 
+                            chg = new List<double>();
+                            for (int i = 0; i < TVs.Count; i++)
+                            {
+                                chg.Add(Convert.ToDouble(TVs[i].VB));
+                            }
+
+                            Utility.AddLine_Axis(chart_Main, chg, System.Windows.Media.Colors.DarkRed, "Bottom_V");
+                            chart_Main.AxisY[Utility.FindAxis_Name(chart_Main, "Bottom_V")].ShowLabels = false;
+                        }
+
+                        // TMB Ratio
+                        if (chk_TMB_Ratio1.Checked)
+                        {
+                            chg = new List<double>();
+                            for (int i = 0; i < TVs.Count; i++)
+                            {
+                                chg.Add(Convert.ToDouble(TVs[i].TMB_R1));
+                            }
+
+                            Utility.AddLine_Axis(chart_Main, chg, System.Windows.Media.Colors.DeepSkyBlue, "TMB_R1");
+                            chart_Main.AxisY[Utility.FindAxis_Name(chart_Main, "TMB_R1")].ShowLabels = false;
+                        }
+
+                        // TMB Ratio 2
+                        if (chk_TMB_Ratio2.Checked)
+                        {
+                            chg = new List<double>();
+                            for (int i = 0; i < TVs.Count; i++)
+                            {
+                                chg.Add(Convert.ToDouble(TVs[i].TMB_R2));
+                            }
+
+                            Utility.AddLine_Axis(chart_Main, chg, System.Windows.Media.Colors.LightBlue, "TMB_R2");
+                            chart_Main.AxisY[Utility.FindAxis_Name(chart_Main, "TMB_R2")].ShowLabels = false;
+                        }
+
+                        // TMB Ratio 3
+                        if (chk_TMB_Ratio3.Checked)
+                        {
+                            chg = new List<double>();
+                            for (int i = 0; i < TVs.Count; i++)
+                            {
+                                chg.Add(Convert.ToDouble(TVs[i].TMB_R3));
+                            }
+
+                            Utility.AddLine_Axis(chart_Main, chg, System.Windows.Media.Colors.SkyBlue, "TMB_R3");
+                            chart_Main.AxisY[Utility.FindAxis_Name(chart_Main, "TMB_R3")].ShowLabels = false;
+                        }
+
+                        // EPS Date
+                        if (chk_EPS.Checked)
+                        {
+                            chg = new List<double>();
+                            for (int i = 0; i < TVs.Count; i++)
+                            {
+                                chg.Add(Convert.ToDouble(TVs[i].reportedEPS));
+                            }
+
+                            Utility.AddLine_Axis(chart_Main, chg, System.Windows.Media.Colors.Red, "EPS");
+                            chart_Main.AxisY[Utility.FindAxis_Name(chart_Main, "EPS")].ShowLabels = false;
                         }
                     }
                 }
@@ -1127,6 +1170,51 @@ r.date_hist >= dt_from && r.date_hist <= dt_to).OrderBy(r => r.date_hist).ToList
             }
         }
 
+        public void DrawScatterChart(string _hist_id)
+        {
+            if (this.chart_Main.InvokeRequired)
+            {
+                chart_Main.BeginInvoke(new MethodInvoker(delegate () { DrawScatterChart(_hist_id); }));
+            }
+            else
+            {
+                try
+                {
+                    Utility.ResetChart(chart_Main);
+
+                    using (stockEntity stock = new stockEntity())
+                    {
+                        List<sp_get_prediction_history_Result> results = stock.sp_get_prediction_history(Convert.ToInt32(_hist_id)).ToList();
+
+                        List<double> list1 = new List<double>();
+                        List<double> list2 = new List<double>();
+
+                        if (results.Count > 950)
+                        {
+                            query.Show_Message("More than 999 Rows"); 
+                            return;
+                        }
+                        foreach(var r in results)
+                        {
+                            if (!r.symbol.StartsWith("_"))
+                            {
+                                list1.Add(Convert.ToDouble(r.ratio1));
+                                list2.Add(Convert.ToDouble(r.ratio2));
+                            }
+                        }
+
+                        Utility.AddScatter(chart_Main, "Scatter", list1, list2, System.Windows.Media.Colors.Blue);
+
+                    }
+                }
+                catch (Exception ex)
+                {
+                    query.Show_Message("Scatter Chart Error:" + ex.Message);
+                }
+
+                chart_Main.BringToFront();
+            }
+        }
         #endregion
 
         #region + Capture Process
@@ -1348,6 +1436,69 @@ r.date_hist >= dt_from && r.date_hist <= dt_to).OrderBy(r => r.date_hist).ToList
                 {
                     capture_continue = false;
                     btn_Capture.Text = "Capture";
+                }
+            }
+        }
+
+        private void CaptureChart(int _r, bool _analysis_on, int _option, bool _is_auto = true)
+        {
+            if (this.dgv_List.InvokeRequired)
+            {
+                dgv_List.BeginInvoke(new MethodInvoker(delegate () { SaveChart(_r, _analysis_on, _option, _is_auto); }));
+            }
+            else
+            {
+
+                Rectangle bounds = this.Bounds;
+
+                int pic_width = bounds.Width - 20;
+                int pic_height = bounds.Height - 10;
+                int start_left = bounds.Left + 10;
+                int start_top = bounds.Top;
+
+                if (_option == 1 || _option == 2)
+                {
+                    bounds = this.chart_Main.Bounds;
+                    pic_width = bounds.Width - 20;
+                    pic_height = bounds.Height;
+                    start_left = bounds.Left;
+                    start_top = bounds.Top + 22;
+                }
+
+                using (Bitmap bitmap = new Bitmap(pic_width, pic_height))
+                {
+                    using (Graphics g = Graphics.FromImage(bitmap))
+                    {
+                        g.CopyFromScreen(new Point(start_left, start_top), Point.Empty, bounds.Size);
+                    }
+                    var dir = Picture_Dir + "\\chart\\";
+
+                    var filename = dt_Symbol_From.Value.ToString("yyyyMMdd") + "_"
+                        + dt_Symbol_To.Value.ToString("yyyyMMdd") + "_"
+                        + dgv_List[2, _r].Value.ToString() + "_"
+                        + _option.ToString();
+                    if (!Directory.Exists(dir))
+                        Directory.CreateDirectory(dir);
+                    string fullpath = dir + filename + ".png";
+
+                    if (File.Exists(fullpath))
+                        File.Delete(fullpath);
+
+                    bitmap.Save(fullpath, ImageFormat.Png);
+
+                    if (_analysis_on)
+                        query.Save_Analysis(dir, "\\chart_" + filename);
+
+                    if (!_is_auto)
+                    {
+                        using (Process myProcess = new Process())
+                        {
+                            myProcess.StartInfo.FileName = @"C:\Program Files\TechSmith\Snagit 2021\SnagitEditor.exe";
+                            myProcess.StartInfo.Arguments = fullpath;
+                            myProcess.Start();
+                        }
+                    }
+
                 }
             }
         }

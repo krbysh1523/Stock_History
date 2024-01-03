@@ -320,6 +320,60 @@ namespace History
             int diff = (7 + (dt.DayOfWeek - startOfWeek)) % 7;
             return dt.AddDays(-1 * diff).Date;
         }
+        public static void SetAxis_LineSeries(LiveCharts.WinForms.CartesianChart _cht, LineSeries _series, string _Axis_Name)
+        {
+            for(int i = 0; i < _cht.AxisY.Count; i++)
+            {
+                if(_cht.AxisY[i].Name == _Axis_Name)
+                {
+                    _series.ScalesYAt = i;
+                }
+            }
+        }
+
+        public static void SetAxis_Name(LiveCharts.WinForms.CartesianChart _cht, int _index, string _Axis_Name)
+        {
+            _cht.AxisY[_index].Name = _Axis_Name;
+        }
+
+        public static bool AxisY_null(LiveCharts.WinForms.CartesianChart _cht)
+        {
+            if (_cht.AxisY.Count > 0)
+                return false;
+            else
+                return true;
+        }
+
+        public static int FindAxis_Name(LiveCharts.WinForms.CartesianChart _cht, string _Axis_Name)
+        {
+            for (int i = 0; i < _cht.AxisY.Count; i++)
+            {
+                if (_cht.AxisY[i].Name == "")
+                {
+                    _cht.AxisY.RemoveAt(i);
+                    break;
+                }
+            }
+            for (int i = 0; i < _cht.AxisY.Count; i++)
+            {
+                if (_cht.AxisY[i].Name == _Axis_Name)
+                {
+                    return i;
+                }
+            }
+
+            var new_axis_Y = new Axis();
+            new_axis_Y.Name = _Axis_Name;
+            _cht.AxisY.Add(new_axis_Y);
+            return _cht.AxisY.Count - 1;
+        }
+
+        public static void SetAxis_Fixed(LiveCharts.WinForms.CartesianChart _cht, string _series_name, double _Max, double _Min, bool _LabelVisible = false)
+        {
+            _cht.AxisY[FindAxis_Name(_cht, _series_name)].MaxValue = _Max;
+            _cht.AxisY[FindAxis_Name(_cht, _series_name)].MinValue = _Min;
+            _cht.AxisY[FindAxis_Name(_cht, _series_name)].ShowLabels = _LabelVisible;
+        }
 
         public static void SetAxis(LiveCharts.WinForms.CartesianChart _cht, int _cnt)
         {
@@ -341,7 +395,7 @@ namespace History
                     Step = step,
                     StrokeThickness = 1,
                     StrokeDashArray = new System.Windows.Media.DoubleCollection(new double[] { 1 }),
-                    Stroke = new System.Windows.Media.SolidColorBrush(System.Windows.Media.Colors.Gainsboro)
+                    Stroke = new System.Windows.Media.SolidColorBrush(System.Windows.Media.Colors.Silver)
                 };
             }
             if (_cht.AxisY.Count > 0)
@@ -350,7 +404,7 @@ namespace History
                 {
                     StrokeThickness = 1,
                     StrokeDashArray = new System.Windows.Media.DoubleCollection(new double[] { 1 }),
-                    Stroke = new System.Windows.Media.SolidColorBrush(System.Windows.Media.Colors.Gainsboro)
+                    Stroke = new System.Windows.Media.SolidColorBrush(System.Windows.Media.Colors.Silver)
                 };
             }
         }
@@ -481,6 +535,66 @@ namespace History
 
             return series;
         }
+        public static LineSeries AddLine(List<double> _hist, System.Windows.Media.Color _color, string _title, string _name, string _point_shape, double _point_size)
+        {
+            LineSeries series = new LineSeries();
+            series.Name = _name;
+            series.Stroke = new System.Windows.Media.SolidColorBrush(_color);
+            series.Title = _title;
+            if (_point_shape.ToLower() == "circle")
+                series.PointGeometry = DefaultGeometries.Circle;
+            else if (_point_shape.ToLower() == "diamond")
+                series.PointGeometry = DefaultGeometries.Diamond;
+            else if (_point_shape.ToLower() == "cross")
+                series.PointGeometry = DefaultGeometries.Cross;
+            else if (_point_shape.ToLower() == "square")
+                series.PointGeometry = DefaultGeometries.Square;
+            else
+                series.PointGeometry = DefaultGeometries.None;
+
+            series.PointGeometrySize = _point_size;
+            ChartValues<double> points = new ChartValues<double>();
+            foreach (var h in _hist)
+            {
+                points.Add(h);
+            }
+            series.Values = points;
+
+            return series;
+        }
+        public static LineSeries AddLine(List<double> _hist, System.Windows.Media.Color _color, string _title, string _name)
+        {
+            return AddLine(_hist, _color, _title, _name, "circle", 10);
+        }
+        public static LineSeries AddLine(List<double> _hist, System.Windows.Media.Color _color, string _title, string _name, int _AxisY)
+        {
+            LineSeries line = AddLine(_hist, _color, _title, _name, "circle", 5);
+            line.ScalesYAt = _AxisY;
+            return line;
+        }
+
+        public static void AddLine_Axis(LiveCharts.WinForms.CartesianChart _cht, List<double> _hist, System.Windows.Media.Color _color, string _series_name)
+        {
+            var series = AddLine(_hist, _color, _series_name, _series_name);
+            series.ScalesYAt = FindAxis_Name(_cht, _series_name);
+            _cht.Series.Add(series);
+        }
+
+        public static AxisSection AddSection(double _start, double _width, System.Windows.Media.Color _color, double _opacity)
+        {
+            AxisSection axis = new AxisSection();
+
+            axis.Value = _start;
+            axis.SectionWidth = _width;
+            axis.Fill = new System.Windows.Media.SolidColorBrush
+            {
+                Color = _color,
+                Opacity = _opacity
+            };
+
+            return axis;
+        }
+
         public static LineSeries AddStraightLine(List<DateTime> _hist, double _value, System.Windows.Media.Color _color, string _title)
         {
             LineSeries line = new LineSeries();
@@ -518,26 +632,57 @@ namespace History
 
             return line;
         }
-
-        public static AxisSection AddSection(double _start, double _width, System.Windows.Media.Color _color, double _opacity)
+        public static void AddScatter(LiveCharts.WinForms.CartesianChart _cht, string _name, List<double> _list1, List<double> _list2, System.Windows.Media.Color _color)
         {
-            AxisSection axis = new AxisSection();
-
-            axis.Value = _start;
-            axis.SectionWidth = _width;
-            axis.Fill = new System.Windows.Media.SolidColorBrush
+            ScatterSeries series = new ScatterSeries();
+            series.Values = new ChartValues<ObservablePoint>();
+            series.Name = _name;
+            series.Stroke = new System.Windows.Media.SolidColorBrush(_color);
+            series.Title = _name;
+            
+            for(int i = 0; i < _list1.Count; i++)
             {
-                Color = _color,
-                Opacity = _opacity
+                series.Values.Add(new ObservablePoint(_list1[i], _list2[i]));
+            }
+
+            _cht.Series.Add(series);
+
+            //Axis
+            AxisSection zeroX = new AxisSection();
+            zeroX.Value = 0;
+            zeroX.SectionWidth =0.1;
+            zeroX.Fill = new System.Windows.Media.SolidColorBrush
+            {
+                Color = _color
+            };
+            AxisSection zeroY = new AxisSection();
+            zeroY.Value = 0;
+            zeroY.SectionWidth = 0.1;
+            zeroY.Fill = new System.Windows.Media.SolidColorBrush
+            {
+                Color = _color
             };
 
-            return axis;
+            var new_axis_Y = new Axis();
+            new_axis_Y.Name = "Scatter_Y";
+            new_axis_Y.Sections.Add(zeroY);
+            _cht.AxisY.Add(new_axis_Y);
+
+            var new_axis_X = new Axis();
+            new_axis_X.Name = "Scatter_X";
+            new_axis_X.Sections.Add(zeroX);
+            _cht.AxisX.Add(new_axis_X);
+
+            SetAxis(_cht, _list1.Count);
+
         }
         public static void ResetChart(LiveCharts.WinForms.CartesianChart _cht)
         {
             _cht.AxisX.Clear();
-            while(_cht.AxisY.Count > 1)
-                    _cht.AxisY.RemoveAt(1);
+
+            _cht.AxisY.Clear();
+            //while(_cht.AxisY.Count > 1)
+            //        _cht.AxisY.RemoveAt(1);
 
             _cht.Series.Clear();
         }
@@ -569,6 +714,33 @@ namespace History
                 return "Y";
             else
                 return "N";
+        }
+
+        public static void Copy_DGV_to_Clipboard(DataGridView dgv, int _exclue_row, bool Copy_Header = true)
+        {
+
+            var newline = System.Environment.NewLine;
+            var tab = "\t";
+            var clipboard_string = new StringBuilder();
+            if (Copy_Header)
+            {
+                for (int c = 0; c < dgv.Columns.Count; c++)
+                {
+                    clipboard_string.Append(dgv.Columns[c].HeaderText + tab);
+                }
+                clipboard_string.Append(newline);
+            }
+            for (int r = _exclue_row; r < dgv.Rows.Count; r++)
+            {
+                for (int c = 0; c < dgv.Columns.Count; c++)
+                {
+                    clipboard_string.Append(dgv[c, r].Value + tab);
+                }
+                clipboard_string.Append(newline);
+            }
+
+            Clipboard.SetText(clipboard_string.ToString());
+
         }
         #endregion
     }

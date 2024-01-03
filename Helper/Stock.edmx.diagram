@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="027c5d8e676241cdacddfd4720d60255" Name="Diagram1" ZoomLevel="93">
+        <EntityTypeShape EntityType="stockModel.daily_analysis" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="stockModel.daily_history" Width="1.5" PointX="2.75" PointY="0.75" />
+        <EntityTypeShape EntityType="stockModel.lookup" Width="1.5" PointX="4.75" PointY="0.75" />
+        <EntityTypeShape EntityType="stockModel.prediction" Width="1.5" PointX="2.75" PointY="4.75" />
+        <EntityTypeShape EntityType="stockModel.symbol_att" Width="1.5" PointX="4.75" PointY="4.75" />
+        <EntityTypeShape EntityType="stockModel.weekly_analysis" Width="1.5" PointX="6.75" PointY="0.75" />
+        <EntityTypeShape EntityType="stockModel.daily_analysis_v1" Width="1.5" PointX="6.75" PointY="4.75" />
+        <EntityTypeShape EntityType="stockModel.daily_candle_v1" Width="1.5" PointX="8.75" PointY="0.75" />
+        <EntityTypeShape EntityType="stockModel.daily_close_v1" Width="1.5" PointX="2.75" PointY="8.75" />
+        <EntityTypeShape EntityType="stockModel.daily_sma5_v1" Width="1.5" PointX="8.75" PointY="3.75" />
+        <EntityTypeShape EntityType="stockModel.daily_strong_v1" Width="1.5" PointX="8.75" PointY="7.75" />
+        <EntityTypeShape EntityType="stockModel.daily_v1" Width="1.5" PointX="10.75" PointY="0.75" />
+        <EntityTypeShape EntityType="stockModel.daily_vol_sma10_v1" Width="1.5" PointX="4.75" PointY="10.75" />
+        <EntityTypeShape EntityType="stockModel.daily_vol_sma5_v1" Width="1.5" PointX="12.75" PointY="0.75" />
+        <EntityTypeShape EntityType="stockModel.daily_volume_v1" Width="1.5" PointX="12.75" PointY="4.75" />
+        <EntityTypeShape EntityType="stockModel.fundamental_v1" Width="1.5" PointX="12.75" PointY="8.75" />
+        <EntityTypeShape EntityType="stockModel.industry_v1" Width="1.5" PointX="14.75" PointY="0.75" />
+        <EntityTypeShape EntityType="stockModel.list_history_v1" Width="1.5" PointX="0.75" PointY="14.75" />
+        <EntityTypeShape EntityType="stockModel.sector_v1" Width="1.5" PointX="2.75" PointY="14.75" />
+        <EntityTypeShape EntityType="stockModel.watch_list_v1" Width="1.5" PointX="14.75" PointY="3.75" />
+        <EntityTypeShape EntityType="stockModel.daily_raw" Width="1.5" PointX="5.375" PointY="14.75" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

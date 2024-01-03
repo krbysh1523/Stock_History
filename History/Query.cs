@@ -17,9 +17,12 @@ namespace History
     {
         #region + Forms
         Analysis chart = null;
-        GetData import = null;
+        Import import = null;
+        GetData getData = null;
         Index_Analyzer index = null;
         MessageUI msg = null;
+
+        bool simul_continue = false;
 
         public Query()
         {
@@ -31,13 +34,17 @@ namespace History
 
         private void Query_Load(object sender, EventArgs e)
         {
+            // TODO: This line of code loads data into the 'stockDataSet.simul_header' table. You can move, or remove it, as needed.
+            this.simul_headerTableAdapter.Fill(this.stockDataSet.simul_header);
             this.test_planTableAdapter.Fill(this.stockDataSet.test_plan);
             bindLookup.Filter = "l_type like '%Option%'";
             this.lookupTableAdapter.Fill(this.stockDataSet.lookup);
             AddGVButtons();
 
-            btn_Index_Click(this, null);
-            btn_Message_Click(this, null);
+            btn_Import_Click(this, null);
+
+            //btn_Index_Click(this, null);
+            //btn_Message_Click(this, null);
 
             btn_LayoutRefresh_Click(this, null);
         }
@@ -57,7 +64,7 @@ namespace History
 
         public void CloseChild(Form _form)
         {
-            if(_form.Name == "chart")
+            if (_form.Name == "chart")
                 chart = null;
             if (_form.Name == "index")
                 index = null;
@@ -115,13 +122,13 @@ namespace History
         {
             if (import == null)
             {
-                import = new GetData(this);
+                import = new Import(this);
                 import.Name = "import";
                 import.Show();
             }
             else
             {
-                chart.BringToFront();
+                import.BringToFront();
             }
         }
         private void btn_Index_Click(object sender, EventArgs e)
@@ -150,6 +157,21 @@ namespace History
                 msg.BringToFront();
             }
         }
+        private void btn_GetData_Click(object sender, EventArgs e)
+        {
+            if (getData == null)
+            {
+                getData = new GetData(this);
+                getData.Name = "Get Data";
+                getData.Show();
+            }
+            else
+            {
+                getData.BringToFront();
+            }
+
+        }
+
         #endregion
 
         #region + User Event
@@ -186,7 +208,7 @@ namespace History
                         chart.btn_Symbol_Click(chart, null);
                     }
                 }
-                else if(e.ColumnIndex == 1)
+                else if (e.ColumnIndex == 1)
                 {
                     if (chart != null)
                     {
@@ -210,15 +232,25 @@ namespace History
 
         private void dgv_TestPlan_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
-            if(e.RowIndex >= 0 && e.ColumnIndex == 0)
+            if (e.RowIndex >= 0 && e.ColumnIndex == 0)
             {
-                if(dgv_TestPlan[e.ColumnIndex, e.RowIndex].Value.ToString().IndexOfAny(System.IO.Path.GetInvalidFileNameChars()) >= 0)
+                if (dgv_TestPlan[e.ColumnIndex, e.RowIndex].Value.ToString().IndexOfAny(System.IO.Path.GetInvalidFileNameChars()) >= 0)
                 {
                     MessageBox.Show(this, "Contain invalid Character", "Error");
                     dgv_TestPlan[e.ColumnIndex, e.RowIndex].Value = "Test";
                 }
             }
         }
+
+        private void dgv_TestPlan_SelectionChanged(object sender, EventArgs e)
+        {
+            if (dgv_TestPlan.SelectedCells.Count > 0 && dgv_TestPlan.SelectedCells[0].RowIndex >= 0)
+            {
+                if (dgv_TestPlan[0, dgv_TestPlan.SelectedCells[0].RowIndex].Value != null)
+                    txt_SimulName.Text = dgv_TestPlan[0, dgv_TestPlan.SelectedCells[0].RowIndex].Value.ToString();
+            }
+        }
+
         #endregion
 
         #region + Test Plan
@@ -264,10 +296,10 @@ namespace History
                         dgv_TestPlan[8, row].Value = dgv_Lookup["latt4DataGridViewTextBoxColumn", e.RowIndex].Value.ToString();
                         dgv_TestPlan[9, row].Value = dgv_Lookup["latt5DataGridViewTextBoxColumn", e.RowIndex].Value.ToString();
                     }
-                } 
+                }
             }
         }
-        
+
         private void btn_Test_Refresh_Click(object sender, EventArgs e)
         {
             this.test_planTableAdapter.Fill(this.stockDataSet.test_plan);
@@ -279,7 +311,7 @@ namespace History
 
             string prev_test = "";
             Color prev_color = Color.Gainsboro;
-            for(int r = 1; r < dgv_TestPlan.RowCount-1; r++)
+            for (int r = 1; r < dgv_TestPlan.RowCount - 1; r++)
             {
                 if (prev_test == "" ||
                     prev_test != dgv_TestPlan[0, r].Value.ToString())
@@ -307,7 +339,7 @@ namespace History
         private void btn_Test_FillIn_Click(object sender, EventArgs e)
         {
             if (dgv_TestPlan.SelectedCells.Count > 0 && dgv_TestPlan.SelectedCells[0].RowIndex >= 0)
-            { 
+            {
                 if (dgv_TestPlan["test_id", dgv_TestPlan.SelectedCells[0].RowIndex].Value == null)
                 {
                     var row = stockDataSet.test_plan.Newtest_planRow();
@@ -316,10 +348,10 @@ namespace History
                     row.pass_list = "Y";
                     row.filter_option = Convert.ToInt32(dgv_Lookup["lidDataGridViewTextBoxColumn", dgv_Lookup.SelectedCells[0].RowIndex].Value.ToString());
                     row.filter_desc = dgv_Lookup["lnameDataGridViewTextBoxColumn", dgv_Lookup.SelectedCells[0].RowIndex].Value.ToString();
-                    row.filter_att1 = dgv_Lookup["latt1DataGridViewTextBoxColumn", dgv_Lookup.SelectedCells[0].RowIndex].Value.ToString();                            
-                    row.filter_att2 = dgv_Lookup["latt2DataGridViewTextBoxColumn", dgv_Lookup.SelectedCells[0].RowIndex].Value.ToString();                            
-                    row.filter_att3 = dgv_Lookup["latt3DataGridViewTextBoxColumn", dgv_Lookup.SelectedCells[0].RowIndex].Value.ToString();                            
-                    row.filter_att4 = dgv_Lookup["latt4DataGridViewTextBoxColumn", dgv_Lookup.SelectedCells[0].RowIndex].Value.ToString();                            
+                    row.filter_att1 = dgv_Lookup["latt1DataGridViewTextBoxColumn", dgv_Lookup.SelectedCells[0].RowIndex].Value.ToString();
+                    row.filter_att2 = dgv_Lookup["latt2DataGridViewTextBoxColumn", dgv_Lookup.SelectedCells[0].RowIndex].Value.ToString();
+                    row.filter_att3 = dgv_Lookup["latt3DataGridViewTextBoxColumn", dgv_Lookup.SelectedCells[0].RowIndex].Value.ToString();
+                    row.filter_att4 = dgv_Lookup["latt4DataGridViewTextBoxColumn", dgv_Lookup.SelectedCells[0].RowIndex].Value.ToString();
                     row.filter_att5 = dgv_Lookup["latt5DataGridViewTextBoxColumn", dgv_Lookup.SelectedCells[0].RowIndex].Value.ToString();
                     stockDataSet.test_plan.Addtest_planRow(row);
                 }
@@ -397,7 +429,7 @@ namespace History
                         Thread.Sleep(500);
                     }
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
                     Show_Message("Error:" + ex.Message);
                 }
@@ -417,11 +449,11 @@ namespace History
             var count = tests.Count;
             int step = 1;
 
-            foreach(var test in tests)
+            foreach (var test in tests)
             {
                 string status = test.test_seq + " of " + test.plan_name;
-                
-                if(step == count)
+
+                if (step == count)
                     status = "(Final) " + test.test_seq + " of " + test.plan_name;
                 Show_Message(status);
 
@@ -436,7 +468,7 @@ namespace History
                 }
 
                 //index.CaptureList(status);
-                
+
                 Thread.Sleep(500);
                 step++;
             }
@@ -482,7 +514,7 @@ namespace History
                     }
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Show_Message("Error:" + ex.Message);
             }
@@ -490,7 +522,7 @@ namespace History
 
         private void chk_Capture_CheckedChanged(object sender, EventArgs e)
         {
-            if(!chk_Capture.Checked && index.capture_continue)
+            if (!chk_Capture.Checked && index.capture_continue)
                 index.capture_continue = false;
         }
 
@@ -511,12 +543,17 @@ namespace History
 
             msg.Load_History();
         }
-        public void RetrieveHistoryList(string _hist_id, string _start_dttm, string _end_dttm)
+        public void RetrieveHistoryList(string _hist_id, string _start_dttm, string _end_dttm, bool _Scatter_Visible)
         {
             if (index == null)
                 this.btn_Index_Click(this, null);
 
             index.GetHistory_List(_hist_id, _start_dttm, _end_dttm);
+
+            if (_Scatter_Visible)
+            {
+                index.DrawScatterChart(_hist_id);
+            }
         }
 
         public void RetrieveStatHistory(int _hist_count, string _final_only)
@@ -532,10 +569,10 @@ namespace History
         #region + Layout
         private void btn_UpdateLayout_Click(object sender, EventArgs e)
         {
-            using(stockEntity stock = new stockEntity())
+            using (stockEntity stock = new stockEntity())
             {
                 var cmb_text = cmb_Layout.Text;
-                lookup layout = stock.lookups.FirstOrDefault(r => r.l_type == "Layout" && r.l_name == cmb_text);
+                lookup layout = stock.lookup.FirstOrDefault(r => r.l_type == "Layout" && r.l_name == cmb_text);
                 string[] layouts = Save_Layout();
                 layout.l_att1 = layouts[0];
                 layout.l_att2 = layouts[1];
@@ -561,9 +598,9 @@ namespace History
         private void btn_LayoutRefresh_Click(object sender, EventArgs e)
         {
             cmb_Layout.SelectedIndexChanged -= cmb_Layout_SelectedIndexChanged;
-            using(stockEntity stock = new stockEntity())
+            using (stockEntity stock = new stockEntity())
             {
-                var layouts = stock.lookups.Where(r => r.l_type == "Layout").OrderBy(r => r.l_id).ToList();
+                var layouts = stock.lookup.Where(r => r.l_type == "Layout").OrderBy(r => r.l_id).ToList();
 
                 cmb_Layout.DataSource = layouts;
                 cmb_Layout.DisplayMember = "l_name";
@@ -578,7 +615,7 @@ namespace History
             using (stockEntity stock = new stockEntity())
             {
                 var cmb_text = cmb_Layout.Text;
-                lookup layout = stock.lookups.FirstOrDefault(r => r.l_type == "Layout" && r.l_name == cmb_text);
+                lookup layout = stock.lookup.FirstOrDefault(r => r.l_type == "Layout" && r.l_name == cmb_text);
                 Set_Layout(layout);
             }
         }
@@ -589,7 +626,7 @@ namespace History
             index.Location = new Point(points[0], points[1]);
             index.Size = new Size(points[2], points[3]);
 
-            points = ret_points(_layout.l_att2); 
+            points = ret_points(_layout.l_att2);
             this.Location = new Point(points[0], points[1]);
             this.Size = new Size(points[2], points[3]);
 
@@ -614,7 +651,7 @@ namespace History
         {
             this.tabControl1.SelectedTab = tab_Picture;
 
-            if(File.Exists(_filename))
+            if (File.Exists(_filename))
             {
                 pic_Symbol.Image = Image.FromFile(_filename);
             }
@@ -622,6 +659,222 @@ namespace History
             {
                 pic_Symbol.Image = pic_Symbol.ErrorImage;
             }
+        }
+        #endregion
+
+        #region + Test Simulation
+        private void btn_Simulation_Click(object sender, EventArgs e)
+        {
+            if (simul_continue)
+            {
+                SetContinue(false);
+            }
+            else
+            {
+                SetContinue(true);
+                thd_Test = new Thread(new ParameterizedThreadStart(Simulation));
+                thd_Test.Start(new object[] { nmb_Weeks.Value,
+                    index.dt_Symbol_From.Value,
+                    index.dt_Symbol_To.Value,
+                    txt_SimulName.Text
+                });
+            }
+        }
+        private void SetContinue(bool _continue)
+        {
+            if (this.btn_Simulation.InvokeRequired)
+            {
+                btn_Simulation.BeginInvoke(new MethodInvoker(delegate () { SetContinue(_continue); }));
+            }
+            else
+            {
+                if (_continue == false)
+                {
+                    simul_continue = false;
+                    Show_Message("Stopping Simulation");
+                    btn_Simulation.Text = "Start Simulation";
+                }
+                else
+                {
+                    simul_continue = true;
+                    Show_Message("Starting Simulation");
+                    btn_Simulation.Text = "Stop Simulation";
+                }
+            }
+        }
+
+        private void Simulation(object _param)
+        {
+            object[] param = (object[])_param;
+
+            int no_weeks = Convert.ToInt32(param[0]);
+            DateTime start_dttm = Convert.ToDateTime(param[1]);
+            DateTime end_dttm = Convert.ToDateTime(param[2]);
+            string plan_name = Convert.ToString(param[3]);
+
+            try
+            {
+                using (stockEntity stock = new stockEntity())
+                {
+                    var tests = stock.test_plan.Where(r => r.plan_name == plan_name).OrderBy(r => r.test_seq).ToList();
+                    var count = tests.Count;
+
+                    //Create Simulation Header
+                    var head = stock.simul_header.Create();
+                    head.start_dttm = start_dttm;
+                    head.end_dttm = end_dttm.AddDays(7 * no_weeks);
+                    head.simul_name = txt_SimulName.Text;
+                    head.ratio1 = 0;
+                    head.ratio2 = 0;
+                    head.rate_5 = 0;
+                    head.rate_10 = 0;
+                    head.rate_15 = 0;
+                    head.rate_20 = 0;
+                    head.rate_40 = 0;
+                    head.rate_60 = 0;
+                    stock.simul_header.Add(head);
+
+                    stock.SaveChanges();
+
+                    var simul_header_id = head.simul_header_id;
+
+                    //Week
+                    for (int w = 0; w < no_weeks; w++)
+                    {
+                        DateTime start_test = start_dttm.AddDays(7 * w);
+                        DateTime end_test = end_dttm.AddDays(7 * w);
+                        int step = 1;
+                        string symbol_lists = "";
+
+                        foreach (var test in tests)
+                        {
+
+                            string status = test.test_seq + " of " + test.plan_name;
+
+                            if (step == count)
+                                status = "(Final) " + test.test_seq + " of " + test.plan_name;
+                            Show_Message(status);
+
+                            // Run Test
+                            var results = stock.filter_main(start_test, end_test, test.filter_option, test.pass_list, symbol_lists, test.filter_att1, test.filter_att2, test.filter_att3, test.filter_att4, test.filter_att5, status).ToList();
+
+                            symbol_lists = "";
+
+                            // Set Symbols Lists
+                            foreach (var r in results)
+                            {
+                                if (r.symbol.StartsWith("_AVG"))
+                                {
+                                    stock.sp_simul_test(simul_header_id, r.hist_id, plan_name, status, test.filter_option, w,
+                                        start_test, end_test, r.ratio1, r.ratio2,
+                                        r.rate_5, r.rate_10, r.rate_15, r.rate_20, r.rate_40, r.rate_60);
+
+                                    Show_Message("Saved " + status);
+                                }
+                                else if (r.symbol.StartsWith("_TOTAL"))
+                                { }
+                                else
+                                {
+                                    symbol_lists = symbol_lists + r.symbol + ",";
+                                }
+                            }
+                            btn_ReloadSimul_Click(this, null);
+                            Load_Simul_DGV(simul_header_id);
+
+                            if (!simul_continue)
+                                break;
+
+                            step++;
+                        }
+
+                        if (!simul_continue)
+                            break;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Show_Message("Error:" + ex.Message);
+            }
+            msg.Load_History();
+
+            SetContinue(false);
+        }
+
+        private void Load_Simul_DGV(int _simul_header_id)
+        {
+            if (this.dgv_Simul.InvokeRequired)
+            {
+                dgv_Simul.BeginInvoke(new MethodInvoker(delegate () { Load_Simul_DGV(_simul_header_id); }));
+            }
+            else
+            {
+                //Tests
+                this.simul_testsTableAdapter.Fill(this.stockDataSet.simul_tests, _simul_header_id);
+                if (chk_Simul_Filter.Checked)
+                {
+                    string filter = "";
+                    foreach (var l in txt_Filter.Lines)
+                    {
+                        if (l.Trim() != "")
+                        {
+                            filter += " plan_desc like '%' + '" + l + "' + '%' OR";
+                        }
+                    }
+                    this.simultestsBindingSource.Filter = filter.Remove(filter.Length - 2, 2);
+                }
+                else
+                {
+                    this.simultestsBindingSource.Filter = "";
+                }
+            }
+        }
+
+        private void btn_Simul_Copy_Click(object sender, EventArgs e)
+        {
+            Utility.Copy_DGV_to_Clipboard(dgv_Simul, 0, false);
+        }
+        private void btn_ReloadSimul_Click(object sender, EventArgs e)
+        {
+            if (this.dgv_Simul_Header.InvokeRequired)
+            {
+                dgv_Simul_Header.BeginInvoke(new MethodInvoker(delegate () { btn_ReloadSimul_Click(sender, e); }));
+            }
+            else
+            {
+                //Header
+                this.simul_headerTableAdapter.Fill(this.stockDataSet.simul_header);
+            }
+        }
+
+        private void dgv_Simul_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if(e.ColumnIndex == histidDataGridViewTextBoxColumn.Index && e.RowIndex >= 0)
+            {
+                RetrieveHistoryList(dgv_Simul[e.ColumnIndex, e.RowIndex].Value.ToString(),
+                    dgv_Simul["startdttmDataGridViewTextBoxColumn1", e.RowIndex].Value.ToString(),
+                    dgv_Simul["enddttmDataGridViewTextBoxColumn1", e.RowIndex].Value.ToString(),
+                    chk_Scatter.Checked);
+            }
+        }
+
+        private void dgv_Simul_Header_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if(e.ColumnIndex == simulheaderidDataGridViewTextBoxColumn.Index && e.RowIndex >= 0)
+                Load_Simul_DGV(Convert.ToInt32(dgv_Simul_Header[e.ColumnIndex, e.RowIndex].Value.ToString()));
+            else if (e.ColumnIndex == deleteSimulHeader.Index && e.RowIndex >= 0)
+            {
+                if (MessageBox.Show(this, "Do you want to Delete " + dgv_Simul_Header[simulheaderidDataGridViewTextBoxColumn.Index, e.RowIndex].Value.ToString() + "?") == DialogResult.OK)
+                {
+                    using (stockEntity stock = new stockEntity())
+                    {
+                        stock.sp_simul_test_delete(Convert.ToInt32(dgv_Simul_Header[simulheaderidDataGridViewTextBoxColumn.Index, e.RowIndex].Value.ToString()));
+                    }
+
+                    btn_ReloadSimul_Click(this, null);
+                }
+            }
+
         }
         #endregion
 

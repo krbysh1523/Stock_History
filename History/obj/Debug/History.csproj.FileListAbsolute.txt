@@ -204,6 +204,7 @@ C:\Users\Sukho\OneDrive\투자\Program\History\History\bin\Debug\Microsoft.Bcl.A
 C:\Users\Sukho\OneDrive\투자\Program\History\History\bin\Debug\Newtonsoft.Json.xml
 C:\Users\Sukho\OneDrive\투자\Program\History\History\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
 C:\Users\Sukho\OneDrive\투자\Program\History\History\bin\Debug\System.Threading.Tasks.Extensions.xml
+C:\Users\Sukho\OneDrive\투자\Program\History\History\obj\Debug\History.ResultUI.resources
 C:\Users\Sukho\OneDrive\투자\Program\History\History\obj\Debug\History.Index_Analyzer.resources
 C:\Users\Sukho\OneDrive\투자\Program\History\History\obj\Debug\History.Analysis.resources
 C:\Users\Sukho\OneDrive\투자\Program\History\History\obj\Debug\History.GetData.resources
@@ -215,5 +216,5 @@ C:\Users\Sukho\OneDrive\투자\Program\History\History\obj\Debug\History.csproj.
 C:\Users\Sukho\OneDrive\투자\Program\History\History\obj\Debug\History.csproj.CopyComplete
 C:\Users\Sukho\OneDrive\투자\Program\History\History\obj\Debug\History.exe
 C:\Users\Sukho\OneDrive\투자\Program\History\History\obj\Debug\History.pdb
+C:\Users\Sukho\OneDrive\투자\Program\History\History\obj\Debug\History.Import.resources
 C:\Users\Sukho\OneDrive\투자\Program\History\History\obj\Debug\History.csproj.AssemblyReference.cache
-C:\Users\Sukho\OneDrive\투자\Program\History\History\obj\Debug\History.ResultUI.resources

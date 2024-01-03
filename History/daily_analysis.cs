@@ -21,8 +21,12 @@ namespace History
         public string dir { get; set; }
         public Nullable<double> oc_by_hl_perc { get; set; }
         public Nullable<int> dir_on { get; set; }
-        public Nullable<int> point1 { get; set; }
-        public Nullable<int> point2 { get; set; }
-        public Nullable<int> point3 { get; set; }
+        public string TMB { get; set; }
+        public Nullable<double> VT { get; set; }
+        public Nullable<double> VM { get; set; }
+        public Nullable<double> VB { get; set; }
+        public Nullable<double> TMB_R1 { get; set; }
+        public Nullable<double> TMB_R2 { get; set; }
+        public Nullable<double> TMB_R3 { get; set; }
     }
 }

@@ -33,6 +33,17 @@ namespace History
             this.txt_Log = new System.Windows.Forms.RichTextBox();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.dgv_History = new System.Windows.Forms.DataGridView();
+            this.listhistoryBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.stockDataSetBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.stockDataSet = new History.stockDataSet();
+            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            this.label1 = new System.Windows.Forms.Label();
+            this.nmb_HistoryCount = new System.Windows.Forms.NumericUpDown();
+            this.chk_FinalOnly = new System.Windows.Forms.CheckBox();
+            this.btn_GetStat = new System.Windows.Forms.Button();
+            this.btn_Future = new System.Windows.Forms.Button();
+            this.chk_Scatter = new System.Windows.Forms.CheckBox();
+            this.list_historyTableAdapter = new History.stockDataSetTableAdapters.list_historyTableAdapter();
             this.hISTIDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewButtonColumn();
             this.fILTEROPTIONDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.option_desc = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -43,25 +54,15 @@ namespace History
             this.rate_20 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.rate_40 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.rate_60 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.pASSLISTDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.hISTDTTMDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.sTARTDTTMDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.eNDDTTMDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.att1DataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.att2DataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.att3DataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.att4DataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.att5DataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.sTARTDTTMDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.eNDDTTMDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.listhistoryBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.stockDataSetBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.stockDataSet = new History.stockDataSet();
-            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
-            this.label1 = new System.Windows.Forms.Label();
-            this.nmb_HistoryCount = new System.Windows.Forms.NumericUpDown();
-            this.chk_FinalOnly = new System.Windows.Forms.CheckBox();
-            this.btn_GetStat = new System.Windows.Forms.Button();
-            this.list_historyTableAdapter = new History.stockDataSetTableAdapters.list_historyTableAdapter();
-            this.btn_Future = new System.Windows.Forms.Button();
+            this.pASSLISTDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.hISTDTTMDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -122,15 +123,15 @@ namespace History
             this.rate_20,
             this.rate_40,
             this.rate_60,
-            this.pASSLISTDataGridViewTextBoxColumn,
-            this.hISTDTTMDataGridViewTextBoxColumn,
+            this.sTARTDTTMDataGridViewTextBoxColumn,
+            this.eNDDTTMDataGridViewTextBoxColumn,
             this.att1DataGridViewTextBoxColumn,
             this.att2DataGridViewTextBoxColumn,
             this.att3DataGridViewTextBoxColumn,
             this.att4DataGridViewTextBoxColumn,
             this.att5DataGridViewTextBoxColumn,
-            this.sTARTDTTMDataGridViewTextBoxColumn,
-            this.eNDDTTMDataGridViewTextBoxColumn});
+            this.pASSLISTDataGridViewTextBoxColumn,
+            this.hISTDTTMDataGridViewTextBoxColumn});
             this.dgv_History.DataSource = this.listhistoryBindingSource;
             this.dgv_History.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgv_History.Location = new System.Drawing.Point(0, 35);
@@ -142,6 +143,109 @@ namespace History
             this.dgv_History.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv_History_CellContentClick);
             this.dgv_History.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgv_History_CellFormatting);
             this.dgv_History.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dgv_History_DataBindingComplete);
+            // 
+            // listhistoryBindingSource
+            // 
+            this.listhistoryBindingSource.DataMember = "list_history";
+            this.listhistoryBindingSource.DataSource = this.stockDataSetBindingSource;
+            // 
+            // stockDataSetBindingSource
+            // 
+            this.stockDataSetBindingSource.DataSource = this.stockDataSet;
+            this.stockDataSetBindingSource.Position = 0;
+            // 
+            // stockDataSet
+            // 
+            this.stockDataSet.DataSetName = "stockDataSet";
+            this.stockDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
+            // flowLayoutPanel1
+            // 
+            this.flowLayoutPanel1.Controls.Add(this.label1);
+            this.flowLayoutPanel1.Controls.Add(this.nmb_HistoryCount);
+            this.flowLayoutPanel1.Controls.Add(this.chk_FinalOnly);
+            this.flowLayoutPanel1.Controls.Add(this.btn_GetStat);
+            this.flowLayoutPanel1.Controls.Add(this.btn_Future);
+            this.flowLayoutPanel1.Controls.Add(this.chk_Scatter);
+            this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 0);
+            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(729, 35);
+            this.flowLayoutPanel1.TabIndex = 1;
+            // 
+            // label1
+            // 
+            this.label1.Location = new System.Drawing.Point(3, 0);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(54, 23);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "History";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // nmb_HistoryCount
+            // 
+            this.nmb_HistoryCount.Location = new System.Drawing.Point(63, 3);
+            this.nmb_HistoryCount.Minimum = new decimal(new int[] {
+            2,
+            0,
+            0,
+            0});
+            this.nmb_HistoryCount.Name = "nmb_HistoryCount";
+            this.nmb_HistoryCount.Size = new System.Drawing.Size(53, 20);
+            this.nmb_HistoryCount.TabIndex = 1;
+            this.nmb_HistoryCount.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.nmb_HistoryCount.Value = new decimal(new int[] {
+            15,
+            0,
+            0,
+            0});
+            // 
+            // chk_FinalOnly
+            // 
+            this.chk_FinalOnly.AutoSize = true;
+            this.chk_FinalOnly.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.chk_FinalOnly.Location = new System.Drawing.Point(122, 3);
+            this.chk_FinalOnly.Name = "chk_FinalOnly";
+            this.chk_FinalOnly.Size = new System.Drawing.Size(72, 17);
+            this.chk_FinalOnly.TabIndex = 2;
+            this.chk_FinalOnly.Text = "Final Only";
+            this.chk_FinalOnly.UseVisualStyleBackColor = true;
+            this.chk_FinalOnly.CheckedChanged += new System.EventHandler(this.chk_FinalOnly_CheckedChanged);
+            // 
+            // btn_GetStat
+            // 
+            this.btn_GetStat.Location = new System.Drawing.Point(200, 3);
+            this.btn_GetStat.Name = "btn_GetStat";
+            this.btn_GetStat.Size = new System.Drawing.Size(75, 23);
+            this.btn_GetStat.TabIndex = 3;
+            this.btn_GetStat.Text = "Get Stat";
+            this.btn_GetStat.UseVisualStyleBackColor = true;
+            this.btn_GetStat.Click += new System.EventHandler(this.btn_GetStat_Click);
+            // 
+            // btn_Future
+            // 
+            this.btn_Future.Location = new System.Drawing.Point(281, 3);
+            this.btn_Future.Name = "btn_Future";
+            this.btn_Future.Size = new System.Drawing.Size(75, 23);
+            this.btn_Future.TabIndex = 4;
+            this.btn_Future.Text = "Future";
+            this.btn_Future.UseVisualStyleBackColor = true;
+            this.btn_Future.Click += new System.EventHandler(this.btn_Future_Click);
+            // 
+            // chk_Scatter
+            // 
+            this.chk_Scatter.AutoSize = true;
+            this.chk_Scatter.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.chk_Scatter.Location = new System.Drawing.Point(362, 3);
+            this.chk_Scatter.Name = "chk_Scatter";
+            this.chk_Scatter.Size = new System.Drawing.Size(60, 17);
+            this.chk_Scatter.TabIndex = 5;
+            this.chk_Scatter.Text = "Scatter";
+            this.chk_Scatter.UseVisualStyleBackColor = true;
+            // 
+            // list_historyTableAdapter
+            // 
+            this.list_historyTableAdapter.ClearBeforeFill = true;
             // 
             // hISTIDDataGridViewTextBoxColumn
             // 
@@ -225,21 +329,19 @@ namespace History
             this.rate_60.ReadOnly = true;
             this.rate_60.Width = 35;
             // 
-            // pASSLISTDataGridViewTextBoxColumn
+            // sTARTDTTMDataGridViewTextBoxColumn
             // 
-            this.pASSLISTDataGridViewTextBoxColumn.DataPropertyName = "PASS_LIST";
-            this.pASSLISTDataGridViewTextBoxColumn.FillWeight = 40F;
-            this.pASSLISTDataGridViewTextBoxColumn.HeaderText = "Passed";
-            this.pASSLISTDataGridViewTextBoxColumn.Name = "pASSLISTDataGridViewTextBoxColumn";
-            this.pASSLISTDataGridViewTextBoxColumn.ReadOnly = true;
-            this.pASSLISTDataGridViewTextBoxColumn.Width = 50;
+            this.sTARTDTTMDataGridViewTextBoxColumn.DataPropertyName = "START_DTTM";
+            this.sTARTDTTMDataGridViewTextBoxColumn.HeaderText = "Start";
+            this.sTARTDTTMDataGridViewTextBoxColumn.Name = "sTARTDTTMDataGridViewTextBoxColumn";
+            this.sTARTDTTMDataGridViewTextBoxColumn.ReadOnly = true;
             // 
-            // hISTDTTMDataGridViewTextBoxColumn
+            // eNDDTTMDataGridViewTextBoxColumn
             // 
-            this.hISTDTTMDataGridViewTextBoxColumn.DataPropertyName = "HIST_DTTM";
-            this.hISTDTTMDataGridViewTextBoxColumn.HeaderText = "Date";
-            this.hISTDTTMDataGridViewTextBoxColumn.Name = "hISTDTTMDataGridViewTextBoxColumn";
-            this.hISTDTTMDataGridViewTextBoxColumn.ReadOnly = true;
+            this.eNDDTTMDataGridViewTextBoxColumn.DataPropertyName = "END_DTTM";
+            this.eNDDTTMDataGridViewTextBoxColumn.HeaderText = "End";
+            this.eNDDTTMDataGridViewTextBoxColumn.Name = "eNDDTTMDataGridViewTextBoxColumn";
+            this.eNDDTTMDataGridViewTextBoxColumn.ReadOnly = true;
             // 
             // att1DataGridViewTextBoxColumn
             // 
@@ -286,109 +388,21 @@ namespace History
             this.att5DataGridViewTextBoxColumn.ReadOnly = true;
             this.att5DataGridViewTextBoxColumn.Width = 50;
             // 
-            // sTARTDTTMDataGridViewTextBoxColumn
+            // pASSLISTDataGridViewTextBoxColumn
             // 
-            this.sTARTDTTMDataGridViewTextBoxColumn.DataPropertyName = "START_DTTM";
-            this.sTARTDTTMDataGridViewTextBoxColumn.HeaderText = "Start";
-            this.sTARTDTTMDataGridViewTextBoxColumn.Name = "sTARTDTTMDataGridViewTextBoxColumn";
-            this.sTARTDTTMDataGridViewTextBoxColumn.ReadOnly = true;
+            this.pASSLISTDataGridViewTextBoxColumn.DataPropertyName = "PASS_LIST";
+            this.pASSLISTDataGridViewTextBoxColumn.FillWeight = 40F;
+            this.pASSLISTDataGridViewTextBoxColumn.HeaderText = "Passed";
+            this.pASSLISTDataGridViewTextBoxColumn.Name = "pASSLISTDataGridViewTextBoxColumn";
+            this.pASSLISTDataGridViewTextBoxColumn.ReadOnly = true;
+            this.pASSLISTDataGridViewTextBoxColumn.Width = 50;
             // 
-            // eNDDTTMDataGridViewTextBoxColumn
+            // hISTDTTMDataGridViewTextBoxColumn
             // 
-            this.eNDDTTMDataGridViewTextBoxColumn.DataPropertyName = "END_DTTM";
-            this.eNDDTTMDataGridViewTextBoxColumn.HeaderText = "End";
-            this.eNDDTTMDataGridViewTextBoxColumn.Name = "eNDDTTMDataGridViewTextBoxColumn";
-            this.eNDDTTMDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // listhistoryBindingSource
-            // 
-            this.listhistoryBindingSource.DataMember = "list_history";
-            this.listhistoryBindingSource.DataSource = this.stockDataSetBindingSource;
-            // 
-            // stockDataSetBindingSource
-            // 
-            this.stockDataSetBindingSource.DataSource = this.stockDataSet;
-            this.stockDataSetBindingSource.Position = 0;
-            // 
-            // stockDataSet
-            // 
-            this.stockDataSet.DataSetName = "stockDataSet";
-            this.stockDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
-            // flowLayoutPanel1
-            // 
-            this.flowLayoutPanel1.Controls.Add(this.label1);
-            this.flowLayoutPanel1.Controls.Add(this.nmb_HistoryCount);
-            this.flowLayoutPanel1.Controls.Add(this.chk_FinalOnly);
-            this.flowLayoutPanel1.Controls.Add(this.btn_GetStat);
-            this.flowLayoutPanel1.Controls.Add(this.btn_Future);
-            this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 0);
-            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(729, 35);
-            this.flowLayoutPanel1.TabIndex = 1;
-            // 
-            // label1
-            // 
-            this.label1.Location = new System.Drawing.Point(3, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(54, 23);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "History";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // nmb_HistoryCount
-            // 
-            this.nmb_HistoryCount.Location = new System.Drawing.Point(63, 3);
-            this.nmb_HistoryCount.Minimum = new decimal(new int[] {
-            2,
-            0,
-            0,
-            0});
-            this.nmb_HistoryCount.Name = "nmb_HistoryCount";
-            this.nmb_HistoryCount.Size = new System.Drawing.Size(53, 20);
-            this.nmb_HistoryCount.TabIndex = 1;
-            this.nmb_HistoryCount.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.nmb_HistoryCount.Value = new decimal(new int[] {
-            15,
-            0,
-            0,
-            0});
-            // 
-            // chk_FinalOnly
-            // 
-            this.chk_FinalOnly.AutoSize = true;
-            this.chk_FinalOnly.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.chk_FinalOnly.Location = new System.Drawing.Point(122, 3);
-            this.chk_FinalOnly.Name = "chk_FinalOnly";
-            this.chk_FinalOnly.Size = new System.Drawing.Size(72, 17);
-            this.chk_FinalOnly.TabIndex = 2;
-            this.chk_FinalOnly.Text = "Final Only";
-            this.chk_FinalOnly.UseVisualStyleBackColor = true;
-            // 
-            // btn_GetStat
-            // 
-            this.btn_GetStat.Location = new System.Drawing.Point(200, 3);
-            this.btn_GetStat.Name = "btn_GetStat";
-            this.btn_GetStat.Size = new System.Drawing.Size(75, 23);
-            this.btn_GetStat.TabIndex = 3;
-            this.btn_GetStat.Text = "Get Stat";
-            this.btn_GetStat.UseVisualStyleBackColor = true;
-            this.btn_GetStat.Click += new System.EventHandler(this.btn_GetStat_Click);
-            // 
-            // list_historyTableAdapter
-            // 
-            this.list_historyTableAdapter.ClearBeforeFill = true;
-            // 
-            // btn_Future
-            // 
-            this.btn_Future.Location = new System.Drawing.Point(281, 3);
-            this.btn_Future.Name = "btn_Future";
-            this.btn_Future.Size = new System.Drawing.Size(75, 23);
-            this.btn_Future.TabIndex = 4;
-            this.btn_Future.Text = "Future";
-            this.btn_Future.UseVisualStyleBackColor = true;
-            this.btn_Future.Click += new System.EventHandler(this.btn_Future_Click);
+            this.hISTDTTMDataGridViewTextBoxColumn.DataPropertyName = "HIST_DTTM";
+            this.hISTDTTMDataGridViewTextBoxColumn.HeaderText = "Date";
+            this.hISTDTTMDataGridViewTextBoxColumn.Name = "hISTDTTMDataGridViewTextBoxColumn";
+            this.hISTDTTMDataGridViewTextBoxColumn.ReadOnly = true;
             // 
             // MessageUI
             // 
@@ -424,6 +438,13 @@ namespace History
         private System.Windows.Forms.BindingSource listhistoryBindingSource;
         private stockDataSetTableAdapters.list_historyTableAdapter list_historyTableAdapter;
         private System.Windows.Forms.BindingSource stockDataSetBindingSource;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.NumericUpDown nmb_HistoryCount;
+        private System.Windows.Forms.CheckBox chk_FinalOnly;
+        private System.Windows.Forms.Button btn_GetStat;
+        private System.Windows.Forms.Button btn_Future;
+        private System.Windows.Forms.CheckBox chk_Scatter;
         private System.Windows.Forms.DataGridViewButtonColumn hISTIDDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn fILTEROPTIONDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn option_desc;
@@ -434,20 +455,14 @@ namespace History
         private System.Windows.Forms.DataGridViewTextBoxColumn rate_20;
         private System.Windows.Forms.DataGridViewTextBoxColumn rate_40;
         private System.Windows.Forms.DataGridViewTextBoxColumn rate_60;
-        private System.Windows.Forms.DataGridViewTextBoxColumn pASSLISTDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn hISTDTTMDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn sTARTDTTMDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn eNDDTTMDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn att1DataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn att2DataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn att3DataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn att4DataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn att5DataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn sTARTDTTMDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn eNDDTTMDataGridViewTextBoxColumn;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.NumericUpDown nmb_HistoryCount;
-        private System.Windows.Forms.CheckBox chk_FinalOnly;
-        private System.Windows.Forms.Button btn_GetStat;
-        private System.Windows.Forms.Button btn_Future;
+        private System.Windows.Forms.DataGridViewTextBoxColumn pASSLISTDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn hISTDTTMDataGridViewTextBoxColumn;
     }
 }

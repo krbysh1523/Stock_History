@@ -80,7 +80,7 @@ namespace History
         {
             using (stockEntity stock = new stockEntity())
             {
-                data_types = stock.lookups.Where(r => r.l_type == "data_type").ToList();
+                data_types = stock.lookup.Where(r => r.l_type == "data_type").ToList();
             }
         }
 
@@ -322,7 +322,7 @@ namespace History
             using (stockEntity api = new stockEntity())
             {
                 List<earning> history = new List<earning>();
-                history = api.earnings.Where(r => r.symbol == s).ToList();
+                //history = api.earnings.Where(r => r.symbol == s).ToList();
 
                 foreach (JToken j in results)
                 {
@@ -341,7 +341,7 @@ namespace History
                             surprisePercentage = ret_Double(j, "surprisePercentage"),
                         };
                         history.Add(new_earning);
-                        api.earnings.Add(new_earning);
+                        //api.earnings.Add(new_earning);
                     }
                 }
                 api.SaveChanges();
@@ -413,7 +413,7 @@ namespace History
             using (stockEntity api = new stockEntity())
             {
                 List<income> history = new List<income>();
-                history = api.incomes.Where(r => r.symbol == s).ToList();
+                //history = api.incomes.Where(r => r.symbol == s).ToList();
 
                 foreach (JToken j in results)
                 {
@@ -454,7 +454,7 @@ namespace History
                             netIncomeApplicableToCommonShares = ret_Double(j, "netIncomeApplicableToCommonShares"),
                             preferredStockAndOtherAdjustments = ret_String(j, "preferredStockAndOtherAdjustments")
                         };
-                        api.incomes.Add(new_income);
+                        //api.incomes.Add(new_income);
                         history.Add(new_income);
                     }
                 }

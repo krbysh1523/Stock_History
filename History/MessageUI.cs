@@ -76,11 +76,25 @@ namespace History
             {
                 query.RetrieveHistoryList(dgv_History[0, e.RowIndex].Value.ToString(),
                     dgv_History["sTARTDTTMDataGridViewTextBoxColumn", e.RowIndex].Value.ToString(),
-                    dgv_History["eNDDTTMDataGridViewTextBoxColumn", e.RowIndex].Value.ToString());
+                    dgv_History["eNDDTTMDataGridViewTextBoxColumn", e.RowIndex].Value.ToString(),
+                    chk_Scatter.Checked);
             }
             if (e.RowIndex >= 0 && e.ColumnIndex == dgv_History.Columns["option_desc"].Index)
             {
                 show_Message(dgv_History[e.ColumnIndex, e.RowIndex].ToolTipText);
+            }
+        }
+        private void chk_FinalOnly_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chk_FinalOnly.Checked)
+            {
+                this.list_historyTableAdapter.Fill(this.stockDataSet.list_history);
+                this.listhistoryBindingSource.Filter = "description like '(Final)%'";
+            }
+            else
+            {
+                this.list_historyTableAdapter.Fill(this.stockDataSet.list_history);
+                this.listhistoryBindingSource.Filter = "";
             }
         }
         #endregion
@@ -145,5 +159,6 @@ namespace History
             }
         }
         #endregion
+
     }
 }

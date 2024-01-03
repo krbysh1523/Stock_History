@@ -1,1029 +1,1000 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-  <EntityContainerMapping StorageEntityContainer="stockModelStoreContainer" CdmEntityContainer="stockEntity">
+  <EntityContainerMapping StorageEntityContainer="stockModelStoreContainer" CdmEntityContainer="stockEntities">
+    <FunctionImportMapping FunctionImportName="process_analysis" FunctionName="stockModel.Store.process_analysis" />
+    <FunctionImportMapping FunctionImportName="process_history" FunctionName="stockModel.Store.process_history" />
     <EntitySetMapping Name="daily_analysis">
       <EntityTypeMapping TypeName="stockModel.daily_analysis">
         <MappingFragment StoreEntitySet="daily_analysis">
-          <ScalarProperty Name="symbol" ColumnName="symbol" />
-          <ScalarProperty Name="date" ColumnName="date" />
-          <ScalarProperty Name="open_close_perc" ColumnName="open_close_perc" />
-          <ScalarProperty Name="high_low_perc" ColumnName="high_low_perc" />
-          <ScalarProperty Name="dir" ColumnName="dir" />
-          <ScalarProperty Name="oc_by_hl_perc" ColumnName="oc_by_hl_perc" />
+          <ScalarProperty Name="TMB_R3" ColumnName="TMB_R3" />
+          <ScalarProperty Name="TMB_R2" ColumnName="TMB_R2" />
+          <ScalarProperty Name="TMB_R1" ColumnName="TMB_R1" />
+          <ScalarProperty Name="VB" ColumnName="VB" />
+          <ScalarProperty Name="VM" ColumnName="VM" />
+          <ScalarProperty Name="VT" ColumnName="VT" />
+          <ScalarProperty Name="TMB" ColumnName="TMB" />
           <ScalarProperty Name="dir_on" ColumnName="dir_on" />
-          <ScalarProperty Name="point1" ColumnName="point1" />
-          <ScalarProperty Name="point2" ColumnName="point2" />
-          <ScalarProperty Name="point3" ColumnName="point3" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="daily_close">
-      <EntityTypeMapping TypeName="stockModel.daily_close">
-        <MappingFragment StoreEntitySet="daily_close">
+          <ScalarProperty Name="oc_by_hl_perc" ColumnName="oc_by_hl_perc" />
+          <ScalarProperty Name="dir" ColumnName="dir" />
+          <ScalarProperty Name="high_low_perc" ColumnName="high_low_perc" />
+          <ScalarProperty Name="open_close_perc" ColumnName="open_close_perc" />
+          <ScalarProperty Name="date" ColumnName="date" />
           <ScalarProperty Name="symbol" ColumnName="symbol" />
-          <ScalarProperty Name="date_hist" ColumnName="date_hist" />
-          <ScalarProperty Name="SMA_005" ColumnName="SMA_005" />
-          <ScalarProperty Name="SMA_010" ColumnName="SMA_010" />
-          <ScalarProperty Name="SMA_020" ColumnName="SMA_020" />
-          <ScalarProperty Name="SMA_030" ColumnName="SMA_030" />
-          <ScalarProperty Name="SMA_060" ColumnName="SMA_060" />
-          <ScalarProperty Name="SMA_120" ColumnName="SMA_120" />
-          <ScalarProperty Name="SMA_240" ColumnName="SMA_240" />
-          <ScalarProperty Name="price" ColumnName="price" />
-          <ScalarProperty Name="direction" ColumnName="direction" />
-          <ScalarProperty Name="candle" ColumnName="candle" />
-          <ScalarProperty Name="head" ColumnName="head" />
-          <ScalarProperty Name="center" ColumnName="center" />
-          <ScalarProperty Name="tail" ColumnName="tail" />
-          <ScalarProperty Name="size_sma5" ColumnName="size_sma5" />
-          <ScalarProperty Name="size_sma10" ColumnName="size_sma10" />
-          <ScalarProperty Name="size_sma20" ColumnName="size_sma20" />
-          <ScalarProperty Name="size_sma30" ColumnName="size_sma30" />
-          <ScalarProperty Name="size_sma60" ColumnName="size_sma60" />
-          <ScalarProperty Name="size_sma120" ColumnName="size_sma120" />
-          <ScalarProperty Name="size_sma240" ColumnName="size_sma240" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="daily_history">
       <EntityTypeMapping TypeName="stockModel.daily_history">
         <MappingFragment StoreEntitySet="daily_history">
-          <ScalarProperty Name="symbol" ColumnName="symbol" />
-          <ScalarProperty Name="date" ColumnName="date" />
-          <ScalarProperty Name="open" ColumnName="open" />
-          <ScalarProperty Name="close" ColumnName="close" />
-          <ScalarProperty Name="high" ColumnName="high" />
-          <ScalarProperty Name="low" ColumnName="low" />
-          <ScalarProperty Name="volume" ColumnName="volume" />
-          <ScalarProperty Name="avg" ColumnName="avg" />
           <ScalarProperty Name="seq" ColumnName="seq" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="daily_sma5">
-      <EntityTypeMapping TypeName="stockModel.daily_sma5">
-        <MappingFragment StoreEntitySet="daily_sma5">
-          <ScalarProperty Name="symbol" ColumnName="symbol" />
-          <ScalarProperty Name="date_hist" ColumnName="date_hist" />
-          <ScalarProperty Name="price" ColumnName="price" />
-          <ScalarProperty Name="price_pre" ColumnName="price_pre" />
-          <ScalarProperty Name="price_chg_perc" ColumnName="price_chg_perc" />
-          <ScalarProperty Name="sma5" ColumnName="sma5" />
-          <ScalarProperty Name="sma5_pre" ColumnName="sma5_pre" />
-          <ScalarProperty Name="sma5_chg_perc" ColumnName="sma5_chg_perc" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="daily_source">
-      <EntityTypeMapping TypeName="stockModel.daily_source">
-        <MappingFragment StoreEntitySet="daily_source">
-          <ScalarProperty Name="symbol" ColumnName="symbol" />
-          <ScalarProperty Name="date" ColumnName="date" />
-          <ScalarProperty Name="open" ColumnName="open" />
-          <ScalarProperty Name="close" ColumnName="close" />
-          <ScalarProperty Name="adjusted_close" ColumnName="adjusted_close" />
-          <ScalarProperty Name="high" ColumnName="high" />
+          <ScalarProperty Name="avg" ColumnName="avg" />
+          <ScalarProperty Name="volume" ColumnName="volume" />
           <ScalarProperty Name="low" ColumnName="low" />
-          <ScalarProperty Name="volume" ColumnName="volume" />
-          <ScalarProperty Name="dividend_amount" ColumnName="dividend_amount" />
-          <ScalarProperty Name="split_coefficient" ColumnName="split_coefficient" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="daily_strong">
-      <EntityTypeMapping TypeName="stockModel.daily_strong">
-        <MappingFragment StoreEntitySet="daily_strong">
+          <ScalarProperty Name="high" ColumnName="high" />
+          <ScalarProperty Name="close" ColumnName="close" />
+          <ScalarProperty Name="open" ColumnName="open" />
+          <ScalarProperty Name="date" ColumnName="date" />
           <ScalarProperty Name="symbol" ColumnName="symbol" />
-          <ScalarProperty Name="date_hist" ColumnName="date_hist" />
-          <ScalarProperty Name="price" ColumnName="price" />
-          <ScalarProperty Name="price_chg_perc" ColumnName="price_chg_perc" />
-          <ScalarProperty Name="sma5_chg_perc" ColumnName="sma5_chg_perc" />
-          <ScalarProperty Name="spy_price" ColumnName="spy_price" />
-          <ScalarProperty Name="spy_chg" ColumnName="spy_chg" />
-          <ScalarProperty Name="spy_sma5" ColumnName="spy_sma5" />
-          <ScalarProperty Name="spy_diff" ColumnName="spy_diff" />
-          <ScalarProperty Name="spy_diff_sma5" ColumnName="spy_diff_sma5" />
-          <ScalarProperty Name="qqq_price" ColumnName="qqq_price" />
-          <ScalarProperty Name="qqq_chg" ColumnName="qqq_chg" />
-          <ScalarProperty Name="qqq_sma5" ColumnName="qqq_sma5" />
-          <ScalarProperty Name="qqq_diff" ColumnName="qqq_diff" />
-          <ScalarProperty Name="qqq_diff_sma5" ColumnName="qqq_diff_sma5" />
-          <ScalarProperty Name="dia_price" ColumnName="dia_price" />
-          <ScalarProperty Name="dia_chg" ColumnName="dia_chg" />
-          <ScalarProperty Name="dia_sma5" ColumnName="dia_sma5" />
-          <ScalarProperty Name="dia_diff" ColumnName="dia_diff" />
-          <ScalarProperty Name="dia_diff_sma5" ColumnName="dia_diff_sma5" />
-          <ScalarProperty Name="idx_diff" ColumnName="idx_diff" />
-          <ScalarProperty Name="idx_diff_sma5" ColumnName="idx_diff_sma5" />
-          <ScalarProperty Name="idx_chg" ColumnName="idx_chg" />
-          <ScalarProperty Name="idx_price" ColumnName="idx_price" />
-          <ScalarProperty Name="idx_sma5" ColumnName="idx_sma5" />
-          <ScalarProperty Name="sma5" ColumnName="sma5" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="daily_volume">
-      <EntityTypeMapping TypeName="stockModel.daily_volume">
-        <MappingFragment StoreEntitySet="daily_volume">
-          <ScalarProperty Name="symbol" ColumnName="symbol" />
-          <ScalarProperty Name="date_hist" ColumnName="date_hist" />
-          <ScalarProperty Name="volume" ColumnName="volume" />
-          <ScalarProperty Name="SMA_005" ColumnName="SMA_005" />
-          <ScalarProperty Name="SMA_010" ColumnName="SMA_010" />
-          <ScalarProperty Name="SMA_020" ColumnName="SMA_020" />
-          <ScalarProperty Name="SMA_030" ColumnName="SMA_030" />
-          <ScalarProperty Name="SMA_060" ColumnName="SMA_060" />
-          <ScalarProperty Name="SMA_120" ColumnName="SMA_120" />
-          <ScalarProperty Name="SMA_240" ColumnName="SMA_240" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="earnings">
-      <EntityTypeMapping TypeName="stockModel.earning">
-        <MappingFragment StoreEntitySet="earning">
-          <ScalarProperty Name="symbol" ColumnName="symbol" />
-          <ScalarProperty Name="fiscalDateEnding" ColumnName="fiscalDateEnding" />
-          <ScalarProperty Name="reportedDate" ColumnName="reportedDate" />
-          <ScalarProperty Name="reportedEPS" ColumnName="reportedEPS" />
-          <ScalarProperty Name="estimatedEPS" ColumnName="estimatedEPS" />
-          <ScalarProperty Name="surprise" ColumnName="surprise" />
-          <ScalarProperty Name="surprisePercentage" ColumnName="surprisePercentage" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="fundamentals">
-      <EntityTypeMapping TypeName="stockModel.fundamental">
-        <MappingFragment StoreEntitySet="fundamental">
-          <ScalarProperty Name="symbol" ColumnName="symbol" />
-          <ScalarProperty Name="date_hist" ColumnName="date_hist" />
-          <ScalarProperty Name="date_fiscal" ColumnName="date_fiscal" />
-          <ScalarProperty Name="eps" ColumnName="eps" />
-          <ScalarProperty Name="perc_eps" ColumnName="perc_eps" />
-          <ScalarProperty Name="perc_eps_1year" ColumnName="perc_eps_1year" />
-          <ScalarProperty Name="perc_eps_3year" ColumnName="perc_eps_3year" />
-          <ScalarProperty Name="est" ColumnName="est" />
-          <ScalarProperty Name="perc_est" ColumnName="perc_est" />
-          <ScalarProperty Name="perc_est_1year" ColumnName="perc_est_1year" />
-          <ScalarProperty Name="perc_est_3year" ColumnName="perc_est_3year" />
-          <ScalarProperty Name="surprise" ColumnName="surprise" />
-          <ScalarProperty Name="surprise_1year" ColumnName="surprise_1year" />
-          <ScalarProperty Name="surprise_3year" ColumnName="surprise_3year" />
-          <ScalarProperty Name="perc_after_expense" ColumnName="perc_after_expense" />
-          <ScalarProperty Name="perc_after_expense_1year" ColumnName="perc_after_expense_1year" />
-          <ScalarProperty Name="perc_after_expense_3year" ColumnName="perc_after_expense_3year" />
-          <ScalarProperty Name="perc_profit" ColumnName="perc_profit" />
-          <ScalarProperty Name="perc_profit_1year" ColumnName="perc_profit_1year" />
-          <ScalarProperty Name="perc_profit_3year" ColumnName="perc_profit_3year" />
-          <ScalarProperty Name="perc_total" ColumnName="perc_total" />
-          <ScalarProperty Name="perc_total_1year" ColumnName="perc_total_1year" />
-          <ScalarProperty Name="perc_total_3year" ColumnName="perc_total_3year" />
-          <ScalarProperty Name="eps_close_rate" ColumnName="eps_close_rate" />
-          <ScalarProperty Name="pre_30" ColumnName="pre_30" />
-          <ScalarProperty Name="pre_20" ColumnName="pre_20" />
-          <ScalarProperty Name="pre_10" ColumnName="pre_10" />
-          <ScalarProperty Name="pre_5" ColumnName="pre_5" />
-          <ScalarProperty Name="pre_3" ColumnName="pre_3" />
-          <ScalarProperty Name="pre_1" ColumnName="pre_1" />
-          <ScalarProperty Name="next_1" ColumnName="next_1" />
-          <ScalarProperty Name="next_3" ColumnName="next_3" />
-          <ScalarProperty Name="next_5" ColumnName="next_5" />
-          <ScalarProperty Name="next_10" ColumnName="next_10" />
-          <ScalarProperty Name="next_20" ColumnName="next_20" />
-          <ScalarProperty Name="next_30" ColumnName="next_30" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="incomes">
-      <EntityTypeMapping TypeName="stockModel.income">
-        <MappingFragment StoreEntitySet="income">
-          <ScalarProperty Name="symbol" ColumnName="symbol" />
-          <ScalarProperty Name="fiscalDateEnding" ColumnName="fiscalDateEnding" />
-          <ScalarProperty Name="reportedCurrency" ColumnName="reportedCurrency" />
-          <ScalarProperty Name="totalRevenue" ColumnName="totalRevenue" />
-          <ScalarProperty Name="totalOperatingExpense" ColumnName="totalOperatingExpense" />
-          <ScalarProperty Name="costOfRevenue" ColumnName="costOfRevenue" />
-          <ScalarProperty Name="grossProfit" ColumnName="grossProfit" />
-          <ScalarProperty Name="ebit" ColumnName="ebit" />
-          <ScalarProperty Name="netIncome" ColumnName="netIncome" />
-          <ScalarProperty Name="researchAndDevelopment" ColumnName="researchAndDevelopment" />
-          <ScalarProperty Name="effectOfAccountingCharges" ColumnName="effectOfAccountingCharges" />
-          <ScalarProperty Name="incomeBeforeTax" ColumnName="incomeBeforeTax" />
-          <ScalarProperty Name="minorityInterest" ColumnName="minorityInterest" />
-          <ScalarProperty Name="sellingGeneralAdministrative" ColumnName="sellingGeneralAdministrative" />
-          <ScalarProperty Name="otherNonOperatingIncome" ColumnName="otherNonOperatingIncome" />
-          <ScalarProperty Name="operatingIncome" ColumnName="operatingIncome" />
-          <ScalarProperty Name="otherOperatingExpense" ColumnName="otherOperatingExpense" />
-          <ScalarProperty Name="interestExpense" ColumnName="interestExpense" />
-          <ScalarProperty Name="taxProvision" ColumnName="taxProvision" />
-          <ScalarProperty Name="interestIncome" ColumnName="interestIncome" />
-          <ScalarProperty Name="netInterestIncome" ColumnName="netInterestIncome" />
-          <ScalarProperty Name="extraordinaryItems" ColumnName="extraordinaryItems" />
-          <ScalarProperty Name="nonRecurring" ColumnName="nonRecurring" />
-          <ScalarProperty Name="otherItems" ColumnName="otherItems" />
-          <ScalarProperty Name="incomeTaxExpense" ColumnName="incomeTaxExpense" />
-          <ScalarProperty Name="totalOtherIncomeExpense" ColumnName="totalOtherIncomeExpense" />
-          <ScalarProperty Name="discontinuedOperations" ColumnName="discontinuedOperations" />
-          <ScalarProperty Name="netIncomeFromContinuingOperations" ColumnName="netIncomeFromContinuingOperations" />
-          <ScalarProperty Name="netIncomeApplicableToCommonShares" ColumnName="netIncomeApplicableToCommonShares" />
-          <ScalarProperty Name="preferredStockAndOtherAdjustments" ColumnName="preferredStockAndOtherAdjustments" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="list_history">
-      <EntityTypeMapping TypeName="stockModel.list_history">
-        <MappingFragment StoreEntitySet="list_history">
-          <ScalarProperty Name="HIST_ID" ColumnName="HIST_ID" />
-          <ScalarProperty Name="HIST_DTTM" ColumnName="HIST_DTTM" />
-          <ScalarProperty Name="START_DTTM" ColumnName="START_DTTM" />
-          <ScalarProperty Name="END_DTTM" ColumnName="END_DTTM" />
-          <ScalarProperty Name="PASS_LIST" ColumnName="PASS_LIST" />
-          <ScalarProperty Name="FILTER_OPTION" ColumnName="FILTER_OPTION" />
-          <ScalarProperty Name="att1" ColumnName="att1" />
-          <ScalarProperty Name="att2" ColumnName="att2" />
-          <ScalarProperty Name="att3" ColumnName="att3" />
-          <ScalarProperty Name="att4" ColumnName="att4" />
-          <ScalarProperty Name="att5" ColumnName="att5" />
-          <ScalarProperty Name="option_desc" ColumnName="option_desc" />
-          <ScalarProperty Name="description" ColumnName="description" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="lookups">
       <EntityTypeMapping TypeName="stockModel.lookup">
         <MappingFragment StoreEntitySet="lookup">
-          <ScalarProperty Name="l_type" ColumnName="l_type" />
-          <ScalarProperty Name="l_id" ColumnName="l_id" />
-          <ScalarProperty Name="l_name" ColumnName="l_name" />
-          <ScalarProperty Name="l_order" ColumnName="l_order" />
-          <ScalarProperty Name="l_att1" ColumnName="l_att1" />
-          <ScalarProperty Name="l_att2" ColumnName="l_att2" />
-          <ScalarProperty Name="l_att3" ColumnName="l_att3" />
-          <ScalarProperty Name="l_att4" ColumnName="l_att4" />
           <ScalarProperty Name="l_att5" ColumnName="l_att5" />
+          <ScalarProperty Name="l_att4" ColumnName="l_att4" />
+          <ScalarProperty Name="l_att3" ColumnName="l_att3" />
+          <ScalarProperty Name="l_att2" ColumnName="l_att2" />
+          <ScalarProperty Name="l_att1" ColumnName="l_att1" />
+          <ScalarProperty Name="l_order" ColumnName="l_order" />
+          <ScalarProperty Name="l_name" ColumnName="l_name" />
+          <ScalarProperty Name="l_id" ColumnName="l_id" />
+          <ScalarProperty Name="l_type" ColumnName="l_type" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="predictions">
       <EntityTypeMapping TypeName="stockModel.prediction">
         <MappingFragment StoreEntitySet="prediction">
-          <ScalarProperty Name="symbol" ColumnName="symbol" />
-          <ScalarProperty Name="ranking" ColumnName="ranking" />
-          <ScalarProperty Name="ratio1" ColumnName="ratio1" />
-          <ScalarProperty Name="ratio2" ColumnName="ratio2" />
-          <ScalarProperty Name="rate_5" ColumnName="rate_5" />
-          <ScalarProperty Name="rate_10" ColumnName="rate_10" />
-          <ScalarProperty Name="rate_15" ColumnName="rate_15" />
-          <ScalarProperty Name="rate_20" ColumnName="rate_20" />
-          <ScalarProperty Name="rate_40" ColumnName="rate_40" />
           <ScalarProperty Name="rate_60" ColumnName="rate_60" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="prediction_history">
-      <EntityTypeMapping TypeName="stockModel.prediction_history">
-        <MappingFragment StoreEntitySet="prediction_history">
-          <ScalarProperty Name="result_id" ColumnName="result_id" />
-          <ScalarProperty Name="hist_id" ColumnName="hist_id" />
-          <ScalarProperty Name="symbol" ColumnName="symbol" />
-          <ScalarProperty Name="ranking" ColumnName="ranking" />
-          <ScalarProperty Name="ratio1" ColumnName="ratio1" />
-          <ScalarProperty Name="ratio2" ColumnName="ratio2" />
-          <ScalarProperty Name="rate_5" ColumnName="rate_5" />
-          <ScalarProperty Name="rate_10" ColumnName="rate_10" />
-          <ScalarProperty Name="rate_15" ColumnName="rate_15" />
-          <ScalarProperty Name="rate_20" ColumnName="rate_20" />
           <ScalarProperty Name="rate_40" ColumnName="rate_40" />
-          <ScalarProperty Name="rate_60" ColumnName="rate_60" />
-          <ScalarProperty Name="result" ColumnName="result" />
-          <ScalarProperty Name="result_desc" ColumnName="result_desc" />
+          <ScalarProperty Name="rate_20" ColumnName="rate_20" />
+          <ScalarProperty Name="rate_15" ColumnName="rate_15" />
+          <ScalarProperty Name="rate_10" ColumnName="rate_10" />
+          <ScalarProperty Name="rate_5" ColumnName="rate_5" />
+          <ScalarProperty Name="ratio2" ColumnName="ratio2" />
+          <ScalarProperty Name="ratio1" ColumnName="ratio1" />
+          <ScalarProperty Name="ranking" ColumnName="ranking" />
+          <ScalarProperty Name="symbol" ColumnName="symbol" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="symbol_att">
       <EntityTypeMapping TypeName="stockModel.symbol_att">
         <MappingFragment StoreEntitySet="symbol_att">
-          <ScalarProperty Name="symbol" ColumnName="symbol" />
-          <ScalarProperty Name="name" ColumnName="name" />
-          <ScalarProperty Name="Sector" ColumnName="Sector" />
-          <ScalarProperty Name="Industry" ColumnName="Industry" />
-          <ScalarProperty Name="market_cap" ColumnName="market_cap" />
           <ScalarProperty Name="market_rank" ColumnName="market_rank" />
+          <ScalarProperty Name="market_cap" ColumnName="market_cap" />
           <ScalarProperty Name="symbol_type" ColumnName="symbol_type" />
+          <ScalarProperty Name="Industry" ColumnName="Industry" />
+          <ScalarProperty Name="Sector" ColumnName="Sector" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="symbol" ColumnName="symbol" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="daily_close">
+      <EntityTypeMapping TypeName="stockModel.daily_close">
+        <MappingFragment StoreEntitySet="daily_close">
+          <ScalarProperty Name="size_sma240" ColumnName="size_sma240" />
+          <ScalarProperty Name="size_sma120" ColumnName="size_sma120" />
+          <ScalarProperty Name="size_sma60" ColumnName="size_sma60" />
+          <ScalarProperty Name="size_sma30" ColumnName="size_sma30" />
+          <ScalarProperty Name="size_sma20" ColumnName="size_sma20" />
+          <ScalarProperty Name="size_sma10" ColumnName="size_sma10" />
+          <ScalarProperty Name="size_sma5" ColumnName="size_sma5" />
+          <ScalarProperty Name="tail" ColumnName="tail" />
+          <ScalarProperty Name="center" ColumnName="center" />
+          <ScalarProperty Name="head" ColumnName="head" />
+          <ScalarProperty Name="candle" ColumnName="candle" />
+          <ScalarProperty Name="direction" ColumnName="direction" />
+          <ScalarProperty Name="price" ColumnName="price" />
+          <ScalarProperty Name="SMA_240" ColumnName="SMA_240" />
+          <ScalarProperty Name="SMA_120" ColumnName="SMA_120" />
+          <ScalarProperty Name="SMA_060" ColumnName="SMA_060" />
+          <ScalarProperty Name="SMA_030" ColumnName="SMA_030" />
+          <ScalarProperty Name="SMA_020" ColumnName="SMA_020" />
+          <ScalarProperty Name="SMA_010" ColumnName="SMA_010" />
+          <ScalarProperty Name="SMA_005" ColumnName="SMA_005" />
+          <ScalarProperty Name="date_hist" ColumnName="date_hist" />
+          <ScalarProperty Name="symbol" ColumnName="symbol" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="daily_sma5">
+      <EntityTypeMapping TypeName="stockModel.daily_sma5">
+        <MappingFragment StoreEntitySet="daily_sma5">
+          <ScalarProperty Name="sma5_chg_perc" ColumnName="sma5_chg_perc" />
+          <ScalarProperty Name="sma5_pre" ColumnName="sma5_pre" />
+          <ScalarProperty Name="sma5" ColumnName="sma5" />
+          <ScalarProperty Name="price_chg_perc" ColumnName="price_chg_perc" />
+          <ScalarProperty Name="price_pre" ColumnName="price_pre" />
+          <ScalarProperty Name="price" ColumnName="price" />
+          <ScalarProperty Name="date_hist" ColumnName="date_hist" />
+          <ScalarProperty Name="symbol" ColumnName="symbol" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="daily_source">
+      <EntityTypeMapping TypeName="stockModel.daily_source">
+        <MappingFragment StoreEntitySet="daily_source">
+          <ScalarProperty Name="split_coefficient" ColumnName="split_coefficient" />
+          <ScalarProperty Name="dividend_amount" ColumnName="dividend_amount" />
+          <ScalarProperty Name="volume" ColumnName="volume" />
+          <ScalarProperty Name="low" ColumnName="low" />
+          <ScalarProperty Name="high" ColumnName="high" />
+          <ScalarProperty Name="adjusted_close" ColumnName="adjusted_close" />
+          <ScalarProperty Name="close" ColumnName="close" />
+          <ScalarProperty Name="open" ColumnName="open" />
+          <ScalarProperty Name="date" ColumnName="date" />
+          <ScalarProperty Name="symbol" ColumnName="symbol" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="daily_strong">
+      <EntityTypeMapping TypeName="stockModel.daily_strong">
+        <MappingFragment StoreEntitySet="daily_strong">
+          <ScalarProperty Name="sma5" ColumnName="sma5" />
+          <ScalarProperty Name="idx_sma5" ColumnName="idx_sma5" />
+          <ScalarProperty Name="idx_price" ColumnName="idx_price" />
+          <ScalarProperty Name="idx_chg" ColumnName="idx_chg" />
+          <ScalarProperty Name="idx_diff_sma5" ColumnName="idx_diff_sma5" />
+          <ScalarProperty Name="idx_diff" ColumnName="idx_diff" />
+          <ScalarProperty Name="dia_diff_sma5" ColumnName="dia_diff_sma5" />
+          <ScalarProperty Name="dia_diff" ColumnName="dia_diff" />
+          <ScalarProperty Name="dia_sma5" ColumnName="dia_sma5" />
+          <ScalarProperty Name="dia_chg" ColumnName="dia_chg" />
+          <ScalarProperty Name="dia_price" ColumnName="dia_price" />
+          <ScalarProperty Name="qqq_diff_sma5" ColumnName="qqq_diff_sma5" />
+          <ScalarProperty Name="qqq_diff" ColumnName="qqq_diff" />
+          <ScalarProperty Name="qqq_sma5" ColumnName="qqq_sma5" />
+          <ScalarProperty Name="qqq_chg" ColumnName="qqq_chg" />
+          <ScalarProperty Name="qqq_price" ColumnName="qqq_price" />
+          <ScalarProperty Name="spy_diff_sma5" ColumnName="spy_diff_sma5" />
+          <ScalarProperty Name="spy_diff" ColumnName="spy_diff" />
+          <ScalarProperty Name="spy_sma5" ColumnName="spy_sma5" />
+          <ScalarProperty Name="spy_chg" ColumnName="spy_chg" />
+          <ScalarProperty Name="spy_price" ColumnName="spy_price" />
+          <ScalarProperty Name="sma5_chg_perc" ColumnName="sma5_chg_perc" />
+          <ScalarProperty Name="price_chg_perc" ColumnName="price_chg_perc" />
+          <ScalarProperty Name="price" ColumnName="price" />
+          <ScalarProperty Name="date_hist" ColumnName="date_hist" />
+          <ScalarProperty Name="symbol" ColumnName="symbol" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="daily_volume">
+      <EntityTypeMapping TypeName="stockModel.daily_volume">
+        <MappingFragment StoreEntitySet="daily_volume">
+          <ScalarProperty Name="SMA_240" ColumnName="SMA_240" />
+          <ScalarProperty Name="SMA_120" ColumnName="SMA_120" />
+          <ScalarProperty Name="SMA_060" ColumnName="SMA_060" />
+          <ScalarProperty Name="SMA_030" ColumnName="SMA_030" />
+          <ScalarProperty Name="SMA_020" ColumnName="SMA_020" />
+          <ScalarProperty Name="SMA_010" ColumnName="SMA_010" />
+          <ScalarProperty Name="SMA_005" ColumnName="SMA_005" />
+          <ScalarProperty Name="volume" ColumnName="volume" />
+          <ScalarProperty Name="date_hist" ColumnName="date_hist" />
+          <ScalarProperty Name="symbol" ColumnName="symbol" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="earnings">
+      <EntityTypeMapping TypeName="stockModel.earning">
+        <MappingFragment StoreEntitySet="earning">
+          <ScalarProperty Name="surprisePercentage" ColumnName="surprisePercentage" />
+          <ScalarProperty Name="surprise" ColumnName="surprise" />
+          <ScalarProperty Name="estimatedEPS" ColumnName="estimatedEPS" />
+          <ScalarProperty Name="reportedEPS" ColumnName="reportedEPS" />
+          <ScalarProperty Name="reportedDate" ColumnName="reportedDate" />
+          <ScalarProperty Name="fiscalDateEnding" ColumnName="fiscalDateEnding" />
+          <ScalarProperty Name="symbol" ColumnName="symbol" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="fundamentals">
+      <EntityTypeMapping TypeName="stockModel.fundamental">
+        <MappingFragment StoreEntitySet="fundamental">
+          <ScalarProperty Name="next_30" ColumnName="next_30" />
+          <ScalarProperty Name="next_20" ColumnName="next_20" />
+          <ScalarProperty Name="next_10" ColumnName="next_10" />
+          <ScalarProperty Name="next_5" ColumnName="next_5" />
+          <ScalarProperty Name="next_3" ColumnName="next_3" />
+          <ScalarProperty Name="next_1" ColumnName="next_1" />
+          <ScalarProperty Name="pre_1" ColumnName="pre_1" />
+          <ScalarProperty Name="pre_3" ColumnName="pre_3" />
+          <ScalarProperty Name="pre_5" ColumnName="pre_5" />
+          <ScalarProperty Name="pre_10" ColumnName="pre_10" />
+          <ScalarProperty Name="pre_20" ColumnName="pre_20" />
+          <ScalarProperty Name="pre_30" ColumnName="pre_30" />
+          <ScalarProperty Name="eps_close_rate" ColumnName="eps_close_rate" />
+          <ScalarProperty Name="perc_total_3year" ColumnName="perc_total_3year" />
+          <ScalarProperty Name="perc_total_1year" ColumnName="perc_total_1year" />
+          <ScalarProperty Name="perc_total" ColumnName="perc_total" />
+          <ScalarProperty Name="perc_profit_3year" ColumnName="perc_profit_3year" />
+          <ScalarProperty Name="perc_profit_1year" ColumnName="perc_profit_1year" />
+          <ScalarProperty Name="perc_profit" ColumnName="perc_profit" />
+          <ScalarProperty Name="perc_after_expense_3year" ColumnName="perc_after_expense_3year" />
+          <ScalarProperty Name="perc_after_expense_1year" ColumnName="perc_after_expense_1year" />
+          <ScalarProperty Name="perc_after_expense" ColumnName="perc_after_expense" />
+          <ScalarProperty Name="surprise_3year" ColumnName="surprise_3year" />
+          <ScalarProperty Name="surprise_1year" ColumnName="surprise_1year" />
+          <ScalarProperty Name="surprise" ColumnName="surprise" />
+          <ScalarProperty Name="perc_est_3year" ColumnName="perc_est_3year" />
+          <ScalarProperty Name="perc_est_1year" ColumnName="perc_est_1year" />
+          <ScalarProperty Name="perc_est" ColumnName="perc_est" />
+          <ScalarProperty Name="est" ColumnName="est" />
+          <ScalarProperty Name="perc_eps_3year" ColumnName="perc_eps_3year" />
+          <ScalarProperty Name="perc_eps_1year" ColumnName="perc_eps_1year" />
+          <ScalarProperty Name="perc_eps" ColumnName="perc_eps" />
+          <ScalarProperty Name="eps" ColumnName="eps" />
+          <ScalarProperty Name="date_fiscal" ColumnName="date_fiscal" />
+          <ScalarProperty Name="date_hist" ColumnName="date_hist" />
+          <ScalarProperty Name="symbol" ColumnName="symbol" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="incomes">
+      <EntityTypeMapping TypeName="stockModel.income">
+        <MappingFragment StoreEntitySet="income">
+          <ScalarProperty Name="preferredStockAndOtherAdjustments" ColumnName="preferredStockAndOtherAdjustments" />
+          <ScalarProperty Name="netIncomeApplicableToCommonShares" ColumnName="netIncomeApplicableToCommonShares" />
+          <ScalarProperty Name="netIncomeFromContinuingOperations" ColumnName="netIncomeFromContinuingOperations" />
+          <ScalarProperty Name="discontinuedOperations" ColumnName="discontinuedOperations" />
+          <ScalarProperty Name="totalOtherIncomeExpense" ColumnName="totalOtherIncomeExpense" />
+          <ScalarProperty Name="incomeTaxExpense" ColumnName="incomeTaxExpense" />
+          <ScalarProperty Name="otherItems" ColumnName="otherItems" />
+          <ScalarProperty Name="nonRecurring" ColumnName="nonRecurring" />
+          <ScalarProperty Name="extraordinaryItems" ColumnName="extraordinaryItems" />
+          <ScalarProperty Name="netInterestIncome" ColumnName="netInterestIncome" />
+          <ScalarProperty Name="interestIncome" ColumnName="interestIncome" />
+          <ScalarProperty Name="taxProvision" ColumnName="taxProvision" />
+          <ScalarProperty Name="interestExpense" ColumnName="interestExpense" />
+          <ScalarProperty Name="otherOperatingExpense" ColumnName="otherOperatingExpense" />
+          <ScalarProperty Name="operatingIncome" ColumnName="operatingIncome" />
+          <ScalarProperty Name="otherNonOperatingIncome" ColumnName="otherNonOperatingIncome" />
+          <ScalarProperty Name="sellingGeneralAdministrative" ColumnName="sellingGeneralAdministrative" />
+          <ScalarProperty Name="minorityInterest" ColumnName="minorityInterest" />
+          <ScalarProperty Name="incomeBeforeTax" ColumnName="incomeBeforeTax" />
+          <ScalarProperty Name="effectOfAccountingCharges" ColumnName="effectOfAccountingCharges" />
+          <ScalarProperty Name="researchAndDevelopment" ColumnName="researchAndDevelopment" />
+          <ScalarProperty Name="netIncome" ColumnName="netIncome" />
+          <ScalarProperty Name="ebit" ColumnName="ebit" />
+          <ScalarProperty Name="grossProfit" ColumnName="grossProfit" />
+          <ScalarProperty Name="costOfRevenue" ColumnName="costOfRevenue" />
+          <ScalarProperty Name="totalOperatingExpense" ColumnName="totalOperatingExpense" />
+          <ScalarProperty Name="totalRevenue" ColumnName="totalRevenue" />
+          <ScalarProperty Name="reportedCurrency" ColumnName="reportedCurrency" />
+          <ScalarProperty Name="fiscalDateEnding" ColumnName="fiscalDateEnding" />
+          <ScalarProperty Name="symbol" ColumnName="symbol" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="list_history">
+      <EntityTypeMapping TypeName="stockModel.list_history">
+        <MappingFragment StoreEntitySet="list_history">
+          <ScalarProperty Name="description" ColumnName="description" />
+          <ScalarProperty Name="option_desc" ColumnName="option_desc" />
+          <ScalarProperty Name="att5" ColumnName="att5" />
+          <ScalarProperty Name="att4" ColumnName="att4" />
+          <ScalarProperty Name="att3" ColumnName="att3" />
+          <ScalarProperty Name="att2" ColumnName="att2" />
+          <ScalarProperty Name="att1" ColumnName="att1" />
+          <ScalarProperty Name="FILTER_OPTION" ColumnName="FILTER_OPTION" />
+          <ScalarProperty Name="PASS_LIST" ColumnName="PASS_LIST" />
+          <ScalarProperty Name="END_DTTM" ColumnName="END_DTTM" />
+          <ScalarProperty Name="START_DTTM" ColumnName="START_DTTM" />
+          <ScalarProperty Name="HIST_DTTM" ColumnName="HIST_DTTM" />
+          <ScalarProperty Name="HIST_ID" ColumnName="HIST_ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="prediction_history">
+      <EntityTypeMapping TypeName="stockModel.prediction_history">
+        <MappingFragment StoreEntitySet="prediction_history">
+          <ScalarProperty Name="result_desc" ColumnName="result_desc" />
+          <ScalarProperty Name="result" ColumnName="result" />
+          <ScalarProperty Name="rate_60" ColumnName="rate_60" />
+          <ScalarProperty Name="rate_40" ColumnName="rate_40" />
+          <ScalarProperty Name="rate_20" ColumnName="rate_20" />
+          <ScalarProperty Name="rate_15" ColumnName="rate_15" />
+          <ScalarProperty Name="rate_10" ColumnName="rate_10" />
+          <ScalarProperty Name="rate_5" ColumnName="rate_5" />
+          <ScalarProperty Name="ratio2" ColumnName="ratio2" />
+          <ScalarProperty Name="ratio1" ColumnName="ratio1" />
+          <ScalarProperty Name="ranking" ColumnName="ranking" />
+          <ScalarProperty Name="symbol" ColumnName="symbol" />
+          <ScalarProperty Name="hist_id" ColumnName="hist_id" />
+          <ScalarProperty Name="result_id" ColumnName="result_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="simul_header">
+      <EntityTypeMapping TypeName="stockModel.simul_header">
+        <MappingFragment StoreEntitySet="simul_header">
+          <ScalarProperty Name="rate_60" ColumnName="rate_60" />
+          <ScalarProperty Name="rate_40" ColumnName="rate_40" />
+          <ScalarProperty Name="rate_20" ColumnName="rate_20" />
+          <ScalarProperty Name="rate_15" ColumnName="rate_15" />
+          <ScalarProperty Name="rate_10" ColumnName="rate_10" />
+          <ScalarProperty Name="rate_5" ColumnName="rate_5" />
+          <ScalarProperty Name="ratio2" ColumnName="ratio2" />
+          <ScalarProperty Name="ratio1" ColumnName="ratio1" />
+          <ScalarProperty Name="end_dttm" ColumnName="end_dttm" />
+          <ScalarProperty Name="start_dttm" ColumnName="start_dttm" />
+          <ScalarProperty Name="simul_name" ColumnName="simul_name" />
+          <ScalarProperty Name="simul_header_id" ColumnName="simul_header_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="simul_tests">
+      <EntityTypeMapping TypeName="stockModel.simul_tests">
+        <MappingFragment StoreEntitySet="simul_tests">
+          <ScalarProperty Name="rate_60" ColumnName="rate_60" />
+          <ScalarProperty Name="rate_40" ColumnName="rate_40" />
+          <ScalarProperty Name="rate_20" ColumnName="rate_20" />
+          <ScalarProperty Name="rate_15" ColumnName="rate_15" />
+          <ScalarProperty Name="rate_10" ColumnName="rate_10" />
+          <ScalarProperty Name="rate_5" ColumnName="rate_5" />
+          <ScalarProperty Name="ratio2" ColumnName="ratio2" />
+          <ScalarProperty Name="ratio1" ColumnName="ratio1" />
+          <ScalarProperty Name="end_dttm" ColumnName="end_dttm" />
+          <ScalarProperty Name="start_dttm" ColumnName="start_dttm" />
+          <ScalarProperty Name="week_no" ColumnName="week_no" />
+          <ScalarProperty Name="filter_option" ColumnName="filter_option" />
+          <ScalarProperty Name="plan_desc" ColumnName="plan_desc" />
+          <ScalarProperty Name="plan_name" ColumnName="plan_name" />
+          <ScalarProperty Name="hist_id" ColumnName="hist_id" />
+          <ScalarProperty Name="simul_id" ColumnName="simul_id" />
+          <ScalarProperty Name="simul_header_id" ColumnName="simul_header_id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="test_plan">
       <EntityTypeMapping TypeName="stockModel.test_plan">
         <MappingFragment StoreEntitySet="test_plan">
-          <ScalarProperty Name="test_id" ColumnName="test_id" />
-          <ScalarProperty Name="plan_name" ColumnName="plan_name" />
-          <ScalarProperty Name="test_seq" ColumnName="test_seq" />
-          <ScalarProperty Name="pass_list" ColumnName="pass_list" />
-          <ScalarProperty Name="filter_option" ColumnName="filter_option" />
-          <ScalarProperty Name="filter_att1" ColumnName="filter_att1" />
-          <ScalarProperty Name="filter_att2" ColumnName="filter_att2" />
-          <ScalarProperty Name="filter_att3" ColumnName="filter_att3" />
-          <ScalarProperty Name="filter_att4" ColumnName="filter_att4" />
-          <ScalarProperty Name="filter_att5" ColumnName="filter_att5" />
-          <ScalarProperty Name="filter_desc" ColumnName="filter_desc" />
           <ScalarProperty Name="remark" ColumnName="remark" />
+          <ScalarProperty Name="filter_desc" ColumnName="filter_desc" />
+          <ScalarProperty Name="filter_att5" ColumnName="filter_att5" />
+          <ScalarProperty Name="filter_att4" ColumnName="filter_att4" />
+          <ScalarProperty Name="filter_att3" ColumnName="filter_att3" />
+          <ScalarProperty Name="filter_att2" ColumnName="filter_att2" />
+          <ScalarProperty Name="filter_att1" ColumnName="filter_att1" />
+          <ScalarProperty Name="filter_option" ColumnName="filter_option" />
+          <ScalarProperty Name="pass_list" ColumnName="pass_list" />
+          <ScalarProperty Name="test_seq" ColumnName="test_seq" />
+          <ScalarProperty Name="plan_name" ColumnName="plan_name" />
+          <ScalarProperty Name="test_id" ColumnName="test_id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="watch_list">
       <EntityTypeMapping TypeName="stockModel.watch_list">
         <MappingFragment StoreEntitySet="watch_list">
-          <ScalarProperty Name="symbol" ColumnName="symbol" />
-          <ScalarProperty Name="watch_type" ColumnName="watch_type" />
-          <ScalarProperty Name="Sector" ColumnName="Sector" />
-          <ScalarProperty Name="Industry" ColumnName="Industry" />
-          <ScalarProperty Name="company" ColumnName="company" />
           <ScalarProperty Name="market_cap" ColumnName="market_cap" />
+          <ScalarProperty Name="company" ColumnName="company" />
+          <ScalarProperty Name="Industry" ColumnName="Industry" />
+          <ScalarProperty Name="Sector" ColumnName="Sector" />
+          <ScalarProperty Name="watch_type" ColumnName="watch_type" />
+          <ScalarProperty Name="symbol" ColumnName="symbol" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="apis">
       <EntityTypeMapping TypeName="stockModel.api">
         <MappingFragment StoreEntitySet="api">
-          <ScalarProperty Name="api_id" ColumnName="api_id" />
-          <ScalarProperty Name="api_key" ColumnName="api_key" />
           <ScalarProperty Name="last_ran" ColumnName="last_ran" />
+          <ScalarProperty Name="api_key" ColumnName="api_key" />
+          <ScalarProperty Name="api_id" ColumnName="api_id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="daily_avg">
       <EntityTypeMapping TypeName="stockModel.daily_avg">
         <MappingFragment StoreEntitySet="daily_avg">
-          <ScalarProperty Name="symbol" ColumnName="symbol" />
-          <ScalarProperty Name="date" ColumnName="date" />
-          <ScalarProperty Name="SMA_005" ColumnName="SMA_005" />
-          <ScalarProperty Name="SMA_010" ColumnName="SMA_010" />
-          <ScalarProperty Name="SMA_020" ColumnName="SMA_020" />
-          <ScalarProperty Name="SMA_030" ColumnName="SMA_030" />
-          <ScalarProperty Name="SMA_060" ColumnName="SMA_060" />
-          <ScalarProperty Name="SMA_120" ColumnName="SMA_120" />
           <ScalarProperty Name="SMA_200" ColumnName="SMA_200" />
+          <ScalarProperty Name="SMA_120" ColumnName="SMA_120" />
+          <ScalarProperty Name="SMA_060" ColumnName="SMA_060" />
+          <ScalarProperty Name="SMA_030" ColumnName="SMA_030" />
+          <ScalarProperty Name="SMA_020" ColumnName="SMA_020" />
+          <ScalarProperty Name="SMA_010" ColumnName="SMA_010" />
+          <ScalarProperty Name="SMA_005" ColumnName="SMA_005" />
+          <ScalarProperty Name="date" ColumnName="date" />
+          <ScalarProperty Name="symbol" ColumnName="symbol" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="daily_high">
       <EntityTypeMapping TypeName="stockModel.daily_high">
         <MappingFragment StoreEntitySet="daily_high">
-          <ScalarProperty Name="symbol" ColumnName="symbol" />
-          <ScalarProperty Name="date" ColumnName="date" />
-          <ScalarProperty Name="SMA_005" ColumnName="SMA_005" />
-          <ScalarProperty Name="SMA_010" ColumnName="SMA_010" />
-          <ScalarProperty Name="SMA_020" ColumnName="SMA_020" />
-          <ScalarProperty Name="SMA_030" ColumnName="SMA_030" />
-          <ScalarProperty Name="SMA_060" ColumnName="SMA_060" />
-          <ScalarProperty Name="SMA_120" ColumnName="SMA_120" />
           <ScalarProperty Name="SMA_200" ColumnName="SMA_200" />
+          <ScalarProperty Name="SMA_120" ColumnName="SMA_120" />
+          <ScalarProperty Name="SMA_060" ColumnName="SMA_060" />
+          <ScalarProperty Name="SMA_030" ColumnName="SMA_030" />
+          <ScalarProperty Name="SMA_020" ColumnName="SMA_020" />
+          <ScalarProperty Name="SMA_010" ColumnName="SMA_010" />
+          <ScalarProperty Name="SMA_005" ColumnName="SMA_005" />
+          <ScalarProperty Name="date" ColumnName="date" />
+          <ScalarProperty Name="symbol" ColumnName="symbol" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="daily_industry">
       <EntityTypeMapping TypeName="stockModel.daily_industry">
         <MappingFragment StoreEntitySet="daily_industry">
-          <ScalarProperty Name="industry" ColumnName="industry" />
-          <ScalarProperty Name="date_hist" ColumnName="date_hist" />
-          <ScalarProperty Name="price_chg" ColumnName="price_chg" />
-          <ScalarProperty Name="idx_chg" ColumnName="idx_chg" />
-          <ScalarProperty Name="strong" ColumnName="strong" />
           <ScalarProperty Name="strong_sma5" ColumnName="strong_sma5" />
+          <ScalarProperty Name="strong" ColumnName="strong" />
+          <ScalarProperty Name="idx_chg" ColumnName="idx_chg" />
+          <ScalarProperty Name="price_chg" ColumnName="price_chg" />
+          <ScalarProperty Name="date_hist" ColumnName="date_hist" />
+          <ScalarProperty Name="industry" ColumnName="industry" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="daily_low">
       <EntityTypeMapping TypeName="stockModel.daily_low">
         <MappingFragment StoreEntitySet="daily_low">
-          <ScalarProperty Name="symbol" ColumnName="symbol" />
-          <ScalarProperty Name="date" ColumnName="date" />
-          <ScalarProperty Name="SMA_005" ColumnName="SMA_005" />
-          <ScalarProperty Name="SMA_010" ColumnName="SMA_010" />
-          <ScalarProperty Name="SMA_020" ColumnName="SMA_020" />
-          <ScalarProperty Name="SMA_030" ColumnName="SMA_030" />
-          <ScalarProperty Name="SMA_060" ColumnName="SMA_060" />
-          <ScalarProperty Name="SMA_120" ColumnName="SMA_120" />
           <ScalarProperty Name="SMA_200" ColumnName="SMA_200" />
+          <ScalarProperty Name="SMA_120" ColumnName="SMA_120" />
+          <ScalarProperty Name="SMA_060" ColumnName="SMA_060" />
+          <ScalarProperty Name="SMA_030" ColumnName="SMA_030" />
+          <ScalarProperty Name="SMA_020" ColumnName="SMA_020" />
+          <ScalarProperty Name="SMA_010" ColumnName="SMA_010" />
+          <ScalarProperty Name="SMA_005" ColumnName="SMA_005" />
+          <ScalarProperty Name="date" ColumnName="date" />
+          <ScalarProperty Name="symbol" ColumnName="symbol" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="daily_open">
       <EntityTypeMapping TypeName="stockModel.daily_open">
         <MappingFragment StoreEntitySet="daily_open">
-          <ScalarProperty Name="symbol" ColumnName="symbol" />
-          <ScalarProperty Name="date" ColumnName="date" />
-          <ScalarProperty Name="SMA_005" ColumnName="SMA_005" />
-          <ScalarProperty Name="SMA_010" ColumnName="SMA_010" />
-          <ScalarProperty Name="SMA_020" ColumnName="SMA_020" />
-          <ScalarProperty Name="SMA_030" ColumnName="SMA_030" />
-          <ScalarProperty Name="SMA_060" ColumnName="SMA_060" />
-          <ScalarProperty Name="SMA_120" ColumnName="SMA_120" />
           <ScalarProperty Name="SMA_200" ColumnName="SMA_200" />
+          <ScalarProperty Name="SMA_120" ColumnName="SMA_120" />
+          <ScalarProperty Name="SMA_060" ColumnName="SMA_060" />
+          <ScalarProperty Name="SMA_030" ColumnName="SMA_030" />
+          <ScalarProperty Name="SMA_020" ColumnName="SMA_020" />
+          <ScalarProperty Name="SMA_010" ColumnName="SMA_010" />
+          <ScalarProperty Name="SMA_005" ColumnName="SMA_005" />
+          <ScalarProperty Name="date" ColumnName="date" />
+          <ScalarProperty Name="symbol" ColumnName="symbol" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="daily_sector">
       <EntityTypeMapping TypeName="stockModel.daily_sector">
         <MappingFragment StoreEntitySet="daily_sector">
-          <ScalarProperty Name="sector" ColumnName="sector" />
-          <ScalarProperty Name="date_hist" ColumnName="date_hist" />
-          <ScalarProperty Name="price_chg" ColumnName="price_chg" />
-          <ScalarProperty Name="idx_chg" ColumnName="idx_chg" />
-          <ScalarProperty Name="strong" ColumnName="strong" />
           <ScalarProperty Name="strong_sma5" ColumnName="strong_sma5" />
+          <ScalarProperty Name="strong" ColumnName="strong" />
+          <ScalarProperty Name="idx_chg" ColumnName="idx_chg" />
+          <ScalarProperty Name="price_chg" ColumnName="price_chg" />
+          <ScalarProperty Name="date_hist" ColumnName="date_hist" />
+          <ScalarProperty Name="sector" ColumnName="sector" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="daily_analysis_v1">
       <EntityTypeMapping TypeName="stockModel.daily_analysis_v1">
         <MappingFragment StoreEntitySet="daily_analysis_v1">
-          <ScalarProperty Name="symbol" ColumnName="symbol" />
-          <ScalarProperty Name="watch_type" ColumnName="watch_type" />
-          <ScalarProperty Name="seq" ColumnName="seq" />
+          <ScalarProperty Name="surprisePercentage" ColumnName="surprisePercentage" />
+          <ScalarProperty Name="reportedEPS" ColumnName="reportedEPS" />
+          <ScalarProperty Name="TMB_R3" ColumnName="TMB_R3" />
+          <ScalarProperty Name="TMB_R2" ColumnName="TMB_R2" />
+          <ScalarProperty Name="TMB_R1" ColumnName="TMB_R1" />
+          <ScalarProperty Name="VB" ColumnName="VB" />
+          <ScalarProperty Name="VM" ColumnName="VM" />
+          <ScalarProperty Name="VT" ColumnName="VT" />
+          <ScalarProperty Name="tmb_no" ColumnName="tmb_no" />
+          <ScalarProperty Name="TMB" ColumnName="TMB" />
+          <ScalarProperty Name="dir_on" ColumnName="dir_on" />
+          <ScalarProperty Name="oc_by_hl_perc" ColumnName="oc_by_hl_perc" />
+          <ScalarProperty Name="dir" ColumnName="dir" />
+          <ScalarProperty Name="high_low_perc" ColumnName="high_low_perc" />
+          <ScalarProperty Name="open_close_perc" ColumnName="open_close_perc" />
           <ScalarProperty Name="date" ColumnName="date" />
-          <ScalarProperty Name="open" ColumnName="open" />
-          <ScalarProperty Name="close" ColumnName="close" />
-          <ScalarProperty Name="high" ColumnName="high" />
-          <ScalarProperty Name="low" ColumnName="low" />
-          <ScalarProperty Name="volume" ColumnName="volume" />
-          <ScalarProperty Name="avg" ColumnName="avg" />
-          <ScalarProperty Name="analysis_dir" ColumnName="analysis_dir" />
-          <ScalarProperty Name="analysis_dir_on" ColumnName="analysis_dir_on" />
-          <ScalarProperty Name="analysis_high_low_perc" ColumnName="analysis_high_low_perc" />
-          <ScalarProperty Name="analysis_oc_by_hl_perc" ColumnName="analysis_oc_by_hl_perc" />
-          <ScalarProperty Name="analysis_open_close_perc" ColumnName="analysis_open_close_perc" />
-          <ScalarProperty Name="analysis_point1" ColumnName="analysis_point1" />
-          <ScalarProperty Name="analysis_point2" ColumnName="analysis_point2" />
-          <ScalarProperty Name="analysis_point3" ColumnName="analysis_point3" />
-          <ScalarProperty Name="avg_after_005_perc" ColumnName="avg_after_005_perc" />
-          <ScalarProperty Name="avg_after_010_perc" ColumnName="avg_after_010_perc" />
-          <ScalarProperty Name="avg_after_015_perc" ColumnName="avg_after_015_perc" />
-          <ScalarProperty Name="avg_after_020_perc" ColumnName="avg_after_020_perc" />
-          <ScalarProperty Name="avg_after_040_perc" ColumnName="avg_after_040_perc" />
-          <ScalarProperty Name="avg_after_060_perc" ColumnName="avg_after_060_perc" />
-          <ScalarProperty Name="avg_after_120_perc" ColumnName="avg_after_120_perc" />
-          <ScalarProperty Name="avg_after_240_perc" ColumnName="avg_after_240_perc" />
-          <ScalarProperty Name="avg_after_480_perc" ColumnName="avg_after_480_perc" />
-          <ScalarProperty Name="avg_after_720_perc" ColumnName="avg_after_720_perc" />
-          <ScalarProperty Name="avg_after_960_perc" ColumnName="avg_after_960_perc" />
-          <ScalarProperty Name="avg_change" ColumnName="avg_change" />
-          <ScalarProperty Name="avg_change_perc" ColumnName="avg_change_perc" />
-          <ScalarProperty Name="avg_ema_005" ColumnName="avg_ema_005" />
-          <ScalarProperty Name="avg_ema_012" ColumnName="avg_ema_012" />
-          <ScalarProperty Name="avg_ema_020" ColumnName="avg_ema_020" />
-          <ScalarProperty Name="avg_ema_026" ColumnName="avg_ema_026" />
-          <ScalarProperty Name="avg_ema_060" ColumnName="avg_ema_060" />
-          <ScalarProperty Name="avg_ema_120" ColumnName="avg_ema_120" />
-          <ScalarProperty Name="avg_macd_12_26" ColumnName="avg_macd_12_26" />
-          <ScalarProperty Name="avg_macd_12_26_9" ColumnName="avg_macd_12_26_9" />
-          <ScalarProperty Name="avg_macd_12_26_hist" ColumnName="avg_macd_12_26_hist" />
-          <ScalarProperty Name="avg_per_fiscal" ColumnName="avg_per_fiscal" />
-          <ScalarProperty Name="avg_per_report" ColumnName="avg_per_report" />
-          <ScalarProperty Name="avg_rsi_005" ColumnName="avg_rsi_005" />
-          <ScalarProperty Name="avg_rsi_012" ColumnName="avg_rsi_012" />
-          <ScalarProperty Name="avg_rsi_020" ColumnName="avg_rsi_020" />
-          <ScalarProperty Name="avg_rsi_026" ColumnName="avg_rsi_026" />
-          <ScalarProperty Name="avg_rsi_060" ColumnName="avg_rsi_060" />
-          <ScalarProperty Name="avg_rsi_120" ColumnName="avg_rsi_120" />
-          <ScalarProperty Name="avg_sma_005" ColumnName="avg_sma_005" />
-          <ScalarProperty Name="avg_sma_012" ColumnName="avg_sma_012" />
-          <ScalarProperty Name="avg_sma_020" ColumnName="avg_sma_020" />
-          <ScalarProperty Name="avg_sma_026" ColumnName="avg_sma_026" />
-          <ScalarProperty Name="avg_sma_060" ColumnName="avg_sma_060" />
-          <ScalarProperty Name="avg_sma_120" ColumnName="avg_sma_120" />
-          <ScalarProperty Name="volume_after_005_perc" ColumnName="volume_after_005_perc" />
-          <ScalarProperty Name="volume_after_010_perc" ColumnName="volume_after_010_perc" />
-          <ScalarProperty Name="volume_after_015_perc" ColumnName="volume_after_015_perc" />
-          <ScalarProperty Name="volume_after_020_perc" ColumnName="volume_after_020_perc" />
-          <ScalarProperty Name="volume_after_040_perc" ColumnName="volume_after_040_perc" />
-          <ScalarProperty Name="volume_after_060_perc" ColumnName="volume_after_060_perc" />
-          <ScalarProperty Name="volume_after_120_perc" ColumnName="volume_after_120_perc" />
-          <ScalarProperty Name="volume_after_240_perc" ColumnName="volume_after_240_perc" />
-          <ScalarProperty Name="volume_after_480_perc" ColumnName="volume_after_480_perc" />
-          <ScalarProperty Name="volume_after_720_perc" ColumnName="volume_after_720_perc" />
-          <ScalarProperty Name="volume_after_960_perc" ColumnName="volume_after_960_perc" />
-          <ScalarProperty Name="volume_change" ColumnName="volume_change" />
-          <ScalarProperty Name="volume_change_perc" ColumnName="volume_change_perc" />
-          <ScalarProperty Name="volume_ema_005" ColumnName="volume_ema_005" />
-          <ScalarProperty Name="volume_ema_012" ColumnName="volume_ema_012" />
-          <ScalarProperty Name="volume_ema_020" ColumnName="volume_ema_020" />
-          <ScalarProperty Name="volume_ema_026" ColumnName="volume_ema_026" />
-          <ScalarProperty Name="volume_ema_060" ColumnName="volume_ema_060" />
-          <ScalarProperty Name="volume_ema_120" ColumnName="volume_ema_120" />
-          <ScalarProperty Name="volume_macd_12_26" ColumnName="volume_macd_12_26" />
-          <ScalarProperty Name="volume_macd_12_26_9" ColumnName="volume_macd_12_26_9" />
-          <ScalarProperty Name="volume_macd_12_26_hist" ColumnName="volume_macd_12_26_hist" />
-          <ScalarProperty Name="volume_obv" ColumnName="volume_obv" />
-          <ScalarProperty Name="volume_per_fiscal" ColumnName="volume_per_fiscal" />
-          <ScalarProperty Name="volume_per_report" ColumnName="volume_per_report" />
-          <ScalarProperty Name="volume_rsi_005" ColumnName="volume_rsi_005" />
-          <ScalarProperty Name="volume_rsi_012" ColumnName="volume_rsi_012" />
-          <ScalarProperty Name="volume_rsi_020" ColumnName="volume_rsi_020" />
-          <ScalarProperty Name="volume_rsi_026" ColumnName="volume_rsi_026" />
-          <ScalarProperty Name="volume_rsi_060" ColumnName="volume_rsi_060" />
-          <ScalarProperty Name="volume_rsi_120" ColumnName="volume_rsi_120" />
-          <ScalarProperty Name="volume_sma_005" ColumnName="volume_sma_005" />
-          <ScalarProperty Name="volume_sma_012" ColumnName="volume_sma_012" />
-          <ScalarProperty Name="volume_sma_020" ColumnName="volume_sma_020" />
-          <ScalarProperty Name="volume_sma_026" ColumnName="volume_sma_026" />
-          <ScalarProperty Name="volume_sma_060" ColumnName="volume_sma_060" />
-          <ScalarProperty Name="volume_sma_120" ColumnName="volume_sma_120" />
-          <ScalarProperty Name="volume_vr" ColumnName="volume_vr" />
-          <ScalarProperty Name="last_created" ColumnName="last_created" />
+          <ScalarProperty Name="symbol" ColumnName="symbol" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="daily_candle_v1">
       <EntityTypeMapping TypeName="stockModel.daily_candle_v1">
         <MappingFragment StoreEntitySet="daily_candle_v1">
-          <ScalarProperty Name="symbol" ColumnName="symbol" />
-          <ScalarProperty Name="date_hist" ColumnName="date_hist" />
-          <ScalarProperty Name="direction" ColumnName="direction" />
-          <ScalarProperty Name="size" ColumnName="size" />
           <ScalarProperty Name="candle" ColumnName="candle" />
+          <ScalarProperty Name="size" ColumnName="size" />
+          <ScalarProperty Name="direction" ColumnName="direction" />
+          <ScalarProperty Name="date_hist" ColumnName="date_hist" />
+          <ScalarProperty Name="symbol" ColumnName="symbol" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="daily_close_v1">
       <EntityTypeMapping TypeName="stockModel.daily_close_v1">
         <MappingFragment StoreEntitySet="daily_close_v1">
-          <ScalarProperty Name="symbol" ColumnName="symbol" />
-          <ScalarProperty Name="date_hist" ColumnName="date_hist" />
-          <ScalarProperty Name="price" ColumnName="price" />
-          <ScalarProperty Name="sma_005" ColumnName="sma_005" />
-          <ScalarProperty Name="sma_010" ColumnName="sma_010" />
-          <ScalarProperty Name="sma_020" ColumnName="sma_020" />
-          <ScalarProperty Name="sma_030" ColumnName="sma_030" />
-          <ScalarProperty Name="sma_060" ColumnName="sma_060" />
-          <ScalarProperty Name="sma_120" ColumnName="sma_120" />
-          <ScalarProperty Name="sma_240" ColumnName="sma_240" />
-          <ScalarProperty Name="direction" ColumnName="direction" />
-          <ScalarProperty Name="head" ColumnName="head" />
-          <ScalarProperty Name="center" ColumnName="center" />
-          <ScalarProperty Name="tail" ColumnName="tail" />
-          <ScalarProperty Name="candle" ColumnName="candle" />
-          <ScalarProperty Name="size_sma5" ColumnName="size_sma5" />
-          <ScalarProperty Name="size_sma10" ColumnName="size_sma10" />
-          <ScalarProperty Name="size_sma20" ColumnName="size_sma20" />
-          <ScalarProperty Name="size_sma30" ColumnName="size_sma30" />
-          <ScalarProperty Name="size_sma60" ColumnName="size_sma60" />
-          <ScalarProperty Name="size_sma120" ColumnName="size_sma120" />
           <ScalarProperty Name="size_sma240" ColumnName="size_sma240" />
+          <ScalarProperty Name="size_sma120" ColumnName="size_sma120" />
+          <ScalarProperty Name="size_sma60" ColumnName="size_sma60" />
+          <ScalarProperty Name="size_sma30" ColumnName="size_sma30" />
+          <ScalarProperty Name="size_sma20" ColumnName="size_sma20" />
+          <ScalarProperty Name="size_sma10" ColumnName="size_sma10" />
+          <ScalarProperty Name="size_sma5" ColumnName="size_sma5" />
+          <ScalarProperty Name="candle" ColumnName="candle" />
+          <ScalarProperty Name="tail" ColumnName="tail" />
+          <ScalarProperty Name="center" ColumnName="center" />
+          <ScalarProperty Name="head" ColumnName="head" />
+          <ScalarProperty Name="direction" ColumnName="direction" />
+          <ScalarProperty Name="sma_240" ColumnName="sma_240" />
+          <ScalarProperty Name="sma_120" ColumnName="sma_120" />
+          <ScalarProperty Name="sma_060" ColumnName="sma_060" />
+          <ScalarProperty Name="sma_030" ColumnName="sma_030" />
+          <ScalarProperty Name="sma_020" ColumnName="sma_020" />
+          <ScalarProperty Name="sma_010" ColumnName="sma_010" />
+          <ScalarProperty Name="sma_005" ColumnName="sma_005" />
+          <ScalarProperty Name="price" ColumnName="price" />
+          <ScalarProperty Name="date_hist" ColumnName="date_hist" />
+          <ScalarProperty Name="symbol" ColumnName="symbol" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="daily_sma5_v1">
       <EntityTypeMapping TypeName="stockModel.daily_sma5_v1">
         <MappingFragment StoreEntitySet="daily_sma5_v1">
-          <ScalarProperty Name="symbol" ColumnName="symbol" />
-          <ScalarProperty Name="date_hist" ColumnName="date_hist" />
-          <ScalarProperty Name="price" ColumnName="price" />
-          <ScalarProperty Name="price_pre" ColumnName="price_pre" />
-          <ScalarProperty Name="price_chg_perc" ColumnName="price_chg_perc" />
-          <ScalarProperty Name="sma5" ColumnName="sma5" />
-          <ScalarProperty Name="sma5_pre" ColumnName="sma5_pre" />
           <ScalarProperty Name="sma5_chg_perc" ColumnName="sma5_chg_perc" />
+          <ScalarProperty Name="sma5_pre" ColumnName="sma5_pre" />
+          <ScalarProperty Name="sma5" ColumnName="sma5" />
+          <ScalarProperty Name="price_chg_perc" ColumnName="price_chg_perc" />
+          <ScalarProperty Name="price_pre" ColumnName="price_pre" />
+          <ScalarProperty Name="price" ColumnName="price" />
+          <ScalarProperty Name="date_hist" ColumnName="date_hist" />
+          <ScalarProperty Name="symbol" ColumnName="symbol" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="daily_strong_v1">
       <EntityTypeMapping TypeName="stockModel.daily_strong_v1">
         <MappingFragment StoreEntitySet="daily_strong_v1">
-          <ScalarProperty Name="symbol" ColumnName="symbol" />
-          <ScalarProperty Name="date_hist" ColumnName="date_hist" />
-          <ScalarProperty Name="price" ColumnName="price" />
-          <ScalarProperty Name="price_chg_perc" ColumnName="price_chg_perc" />
-          <ScalarProperty Name="sma5" ColumnName="sma5" />
-          <ScalarProperty Name="sma5_chg_perc" ColumnName="sma5_chg_perc" />
-          <ScalarProperty Name="spy_price" ColumnName="spy_price" />
-          <ScalarProperty Name="spy_chg" ColumnName="spy_chg" />
-          <ScalarProperty Name="spy_sma5" ColumnName="spy_sma5" />
-          <ScalarProperty Name="spy_diff" ColumnName="spy_diff" />
-          <ScalarProperty Name="spy_diff_sma5" ColumnName="spy_diff_sma5" />
-          <ScalarProperty Name="qqq_price" ColumnName="qqq_price" />
-          <ScalarProperty Name="qqq_chg" ColumnName="qqq_chg" />
-          <ScalarProperty Name="qqq_sma5" ColumnName="qqq_sma5" />
-          <ScalarProperty Name="qqq_diff" ColumnName="qqq_diff" />
-          <ScalarProperty Name="qqq_diff_sma5" ColumnName="qqq_diff_sma5" />
-          <ScalarProperty Name="dia_price" ColumnName="dia_price" />
-          <ScalarProperty Name="dia_chg" ColumnName="dia_chg" />
-          <ScalarProperty Name="dia_sma5" ColumnName="dia_sma5" />
-          <ScalarProperty Name="dia_diff" ColumnName="dia_diff" />
-          <ScalarProperty Name="dia_diff_sma5" ColumnName="dia_diff_sma5" />
-          <ScalarProperty Name="idx_price" ColumnName="idx_price" />
-          <ScalarProperty Name="idx_sma5" ColumnName="idx_sma5" />
-          <ScalarProperty Name="idx_chg" ColumnName="idx_chg" />
-          <ScalarProperty Name="idx_diff" ColumnName="idx_diff" />
           <ScalarProperty Name="idx_diff_sma5" ColumnName="idx_diff_sma5" />
+          <ScalarProperty Name="idx_diff" ColumnName="idx_diff" />
+          <ScalarProperty Name="idx_chg" ColumnName="idx_chg" />
+          <ScalarProperty Name="idx_sma5" ColumnName="idx_sma5" />
+          <ScalarProperty Name="idx_price" ColumnName="idx_price" />
+          <ScalarProperty Name="dia_diff_sma5" ColumnName="dia_diff_sma5" />
+          <ScalarProperty Name="dia_diff" ColumnName="dia_diff" />
+          <ScalarProperty Name="dia_sma5" ColumnName="dia_sma5" />
+          <ScalarProperty Name="dia_chg" ColumnName="dia_chg" />
+          <ScalarProperty Name="dia_price" ColumnName="dia_price" />
+          <ScalarProperty Name="qqq_diff_sma5" ColumnName="qqq_diff_sma5" />
+          <ScalarProperty Name="qqq_diff" ColumnName="qqq_diff" />
+          <ScalarProperty Name="qqq_sma5" ColumnName="qqq_sma5" />
+          <ScalarProperty Name="qqq_chg" ColumnName="qqq_chg" />
+          <ScalarProperty Name="qqq_price" ColumnName="qqq_price" />
+          <ScalarProperty Name="spy_diff_sma5" ColumnName="spy_diff_sma5" />
+          <ScalarProperty Name="spy_diff" ColumnName="spy_diff" />
+          <ScalarProperty Name="spy_sma5" ColumnName="spy_sma5" />
+          <ScalarProperty Name="spy_chg" ColumnName="spy_chg" />
+          <ScalarProperty Name="spy_price" ColumnName="spy_price" />
+          <ScalarProperty Name="sma5_chg_perc" ColumnName="sma5_chg_perc" />
+          <ScalarProperty Name="sma5" ColumnName="sma5" />
+          <ScalarProperty Name="price_chg_perc" ColumnName="price_chg_perc" />
+          <ScalarProperty Name="price" ColumnName="price" />
+          <ScalarProperty Name="date_hist" ColumnName="date_hist" />
+          <ScalarProperty Name="symbol" ColumnName="symbol" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="daily_v1">
       <EntityTypeMapping TypeName="stockModel.daily_v1">
         <MappingFragment StoreEntitySet="daily_v1">
-          <ScalarProperty Name="symbol" ColumnName="symbol" />
-          <ScalarProperty Name="watch_type" ColumnName="watch_type" />
-          <ScalarProperty Name="seq" ColumnName="seq" />
-          <ScalarProperty Name="date" ColumnName="date" />
-          <ScalarProperty Name="open" ColumnName="open" />
-          <ScalarProperty Name="close" ColumnName="close" />
-          <ScalarProperty Name="high" ColumnName="high" />
-          <ScalarProperty Name="low" ColumnName="low" />
-          <ScalarProperty Name="volume" ColumnName="volume" />
-          <ScalarProperty Name="avg" ColumnName="avg" />
-          <ScalarProperty Name="analysis_dir" ColumnName="analysis_dir" />
-          <ScalarProperty Name="analysis_dir_on" ColumnName="analysis_dir_on" />
-          <ScalarProperty Name="analysis_high_low_perc" ColumnName="analysis_high_low_perc" />
-          <ScalarProperty Name="analysis_oc_by_hl_perc" ColumnName="analysis_oc_by_hl_perc" />
-          <ScalarProperty Name="analysis_open_close_perc" ColumnName="analysis_open_close_perc" />
-          <ScalarProperty Name="analysis_point1" ColumnName="analysis_point1" />
-          <ScalarProperty Name="analysis_point2" ColumnName="analysis_point2" />
-          <ScalarProperty Name="analysis_point3" ColumnName="analysis_point3" />
-          <ScalarProperty Name="avg_after_005_perc" ColumnName="avg_after_005_perc" />
-          <ScalarProperty Name="avg_after_010_perc" ColumnName="avg_after_010_perc" />
-          <ScalarProperty Name="avg_after_015_perc" ColumnName="avg_after_015_perc" />
-          <ScalarProperty Name="avg_after_020_perc" ColumnName="avg_after_020_perc" />
-          <ScalarProperty Name="avg_after_040_perc" ColumnName="avg_after_040_perc" />
-          <ScalarProperty Name="avg_after_060_perc" ColumnName="avg_after_060_perc" />
-          <ScalarProperty Name="avg_after_120_perc" ColumnName="avg_after_120_perc" />
-          <ScalarProperty Name="avg_after_240_perc" ColumnName="avg_after_240_perc" />
-          <ScalarProperty Name="avg_after_480_perc" ColumnName="avg_after_480_perc" />
-          <ScalarProperty Name="avg_after_720_perc" ColumnName="avg_after_720_perc" />
-          <ScalarProperty Name="avg_after_960_perc" ColumnName="avg_after_960_perc" />
-          <ScalarProperty Name="avg_change" ColumnName="avg_change" />
-          <ScalarProperty Name="avg_change_perc" ColumnName="avg_change_perc" />
-          <ScalarProperty Name="avg_ema_005" ColumnName="avg_ema_005" />
-          <ScalarProperty Name="avg_ema_012" ColumnName="avg_ema_012" />
-          <ScalarProperty Name="avg_ema_020" ColumnName="avg_ema_020" />
-          <ScalarProperty Name="avg_ema_026" ColumnName="avg_ema_026" />
-          <ScalarProperty Name="avg_ema_060" ColumnName="avg_ema_060" />
-          <ScalarProperty Name="avg_ema_120" ColumnName="avg_ema_120" />
-          <ScalarProperty Name="avg_macd_12_26" ColumnName="avg_macd_12_26" />
-          <ScalarProperty Name="avg_macd_12_26_9" ColumnName="avg_macd_12_26_9" />
-          <ScalarProperty Name="avg_macd_12_26_hist" ColumnName="avg_macd_12_26_hist" />
-          <ScalarProperty Name="avg_per_fiscal" ColumnName="avg_per_fiscal" />
-          <ScalarProperty Name="avg_per_report" ColumnName="avg_per_report" />
-          <ScalarProperty Name="avg_rsi_005" ColumnName="avg_rsi_005" />
-          <ScalarProperty Name="avg_rsi_012" ColumnName="avg_rsi_012" />
-          <ScalarProperty Name="avg_rsi_020" ColumnName="avg_rsi_020" />
-          <ScalarProperty Name="avg_rsi_026" ColumnName="avg_rsi_026" />
-          <ScalarProperty Name="avg_rsi_060" ColumnName="avg_rsi_060" />
-          <ScalarProperty Name="avg_rsi_120" ColumnName="avg_rsi_120" />
-          <ScalarProperty Name="avg_sma_005" ColumnName="avg_sma_005" />
-          <ScalarProperty Name="avg_sma_012" ColumnName="avg_sma_012" />
-          <ScalarProperty Name="avg_sma_020" ColumnName="avg_sma_020" />
-          <ScalarProperty Name="avg_sma_026" ColumnName="avg_sma_026" />
-          <ScalarProperty Name="avg_sma_060" ColumnName="avg_sma_060" />
-          <ScalarProperty Name="avg_sma_120" ColumnName="avg_sma_120" />
-          <ScalarProperty Name="close_after_005_perc" ColumnName="close_after_005_perc" />
-          <ScalarProperty Name="close_after_010_perc" ColumnName="close_after_010_perc" />
-          <ScalarProperty Name="close_after_015_perc" ColumnName="close_after_015_perc" />
-          <ScalarProperty Name="close_after_020_perc" ColumnName="close_after_020_perc" />
-          <ScalarProperty Name="close_after_040_perc" ColumnName="close_after_040_perc" />
-          <ScalarProperty Name="close_after_060_perc" ColumnName="close_after_060_perc" />
-          <ScalarProperty Name="close_after_120_perc" ColumnName="close_after_120_perc" />
-          <ScalarProperty Name="close_after_240_perc" ColumnName="close_after_240_perc" />
-          <ScalarProperty Name="close_after_480_perc" ColumnName="close_after_480_perc" />
-          <ScalarProperty Name="close_after_720_perc" ColumnName="close_after_720_perc" />
-          <ScalarProperty Name="close_after_960_perc" ColumnName="close_after_960_perc" />
-          <ScalarProperty Name="close_change" ColumnName="close_change" />
-          <ScalarProperty Name="close_change_perc" ColumnName="close_change_perc" />
-          <ScalarProperty Name="close_ema_005" ColumnName="close_ema_005" />
-          <ScalarProperty Name="close_ema_012" ColumnName="close_ema_012" />
-          <ScalarProperty Name="close_ema_020" ColumnName="close_ema_020" />
-          <ScalarProperty Name="close_ema_026" ColumnName="close_ema_026" />
-          <ScalarProperty Name="close_ema_060" ColumnName="close_ema_060" />
-          <ScalarProperty Name="close_ema_120" ColumnName="close_ema_120" />
-          <ScalarProperty Name="close_macd_12_26" ColumnName="close_macd_12_26" />
-          <ScalarProperty Name="close_macd_12_26_9" ColumnName="close_macd_12_26_9" />
-          <ScalarProperty Name="close_macd_12_26_hist" ColumnName="close_macd_12_26_hist" />
-          <ScalarProperty Name="close_per_fiscal" ColumnName="close_per_fiscal" />
-          <ScalarProperty Name="close_per_report" ColumnName="close_per_report" />
-          <ScalarProperty Name="close_rsi_005" ColumnName="close_rsi_005" />
-          <ScalarProperty Name="close_rsi_012" ColumnName="close_rsi_012" />
-          <ScalarProperty Name="close_rsi_020" ColumnName="close_rsi_020" />
-          <ScalarProperty Name="close_rsi_026" ColumnName="close_rsi_026" />
-          <ScalarProperty Name="close_rsi_060" ColumnName="close_rsi_060" />
-          <ScalarProperty Name="close_rsi_120" ColumnName="close_rsi_120" />
-          <ScalarProperty Name="close_sma_005" ColumnName="close_sma_005" />
-          <ScalarProperty Name="close_sma_012" ColumnName="close_sma_012" />
-          <ScalarProperty Name="high_after_005_perc" ColumnName="high_after_005_perc" />
-          <ScalarProperty Name="high_after_010_perc" ColumnName="high_after_010_perc" />
-          <ScalarProperty Name="high_after_015_perc" ColumnName="high_after_015_perc" />
-          <ScalarProperty Name="high_after_020_perc" ColumnName="high_after_020_perc" />
-          <ScalarProperty Name="high_after_040_perc" ColumnName="high_after_040_perc" />
-          <ScalarProperty Name="high_after_060_perc" ColumnName="high_after_060_perc" />
-          <ScalarProperty Name="high_after_120_perc" ColumnName="high_after_120_perc" />
-          <ScalarProperty Name="high_after_240_perc" ColumnName="high_after_240_perc" />
-          <ScalarProperty Name="high_after_480_perc" ColumnName="high_after_480_perc" />
-          <ScalarProperty Name="high_after_720_perc" ColumnName="high_after_720_perc" />
-          <ScalarProperty Name="high_after_960_perc" ColumnName="high_after_960_perc" />
-          <ScalarProperty Name="high_change_perc" ColumnName="high_change_perc" />
-          <ScalarProperty Name="low_after_005_perc" ColumnName="low_after_005_perc" />
-          <ScalarProperty Name="low_after_010_perc" ColumnName="low_after_010_perc" />
-          <ScalarProperty Name="low_after_015_perc" ColumnName="low_after_015_perc" />
-          <ScalarProperty Name="low_after_020_perc" ColumnName="low_after_020_perc" />
-          <ScalarProperty Name="low_after_040_perc" ColumnName="low_after_040_perc" />
-          <ScalarProperty Name="low_after_060_perc" ColumnName="low_after_060_perc" />
-          <ScalarProperty Name="low_after_120_perc" ColumnName="low_after_120_perc" />
-          <ScalarProperty Name="low_after_240_perc" ColumnName="low_after_240_perc" />
-          <ScalarProperty Name="low_after_480_perc" ColumnName="low_after_480_perc" />
-          <ScalarProperty Name="low_after_720_perc" ColumnName="low_after_720_perc" />
-          <ScalarProperty Name="low_after_960_perc" ColumnName="low_after_960_perc" />
-          <ScalarProperty Name="low_change_perc" ColumnName="low_change_perc" />
-          <ScalarProperty Name="open_after_005_perc" ColumnName="open_after_005_perc" />
-          <ScalarProperty Name="open_after_010_perc" ColumnName="open_after_010_perc" />
-          <ScalarProperty Name="open_after_015_perc" ColumnName="open_after_015_perc" />
-          <ScalarProperty Name="open_after_020_perc" ColumnName="open_after_020_perc" />
-          <ScalarProperty Name="open_after_040_perc" ColumnName="open_after_040_perc" />
-          <ScalarProperty Name="open_after_060_perc" ColumnName="open_after_060_perc" />
-          <ScalarProperty Name="open_after_120_perc" ColumnName="open_after_120_perc" />
-          <ScalarProperty Name="open_after_240_perc" ColumnName="open_after_240_perc" />
-          <ScalarProperty Name="open_after_480_perc" ColumnName="open_after_480_perc" />
-          <ScalarProperty Name="open_after_720_perc" ColumnName="open_after_720_perc" />
-          <ScalarProperty Name="open_after_960_perc" ColumnName="open_after_960_perc" />
-          <ScalarProperty Name="open_change_perc" ColumnName="open_change_perc" />
-          <ScalarProperty Name="volume_after_005_perc" ColumnName="volume_after_005_perc" />
-          <ScalarProperty Name="volume_after_010_perc" ColumnName="volume_after_010_perc" />
-          <ScalarProperty Name="volume_after_015_perc" ColumnName="volume_after_015_perc" />
-          <ScalarProperty Name="volume_after_020_perc" ColumnName="volume_after_020_perc" />
-          <ScalarProperty Name="volume_after_040_perc" ColumnName="volume_after_040_perc" />
-          <ScalarProperty Name="volume_after_060_perc" ColumnName="volume_after_060_perc" />
-          <ScalarProperty Name="volume_after_120_perc" ColumnName="volume_after_120_perc" />
-          <ScalarProperty Name="volume_after_240_perc" ColumnName="volume_after_240_perc" />
-          <ScalarProperty Name="volume_after_480_perc" ColumnName="volume_after_480_perc" />
-          <ScalarProperty Name="volume_after_720_perc" ColumnName="volume_after_720_perc" />
-          <ScalarProperty Name="volume_after_960_perc" ColumnName="volume_after_960_perc" />
-          <ScalarProperty Name="volume_change_perc" ColumnName="volume_change_perc" />
-          <ScalarProperty Name="close_sma_020" ColumnName="close_sma_020" />
-          <ScalarProperty Name="close_sma_026" ColumnName="close_sma_026" />
-          <ScalarProperty Name="close_sma_060" ColumnName="close_sma_060" />
-          <ScalarProperty Name="close_sma_120" ColumnName="close_sma_120" />
-          <ScalarProperty Name="high_change" ColumnName="high_change" />
-          <ScalarProperty Name="high_ema_005" ColumnName="high_ema_005" />
-          <ScalarProperty Name="high_ema_012" ColumnName="high_ema_012" />
-          <ScalarProperty Name="high_ema_020" ColumnName="high_ema_020" />
-          <ScalarProperty Name="high_ema_026" ColumnName="high_ema_026" />
-          <ScalarProperty Name="high_ema_060" ColumnName="high_ema_060" />
-          <ScalarProperty Name="high_ema_120" ColumnName="high_ema_120" />
-          <ScalarProperty Name="high_macd_12_26" ColumnName="high_macd_12_26" />
-          <ScalarProperty Name="high_macd_12_26_9" ColumnName="high_macd_12_26_9" />
-          <ScalarProperty Name="high_macd_12_26_hist" ColumnName="high_macd_12_26_hist" />
-          <ScalarProperty Name="high_per_fiscal" ColumnName="high_per_fiscal" />
-          <ScalarProperty Name="high_per_report" ColumnName="high_per_report" />
-          <ScalarProperty Name="high_rsi_005" ColumnName="high_rsi_005" />
-          <ScalarProperty Name="high_rsi_012" ColumnName="high_rsi_012" />
-          <ScalarProperty Name="high_rsi_020" ColumnName="high_rsi_020" />
-          <ScalarProperty Name="high_rsi_026" ColumnName="high_rsi_026" />
-          <ScalarProperty Name="high_rsi_060" ColumnName="high_rsi_060" />
-          <ScalarProperty Name="high_rsi_120" ColumnName="high_rsi_120" />
-          <ScalarProperty Name="high_sma_005" ColumnName="high_sma_005" />
-          <ScalarProperty Name="high_sma_012" ColumnName="high_sma_012" />
-          <ScalarProperty Name="high_sma_020" ColumnName="high_sma_020" />
-          <ScalarProperty Name="high_sma_026" ColumnName="high_sma_026" />
-          <ScalarProperty Name="high_sma_060" ColumnName="high_sma_060" />
-          <ScalarProperty Name="high_sma_120" ColumnName="high_sma_120" />
-          <ScalarProperty Name="low_change" ColumnName="low_change" />
-          <ScalarProperty Name="low_ema_005" ColumnName="low_ema_005" />
-          <ScalarProperty Name="low_ema_012" ColumnName="low_ema_012" />
-          <ScalarProperty Name="low_ema_020" ColumnName="low_ema_020" />
-          <ScalarProperty Name="low_ema_026" ColumnName="low_ema_026" />
-          <ScalarProperty Name="low_ema_060" ColumnName="low_ema_060" />
-          <ScalarProperty Name="low_ema_120" ColumnName="low_ema_120" />
-          <ScalarProperty Name="low_macd_12_26" ColumnName="low_macd_12_26" />
-          <ScalarProperty Name="low_macd_12_26_9" ColumnName="low_macd_12_26_9" />
-          <ScalarProperty Name="low_macd_12_26_hist" ColumnName="low_macd_12_26_hist" />
-          <ScalarProperty Name="low_per_fiscal" ColumnName="low_per_fiscal" />
-          <ScalarProperty Name="low_per_report" ColumnName="low_per_report" />
-          <ScalarProperty Name="low_rsi_005" ColumnName="low_rsi_005" />
-          <ScalarProperty Name="low_rsi_012" ColumnName="low_rsi_012" />
-          <ScalarProperty Name="low_rsi_020" ColumnName="low_rsi_020" />
-          <ScalarProperty Name="low_rsi_026" ColumnName="low_rsi_026" />
-          <ScalarProperty Name="low_rsi_060" ColumnName="low_rsi_060" />
-          <ScalarProperty Name="low_rsi_120" ColumnName="low_rsi_120" />
-          <ScalarProperty Name="low_sma_005" ColumnName="low_sma_005" />
-          <ScalarProperty Name="low_sma_012" ColumnName="low_sma_012" />
-          <ScalarProperty Name="low_sma_020" ColumnName="low_sma_020" />
-          <ScalarProperty Name="low_sma_026" ColumnName="low_sma_026" />
-          <ScalarProperty Name="low_sma_060" ColumnName="low_sma_060" />
-          <ScalarProperty Name="low_sma_120" ColumnName="low_sma_120" />
-          <ScalarProperty Name="open_change" ColumnName="open_change" />
-          <ScalarProperty Name="open_ema_005" ColumnName="open_ema_005" />
-          <ScalarProperty Name="open_ema_012" ColumnName="open_ema_012" />
-          <ScalarProperty Name="open_ema_020" ColumnName="open_ema_020" />
-          <ScalarProperty Name="open_ema_026" ColumnName="open_ema_026" />
-          <ScalarProperty Name="open_ema_060" ColumnName="open_ema_060" />
-          <ScalarProperty Name="open_ema_120" ColumnName="open_ema_120" />
-          <ScalarProperty Name="open_macd_12_26" ColumnName="open_macd_12_26" />
-          <ScalarProperty Name="open_macd_12_26_9" ColumnName="open_macd_12_26_9" />
-          <ScalarProperty Name="open_macd_12_26_hist" ColumnName="open_macd_12_26_hist" />
-          <ScalarProperty Name="open_per_fiscal" ColumnName="open_per_fiscal" />
-          <ScalarProperty Name="open_per_report" ColumnName="open_per_report" />
-          <ScalarProperty Name="open_rsi_005" ColumnName="open_rsi_005" />
-          <ScalarProperty Name="open_rsi_012" ColumnName="open_rsi_012" />
-          <ScalarProperty Name="open_rsi_020" ColumnName="open_rsi_020" />
-          <ScalarProperty Name="open_rsi_026" ColumnName="open_rsi_026" />
-          <ScalarProperty Name="open_rsi_060" ColumnName="open_rsi_060" />
-          <ScalarProperty Name="open_rsi_120" ColumnName="open_rsi_120" />
-          <ScalarProperty Name="open_sma_005" ColumnName="open_sma_005" />
-          <ScalarProperty Name="open_sma_012" ColumnName="open_sma_012" />
-          <ScalarProperty Name="open_sma_020" ColumnName="open_sma_020" />
-          <ScalarProperty Name="open_sma_026" ColumnName="open_sma_026" />
-          <ScalarProperty Name="open_sma_060" ColumnName="open_sma_060" />
-          <ScalarProperty Name="open_sma_120" ColumnName="open_sma_120" />
-          <ScalarProperty Name="source_adjusted_close" ColumnName="source_adjusted_close" />
-          <ScalarProperty Name="source_close" ColumnName="source_close" />
-          <ScalarProperty Name="source_dividend_amount" ColumnName="source_dividend_amount" />
-          <ScalarProperty Name="source_high" ColumnName="source_high" />
-          <ScalarProperty Name="source_low" ColumnName="source_low" />
-          <ScalarProperty Name="source_open" ColumnName="source_open" />
-          <ScalarProperty Name="source_split_coefficient" ColumnName="source_split_coefficient" />
-          <ScalarProperty Name="source_volume" ColumnName="source_volume" />
-          <ScalarProperty Name="volume_change" ColumnName="volume_change" />
-          <ScalarProperty Name="volume_ema_005" ColumnName="volume_ema_005" />
-          <ScalarProperty Name="volume_ema_012" ColumnName="volume_ema_012" />
-          <ScalarProperty Name="volume_ema_020" ColumnName="volume_ema_020" />
-          <ScalarProperty Name="volume_ema_026" ColumnName="volume_ema_026" />
-          <ScalarProperty Name="volume_ema_060" ColumnName="volume_ema_060" />
-          <ScalarProperty Name="volume_ema_120" ColumnName="volume_ema_120" />
-          <ScalarProperty Name="volume_macd_12_26" ColumnName="volume_macd_12_26" />
-          <ScalarProperty Name="volume_macd_12_26_9" ColumnName="volume_macd_12_26_9" />
-          <ScalarProperty Name="volume_macd_12_26_hist" ColumnName="volume_macd_12_26_hist" />
-          <ScalarProperty Name="volume_obv" ColumnName="volume_obv" />
-          <ScalarProperty Name="volume_per_fiscal" ColumnName="volume_per_fiscal" />
-          <ScalarProperty Name="volume_per_report" ColumnName="volume_per_report" />
-          <ScalarProperty Name="volume_rsi_005" ColumnName="volume_rsi_005" />
-          <ScalarProperty Name="volume_rsi_012" ColumnName="volume_rsi_012" />
-          <ScalarProperty Name="volume_rsi_020" ColumnName="volume_rsi_020" />
-          <ScalarProperty Name="volume_rsi_026" ColumnName="volume_rsi_026" />
-          <ScalarProperty Name="volume_rsi_060" ColumnName="volume_rsi_060" />
-          <ScalarProperty Name="volume_rsi_120" ColumnName="volume_rsi_120" />
-          <ScalarProperty Name="volume_sma_005" ColumnName="volume_sma_005" />
-          <ScalarProperty Name="volume_sma_012" ColumnName="volume_sma_012" />
-          <ScalarProperty Name="volume_sma_020" ColumnName="volume_sma_020" />
-          <ScalarProperty Name="volume_sma_026" ColumnName="volume_sma_026" />
-          <ScalarProperty Name="volume_sma_060" ColumnName="volume_sma_060" />
-          <ScalarProperty Name="volume_sma_120" ColumnName="volume_sma_120" />
-          <ScalarProperty Name="volume_vr" ColumnName="volume_vr" />
           <ScalarProperty Name="last_created" ColumnName="last_created" />
+          <ScalarProperty Name="volume_vr" ColumnName="volume_vr" />
+          <ScalarProperty Name="volume_sma_120" ColumnName="volume_sma_120" />
+          <ScalarProperty Name="volume_sma_060" ColumnName="volume_sma_060" />
+          <ScalarProperty Name="volume_sma_026" ColumnName="volume_sma_026" />
+          <ScalarProperty Name="volume_sma_020" ColumnName="volume_sma_020" />
+          <ScalarProperty Name="volume_sma_012" ColumnName="volume_sma_012" />
+          <ScalarProperty Name="volume_sma_005" ColumnName="volume_sma_005" />
+          <ScalarProperty Name="volume_rsi_120" ColumnName="volume_rsi_120" />
+          <ScalarProperty Name="volume_rsi_060" ColumnName="volume_rsi_060" />
+          <ScalarProperty Name="volume_rsi_026" ColumnName="volume_rsi_026" />
+          <ScalarProperty Name="volume_rsi_020" ColumnName="volume_rsi_020" />
+          <ScalarProperty Name="volume_rsi_012" ColumnName="volume_rsi_012" />
+          <ScalarProperty Name="volume_rsi_005" ColumnName="volume_rsi_005" />
+          <ScalarProperty Name="volume_per_report" ColumnName="volume_per_report" />
+          <ScalarProperty Name="volume_per_fiscal" ColumnName="volume_per_fiscal" />
+          <ScalarProperty Name="volume_obv" ColumnName="volume_obv" />
+          <ScalarProperty Name="volume_macd_12_26_hist" ColumnName="volume_macd_12_26_hist" />
+          <ScalarProperty Name="volume_macd_12_26_9" ColumnName="volume_macd_12_26_9" />
+          <ScalarProperty Name="volume_macd_12_26" ColumnName="volume_macd_12_26" />
+          <ScalarProperty Name="volume_ema_120" ColumnName="volume_ema_120" />
+          <ScalarProperty Name="volume_ema_060" ColumnName="volume_ema_060" />
+          <ScalarProperty Name="volume_ema_026" ColumnName="volume_ema_026" />
+          <ScalarProperty Name="volume_ema_020" ColumnName="volume_ema_020" />
+          <ScalarProperty Name="volume_ema_012" ColumnName="volume_ema_012" />
+          <ScalarProperty Name="volume_ema_005" ColumnName="volume_ema_005" />
+          <ScalarProperty Name="volume_change" ColumnName="volume_change" />
+          <ScalarProperty Name="source_volume" ColumnName="source_volume" />
+          <ScalarProperty Name="source_split_coefficient" ColumnName="source_split_coefficient" />
+          <ScalarProperty Name="source_open" ColumnName="source_open" />
+          <ScalarProperty Name="source_low" ColumnName="source_low" />
+          <ScalarProperty Name="source_high" ColumnName="source_high" />
+          <ScalarProperty Name="source_dividend_amount" ColumnName="source_dividend_amount" />
+          <ScalarProperty Name="source_close" ColumnName="source_close" />
+          <ScalarProperty Name="source_adjusted_close" ColumnName="source_adjusted_close" />
+          <ScalarProperty Name="open_sma_120" ColumnName="open_sma_120" />
+          <ScalarProperty Name="open_sma_060" ColumnName="open_sma_060" />
+          <ScalarProperty Name="open_sma_026" ColumnName="open_sma_026" />
+          <ScalarProperty Name="open_sma_020" ColumnName="open_sma_020" />
+          <ScalarProperty Name="open_sma_012" ColumnName="open_sma_012" />
+          <ScalarProperty Name="open_sma_005" ColumnName="open_sma_005" />
+          <ScalarProperty Name="open_rsi_120" ColumnName="open_rsi_120" />
+          <ScalarProperty Name="open_rsi_060" ColumnName="open_rsi_060" />
+          <ScalarProperty Name="open_rsi_026" ColumnName="open_rsi_026" />
+          <ScalarProperty Name="open_rsi_020" ColumnName="open_rsi_020" />
+          <ScalarProperty Name="open_rsi_012" ColumnName="open_rsi_012" />
+          <ScalarProperty Name="open_rsi_005" ColumnName="open_rsi_005" />
+          <ScalarProperty Name="open_per_report" ColumnName="open_per_report" />
+          <ScalarProperty Name="open_per_fiscal" ColumnName="open_per_fiscal" />
+          <ScalarProperty Name="open_macd_12_26_hist" ColumnName="open_macd_12_26_hist" />
+          <ScalarProperty Name="open_macd_12_26_9" ColumnName="open_macd_12_26_9" />
+          <ScalarProperty Name="open_macd_12_26" ColumnName="open_macd_12_26" />
+          <ScalarProperty Name="open_ema_120" ColumnName="open_ema_120" />
+          <ScalarProperty Name="open_ema_060" ColumnName="open_ema_060" />
+          <ScalarProperty Name="open_ema_026" ColumnName="open_ema_026" />
+          <ScalarProperty Name="open_ema_020" ColumnName="open_ema_020" />
+          <ScalarProperty Name="open_ema_012" ColumnName="open_ema_012" />
+          <ScalarProperty Name="open_ema_005" ColumnName="open_ema_005" />
+          <ScalarProperty Name="open_change" ColumnName="open_change" />
+          <ScalarProperty Name="low_sma_120" ColumnName="low_sma_120" />
+          <ScalarProperty Name="low_sma_060" ColumnName="low_sma_060" />
+          <ScalarProperty Name="low_sma_026" ColumnName="low_sma_026" />
+          <ScalarProperty Name="low_sma_020" ColumnName="low_sma_020" />
+          <ScalarProperty Name="low_sma_012" ColumnName="low_sma_012" />
+          <ScalarProperty Name="low_sma_005" ColumnName="low_sma_005" />
+          <ScalarProperty Name="low_rsi_120" ColumnName="low_rsi_120" />
+          <ScalarProperty Name="low_rsi_060" ColumnName="low_rsi_060" />
+          <ScalarProperty Name="low_rsi_026" ColumnName="low_rsi_026" />
+          <ScalarProperty Name="low_rsi_020" ColumnName="low_rsi_020" />
+          <ScalarProperty Name="low_rsi_012" ColumnName="low_rsi_012" />
+          <ScalarProperty Name="low_rsi_005" ColumnName="low_rsi_005" />
+          <ScalarProperty Name="low_per_report" ColumnName="low_per_report" />
+          <ScalarProperty Name="low_per_fiscal" ColumnName="low_per_fiscal" />
+          <ScalarProperty Name="low_macd_12_26_hist" ColumnName="low_macd_12_26_hist" />
+          <ScalarProperty Name="low_macd_12_26_9" ColumnName="low_macd_12_26_9" />
+          <ScalarProperty Name="low_macd_12_26" ColumnName="low_macd_12_26" />
+          <ScalarProperty Name="low_ema_120" ColumnName="low_ema_120" />
+          <ScalarProperty Name="low_ema_060" ColumnName="low_ema_060" />
+          <ScalarProperty Name="low_ema_026" ColumnName="low_ema_026" />
+          <ScalarProperty Name="low_ema_020" ColumnName="low_ema_020" />
+          <ScalarProperty Name="low_ema_012" ColumnName="low_ema_012" />
+          <ScalarProperty Name="low_ema_005" ColumnName="low_ema_005" />
+          <ScalarProperty Name="low_change" ColumnName="low_change" />
+          <ScalarProperty Name="high_sma_120" ColumnName="high_sma_120" />
+          <ScalarProperty Name="high_sma_060" ColumnName="high_sma_060" />
+          <ScalarProperty Name="high_sma_026" ColumnName="high_sma_026" />
+          <ScalarProperty Name="high_sma_020" ColumnName="high_sma_020" />
+          <ScalarProperty Name="high_sma_012" ColumnName="high_sma_012" />
+          <ScalarProperty Name="high_sma_005" ColumnName="high_sma_005" />
+          <ScalarProperty Name="high_rsi_120" ColumnName="high_rsi_120" />
+          <ScalarProperty Name="high_rsi_060" ColumnName="high_rsi_060" />
+          <ScalarProperty Name="high_rsi_026" ColumnName="high_rsi_026" />
+          <ScalarProperty Name="high_rsi_020" ColumnName="high_rsi_020" />
+          <ScalarProperty Name="high_rsi_012" ColumnName="high_rsi_012" />
+          <ScalarProperty Name="high_rsi_005" ColumnName="high_rsi_005" />
+          <ScalarProperty Name="high_per_report" ColumnName="high_per_report" />
+          <ScalarProperty Name="high_per_fiscal" ColumnName="high_per_fiscal" />
+          <ScalarProperty Name="high_macd_12_26_hist" ColumnName="high_macd_12_26_hist" />
+          <ScalarProperty Name="high_macd_12_26_9" ColumnName="high_macd_12_26_9" />
+          <ScalarProperty Name="high_macd_12_26" ColumnName="high_macd_12_26" />
+          <ScalarProperty Name="high_ema_120" ColumnName="high_ema_120" />
+          <ScalarProperty Name="high_ema_060" ColumnName="high_ema_060" />
+          <ScalarProperty Name="high_ema_026" ColumnName="high_ema_026" />
+          <ScalarProperty Name="high_ema_020" ColumnName="high_ema_020" />
+          <ScalarProperty Name="high_ema_012" ColumnName="high_ema_012" />
+          <ScalarProperty Name="high_ema_005" ColumnName="high_ema_005" />
+          <ScalarProperty Name="high_change" ColumnName="high_change" />
+          <ScalarProperty Name="close_sma_120" ColumnName="close_sma_120" />
+          <ScalarProperty Name="close_sma_060" ColumnName="close_sma_060" />
+          <ScalarProperty Name="close_sma_026" ColumnName="close_sma_026" />
+          <ScalarProperty Name="close_sma_020" ColumnName="close_sma_020" />
+          <ScalarProperty Name="volume_change_perc" ColumnName="volume_change_perc" />
+          <ScalarProperty Name="volume_after_960_perc" ColumnName="volume_after_960_perc" />
+          <ScalarProperty Name="volume_after_720_perc" ColumnName="volume_after_720_perc" />
+          <ScalarProperty Name="volume_after_480_perc" ColumnName="volume_after_480_perc" />
+          <ScalarProperty Name="volume_after_240_perc" ColumnName="volume_after_240_perc" />
+          <ScalarProperty Name="volume_after_120_perc" ColumnName="volume_after_120_perc" />
+          <ScalarProperty Name="volume_after_060_perc" ColumnName="volume_after_060_perc" />
+          <ScalarProperty Name="volume_after_040_perc" ColumnName="volume_after_040_perc" />
+          <ScalarProperty Name="volume_after_020_perc" ColumnName="volume_after_020_perc" />
+          <ScalarProperty Name="volume_after_015_perc" ColumnName="volume_after_015_perc" />
+          <ScalarProperty Name="volume_after_010_perc" ColumnName="volume_after_010_perc" />
+          <ScalarProperty Name="volume_after_005_perc" ColumnName="volume_after_005_perc" />
+          <ScalarProperty Name="open_change_perc" ColumnName="open_change_perc" />
+          <ScalarProperty Name="open_after_960_perc" ColumnName="open_after_960_perc" />
+          <ScalarProperty Name="open_after_720_perc" ColumnName="open_after_720_perc" />
+          <ScalarProperty Name="open_after_480_perc" ColumnName="open_after_480_perc" />
+          <ScalarProperty Name="open_after_240_perc" ColumnName="open_after_240_perc" />
+          <ScalarProperty Name="open_after_120_perc" ColumnName="open_after_120_perc" />
+          <ScalarProperty Name="open_after_060_perc" ColumnName="open_after_060_perc" />
+          <ScalarProperty Name="open_after_040_perc" ColumnName="open_after_040_perc" />
+          <ScalarProperty Name="open_after_020_perc" ColumnName="open_after_020_perc" />
+          <ScalarProperty Name="open_after_015_perc" ColumnName="open_after_015_perc" />
+          <ScalarProperty Name="open_after_010_perc" ColumnName="open_after_010_perc" />
+          <ScalarProperty Name="open_after_005_perc" ColumnName="open_after_005_perc" />
+          <ScalarProperty Name="low_change_perc" ColumnName="low_change_perc" />
+          <ScalarProperty Name="low_after_960_perc" ColumnName="low_after_960_perc" />
+          <ScalarProperty Name="low_after_720_perc" ColumnName="low_after_720_perc" />
+          <ScalarProperty Name="low_after_480_perc" ColumnName="low_after_480_perc" />
+          <ScalarProperty Name="low_after_240_perc" ColumnName="low_after_240_perc" />
+          <ScalarProperty Name="low_after_120_perc" ColumnName="low_after_120_perc" />
+          <ScalarProperty Name="low_after_060_perc" ColumnName="low_after_060_perc" />
+          <ScalarProperty Name="low_after_040_perc" ColumnName="low_after_040_perc" />
+          <ScalarProperty Name="low_after_020_perc" ColumnName="low_after_020_perc" />
+          <ScalarProperty Name="low_after_015_perc" ColumnName="low_after_015_perc" />
+          <ScalarProperty Name="low_after_010_perc" ColumnName="low_after_010_perc" />
+          <ScalarProperty Name="low_after_005_perc" ColumnName="low_after_005_perc" />
+          <ScalarProperty Name="high_change_perc" ColumnName="high_change_perc" />
+          <ScalarProperty Name="high_after_960_perc" ColumnName="high_after_960_perc" />
+          <ScalarProperty Name="high_after_720_perc" ColumnName="high_after_720_perc" />
+          <ScalarProperty Name="high_after_480_perc" ColumnName="high_after_480_perc" />
+          <ScalarProperty Name="high_after_240_perc" ColumnName="high_after_240_perc" />
+          <ScalarProperty Name="high_after_120_perc" ColumnName="high_after_120_perc" />
+          <ScalarProperty Name="high_after_060_perc" ColumnName="high_after_060_perc" />
+          <ScalarProperty Name="high_after_040_perc" ColumnName="high_after_040_perc" />
+          <ScalarProperty Name="high_after_020_perc" ColumnName="high_after_020_perc" />
+          <ScalarProperty Name="high_after_015_perc" ColumnName="high_after_015_perc" />
+          <ScalarProperty Name="high_after_010_perc" ColumnName="high_after_010_perc" />
+          <ScalarProperty Name="high_after_005_perc" ColumnName="high_after_005_perc" />
+          <ScalarProperty Name="close_sma_012" ColumnName="close_sma_012" />
+          <ScalarProperty Name="close_sma_005" ColumnName="close_sma_005" />
+          <ScalarProperty Name="close_rsi_120" ColumnName="close_rsi_120" />
+          <ScalarProperty Name="close_rsi_060" ColumnName="close_rsi_060" />
+          <ScalarProperty Name="close_rsi_026" ColumnName="close_rsi_026" />
+          <ScalarProperty Name="close_rsi_020" ColumnName="close_rsi_020" />
+          <ScalarProperty Name="close_rsi_012" ColumnName="close_rsi_012" />
+          <ScalarProperty Name="close_rsi_005" ColumnName="close_rsi_005" />
+          <ScalarProperty Name="close_per_report" ColumnName="close_per_report" />
+          <ScalarProperty Name="close_per_fiscal" ColumnName="close_per_fiscal" />
+          <ScalarProperty Name="close_macd_12_26_hist" ColumnName="close_macd_12_26_hist" />
+          <ScalarProperty Name="close_macd_12_26_9" ColumnName="close_macd_12_26_9" />
+          <ScalarProperty Name="close_macd_12_26" ColumnName="close_macd_12_26" />
+          <ScalarProperty Name="close_ema_120" ColumnName="close_ema_120" />
+          <ScalarProperty Name="close_ema_060" ColumnName="close_ema_060" />
+          <ScalarProperty Name="close_ema_026" ColumnName="close_ema_026" />
+          <ScalarProperty Name="close_ema_020" ColumnName="close_ema_020" />
+          <ScalarProperty Name="close_ema_012" ColumnName="close_ema_012" />
+          <ScalarProperty Name="close_ema_005" ColumnName="close_ema_005" />
+          <ScalarProperty Name="close_change_perc" ColumnName="close_change_perc" />
+          <ScalarProperty Name="close_change" ColumnName="close_change" />
+          <ScalarProperty Name="close_after_960_perc" ColumnName="close_after_960_perc" />
+          <ScalarProperty Name="close_after_720_perc" ColumnName="close_after_720_perc" />
+          <ScalarProperty Name="close_after_480_perc" ColumnName="close_after_480_perc" />
+          <ScalarProperty Name="close_after_240_perc" ColumnName="close_after_240_perc" />
+          <ScalarProperty Name="close_after_120_perc" ColumnName="close_after_120_perc" />
+          <ScalarProperty Name="close_after_060_perc" ColumnName="close_after_060_perc" />
+          <ScalarProperty Name="close_after_040_perc" ColumnName="close_after_040_perc" />
+          <ScalarProperty Name="close_after_020_perc" ColumnName="close_after_020_perc" />
+          <ScalarProperty Name="close_after_015_perc" ColumnName="close_after_015_perc" />
+          <ScalarProperty Name="close_after_010_perc" ColumnName="close_after_010_perc" />
+          <ScalarProperty Name="close_after_005_perc" ColumnName="close_after_005_perc" />
+          <ScalarProperty Name="avg_sma_120" ColumnName="avg_sma_120" />
+          <ScalarProperty Name="avg_sma_060" ColumnName="avg_sma_060" />
+          <ScalarProperty Name="avg_sma_026" ColumnName="avg_sma_026" />
+          <ScalarProperty Name="avg_sma_020" ColumnName="avg_sma_020" />
+          <ScalarProperty Name="avg_sma_012" ColumnName="avg_sma_012" />
+          <ScalarProperty Name="avg_sma_005" ColumnName="avg_sma_005" />
+          <ScalarProperty Name="avg_rsi_120" ColumnName="avg_rsi_120" />
+          <ScalarProperty Name="avg_rsi_060" ColumnName="avg_rsi_060" />
+          <ScalarProperty Name="avg_rsi_026" ColumnName="avg_rsi_026" />
+          <ScalarProperty Name="avg_rsi_020" ColumnName="avg_rsi_020" />
+          <ScalarProperty Name="avg_rsi_012" ColumnName="avg_rsi_012" />
+          <ScalarProperty Name="avg_rsi_005" ColumnName="avg_rsi_005" />
+          <ScalarProperty Name="avg_per_report" ColumnName="avg_per_report" />
+          <ScalarProperty Name="avg_per_fiscal" ColumnName="avg_per_fiscal" />
+          <ScalarProperty Name="avg_macd_12_26_hist" ColumnName="avg_macd_12_26_hist" />
+          <ScalarProperty Name="avg_macd_12_26_9" ColumnName="avg_macd_12_26_9" />
+          <ScalarProperty Name="avg_macd_12_26" ColumnName="avg_macd_12_26" />
+          <ScalarProperty Name="avg_ema_120" ColumnName="avg_ema_120" />
+          <ScalarProperty Name="avg_ema_060" ColumnName="avg_ema_060" />
+          <ScalarProperty Name="avg_ema_026" ColumnName="avg_ema_026" />
+          <ScalarProperty Name="avg_ema_020" ColumnName="avg_ema_020" />
+          <ScalarProperty Name="avg_ema_012" ColumnName="avg_ema_012" />
+          <ScalarProperty Name="avg_ema_005" ColumnName="avg_ema_005" />
+          <ScalarProperty Name="avg_change_perc" ColumnName="avg_change_perc" />
+          <ScalarProperty Name="avg_change" ColumnName="avg_change" />
+          <ScalarProperty Name="avg_after_960_perc" ColumnName="avg_after_960_perc" />
+          <ScalarProperty Name="avg_after_720_perc" ColumnName="avg_after_720_perc" />
+          <ScalarProperty Name="avg_after_480_perc" ColumnName="avg_after_480_perc" />
+          <ScalarProperty Name="avg_after_240_perc" ColumnName="avg_after_240_perc" />
+          <ScalarProperty Name="avg_after_120_perc" ColumnName="avg_after_120_perc" />
+          <ScalarProperty Name="avg_after_060_perc" ColumnName="avg_after_060_perc" />
+          <ScalarProperty Name="avg_after_040_perc" ColumnName="avg_after_040_perc" />
+          <ScalarProperty Name="avg_after_020_perc" ColumnName="avg_after_020_perc" />
+          <ScalarProperty Name="avg_after_015_perc" ColumnName="avg_after_015_perc" />
+          <ScalarProperty Name="avg_after_010_perc" ColumnName="avg_after_010_perc" />
+          <ScalarProperty Name="avg_after_005_perc" ColumnName="avg_after_005_perc" />
+          <ScalarProperty Name="analysis_point3" ColumnName="analysis_point3" />
+          <ScalarProperty Name="analysis_point2" ColumnName="analysis_point2" />
+          <ScalarProperty Name="analysis_point1" ColumnName="analysis_point1" />
+          <ScalarProperty Name="analysis_open_close_perc" ColumnName="analysis_open_close_perc" />
+          <ScalarProperty Name="analysis_oc_by_hl_perc" ColumnName="analysis_oc_by_hl_perc" />
+          <ScalarProperty Name="analysis_high_low_perc" ColumnName="analysis_high_low_perc" />
+          <ScalarProperty Name="analysis_dir_on" ColumnName="analysis_dir_on" />
+          <ScalarProperty Name="analysis_dir" ColumnName="analysis_dir" />
+          <ScalarProperty Name="avg" ColumnName="avg" />
+          <ScalarProperty Name="volume" ColumnName="volume" />
+          <ScalarProperty Name="low" ColumnName="low" />
+          <ScalarProperty Name="high" ColumnName="high" />
+          <ScalarProperty Name="close" ColumnName="close" />
+          <ScalarProperty Name="open" ColumnName="open" />
+          <ScalarProperty Name="date" ColumnName="date" />
+          <ScalarProperty Name="seq" ColumnName="seq" />
+          <ScalarProperty Name="watch_type" ColumnName="watch_type" />
+          <ScalarProperty Name="symbol" ColumnName="symbol" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="daily_vol_sma10_v1">
       <EntityTypeMapping TypeName="stockModel.daily_vol_sma10_v1">
         <MappingFragment StoreEntitySet="daily_vol_sma10_v1">
-          <ScalarProperty Name="symbol" ColumnName="symbol" />
-          <ScalarProperty Name="date_hist" ColumnName="date_hist" />
-          <ScalarProperty Name="volume" ColumnName="volume" />
-          <ScalarProperty Name="volume_pre" ColumnName="volume_pre" />
-          <ScalarProperty Name="volume_chg_perc" ColumnName="volume_chg_perc" />
-          <ScalarProperty Name="sma10" ColumnName="sma10" />
-          <ScalarProperty Name="sma10_pre" ColumnName="sma10_pre" />
           <ScalarProperty Name="sma10_chg_perc" ColumnName="sma10_chg_perc" />
+          <ScalarProperty Name="sma10_pre" ColumnName="sma10_pre" />
+          <ScalarProperty Name="sma10" ColumnName="sma10" />
+          <ScalarProperty Name="volume_chg_perc" ColumnName="volume_chg_perc" />
+          <ScalarProperty Name="volume_pre" ColumnName="volume_pre" />
+          <ScalarProperty Name="volume" ColumnName="volume" />
+          <ScalarProperty Name="date_hist" ColumnName="date_hist" />
+          <ScalarProperty Name="symbol" ColumnName="symbol" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="daily_vol_sma5_v1">
       <EntityTypeMapping TypeName="stockModel.daily_vol_sma5_v1">
         <MappingFragment StoreEntitySet="daily_vol_sma5_v1">
-          <ScalarProperty Name="symbol" ColumnName="symbol" />
-          <ScalarProperty Name="date_hist" ColumnName="date_hist" />
-          <ScalarProperty Name="volume" ColumnName="volume" />
-          <ScalarProperty Name="volume_pre" ColumnName="volume_pre" />
-          <ScalarProperty Name="volume_chg_perc" ColumnName="volume_chg_perc" />
-          <ScalarProperty Name="sma5" ColumnName="sma5" />
-          <ScalarProperty Name="sma5_pre" ColumnName="sma5_pre" />
           <ScalarProperty Name="sma5_chg_perc" ColumnName="sma5_chg_perc" />
+          <ScalarProperty Name="sma5_pre" ColumnName="sma5_pre" />
+          <ScalarProperty Name="sma5" ColumnName="sma5" />
+          <ScalarProperty Name="volume_chg_perc" ColumnName="volume_chg_perc" />
+          <ScalarProperty Name="volume_pre" ColumnName="volume_pre" />
+          <ScalarProperty Name="volume" ColumnName="volume" />
+          <ScalarProperty Name="date_hist" ColumnName="date_hist" />
+          <ScalarProperty Name="symbol" ColumnName="symbol" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="daily_volume_v1">
       <EntityTypeMapping TypeName="stockModel.daily_volume_v1">
         <MappingFragment StoreEntitySet="daily_volume_v1">
-          <ScalarProperty Name="symbol" ColumnName="symbol" />
-          <ScalarProperty Name="date_hist" ColumnName="date_hist" />
-          <ScalarProperty Name="volume" ColumnName="volume" />
-          <ScalarProperty Name="sma_005" ColumnName="sma_005" />
-          <ScalarProperty Name="sma_010" ColumnName="sma_010" />
-          <ScalarProperty Name="sma_020" ColumnName="sma_020" />
-          <ScalarProperty Name="sma_030" ColumnName="sma_030" />
-          <ScalarProperty Name="sma_060" ColumnName="sma_060" />
-          <ScalarProperty Name="sma_120" ColumnName="sma_120" />
           <ScalarProperty Name="sma_240" ColumnName="sma_240" />
+          <ScalarProperty Name="sma_120" ColumnName="sma_120" />
+          <ScalarProperty Name="sma_060" ColumnName="sma_060" />
+          <ScalarProperty Name="sma_030" ColumnName="sma_030" />
+          <ScalarProperty Name="sma_020" ColumnName="sma_020" />
+          <ScalarProperty Name="sma_010" ColumnName="sma_010" />
+          <ScalarProperty Name="sma_005" ColumnName="sma_005" />
+          <ScalarProperty Name="volume" ColumnName="volume" />
+          <ScalarProperty Name="date_hist" ColumnName="date_hist" />
+          <ScalarProperty Name="symbol" ColumnName="symbol" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="fundamental_v1">
       <EntityTypeMapping TypeName="stockModel.fundamental_v1">
         <MappingFragment StoreEntitySet="fundamental_v1">
-          <ScalarProperty Name="symbol" ColumnName="symbol" />
-          <ScalarProperty Name="date_hist" ColumnName="date_hist" />
-          <ScalarProperty Name="date_fiscal" ColumnName="date_fiscal" />
-          <ScalarProperty Name="eps" ColumnName="eps" />
-          <ScalarProperty Name="perc_eps" ColumnName="perc_eps" />
-          <ScalarProperty Name="perc_eps_1year" ColumnName="perc_eps_1year" />
-          <ScalarProperty Name="perc_eps_3year" ColumnName="perc_eps_3year" />
-          <ScalarProperty Name="est" ColumnName="est" />
-          <ScalarProperty Name="perc_est" ColumnName="perc_est" />
-          <ScalarProperty Name="perc_est_1year" ColumnName="perc_est_1year" />
-          <ScalarProperty Name="perc_est_3year" ColumnName="perc_est_3year" />
-          <ScalarProperty Name="surprise" ColumnName="surprise" />
-          <ScalarProperty Name="surprise_1year" ColumnName="surprise_1year" />
-          <ScalarProperty Name="surprise_3year" ColumnName="surprise_3year" />
-          <ScalarProperty Name="perc_after_expense" ColumnName="perc_after_expense" />
-          <ScalarProperty Name="perc_after_expense_1year" ColumnName="perc_after_expense_1year" />
-          <ScalarProperty Name="perc_after_expense_3year" ColumnName="perc_after_expense_3year" />
-          <ScalarProperty Name="perc_profit" ColumnName="perc_profit" />
-          <ScalarProperty Name="perc_profit_1year" ColumnName="perc_profit_1year" />
-          <ScalarProperty Name="perc_profit_3year" ColumnName="perc_profit_3year" />
-          <ScalarProperty Name="perc_total" ColumnName="perc_total" />
-          <ScalarProperty Name="perc_total_1year" ColumnName="perc_total_1year" />
-          <ScalarProperty Name="perc_total_3year" ColumnName="perc_total_3year" />
-          <ScalarProperty Name="eps_close_rate" ColumnName="eps_close_rate" />
-          <ScalarProperty Name="pre_30" ColumnName="pre_30" />
-          <ScalarProperty Name="pre_20" ColumnName="pre_20" />
-          <ScalarProperty Name="pre_10" ColumnName="pre_10" />
-          <ScalarProperty Name="pre_5" ColumnName="pre_5" />
-          <ScalarProperty Name="pre_3" ColumnName="pre_3" />
-          <ScalarProperty Name="pre_1" ColumnName="pre_1" />
-          <ScalarProperty Name="next_1" ColumnName="next_1" />
-          <ScalarProperty Name="next_3" ColumnName="next_3" />
-          <ScalarProperty Name="next_5" ColumnName="next_5" />
-          <ScalarProperty Name="next_10" ColumnName="next_10" />
-          <ScalarProperty Name="next_20" ColumnName="next_20" />
           <ScalarProperty Name="next_30" ColumnName="next_30" />
+          <ScalarProperty Name="next_20" ColumnName="next_20" />
+          <ScalarProperty Name="next_10" ColumnName="next_10" />
+          <ScalarProperty Name="next_5" ColumnName="next_5" />
+          <ScalarProperty Name="next_3" ColumnName="next_3" />
+          <ScalarProperty Name="next_1" ColumnName="next_1" />
+          <ScalarProperty Name="pre_1" ColumnName="pre_1" />
+          <ScalarProperty Name="pre_3" ColumnName="pre_3" />
+          <ScalarProperty Name="pre_5" ColumnName="pre_5" />
+          <ScalarProperty Name="pre_10" ColumnName="pre_10" />
+          <ScalarProperty Name="pre_20" ColumnName="pre_20" />
+          <ScalarProperty Name="pre_30" ColumnName="pre_30" />
+          <ScalarProperty Name="eps_close_rate" ColumnName="eps_close_rate" />
+          <ScalarProperty Name="perc_total_3year" ColumnName="perc_total_3year" />
+          <ScalarProperty Name="perc_total_1year" ColumnName="perc_total_1year" />
+          <ScalarProperty Name="perc_total" ColumnName="perc_total" />
+          <ScalarProperty Name="perc_profit_3year" ColumnName="perc_profit_3year" />
+          <ScalarProperty Name="perc_profit_1year" ColumnName="perc_profit_1year" />
+          <ScalarProperty Name="perc_profit" ColumnName="perc_profit" />
+          <ScalarProperty Name="perc_after_expense_3year" ColumnName="perc_after_expense_3year" />
+          <ScalarProperty Name="perc_after_expense_1year" ColumnName="perc_after_expense_1year" />
+          <ScalarProperty Name="perc_after_expense" ColumnName="perc_after_expense" />
+          <ScalarProperty Name="surprise_3year" ColumnName="surprise_3year" />
+          <ScalarProperty Name="surprise_1year" ColumnName="surprise_1year" />
+          <ScalarProperty Name="surprise" ColumnName="surprise" />
+          <ScalarProperty Name="perc_est_3year" ColumnName="perc_est_3year" />
+          <ScalarProperty Name="perc_est_1year" ColumnName="perc_est_1year" />
+          <ScalarProperty Name="perc_est" ColumnName="perc_est" />
+          <ScalarProperty Name="est" ColumnName="est" />
+          <ScalarProperty Name="perc_eps_3year" ColumnName="perc_eps_3year" />
+          <ScalarProperty Name="perc_eps_1year" ColumnName="perc_eps_1year" />
+          <ScalarProperty Name="perc_eps" ColumnName="perc_eps" />
+          <ScalarProperty Name="eps" ColumnName="eps" />
+          <ScalarProperty Name="date_fiscal" ColumnName="date_fiscal" />
+          <ScalarProperty Name="date_hist" ColumnName="date_hist" />
+          <ScalarProperty Name="symbol" ColumnName="symbol" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="industry_v1">
       <EntityTypeMapping TypeName="stockModel.industry_v1">
         <MappingFragment StoreEntitySet="industry_v1">
-          <ScalarProperty Name="industry" ColumnName="industry" />
-          <ScalarProperty Name="date_hist" ColumnName="date_hist" />
-          <ScalarProperty Name="price_chg" ColumnName="price_chg" />
-          <ScalarProperty Name="idx_chg" ColumnName="idx_chg" />
-          <ScalarProperty Name="strong" ColumnName="strong" />
           <ScalarProperty Name="strong_sma5" ColumnName="strong_sma5" />
+          <ScalarProperty Name="strong" ColumnName="strong" />
+          <ScalarProperty Name="idx_chg" ColumnName="idx_chg" />
+          <ScalarProperty Name="price_chg" ColumnName="price_chg" />
+          <ScalarProperty Name="date_hist" ColumnName="date_hist" />
+          <ScalarProperty Name="industry" ColumnName="industry" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="list_history_v1">
       <EntityTypeMapping TypeName="stockModel.list_history_v1">
         <MappingFragment StoreEntitySet="list_history_v1">
-          <ScalarProperty Name="HIST_ID" ColumnName="HIST_ID" />
-          <ScalarProperty Name="HIST_DTTM" ColumnName="HIST_DTTM" />
-          <ScalarProperty Name="START_DTTM" ColumnName="START_DTTM" />
-          <ScalarProperty Name="END_DTTM" ColumnName="END_DTTM" />
-          <ScalarProperty Name="PASS_LIST" ColumnName="PASS_LIST" />
-          <ScalarProperty Name="FILTER_OPTION" ColumnName="FILTER_OPTION" />
-          <ScalarProperty Name="att1" ColumnName="att1" />
-          <ScalarProperty Name="att2" ColumnName="att2" />
-          <ScalarProperty Name="att3" ColumnName="att3" />
-          <ScalarProperty Name="att4" ColumnName="att4" />
-          <ScalarProperty Name="att5" ColumnName="att5" />
-          <ScalarProperty Name="option_desc" ColumnName="option_desc" />
-          <ScalarProperty Name="description" ColumnName="description" />
-          <ScalarProperty Name="ranking" ColumnName="ranking" />
-          <ScalarProperty Name="ratio1" ColumnName="ratio1" />
-          <ScalarProperty Name="ratio2" ColumnName="ratio2" />
-          <ScalarProperty Name="rate_5" ColumnName="rate_5" />
-          <ScalarProperty Name="rate_10" ColumnName="rate_10" />
-          <ScalarProperty Name="rate_15" ColumnName="rate_15" />
-          <ScalarProperty Name="rate_20" ColumnName="rate_20" />
-          <ScalarProperty Name="rate_40" ColumnName="rate_40" />
           <ScalarProperty Name="rate_60" ColumnName="rate_60" />
+          <ScalarProperty Name="rate_40" ColumnName="rate_40" />
+          <ScalarProperty Name="rate_20" ColumnName="rate_20" />
+          <ScalarProperty Name="rate_15" ColumnName="rate_15" />
+          <ScalarProperty Name="rate_10" ColumnName="rate_10" />
+          <ScalarProperty Name="rate_5" ColumnName="rate_5" />
+          <ScalarProperty Name="ratio2" ColumnName="ratio2" />
+          <ScalarProperty Name="ratio1" ColumnName="ratio1" />
+          <ScalarProperty Name="ranking" ColumnName="ranking" />
+          <ScalarProperty Name="description" ColumnName="description" />
+          <ScalarProperty Name="option_desc" ColumnName="option_desc" />
+          <ScalarProperty Name="att5" ColumnName="att5" />
+          <ScalarProperty Name="att4" ColumnName="att4" />
+          <ScalarProperty Name="att3" ColumnName="att3" />
+          <ScalarProperty Name="att2" ColumnName="att2" />
+          <ScalarProperty Name="att1" ColumnName="att1" />
+          <ScalarProperty Name="FILTER_OPTION" ColumnName="FILTER_OPTION" />
+          <ScalarProperty Name="PASS_LIST" ColumnName="PASS_LIST" />
+          <ScalarProperty Name="END_DTTM" ColumnName="END_DTTM" />
+          <ScalarProperty Name="START_DTTM" ColumnName="START_DTTM" />
+          <ScalarProperty Name="HIST_DTTM" ColumnName="HIST_DTTM" />
+          <ScalarProperty Name="HIST_ID" ColumnName="HIST_ID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="sector_v1">
       <EntityTypeMapping TypeName="stockModel.sector_v1">
         <MappingFragment StoreEntitySet="sector_v1">
-          <ScalarProperty Name="sector" ColumnName="sector" />
-          <ScalarProperty Name="date_hist" ColumnName="date_hist" />
-          <ScalarProperty Name="price_chg" ColumnName="price_chg" />
-          <ScalarProperty Name="idx_chg" ColumnName="idx_chg" />
-          <ScalarProperty Name="strong" ColumnName="strong" />
           <ScalarProperty Name="strong_sma5" ColumnName="strong_sma5" />
+          <ScalarProperty Name="strong" ColumnName="strong" />
+          <ScalarProperty Name="idx_chg" ColumnName="idx_chg" />
+          <ScalarProperty Name="price_chg" ColumnName="price_chg" />
+          <ScalarProperty Name="date_hist" ColumnName="date_hist" />
+          <ScalarProperty Name="sector" ColumnName="sector" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="watch_list_v1">
       <EntityTypeMapping TypeName="stockModel.watch_list_v1">
         <MappingFragment StoreEntitySet="watch_list_v1">
-          <ScalarProperty Name="symbol" ColumnName="symbol" />
-          <ScalarProperty Name="watch_type" ColumnName="watch_type" />
-          <ScalarProperty Name="company" ColumnName="company" />
-          <ScalarProperty Name="industry" ColumnName="industry" />
-          <ScalarProperty Name="sector" ColumnName="sector" />
-          <ScalarProperty Name="last_updated" ColumnName="last_updated" />
           <ScalarProperty Name="last_earning" ColumnName="last_earning" />
+          <ScalarProperty Name="last_updated" ColumnName="last_updated" />
+          <ScalarProperty Name="sector" ColumnName="sector" />
+          <ScalarProperty Name="industry" ColumnName="industry" />
+          <ScalarProperty Name="company" ColumnName="company" />
+          <ScalarProperty Name="watch_type" ColumnName="watch_type" />
+          <ScalarProperty Name="symbol" ColumnName="symbol" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <FunctionImportMapping FunctionImportName="filter_main" FunctionName="stockModel.Store.filter_main">
+    <FunctionImportMapping FunctionImportName="filter_main1" FunctionName="stockModel.Store.filter_main">
       <ResultMapping>
-        <ComplexTypeMapping TypeName="stockModel.filter_main_Result">
+        <ComplexTypeMapping TypeName="stockModel.filter_main1_Result">
           <ScalarProperty Name="result_id" ColumnName="result_id" />
           <ScalarProperty Name="hist_id" ColumnName="hist_id" />
           <ScalarProperty Name="symbol" ColumnName="symbol" />
@@ -1041,10 +1012,10 @@
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
-    <FunctionImportMapping FunctionImportName="filter_simul" FunctionName="stockModel.Store.filter_simul" />
-    <FunctionImportMapping FunctionImportName="filter_simul_header" FunctionName="stockModel.Store.filter_simul_header">
+    <FunctionImportMapping FunctionImportName="filter_simul1" FunctionName="stockModel.Store.filter_simul" />
+    <FunctionImportMapping FunctionImportName="filter_simul_header1" FunctionName="stockModel.Store.filter_simul_header">
       <ResultMapping>
-        <ComplexTypeMapping TypeName="stockModel.filter_simul_header_Result">
+        <ComplexTypeMapping TypeName="stockModel.filter_simul_header1_Result">
           <ScalarProperty Name="d5" ColumnName="d5" />
           <ScalarProperty Name="d10" ColumnName="d10" />
           <ScalarProperty Name="d15" ColumnName="d15" />
@@ -1054,32 +1025,10 @@
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
-    <FunctionImportMapping FunctionImportName="filter_simul_summary" FunctionName="stockModel.Store.filter_simul_summary" />
-    <FunctionImportMapping FunctionImportName="option_01" FunctionName="stockModel.Store.option_01" />
-    <FunctionImportMapping FunctionImportName="option_02" FunctionName="stockModel.Store.option_02" />
-    <FunctionImportMapping FunctionImportName="option_03" FunctionName="stockModel.Store.option_03" />
-    <FunctionImportMapping FunctionImportName="option_04" FunctionName="stockModel.Store.option_04" />
-    <FunctionImportMapping FunctionImportName="option_05" FunctionName="stockModel.Store.option_05" />
-    <FunctionImportMapping FunctionImportName="option_06" FunctionName="stockModel.Store.option_06" />
-    <FunctionImportMapping FunctionImportName="option_07" FunctionName="stockModel.Store.option_07" />
-    <FunctionImportMapping FunctionImportName="option_08" FunctionName="stockModel.Store.option_08" />
-    <FunctionImportMapping FunctionImportName="option_09" FunctionName="stockModel.Store.option_09" />
-    <FunctionImportMapping FunctionImportName="option_10" FunctionName="stockModel.Store.option_10" />
-    <FunctionImportMapping FunctionImportName="option_11" FunctionName="stockModel.Store.option_11" />
-    <FunctionImportMapping FunctionImportName="option_12" FunctionName="stockModel.Store.option_12" />
-    <FunctionImportMapping FunctionImportName="option_13" FunctionName="stockModel.Store.option_13" />
-    <FunctionImportMapping FunctionImportName="option_14" FunctionName="stockModel.Store.option_14" />
-    <FunctionImportMapping FunctionImportName="option_15" FunctionName="stockModel.Store.option_15" />
-    <FunctionImportMapping FunctionImportName="process_analysis" FunctionName="stockModel.Store.process_analysis" />
-    <FunctionImportMapping FunctionImportName="process_history" FunctionName="stockModel.Store.process_history" />
-    <FunctionImportMapping FunctionImportName="process_rsi_detail" FunctionName="stockModel.Store.process_rsi_detail" />
-    <FunctionImportMapping FunctionImportName="process_sma_detail" FunctionName="stockModel.Store.process_sma_detail" />
-    <FunctionImportMapping FunctionImportName="process_volume" FunctionName="stockModel.Store.process_volume" />
-    <FunctionImportMapping FunctionImportName="sp_add_list_history" FunctionName="stockModel.Store.sp_add_list_history" />
-    <FunctionImportMapping FunctionImportName="sp_generate_idx" FunctionName="stockModel.Store.sp_generate_idx" />
-    <FunctionImportMapping FunctionImportName="sp_get_prediction_history" FunctionName="stockModel.Store.sp_get_prediction_history">
+    <FunctionImportMapping FunctionImportName="filter_simul_summary1" FunctionName="stockModel.Store.filter_simul_summary" />
+    <FunctionImportMapping FunctionImportName="get_Stat_history1" FunctionName="stockModel.Store.get_Stat_history">
       <ResultMapping>
-        <ComplexTypeMapping TypeName="stockModel.sp_get_prediction_history_Result">
+        <ComplexTypeMapping TypeName="stockModel.get_Stat_history1_Result">
           <ScalarProperty Name="result_id" ColumnName="result_id" />
           <ScalarProperty Name="hist_id" ColumnName="hist_id" />
           <ScalarProperty Name="symbol" ColumnName="symbol" />
@@ -1097,14 +1046,35 @@
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
-    <FunctionImportMapping FunctionImportName="sp_prediction_history_cleanup" FunctionName="stockModel.Store.sp_prediction_history_cleanup" />
-    <FunctionImportMapping FunctionImportName="sp_simulation" FunctionName="stockModel.Store.sp_simulation" />
-    <FunctionImportMapping FunctionImportName="XXX_sp_weekly_v1" FunctionName="stockModel.Store.XXX_sp_weekly_v1" />
-    <FunctionImportMapping FunctionImportName="XXX_update_daily_analysis_v1" FunctionName="stockModel.Store.XXX_update_daily_analysis_v1" />
-    <FunctionImportMapping FunctionImportName="XXX_update_daily_v1" FunctionName="stockModel.Store.XXX_update_daily_v1" />
-    <FunctionImportMapping FunctionImportName="get_Stat_history" FunctionName="stockModel.Store.get_Stat_history">
+    <FunctionImportMapping FunctionImportName="option_011" FunctionName="stockModel.Store.option_01" />
+    <FunctionImportMapping FunctionImportName="option_021" FunctionName="stockModel.Store.option_02" />
+    <FunctionImportMapping FunctionImportName="option_031" FunctionName="stockModel.Store.option_03" />
+    <FunctionImportMapping FunctionImportName="option_041" FunctionName="stockModel.Store.option_04" />
+    <FunctionImportMapping FunctionImportName="option_051" FunctionName="stockModel.Store.option_05" />
+    <FunctionImportMapping FunctionImportName="option_061" FunctionName="stockModel.Store.option_06" />
+    <FunctionImportMapping FunctionImportName="option_071" FunctionName="stockModel.Store.option_07" />
+    <FunctionImportMapping FunctionImportName="option_081" FunctionName="stockModel.Store.option_08" />
+    <FunctionImportMapping FunctionImportName="option_091" FunctionName="stockModel.Store.option_09" />
+    <FunctionImportMapping FunctionImportName="option_101" FunctionName="stockModel.Store.option_10" />
+    <FunctionImportMapping FunctionImportName="option_111" FunctionName="stockModel.Store.option_11" />
+    <FunctionImportMapping FunctionImportName="option_121" FunctionName="stockModel.Store.option_12" />
+    <FunctionImportMapping FunctionImportName="option_131" FunctionName="stockModel.Store.option_13" />
+    <FunctionImportMapping FunctionImportName="option_141" FunctionName="stockModel.Store.option_14" />
+    <FunctionImportMapping FunctionImportName="option_151" FunctionName="stockModel.Store.option_15" />
+    <FunctionImportMapping FunctionImportName="option_161" FunctionName="stockModel.Store.option_16" />
+    <FunctionImportMapping FunctionImportName="option_171" FunctionName="stockModel.Store.option_17" />
+    <FunctionImportMapping FunctionImportName="option_181" FunctionName="stockModel.Store.option_18" />
+    <FunctionImportMapping FunctionImportName="option_191" FunctionName="stockModel.Store.option_19" />
+    <FunctionImportMapping FunctionImportName="option_20" FunctionName="stockModel.Store.option_20" />
+    <FunctionImportMapping FunctionImportName="option_991" FunctionName="stockModel.Store.option_99" />
+    <FunctionImportMapping FunctionImportName="process_rsi_detail1" FunctionName="stockModel.Store.process_rsi_detail" />
+    <FunctionImportMapping FunctionImportName="process_sma_detail1" FunctionName="stockModel.Store.process_sma_detail" />
+    <FunctionImportMapping FunctionImportName="process_volume1" FunctionName="stockModel.Store.process_volume" />
+    <FunctionImportMapping FunctionImportName="sp_add_list_history1" FunctionName="stockModel.Store.sp_add_list_history" />
+    <FunctionImportMapping FunctionImportName="sp_generate_idx1" FunctionName="stockModel.Store.sp_generate_idx" />
+    <FunctionImportMapping FunctionImportName="sp_get_prediction_history1" FunctionName="stockModel.Store.sp_get_prediction_history">
       <ResultMapping>
-        <ComplexTypeMapping TypeName="stockModel.get_Stat_history_Result">
+        <ComplexTypeMapping TypeName="stockModel.sp_get_prediction_history1_Result">
           <ScalarProperty Name="result_id" ColumnName="result_id" />
           <ScalarProperty Name="hist_id" ColumnName="hist_id" />
           <ScalarProperty Name="symbol" ColumnName="symbol" />
@@ -1122,5 +1092,12 @@
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_prediction_history_cleanup1" FunctionName="stockModel.Store.sp_prediction_history_cleanup" />
+    <FunctionImportMapping FunctionImportName="sp_simul_test1" FunctionName="stockModel.Store.sp_simul_test" />
+    <FunctionImportMapping FunctionImportName="sp_simul_test_delete1" FunctionName="stockModel.Store.sp_simul_test_delete" />
+    <FunctionImportMapping FunctionImportName="sp_simulation1" FunctionName="stockModel.Store.sp_simulation" />
+    <FunctionImportMapping FunctionImportName="XXX_sp_weekly_v11" FunctionName="stockModel.Store.XXX_sp_weekly_v1" />
+    <FunctionImportMapping FunctionImportName="XXX_update_daily_analysis_v11" FunctionName="stockModel.Store.XXX_update_daily_analysis_v1" />
+    <FunctionImportMapping FunctionImportName="XXX_update_daily_v11" FunctionName="stockModel.Store.XXX_update_daily_v1" />
   </EntityContainerMapping>
 </Mapping>
